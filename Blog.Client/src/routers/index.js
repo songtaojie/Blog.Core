@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Router from 'vue-rooter'
+import Router from 'vue-router'
 import Index from '../views/Index.vue'
 Vue.use(Router)
 const routes = [{
@@ -10,7 +10,10 @@ const routes = [{
   component: Index
   }, {
     path:'/home',
-    component:() => import('../views/Home.vue')
+    component: () => import('../views/Home.vue')
+  },{
+    path:'/login',
+    component: () => import('../views/Login.vue')
   }]
 const router = new Router({
   routes

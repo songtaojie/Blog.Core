@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{83A139BF-2BC9-44CA-B451-E73481498588}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{83A139BF-2BC9-44CA-B451-E73481498588}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HxCore.Model", "HxCore.Model\HxCore.Model.csproj", "{A1B99B4A-5329-4FD8-A641-5E75921A33B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HxCore.Common", "HxCore.Common\HxCore.Common.csproj", "{40B7A48C-1693-4EEB-B322-E61B2A3238B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{83A139BF-2BC9-44CA-B451-E73481498588}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83A139BF-2BC9-44CA-B451-E73481498588}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83A139BF-2BC9-44CA-B451-E73481498588}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B99B4A-5329-4FD8-A641-5E75921A33B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B99B4A-5329-4FD8-A641-5E75921A33B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B99B4A-5329-4FD8-A641-5E75921A33B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B99B4A-5329-4FD8-A641-5E75921A33B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40B7A48C-1693-4EEB-B322-E61B2A3238B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40B7A48C-1693-4EEB-B322-E61B2A3238B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40B7A48C-1693-4EEB-B322-E61B2A3238B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40B7A48C-1693-4EEB-B322-E61B2A3238B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
