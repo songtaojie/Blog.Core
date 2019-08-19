@@ -1,0 +1,21 @@
+
+$prefix: 'hx' !default;//要应用于所有CSS选择器的前缀。 如果更改了，则还必须在JavaScript应用程序中进行更改。
+
+$line-height:1.5em;
+//字体大小
+$font-family: Microsoft YaHei,Microsoft YaHei UI, Arial, Helvetica, sans-serif;
+$font-size: 1em !default;
+//大小
+$max-width: 1270px; //网站页面的最大宽度
+$width-100: 100%;
+$width-75:75%;
+$width-70: 70%;
+$width-50: 50%;
+$width-30:30%;
+$width-25: 25%;
+$width-0: 0;
+$height-100: 100%;
+$height-75: 75%;
+$height-50: 50%;
+$height-25: 25%;
+$height-0: 0;

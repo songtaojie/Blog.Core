@@ -15,7 +15,7 @@ namespace WebApi.Controllers
     public class LoginController : ControllerBase
     {
         [HttpPost]
-        public ActionResult Login(string username,string password)
+        public ActionResult Login([FromForm]string username, [FromForm]string password)
         {
             string jwtStr = string.Empty;
             AjaxResult result = new AjaxResult();
