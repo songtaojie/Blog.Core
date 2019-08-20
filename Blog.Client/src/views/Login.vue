@@ -48,11 +48,15 @@ export default {
   methods:{
     ...mapActions([SIGNIN]),
     login(formName) {
-      debugger
       const _that = this;
       _that.$refs[formName].validate((valid) => {
         if(valid) {
-          _that.SIGNIN(_that.form)
+          _that.SIGNIN({
+            user:_that.form,
+            success:function() {
+              _that.$router.replace(_that.$route.query.redirect || '/')
+            }
+          })
         }
       })
     }

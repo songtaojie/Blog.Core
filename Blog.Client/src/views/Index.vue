@@ -1,16 +1,21 @@
 <template>
   <div>
+    <hx-header></hx-header>
     Index{{list}}
     <button @click="showToast">显示</button>
     <el-button type="primary" @click="send">发送请求</el-button>
   </div>
 </template>
 <script>
+import HxHeader from '../components/HxHeader.vue'
 export default {
   data() {
     return {
       list: 1
     };
+  },
+  components:{
+    HxHeader
   },
   methods: {
     showToast() {

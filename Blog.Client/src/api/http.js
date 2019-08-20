@@ -1,7 +1,15 @@
 import axios from 'axios'
 import QS from 'qs'
-import { Message } from 'element-ui'
-import { isString, isObject, isArray, isEmpty } from '../utils'
+import {
+  Message
+} from 'element-ui'
+import {
+  isString,
+  isObject,
+  isArray,
+  isEmpty
+} from '../utils'
+import router from '../routers'
 // 设置环境切换时的接口url前缀
 // if (process.env.NODE_ENV === 'development') {
 //   axios.defaults.baseURL = 'https://localhost:44354/'
@@ -15,17 +23,33 @@ axios.defaults.timeout = 5000
 // 设置post请求头
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 
+axios.interceptors.request.use((r) => {
+  if (window.sessionStorage.Token && window.sessionStorage.Token.length >= 128) {
+    r.headers.Authorization = 'Bearer ' + window.sessionStorage.Token
+  }
+  return r
+}, (e) => {
+  return Promise.reject(e)
+})
+
 // 返回状态判断(添加响应拦截器)
 axios.interceptors.response.use((res) => {
-  debugger
   // 对响应数据做些事
   if (res.data.success === false) {
     return Promise.reject(res)
   }
   return res.data
-}, (error) => {
+}, (e) => {
   debugger
-  return Promise.reject(error)
+  if (e.response.status === 401) {
+    router.push({
+      path: '/login',
+      query: {
+        redirect: router.path
+      }
+    })
+  }
+  return Promise.reject(e)
 })
 
 /**
@@ -73,7 +97,7 @@ export function get (url, params) {
  * @param {String} url 请求的url地址
  * @param {Object} params 请求时传递的参数
  */
-export function post (url, params,) {
+export function post (url, params) {
   if (!isEmpty(params)) {
     params = filterNull(params)
   }

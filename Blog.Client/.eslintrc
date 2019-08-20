@@ -1,4 +1,5 @@
 {
-    "extends": "vue"
+    "extends": "vue",
 // Your overrides...
+    "parser": "babel-eslint",
 }
