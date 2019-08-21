@@ -1,9 +1,6 @@
 import axios from 'axios'
 import QS from 'qs'
 import {
-  Message
-} from 'element-ui'
-import {
   isString,
   isObject,
   isArray,
@@ -161,7 +158,7 @@ export function ajaxError (err) {
       var result = r.data || {}
       if (result.hasOwnProperty('success') && !result.success) {
         const msg = result.message || r.statusText || err.message
-        Message.error(msg || '服务器忙，请稍后重试!')
+        // Message.error(msg || '服务器忙，请稍后重试!')
       }
     }
   }

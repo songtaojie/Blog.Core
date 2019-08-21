@@ -3,11 +3,12 @@
     <hx-header></hx-header>
     Index{{list}}
     <button @click="showToast">显示</button>
-    <el-button type="primary" @click="send">发送请求</el-button>
+    <b-button @click="send" variant="primary">发送请求</b-button>
   </div>
 </template>
 <script>
 import HxHeader from '../components/HxHeader.vue'
+import { ToastPlugin } from 'bootstrap-vue'
 export default {
   data() {
     return {
@@ -19,7 +20,11 @@ export default {
   },
   methods: {
     showToast() {
-      this.$message.success("这是一个成功提示");
+      debugger
+      window.Test = ToastPlugin;
+      // ToastPlugin.toast('sss',{
+      //   title:'测试'
+      // })
     },
     send() {
       const _that = this

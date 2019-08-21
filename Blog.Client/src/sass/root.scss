@@ -7,3 +7,16 @@ html{
   margin: 0;
   padding: 0;
 }
+.d-flex{
+  display: flex !important;
+}
+.flex-column{
+  flex-direction: column;
+}
+.flex-row{
+  flex-direction: row;
+}
+.justify-content-center {
+  -ms-flex-pack: center !important;
+  justify-content: center !important;
+}

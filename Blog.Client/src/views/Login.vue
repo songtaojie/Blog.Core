@@ -15,7 +15,7 @@
 <template>
   <div class="login-container h-100">
     <div class="login-wrap">
-      <el-form :model="form" :rules="rules" ref="loginForm" status-icon label-width="80px" class="login" >
+      <!-- <el-form :model="form" :rules="rules" ref="loginForm" status-icon label-width="80px" class="login" >
         <el-form-item label="用户名" required prop="username">
           <el-input v-model="form.username" prefix-icon="el-icon-user-solid" placeholder="请输入用户名"></el-input>
         </el-form-item>
@@ -25,7 +25,7 @@
         <el-form-item>
           <el-button @click="login('loginForm')" type="primary" class="w-100">登录</el-button>
         </el-form-item>
-      </el-form>
+      </el-form> -->
     </div>
   </div>
 </template>

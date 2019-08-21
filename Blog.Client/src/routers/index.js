@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '../views/Index.vue'
-import {
-  isLogin
-} from '../store/user.js'
+import { isLogin } from '../store/user.js'
 Vue.use(Router)
 const routes = [{
   path: '',
