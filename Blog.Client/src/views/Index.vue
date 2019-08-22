@@ -8,7 +8,7 @@
 </template>
 <script>
 import HxHeader from '../components/HxHeader.vue'
-import { ToastPlugin } from 'bootstrap-vue'
+import showToast from '../components/toast/'
 export default {
   data() {
     return {
@@ -20,22 +20,30 @@ export default {
   },
   methods: {
     showToast() {
-      debugger
-      window.Test = ToastPlugin;
+      showToast('测试',{
+        variant:'info'
+      })
       // ToastPlugin.toast('sss',{
       //   title:'测试'
       // })
     },
     send() {
-      const _that = this
-      _that.$api
-        .get("api/values/1")
-        .then(r => {
-          debugger;
+      debugger
+       this.$bvToast.toast('Toast body content', {
+          title: `Variant `,
+          variant: 'primary',
+          solid: true,
+noAutoHide:true
         })
-        .catch(err => {
-          _that.$api.ajaxError(err)
-        });
+      // const _that = this
+      // _that.$api
+      //   .get("api/values/1")
+      //   .then(r => {
+      //     debugger;
+      //   })
+      //   .catch(err => {
+      //     _that.$api.ajaxError(err)
+      //   });
     }
   }
   // created() {
