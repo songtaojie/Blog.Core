@@ -4,23 +4,27 @@ import toast from './Toast.vue'
 
 const ToastConstructor = Vue.extend(toast)
 
-function showToast (content, options) {
+var $toast
+
+function show (content, options) {
   if (isEmpty(content)) return
-  const toastDom = new ToastConstructor({
+  options = options || {}
+  $toast = new ToastConstructor({
     el: document.createElement('div'),
     data () {
       return {
         content: content,
         ...options
-        // ...options
       }
     }
   })
   // 把实例化的toast添加到body中
-  document.body.appendChild(toastDom.$el)
-  // setTimeout(() => {
-  //   toastDom.show = false
-  // }, duration)
+  document.body.appendChild($toast.$el)
 }
-
-export default showToast
+function hide () {
+  $toast && ($toast.visible = false)
+}
+export default {
+  show,
+  hide
+}

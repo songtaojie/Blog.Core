@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HxCore.IRepository;
+using HxCore.IServices;
 using HxCore.Model;
+using HxCore.Model.Context;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,9 +13,14 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     public class ValuesController : ControllerBase
     {
+        private IUserInfoService _userService;
+        public ValuesController(IUserInfoService userService)
+        {
+            _userService = userService;
+        }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -22,10 +30,10 @@ namespace WebApi.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public async Task<ActionResult<string>> Get(int id)
         {
-            if (id < 5) throw new UserFriendlyException("id不能小于5");
-            return "这是一个测试";
+           UserInfo user = await _userService.GetEntity(u=>u.UserName=="admin");
+           return "这是一个测试"+ user.NickName;
         }
 
         // POST api/values

@@ -1,5 +1,4 @@
 import axios from 'axios'
-import Vue from 'vue'
 import QS from 'qs'
 import {
   isString,
@@ -8,6 +7,7 @@ import {
   isEmpty
 } from '../utils'
 import router from '../routers'
+import toast from '../components/toast/'
 // 设置环境切换时的接口url前缀
 // if (process.env.NODE_ENV === 'development') {
 //   axios.defaults.baseURL = 'https://localhost:44354/'
@@ -160,7 +160,9 @@ export function ajaxError (err) {
       var result = r.data || {}
       if (result.hasOwnProperty('success') && !result.success) {
         const msg = result.message || r.statusText || err.message
-        // Message.error(msg || '服务器忙，请稍后重试!')
+        toast.show(msg || '服务器忙，请稍后重试!', {
+          variant:'danger'
+        })
       }
     }
   }

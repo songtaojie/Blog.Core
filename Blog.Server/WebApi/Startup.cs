@@ -13,6 +13,15 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 using WebApi.Filter;
+using HxCore.Model.Context;
+using Microsoft.EntityFrameworkCore;
+using HxCore.IRepository;
+using NLog;
+using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
+using System.IO;
+using System.Reflection;
+using WebApi.Services;
 
 namespace WebApi
 {
@@ -25,7 +34,6 @@ namespace WebApi
             Configuration = configuration;
             Environment = _env;
         }
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             #region 跨域CORS
@@ -65,7 +73,8 @@ namespace WebApi
                 c.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 c.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddJwtBearer(c=> {
+            .AddJwtBearer(c =>
+            {
                 c.TokenValidationParameters = tokenParams;
                 c.Events = new JwtBearerEvents()
                 {
@@ -87,7 +96,7 @@ namespace WebApi
                 c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info
                 {
                     Version = "v0.0.1",
-                    Title= "API文档",
+                    Title = "API文档",
                     Description = "框架API文档",
                     TermsOfService = "None"
                 });
@@ -99,21 +108,35 @@ namespace WebApi
                 c.AddSecurityRequirement(security);
                 c.AddSecurityDefinition("HxCore", new ApiKeyScheme
                 {
-                    Description= "JWT授权(数据将在请求头中进行传输) 直接在下框中输入Bearer {token}（注意两者之间是一个空格）",
-                    Name="Authorization",//jwt默认的参数名称
+                    Description = "JWT授权(数据将在请求头中进行传输) 直接在下框中输入Bearer {token}（注意两者之间是一个空格）",
+                    Name = "Authorization",//jwt默认的参数名称
                     In = "Header",//jwt默认存放Authorization信息的位置(请求头中)
                     Type = "apiKey"
                 });
             });
             #endregion
+            #region 数据库链接，上下文NLogLoggerProvider
+            services.AddDbContext<HxContext>();
+            #endregion
 
-            services.AddMvc(c=> {
+            #region MVC，路由配置
+            services.AddMvc(c =>
+            {
                 c.Filters.Add(typeof(ExceptionFilter));
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            #endregion
+
             #region 单例模块
             services.AddSingleton(new AppSettings(Environment));
+            services.AddSingleton(new DbFactory(services.BuildServiceProvider()));
             #endregion
+
+            #region 业务类映射
+            services.AddDIServices();
+            services.AddDIRepository();
+            #endregion
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -121,7 +144,7 @@ namespace WebApi
         {
             if (Environment.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
                 #region Swagger
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>

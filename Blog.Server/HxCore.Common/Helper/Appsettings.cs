@@ -32,6 +32,15 @@ namespace HxCore.Common
                 .Add(new JsonConfigurationSource() {Path=Path,ReloadOnChange=true,Optional =false })
                 .Build();
         }
+        /// <summary>
+        /// 获取连接字符串
+        /// </summary>
+        /// <param name="name">ConnectionStrings节点中子节点名字</param>
+        /// <returns></returns>
+        public static string GetConnectionString(string name)
+        {
+            return Configuration.GetConnectionString(name);
+        }
 
         /// <summary>
         /// 封装要操作的字符

@@ -24,7 +24,6 @@ namespace WebApi
             }
             catch (Exception ex)
             {
-
                 logger.Error(ex, "Stopped program");
                 throw;
             }
@@ -33,7 +32,6 @@ namespace WebApi
                 // 确保在应用程序退出之前刷新和停止内部计时器/线程（避免Linux上的分段错误）
                 NLog.LogManager.Shutdown();
             }
-
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -42,7 +40,7 @@ namespace WebApi
             .ConfigureLogging(logging =>
             {
                 logging.ClearProviders();
-                logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+                logging.SetMinimumLevel(LogLevel.Warning);
             })
             .UseNLog();
     }

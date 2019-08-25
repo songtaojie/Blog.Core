@@ -47,6 +47,10 @@ namespace WebApi.Filter
             else
             {
                 result.Code = response.StatusCode = StatusCodes.Status500InternalServerError;
+                if (!_env.IsDevelopment())
+                {
+                    result.Message = "服务器端错误!";
+                }
                 context.Result = new JsonResult(result);
             }
         }

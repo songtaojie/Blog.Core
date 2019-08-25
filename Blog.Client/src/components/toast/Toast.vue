@@ -1,10 +1,9 @@
 <template>
   <b-toast v-model="visible" :variant="variant" :toaster="toaster" 
-  :auto-hide-delay="autoHideDelay" solid>
+  :auto-hide-delay="autoHideDelay" :no-auto-hide = "noAutoHide" solid>
       <div slot="toast-title" class="d-flex flex-grow-1 align-items-baseline">
-        <b-img blank blank-color="#ff5555" class="mr-2" width="12" height="12"></b-img>
+        <!-- <b-img blank blank-color="#ff5555" class="mr-2" width="12" height="12"></b-img> -->
         <strong class="mr-auto">{{title}}</strong>
-        <!-- <small class="text-muted mr-2">42 seconds ago</small> -->
       </div>{{content}}
     </b-toast>
 </template>
@@ -19,7 +18,8 @@ export default {
       title:'提示',
       content:'',
       toaster:'b-toaster-top-center',
-      autoHideDelay:5000
+      autoHideDelay:5000,
+      noAutoHide:false
     }
   }
 };

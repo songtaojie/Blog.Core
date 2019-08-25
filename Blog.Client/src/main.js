@@ -6,8 +6,8 @@ import api from './api/http.js'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-// import './assets/fonts/iconfont.css'
-// import './sass/root.scss'
+import './assets/fonts/iconfont.css'
+import './sass/root.scss'
 
 Vue.config.productionTip = false
 Vue.prototype.$api = api

@@ -3,12 +3,13 @@
     <hx-header></hx-header>
     Index{{list}}
     <button @click="showToast">显示</button>
+    <b-button @click="hideToast" variant="info">隐藏</b-button>
     <b-button @click="send" variant="primary">发送请求</b-button>
   </div>
 </template>
 <script>
 import HxHeader from '../components/HxHeader.vue'
-import showToast from '../components/toast/'
+import toast from '../components/toast/'
 export default {
   data() {
     return {
@@ -20,21 +21,15 @@ export default {
   },
   methods: {
     showToast() {
-      showToast('测试',{
-        variant:'info'
+      toast.show('测试',{
+        variant:'danger',
+        noAutoHide:true
       })
-      // ToastPlugin.toast('sss',{
-      //   title:'测试'
-      // })
+    },
+    hideToast() {
+      toast.hide();
     },
     send() {
-      debugger
-       this.$bvToast.toast('Toast body content', {
-          title: `Variant `,
-          variant: 'primary',
-          solid: true,
-noAutoHide:true
-        })
       // const _that = this
       // _that.$api
       //   .get("api/values/1")

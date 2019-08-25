@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="h-100">
     <!-- <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <router-view></router-view>
@@ -11,9 +11,3 @@ export default {
   name: 'app',
 }
 </script>
-
-<style>
-#app {
- height: 100%;
-}
-</style>
