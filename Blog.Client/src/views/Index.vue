@@ -1,7 +1,7 @@
 <template>
   <div>
     <hx-header></hx-header>
-    Index{{list}}
+    Index
     <button @click="showToast">显示</button>
     <b-button @click="hideToast" variant="info">隐藏</b-button>
     <b-button @click="send" variant="primary">发送请求</b-button>
@@ -21,6 +21,7 @@ export default {
   },
   methods: {
     showToast() {
+      debugger
       toast.show('测试',{
         variant:'danger',
         noAutoHide:true

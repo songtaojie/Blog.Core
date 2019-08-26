@@ -13,7 +13,7 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Roles = "admin")]
+    [Authorize]
     public class ValuesController : ControllerBase
     {
         private IUserInfoService _userService;

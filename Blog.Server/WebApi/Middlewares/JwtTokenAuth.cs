@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using WebApi.Auth;
 
-namespace WebApi.Auth
+namespace WebApi.Middlewares
 {
     /// <summary>
     /// jwt中间件

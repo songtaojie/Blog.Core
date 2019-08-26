@@ -8,14 +8,21 @@
         </b-link>
       </div>
       <div class="hx-login-form">
-        <b-form>
+        <b-form ref="form" @submit.prevent="onlogin" validated novalidate>
           <h3 class="text-center mb-3">用户登录</h3>
           <b-form-row class="mb-3">
             <b-input-group>
               <b-input-group-prepend is-text>
                 <i class="hx-icon-user-solid"></i>
               </b-input-group-prepend>
-              <b-form-input placeholder="请输入用户名" v-model="form.username"></b-form-input>
+              <b-form-input
+                placeholder="请输入用户名"
+                name="username"
+                class="was-validated"
+                v-model="form.username"
+                required
+              ></b-form-input>
+              <b-form-invalid-feedback>请输入用户名</b-form-invalid-feedback>
             </b-input-group>
           </b-form-row>
           <b-form-row class="mb-3">
@@ -23,7 +30,13 @@
               <b-input-group-prepend is-text>
                 <i class="hx-icon-lock-solid"></i>
               </b-input-group-prepend>
-              <b-form-input type="password" v-model="form.password" placeholder="请输入密码"></b-form-input>
+              <b-form-input
+                type="password"
+                v-model="form.password"
+                class="was-validated"
+                placeholder="请输入密码"
+              ></b-form-input>
+              <b-form-invalid-feedback>请输入密码</b-form-invalid-feedback>
             </b-input-group>
           </b-form-row>
           <b-form-row class="mb-3">
@@ -36,16 +49,17 @@
               >记住我</b-form-checkbox>
             </b-col>
             <b-col class="text-right">
-              <b-button variant="success" right>登录</b-button>
+              <b-button type="submit" variant="success" right>登录</b-button>
             </b-col>
           </b-form-row>
           <div>
             <h4>忘记密码?</h4>
             <p>
-                不用担心, 点击 <a href="javascript:;" class="" id="forget-password">这里</a>
-                找回密码.
+              不用担心, 点击
+              <a href="javascript:;" class id="forget-password">这里</a>
+              找回密码.
             </p>
-        </div>
+          </div>
         </b-form>
       </div>
     </div>
@@ -66,18 +80,17 @@ export default {
   },
   methods: {
     ...mapActions([SIGNIN]),
-    login(formName) {
+    onlogin() {
       const _that = this;
-      _that.$refs[formName].validate(valid => {
-        if (valid) {
-          _that.SIGNIN({
-            user: _that.form,
-            success: function() {
-              _that.$router.replace(_that.$route.query.redirect || "/");
-            }
-          });
-        }
-      });
+      window.from = _that.$refs.form;
+      if (_that.$refs.form.checkValidity()) {
+        _that.SIGNIN({
+          user: _that.form,
+          success: function() {
+            _that.$router.replace(_that.$route.query.redirect || "/");
+          }
+        });
+      }
     }
   }
 };
@@ -91,7 +104,7 @@ export default {
   .hx-login-content {
     width: 18.75rem;
     padding-top: 5rem;
-     margin: 0 auto;
+    margin: 0 auto;
   }
   .hx-login-header {
     a {

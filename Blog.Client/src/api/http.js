@@ -148,7 +148,6 @@ export function del (url, params) {
  * @param {*} err axios异常对象
  */
 export function ajaxError (err) {
-  debugger
   if (err) {
     let r
     if (err.isAxiosError) {
@@ -157,13 +156,18 @@ export function ajaxError (err) {
       r = err
     }
     if (r) {
-      var result = r.data || {}
-      if (result.hasOwnProperty('success') && !result.success) {
-        const msg = result.message || r.statusText || err.message
-        toast.show(msg || '服务器忙，请稍后重试!', {
-          variant:'danger'
-        })
+      var result = r.data
+      var msg
+      if (result && result.hasOwnProperty('success')) {
+        if (!result.success) {
+          msg = result.message || r.statusText || err.message
+        }
+      } else {
+        msg = r.statusText
       }
+      toast.show(msg || '服务器忙，请稍后重试!', {
+        variant: 'danger'
+      })
     }
   }
 }

@@ -13,13 +13,7 @@ export function isLogin () {
   return false
 }
 const user = {
-  state: function () {
-    const userJson = window.sessionStorage.getItem('user')
-    if (userJson) {
-      return JSON.parse(userJson) || {}
-    }
-    return {}
-  },
+  state: JSON.parse(window.sessionStorage.getItem('user') || null) || {},
   mutations: {
     [SIGNIN] (state, { user, success, failure }) {
       post(LOGIN_API, user).then(r => {

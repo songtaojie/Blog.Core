@@ -3,6 +3,7 @@ using HxCore.Model;
 using HxCore.Model.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ConsoleTest
@@ -11,11 +12,26 @@ namespace ConsoleTest
     {
         static void Main(string[] args)
         {
-            HxContext hxContext = new HxContext();
-            long key = 1000;
-            UserInfo user = hxContext.Set<UserInfo>().Find(key);
-            Console.WriteLine(user.UserName);
+            Test();
+            Console.WriteLine("完成");
             Console.ReadKey();
+        }
+
+        public static async void Test()
+        {
+            string result = await Tasks();
+            Console.WriteLine(result);
+        }
+        public static string TaskReturn()
+        {
+            Task.Delay(1000);
+            Console.WriteLine("Task测试");
+            return "这是一个return";
+        }
+        public static async Task<string> Tasks()
+        {
+            string result = await Task.Run(() => TaskReturn());
+            return result;
         }
     }
 }

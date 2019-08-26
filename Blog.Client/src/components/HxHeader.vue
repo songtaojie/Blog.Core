@@ -20,18 +20,38 @@
           <b-nav-item href="#" link-classes="text-white px-3 py-0">博客日记</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
-      <span class="nav-item my-auto p-absolute login">
+      
+      <span class="nav-item my-auto p-absolute login" v-if="!isLogin">
         <router-link to="/login" class="text-white hx-1x">
           <i class="hx-icon-login"></i> 登录
         </router-link>
       </span>
+      <b-navbar-nav v-else>
+        <b-nav-item-dropdown toggle-class="p-0">
+          <template slot="button-content">
+            <!-- <em>{{user.username}}</em> -->
+            <b-img :src="imgUrl" rounded="circle"></b-img>
+            <!-- <img src="../assets/images/avatar1_small.jpg" alt=""> -->
+          </template>
+          <b-dropdown-item>
+
+          </b-dropdown-item>
+        </b-nav-item-dropdown>
+          <!-- <b-nav-item href="#" link-classes="text-white px-3 py-0" active>网站首页</b-nav-item>
+          <b-nav-item href="#" link-classes="text-white px-3 py-0">关于我</b-nav-item>
+          <b-nav-item href="#" link-classes="text-white px-3 py-0">模板分享</b-nav-item>
+          <b-nav-item href="#" link-classes="text-white px-3 py-0">博客日记</b-nav-item> -->
+      </b-navbar-nav>
     </b-navbar>
   </header>
 </template>
 <script>
+import { mapState } from "vuex";
+import imgUrl from '../assets/images/avatar1_small.jpg'
 export default {
   data() {
     return {
+      imgUrl,
       show: false
     };
   },
@@ -46,18 +66,26 @@ export default {
       console.log("dddd");
     }
   },
-  computed: {
+  computed: mapState({
+    user:'user',
+    isLogin:function(){
+      // if(this.user && this.user.username) {
+      //   return true
+      // }
+      // return false
+      return true
+    },
     colclass: function() {
       return {
         "hx-show": this.show
       };
     }
-  },
+  }),
   mounted() {
-    const $col = this.$refs.collapse
+    const $col = this.$refs.collapse;
     window.onresize = function() {
-      if($col.show)$col.show = false
-    }
+      if ($col.show) $col.show = false;
+    };
   }
 };
 </script>
@@ -150,9 +178,9 @@ export default {
           &:hover,
           &:focus,
           &.active {
-            background:#12b7de;
+            background: #12b7de;
             // color:rgb(255, 208, 75)
-            color: #FFF !important;
+            color: #fff !important;
           }
         }
       }
