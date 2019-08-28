@@ -12,5 +12,10 @@ a{
     text-decoration: none;
   }
 }
+.hx-fa-some{
+  width:$font-size;
+  text-align: center;
+}
 @import 'size';
 @import 'text';
+@import 'bootstrap'

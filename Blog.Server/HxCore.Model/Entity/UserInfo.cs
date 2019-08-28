@@ -8,6 +8,7 @@ using HxCore.Common;
 namespace HxCore.Model
 {
     [Table("UserInfo")]
+    [Serializable]
     public class UserInfo : Base.BaseModel, Base.IEntity<long>
     {
         [Key]
@@ -159,5 +160,17 @@ namespace HxCore.Model
         /// </summary>
         [DataType(DataType.DateTime)]
         public virtual DateTime? LastLoginTime { get; set; }
+
+        /// <summary>
+        /// 基础信息
+        /// </summary>
+        [ForeignKey("BasicId")]
+        public BasicInfo BasicInfo { get; set; }
+
+        /// <summary>
+        /// 工作信息
+        /// </summary>
+        [ForeignKey("JobId")]
+        public JobInfo JobInfo { get; set; }
     }
 }

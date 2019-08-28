@@ -3,11 +3,11 @@
   <header class="hx-header">
     <b-navbar toggleable="md" class="mx-auto justify-content-center" type="dark" variant="dark">
       <b-navbar-brand href="/" class="py-0 hx-3x">海·星の博客</b-navbar-brand>
-      <b-navbar-toggle target="nav-collapse" @click="doClick"></b-navbar-toggle>
+      <b-navbar-toggle target="nav-collapse" v-on:click="doClick"></b-navbar-toggle>
       <b-collapse
         id="nav-collapse"
-        @hidden="doHide"
-        @click="doColClick"
+        v-on:hidden="doHide"
+        v-on:click="doColClick"
         ref="collapse"
         class="flex-grow-0"
         :class="colclass"
@@ -20,34 +20,35 @@
           <b-nav-item href="#" link-classes="text-white px-3 py-0">博客日记</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
-      
+
       <span class="nav-item my-auto p-absolute login" v-if="!isLogin">
         <router-link to="/login" class="text-white hx-1x">
           <i class="hx-icon-login"></i> 登录
         </router-link>
       </span>
       <b-navbar-nav v-else>
-        <b-nav-item-dropdown toggle-class="p-0">
+        <b-nav-dropdown toggle-class="p-0" menu-class="hx-dropdown-menu">
           <template slot="button-content">
             <!-- <em>{{user.username}}</em> -->
             <b-img :src="imgUrl" rounded="circle"></b-img>
             <!-- <img src="../assets/images/avatar1_small.jpg" alt=""> -->
           </template>
-          <b-dropdown-item>
-
-          </b-dropdown-item>
-        </b-nav-item-dropdown>
-          <!-- <b-nav-item href="#" link-classes="text-white px-3 py-0" active>网站首页</b-nav-item>
+          <b-dropdown-item ><span class="hx-icon-edit mr-1"></span>写博客</b-dropdown-item>
+          <b-dropdown-item><i class="hx-icon-user mr-1"></i>个人中心</b-dropdown-item>
+          <b-dropdown-item><i class="hx-icon-cfg mr-1"></i>系统管理</b-dropdown-item>
+          <b-dropdown-item><i class="hx-icon-logout-solid mr-1"></i>退出</b-dropdown-item>
+        </b-nav-dropdown>
+        <!-- <b-nav-item href="#" link-classes="text-white px-3 py-0" active>网站首页</b-nav-item>
           <b-nav-item href="#" link-classes="text-white px-3 py-0">关于我</b-nav-item>
           <b-nav-item href="#" link-classes="text-white px-3 py-0">模板分享</b-nav-item>
-          <b-nav-item href="#" link-classes="text-white px-3 py-0">博客日记</b-nav-item> -->
+        <b-nav-item href="#" link-classes="text-white px-3 py-0">博客日记</b-nav-item>-->
       </b-navbar-nav>
     </b-navbar>
   </header>
 </template>
 <script>
 import { mapState } from "vuex";
-import imgUrl from '../assets/images/avatar1_small.jpg'
+import imgUrl from "../assets/images/avatar1_small.jpg";
 export default {
   data() {
     return {
@@ -67,13 +68,13 @@ export default {
     }
   },
   computed: mapState({
-    user:'user',
-    isLogin:function(){
+    user: "user",
+    isLogin: function() {
       // if(this.user && this.user.username) {
       //   return true
       // }
       // return false
-      return true
+      return true;
     },
     colclass: function() {
       return {
@@ -185,6 +186,11 @@ export default {
         }
       }
     }
+  }
+  .hx-icon-logout-solid,
+  .hx-icon-cfg {
+    font-size: 1.25em;
+    margin-left: -2px;
   }
 }
 @media (min-width: 768px) {
