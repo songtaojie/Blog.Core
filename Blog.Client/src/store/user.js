@@ -13,12 +13,11 @@ export function isLogin () {
   return false
 }
 const user = {
-  state: JSON.parse(window.sessionStorage.getItem('user') || null) || {},
+  state: {},
   mutations: {
     [SIGNIN] (state, { user, success, failure }) {
       post(LOGIN_API, user).then(r => {
         window.sessionStorage.setItem('Token', r.resultdata)
-        window.sessionStorage.setItem('user', JSON.stringify(user))
         Object.assign(state, user)
         if (isFunction(success)) {
           success.call(this, r)
@@ -33,7 +32,6 @@ const user = {
     },
     [SIGNOUT] (state) {
       window.sessionStorage.removeItem('Token')
-      window.sessionStorage.removeItem('user')
       Object.keys(state).forEach(k => Vue.delete(state, k))
     }
   },

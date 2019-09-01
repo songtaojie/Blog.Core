@@ -22,6 +22,9 @@ const routes = [{
 }, {
   path: '*',
   redirect: '/'
+}, {
+  path: '/blog/edit',
+  component: () => import('../views/Blog/Edit.vue')
 }]
 const router = new Router({
   mode: 'history',

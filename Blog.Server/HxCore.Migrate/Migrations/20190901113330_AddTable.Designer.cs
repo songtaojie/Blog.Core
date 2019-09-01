@@ -3,14 +3,16 @@ using System;
 using HxCore.Model.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HxCore.Migrate.Migrations
 {
     [DbContext(typeof(HxContext))]
-    partial class HxContextModelSnapshot : ModelSnapshot
+    [Migration("20190901113330_AddTable")]
+    partial class AddTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

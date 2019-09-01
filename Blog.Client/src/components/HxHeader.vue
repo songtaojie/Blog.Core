@@ -33,7 +33,7 @@
             <b-img :src="imgUrl" rounded="circle"></b-img>
             <!-- <img src="../assets/images/avatar1_small.jpg" alt=""> -->
           </template>
-          <b-dropdown-item ><span class="hx-icon-edit mr-1"></span>写博客</b-dropdown-item>
+          <b-dropdown-item target="_blank" href="/blog/edit"><span class="hx-icon-edit mr-1"></span>写博客</b-dropdown-item>
           <b-dropdown-item><i class="hx-icon-user mr-1"></i>个人中心</b-dropdown-item>
           <b-dropdown-item><i class="hx-icon-cfg mr-1"></i>系统管理</b-dropdown-item>
           <b-dropdown-item><i class="hx-icon-logout-solid mr-1"></i>退出</b-dropdown-item>
@@ -48,6 +48,7 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import { isLogin }  from '../store/user'
 import imgUrl from "../assets/images/avatar1_small.jpg";
 export default {
   data() {
@@ -68,13 +69,8 @@ export default {
     }
   },
   computed: mapState({
-    user: "user",
     isLogin: function() {
-      // if(this.user && this.user.username) {
-      //   return true
-      // }
-      // return false
-      return true;
+      return isLogin()
     },
     colclass: function() {
       return {

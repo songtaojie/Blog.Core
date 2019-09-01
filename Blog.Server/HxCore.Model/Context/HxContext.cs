@@ -49,5 +49,7 @@ namespace HxCore.Model.Context
         }
 
         public DbSet<UserInfo> UserInfo { get; set; }
+
+        public DbSet<Blog> Blog { get; set; }
     }
 }
