@@ -1,37 +1,42 @@
 <template>
-  <div>
-     <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
-  </div>
+  <!-- <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor> -->
+<div id="editor">
+  hhhh
+</div>
 </template>
+
 <script>
-import CKEditor from "@ckeditor/ckeditor5-vue";
-import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
-
-import EssentialsPlugin from "@ckeditor/ckeditor5-essentials/src/essentials";
-import BoldPlugin from "@ckeditor/ckeditor5-basic-styles/src/bold";
-import ItalicPlugin from "@ckeditor/ckeditor5-basic-styles/src/italic";
-import ParagraphPlugin from "@ckeditor/ckeditor5-paragraph/src/paragraph";
-
+// ⚠️ NOTE: We don't use @ckeditor/ckeditor5-build-classic any more!
+// Since we're building CKEditor from source, we use the source version of ClassicEditor.
+import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor"
+// import Essentials from "@ckeditor/ckeditor5-essentials/src/essentials"
+// import Bold from "@ckeditor/ckeditor5-basic-styles/src/bold"
+// import Italic from "@ckeditor/ckeditor5-basic-styles/src/italic"
+// import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
+import Font from "@ckeditor/ckeditor5-font/src/font"
+// import Heading from "@ckeditor/ckeditor5-heading/src/heading";
 export default {
-  components: {
-    ckeditor: CKEditor.component
-  },
-  name: "app",
   data() {
     return {
-      editor: ClassicEditor,
+      // editor: ClassicEditor,
       editorData: "<p>Content of the editor.</p>",
       editorConfig: {
         plugins: [
-          EssentialsPlugin,
-          BoldPlugin,
-          ItalicPlugin,
-          LinkPlugin,
-          ParagraphPlugin
+          //Essentials,
+          // Bold,
+          // Italic,
+          // Paragraph+
+          // Font,
+          // Heading
         ],
 
         toolbar: {
-          items: ["bold", "italic", "link", "undo", "redo"]
+          items: [
+            "fontSize",
+            "fontFamily",
+            "fontColor",
+            "fontBackgroundColor"
+          ]
         }
       }
     };

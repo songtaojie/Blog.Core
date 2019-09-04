@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '../views/Index.vue'
+import Edit from '../views/Blog/Edit.vue'
 import { isLogin } from '../store/user.js'
 Vue.use(Router)
 const routes = [{
@@ -8,7 +9,7 @@ const routes = [{
   meta: {
     title: '这是第一个测试程序'
   },
-  component: Index
+  component: Edit
 }, {
   path: '/home',
   meta: {
