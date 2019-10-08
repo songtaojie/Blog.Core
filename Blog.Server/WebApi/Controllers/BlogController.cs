@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
+    /// <summary>
+    /// 博客相关的控制器类
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class BlogController : ControllerBase

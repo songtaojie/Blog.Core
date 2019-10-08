@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace WebApi.Filter
 {
+    /// <summary>
+    /// 异常过滤器
+    /// </summary>
     public class ExceptionFilter : IExceptionFilter, IAsyncExceptionFilter
     {
         private readonly IHostingEnvironment _env;
@@ -22,6 +25,10 @@ namespace WebApi.Filter
             _logger = logger;
         }
 
+        /// <summary>
+        /// 处理异常
+        /// </summary>
+        /// <param name="context">异常上下文</param>
         public void OnException(ExceptionContext context)
         {
             WriteLog(context);

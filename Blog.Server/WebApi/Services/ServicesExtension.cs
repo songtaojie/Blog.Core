@@ -30,6 +30,11 @@ namespace WebApi.Services
             DIServices(services,"HxCore.Repository.dll");
         }
 
+        /// <summary>
+        /// 依赖注入
+        /// </summary>
+        /// <param name="services">服务描述集合</param>
+        /// <param name="dllName">程序集dll</param>
         private static void DIServices(IServiceCollection services,string dllName)
         {
             string basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath;

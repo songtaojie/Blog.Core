@@ -10,14 +10,26 @@ using WebApi.Auth;
 
 namespace WebApi.Controllers
 {
+    /// <summary>
+    /// 账户相关的控制器类
+    /// </summary>
     [ApiController]
     public class AccountController : Controller
     {
+        /// <summary>
+        /// 用户服务类
+        /// </summary>
         private IUserInfoService _userService;
         public AccountController(IUserInfoService userService)
         {
             _userService = userService;
         }
+        /// <summary>
+        /// 用户登录
+        /// </summary>
+        /// <param name="username">用户名</param>
+        /// <param name="password">密码</param>
+        /// <returns></returns>
         [Route("api/login")]
         [HttpPost]
         public async Task<ActionResult> Login([FromForm]string username, [FromForm]string password)

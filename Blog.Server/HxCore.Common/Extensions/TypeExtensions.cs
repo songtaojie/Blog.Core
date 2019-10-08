@@ -5,6 +5,9 @@ using System.Text;
 
 namespace HxCore.Common.Extensions
 {
+    /// <summary>
+    /// 类型扩展类
+    /// </summary>
     public static class TypeExtensions
     {
         /// <summary>
