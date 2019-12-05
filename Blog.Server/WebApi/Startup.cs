@@ -123,6 +123,7 @@ namespace WebApi
             services.AddMvc(c =>
             {
                 c.Filters.Add(typeof(ExceptionFilter));
+                c.Filters.Add(typeof(ApiResultAttribute));
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             #endregion

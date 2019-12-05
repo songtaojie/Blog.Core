@@ -9,13 +9,7 @@ const routes = [{
   meta: {
     title: '这是第一个测试程序'
   },
-  component: Edit
-}, {
-  path: '/home',
-  meta: {
-    auth: true
-  },
-  component: () => import('../views/Home.vue')
+  component: Index
 }, {
   name: 'login',
   path: '/login',

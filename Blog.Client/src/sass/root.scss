@@ -17,9 +17,14 @@ a{
     text-decoration: none;
   }
 }
-.hx-fa-some{
+.#{$prefix}-fa-some{
   width:$font-size;
   text-align: center;
+}
+.#{$prefix}-container{
+  margin: 0 auto;
+  max-width: $max-width;
+  margin-top: $header-height+0.25rem;
 }
 @import 'size';
 @import 'text';

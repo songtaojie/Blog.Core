@@ -37,7 +37,7 @@ namespace WebApi.Controllers
             string jwtStr = string.Empty;
             AjaxResult result = new AjaxResult();
             string md5pwd = SafeHelper.MD5TwoEncrypt(password);
-            UserInfo userInfo = await _userService.GetEntity(u => u.UserName == username && u.PassWord == md5pwd);
+            UserInfo userInfo = await _userService.QueryEntity(u => u.UserName == username && u.PassWord == md5pwd);
             if (userInfo != null)
             {
                 JwtModel jwtModel = new JwtModel

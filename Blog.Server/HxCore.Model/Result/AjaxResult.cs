@@ -24,6 +24,6 @@ namespace HxCore.Model
         /// <summary>
         /// 获取 返回数据
         /// </summary>
-        public object Resultdata { get; set; }
+        public object Data { get; set; }
     }
 }

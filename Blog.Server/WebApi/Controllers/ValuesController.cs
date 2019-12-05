@@ -13,7 +13,7 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [AllowAnonymous]
     public class ValuesController : ControllerBase
     {
         private IUserInfoService _userService;
@@ -30,9 +30,9 @@ namespace WebApi.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<string>> Get(int id)
+        public async Task<string> Get(int id)
         {
-           UserInfo user = await _userService.GetEntity(u=>u.UserName=="admin");
+           UserInfo user = await _userService.QueryEntity(u=>u.UserName=="admin");
            return "这是一个测试"+ user.NickName;
         }
 

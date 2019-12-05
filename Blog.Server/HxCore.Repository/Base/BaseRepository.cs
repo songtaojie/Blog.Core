@@ -13,15 +13,38 @@ namespace HxCore.Repository
         {
             DbContext = Model.Context.DbFactory.GetDbContext();
         }
-
-        public async Task<T> GetEntity(Expression<Func<T, bool>> predicate)
+        #region 查询
+        public async Task<T> QueryEntity(Expression<Func<T, bool>> predicate)
         {
             return await DbContext.Set<T>().FirstOrDefaultAsync(predicate);
         }
 
-        public async Task<T> GetEntityById(object id)
+        public async Task<T> QueryEntityById(object id)
         {
-            return await DbContext.Set<T>().FindAsync();
+            return await DbContext.Set<T>().FindAsync(id);
         }
+
+        public async Task<T> QueryEntityNoTrack(Expression<Func<T, bool>> lambda)
+        {
+            var result = DbContext.Set<T>().AsNoTracking().Where(lambda);
+            
+            return await result.FirstOrDefaultAsync();
+        }
+
+        public IQueryable<T> QueryEntities(Expression<Func<T, bool>> lambda)
+        {
+            var result = DbContext.Set<T>().Where(lambda);
+            return result;
+        }
+
+        public virtual IQueryable<T> QueryEntitiesNoTrack(Expression<Func<T, bool>> lambda)
+        {
+            var result = DbContext.Set<T>()
+                .AsNoTracking()
+                .Where(lambda);
+            return result;
+        }
+        #endregion
+
     }
 }

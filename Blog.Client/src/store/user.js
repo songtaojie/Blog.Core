@@ -5,11 +5,15 @@ export const SIGNIN = 'SIGNIN'// 登录
 export const SIGNOUT = 'SIGNOUT'// 登出
 export const LOGIN_API = 'api/login'
 
+/**
+ * 是否登录
+ */
 export function isLogin () {
   const token = window.sessionStorage.getItem('Token')
   if (token && token.length >= 128) {
     return true
   }
+
   return false
 }
 const user = {

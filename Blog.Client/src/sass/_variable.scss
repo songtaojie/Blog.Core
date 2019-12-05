@@ -1,6 +1,7 @@
 
 $prefix: 'hx' !default;//要应用于所有CSS选择器的前缀。 如果更改了，则还必须在JavaScript应用程序中进行更改。
-
+//头部
+$header-height:3.5rem;
 $line-height:1.5em;
 //字体大小
 $font-family: Microsoft YaHei,Microsoft YaHei UI, Arial, Helvetica, sans-serif;

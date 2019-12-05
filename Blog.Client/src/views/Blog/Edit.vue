@@ -1,45 +1,34 @@
 <template>
-  <!-- <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor> -->
-<div id="editor">
-  hhhh
-</div>
+  <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
 </template>
 
 <script>
-// ⚠️ NOTE: We don't use @ckeditor/ckeditor5-build-classic any more!
-// Since we're building CKEditor from source, we use the source version of ClassicEditor.
-import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor"
-// import Essentials from "@ckeditor/ckeditor5-essentials/src/essentials"
-// import Bold from "@ckeditor/ckeditor5-basic-styles/src/bold"
-// import Italic from "@ckeditor/ckeditor5-basic-styles/src/italic"
-// import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-import Font from "@ckeditor/ckeditor5-font/src/font"
-// import Heading from "@ckeditor/ckeditor5-heading/src/heading";
+import CKEditor from "@ckeditor/ckeditor5-vue";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import "@ckeditor/ckeditor5-build-classic/build/translations/zh-cn";
 export default {
+  components: {
+    ckeditor: CKEditor.component
+  },
   data() {
     return {
-      // editor: ClassicEditor,
+      editor: ClassicEditor,
       editorData: "<p>Content of the editor.</p>",
       editorConfig: {
-        plugins: [
-          //Essentials,
-          // Bold,
-          // Italic,
-          // Paragraph+
-          // Font,
-          // Heading
-        ],
-
-        toolbar: {
-          items: [
-            "fontSize",
-            "fontFamily",
-            "fontColor",
-            "fontBackgroundColor"
-          ]
-        }
+        removePlugins: ["Link", "BlockQuote", "MediaEmbed"],
+        ckfinder: {
+          // Upload the images to the server using the CKFinder QuickUpload command.
+          uploadUrl:
+            "/file/upload?command=QuickUpload&type=Images&responseType=json",
+          // Define the CKFinder configuration (if necessary).
+          options: {
+            resourceType: "Images"
+          }
+        },
+        language: "zh-cn"
       }
     };
-  }
+  },
+  created: function() {}
 };
 </script>
