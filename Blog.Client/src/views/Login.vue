@@ -66,15 +66,15 @@
   </div>
 </template>
 <script>
-import { mapActions } from "vuex";
-import { SIGNIN } from "../store/user.js";
+import { mapActions } from 'vuex';
+import { SIGNIN } from '../store/user.js';
 export default {
   data() {
     return {
       form: {
-        username: "Admin",
-        password: "123456",
-        remember: "N"
+        username: 'Admin',
+        password: '123456',
+        remember: 'N'
       }
     };
   },
@@ -87,7 +87,7 @@ export default {
         _that.SIGNIN({
           user: _that.form,
           success: function() {
-            _that.$router.replace(_that.$route.query.redirect || "/");
+            _that.$router.replace(_that.$route.query.redirect || '/');
           }
         });
       }

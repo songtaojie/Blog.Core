@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "toast",
+  name: 'toast',
   data(){
     return {
       visible:true,

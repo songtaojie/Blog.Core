@@ -47,9 +47,9 @@
   </header>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
 import { isLogin }  from '../store/user'
-import imgUrl from "../assets/images/avatar1_small.jpg";
+import imgUrl  from '../assets/images/avatar1_small.jpg';
 export default {
   data() {
     return {
@@ -65,7 +65,7 @@ export default {
       this.show = !this.show;
     },
     doColClick() {
-      console.log("dddd");
+      console.log('dddd');
     }
   },
   computed: mapState({
@@ -74,7 +74,7 @@ export default {
     },
     colclass: function() {
       return {
-        "hx-show": this.show
+        'hx-show': this.show
       };
     }
   }),

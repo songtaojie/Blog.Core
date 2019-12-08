@@ -45,7 +45,7 @@ namespace WebApi.Controllers
                     Uid = userInfo.Id,
                     //Role = "admin"
                 };
-                result.Resultdata = JwtHelper.IssueJwt(jwtModel);
+                result.Data = JwtHelper.IssueJwt(jwtModel);
             }
             else
             {
