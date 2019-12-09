@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '../views/Index.vue'
-import Edit from '../views/Blog/Edit.vue'
+import Index from '../views/Home/Index.vue'
+// import Edit from '../views/Blog/Edit.vue'
 import { isLogin } from '../store/user.js'
 Vue.use(Router)
 const routes = [{

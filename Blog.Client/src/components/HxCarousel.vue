@@ -1,21 +1,41 @@
 
 <template>
   <div>
-    <b-carousel class="h-100" fade indicators controls label-prev="前一张">
-      <b-carousel-slide caption="First slide" img-src="https://picsum.photos/1024/480/?image=10"></b-carousel-slide>
+    <b-carousel class="" fade indicators controls label-prev="前一张">
+      <b-carousel-slide v-for="item in ImgItems" :key="item.Id" 
+      :img-src="item.src"></b-carousel-slide>
+      <!-- <b-carousel-slide caption="First slide" img-src="https://picsum.photos/1024/480/?image=10"></b-carousel-slide>
       <b-carousel-slide caption="Second Slide" img-src="https://picsum.photos/1024/480/?image=12"></b-carousel-slide>
       <b-carousel-slide caption="Third Slide" img-src="https://picsum.photos/1024/480/?image=22"></b-carousel-slide>
-      <b-carousel-slide caption="Fourth Slide" img-src="https://picsum.photos/1024/480/?image=23"></b-carousel-slide>
+      <b-carousel-slide caption="Fourth Slide" img-src="https://picsum.photos/1024/480/?image=23"></b-carousel-slide>-->
     </b-carousel>
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { isEmpty } from '../utils/'
 export default {
+  name: 'HxCarousel',
+  props: {
+    Items: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
-      imgUrl,
       show: false
+    }
+  },
+  computed:{
+    ImgItems: function() {
+      var that = this
+      var imgItems = []
+      if (isEmpty(that.Items)) return
+      that.Items.forEach(function(v, i) {
+        v.Id = i
+        imgItems.push(v)
+      })
+      return imgItems
     }
   },
   methods: {},

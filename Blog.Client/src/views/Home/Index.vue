@@ -1,27 +1,28 @@
 <template>
   <div>
     <hx-header></hx-header>
-    <div class="container-fluid d-flex">
-      <div class="flex-fill">
-        <div class="d-flex">
-          <div>
-            <hx-carousel></hx-carousel>
+    <div class="container-fluid d-flex mt-1">
+      <div class="flex-fill d-flex flex-column flex-sm-row">
+          <div class="h-100 w-100 w-sm-70">
+            <hx-carousel :Items="ImgItems"></hx-carousel>
           </div>
+          <div class="ml-sm-2 mt-2 mt-sm-0 w-100 w-sm-30"></div>
         </div>
-      </div>
-      <div class="w-25"></div>
     </div>
   </div>
 </template>
 <script>
-import HxHeader from '../components/HxHeader.vue'
-import { HxCarousel } from "../components/HxCarousel.vue"
-import toast from '../components/toast/';
+import HxHeader from '@/components/HxHeader.vue'
+import HxCarousel from '@/components/HxCarousel.vue'
+import toast from '@/components/toast/'
 export default {
   data() {
     return {
-      list: 1
-    };
+      list: 1,
+      ImgItems:[{
+        src:'https://picsum.photos/1024/480/?image=10'
+      }]
+    }
   },
   components: {
     HxHeader,
@@ -29,14 +30,14 @@ export default {
   },
   methods: {
     showToast() {
-      debugger;
+      debugger
       toast.show('测试', {
         variant: 'danger',
         noAutoHide: true
-      });
+      })
     },
     hideToast() {
-      toast.hide();
+      toast.hide()
     },
     send() {
       // const _that = this
@@ -58,5 +59,5 @@ export default {
   //     debugger
   //   })
   // }
-};
+}
 </script>
