@@ -4,3 +4,20 @@
       font-size: $font-size + 0.25em * $index;
   }
 }
+
+//.hx-text-green
+.#{$prefix}-text-green {
+  color: $green;
+}
+//.hx-text-orange
+.#{$prefix}-text-orange {
+  color: $orange;
+}
+//.hx-text-gray
+.#{$prefix}-text-gray {
+  color: $gray-500;
+}
+//.hx-text-gray
+.#{$prefix}-text-blue {
+  color: $blue;
+}

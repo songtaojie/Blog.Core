@@ -2,7 +2,7 @@
 <template>
   <div>
     <b-carousel class="" fade indicators controls label-prev="前一张">
-      <b-carousel-slide v-for="item in ImgItems" :key="item.Id" 
+      <b-carousel-slide v-for="item in ImgItems" :key="item.Id"
       :img-src="item.src"></b-carousel-slide>
       <!-- <b-carousel-slide caption="First slide" img-src="https://picsum.photos/1024/480/?image=10"></b-carousel-slide>
       <b-carousel-slide caption="Second Slide" img-src="https://picsum.photos/1024/480/?image=12"></b-carousel-slide>
@@ -16,6 +16,7 @@ import { isEmpty } from '../utils/'
 export default {
   name: 'HxCarousel',
   props: {
+    // 轮播图片的集合
     Items: {
       type: Array,
       required: true
@@ -30,11 +31,12 @@ export default {
     ImgItems: function() {
       var that = this
       var imgItems = []
-      if (isEmpty(that.Items)) return
+      if (isEmpty(that.Items)) return []
       that.Items.forEach(function(v, i) {
         v.Id = i
         imgItems.push(v)
       })
+
       return imgItems
     }
   },

@@ -33,10 +33,18 @@
             <b-img :src="imgUrl" rounded="circle"></b-img>
             <!-- <img src="../assets/images/avatar1_small.jpg" alt=""> -->
           </template>
-          <b-dropdown-item target="_blank" href="/blog/edit"><span class="hx-icon-edit mr-1"></span>写博客</b-dropdown-item>
-          <b-dropdown-item><i class="hx-icon-user mr-1"></i>个人中心</b-dropdown-item>
-          <b-dropdown-item><i class="hx-icon-cfg mr-1"></i>系统管理</b-dropdown-item>
-          <b-dropdown-item><i class="hx-icon-logout-solid mr-1"></i>退出</b-dropdown-item>
+          <b-dropdown-item target="_blank" href="/blog/edit">
+            <span class="hx-icon-edit mr-1"></span>写博客
+          </b-dropdown-item>
+          <b-dropdown-item>
+            <i class="hx-icon-user mr-1"></i>个人中心
+          </b-dropdown-item>
+          <b-dropdown-item>
+            <i class="hx-icon-cfg mr-1"></i>系统管理
+          </b-dropdown-item>
+          <b-dropdown-item>
+            <i class="hx-icon-logout-solid mr-1"></i>退出
+          </b-dropdown-item>
         </b-nav-dropdown>
         <!-- <b-nav-item href="#" link-classes="text-white px-3 py-0" active>网站首页</b-nav-item>
           <b-nav-item href="#" link-classes="text-white px-3 py-0">关于我</b-nav-item>
@@ -47,25 +55,25 @@
   </header>
 </template>
 <script>
-import { mapState } from 'vuex';
-import { isLogin }  from '../store/user'
-import imgUrl  from '../assets/images/avatar1_small.jpg';
+import { mapState } from 'vuex'
+import { isLogin } from '../store/user'
+import imgUrl from '../assets/images/avatar1_small.jpg'
 export default {
   data() {
     return {
       imgUrl,
       show: false
-    };
+    }
   },
   methods: {
     doClick() {
-      if (!this.show) this.show = !this.show;
+      if (!this.show) this.show = !this.show
     },
-    doHide(e) {
-      this.show = !this.show;
+    doHide() {
+      this.show = !this.show
     },
     doColClick() {
-      console.log('dddd');
+      console.log('dddd')
     }
   },
   computed: mapState({
@@ -75,16 +83,16 @@ export default {
     colclass: function() {
       return {
         'hx-show': this.show
-      };
+      }
     }
   }),
   mounted() {
-    const $col = this.$refs.collapse;
+    const $col = this.$refs.collapse
     window.onresize = function() {
-      if ($col.show) $col.show = false;
-    };
+      if ($col.show) $col.show = false
+    }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .hx-header {

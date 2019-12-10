@@ -66,8 +66,8 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex';
-import { SIGNIN } from '../store/user.js';
+import { mapActions } from 'vuex'
+import { SIGNIN } from '../store/user.js'
 export default {
   data() {
     return {
@@ -76,24 +76,24 @@ export default {
         password: '123456',
         remember: 'N'
       }
-    };
+    }
   },
   methods: {
     ...mapActions([SIGNIN]),
     onlogin() {
-      const _that = this;
-      window.from = _that.$refs.form;
+      const _that = this
+      window.from = _that.$refs.form
       if (_that.$refs.form.checkValidity()) {
         _that.SIGNIN({
           user: _that.form,
           success: function() {
-            _that.$router.replace(_that.$route.query.redirect || '/');
+            _that.$router.replace(_that.$route.query.redirect || '/')
           }
-        });
+        })
       }
     }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .hx-login-wrap {
