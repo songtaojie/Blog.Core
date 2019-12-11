@@ -27,3 +27,6 @@
 .dropdown.show .dropdown-toggle::after {
   transform: rotate(180deg);
 }
+.d-flex:not(.flex-column) > .flex-fill {
+  width: 0;
+}

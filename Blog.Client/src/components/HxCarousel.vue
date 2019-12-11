@@ -1,9 +1,17 @@
 
 <template>
   <div>
-    <b-carousel class="" fade indicators controls label-prev="前一张">
-      <b-carousel-slide v-for="item in ImgItems" :key="item.Id"
-      :img-src="item.src"></b-carousel-slide>
+    <b-carousel class="carousel-img-border"  fade indicators controls label-prev="前一张">
+      <b-carousel-slide
+        v-for="item in ImgItems"
+        :key="item.Id"
+      >
+       <template v-slot:img>
+          <img class="d-block img-fluid w-100 img-thumbnail"
+            :src="item.src"
+          >
+        </template>
+      </b-carousel-slide>
       <!-- <b-carousel-slide caption="First slide" img-src="https://picsum.photos/1024/480/?image=10"></b-carousel-slide>
       <b-carousel-slide caption="Second Slide" img-src="https://picsum.photos/1024/480/?image=12"></b-carousel-slide>
       <b-carousel-slide caption="Third Slide" img-src="https://picsum.photos/1024/480/?image=22"></b-carousel-slide>
@@ -27,12 +35,12 @@ export default {
       show: false
     }
   },
-  computed:{
-    ImgItems: function() {
+  computed: {
+    ImgItems: function () {
       var that = this
       var imgItems = []
       if (isEmpty(that.Items)) return []
-      that.Items.forEach(function(v, i) {
+      that.Items.forEach(function (v, i) {
         v.Id = i
         imgItems.push(v)
       })
@@ -41,8 +49,9 @@ export default {
     }
   },
   methods: {},
-  mounted() {}
+  mounted() { }
 }
 </script>
 <style lang="scss" scoped>
+
 </style>
