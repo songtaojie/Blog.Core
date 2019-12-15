@@ -1,5 +1,5 @@
 <template>
-  <div class="ml-sm-1 p-1 mt-sm-0 about-me">
+  <div class="ml-sm-1 p-1 mt-sm-0 hx-about-me">
     <h2 class="mx-2 my-3 about-header">关于我</h2>
     <p>网名：演绎~陌路离殇</p>
     <p>职业：Web前端设计师、后端开发</p>
@@ -32,7 +32,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  .about-me {
+  .hx-about-me {
     box-shadow: 0px 1px 0px rgba(255,255,255,.1), inset 0px 1px 1px rgba(0,0,0,.7);
     border-radius: 3px;
     background: url(/images/quote-bg.png) no-repeat top right rgba(42,42,42,1);

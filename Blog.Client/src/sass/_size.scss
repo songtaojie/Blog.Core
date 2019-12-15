@@ -1,3 +1,6 @@
+// 类名
+$about-me: name(about-me);
+$carousel: name(carousel);
 //.hx-minw-
 @for $i from 0 through 5 {
   .#{$prefix}-minw-#{$i} {
@@ -31,7 +34,13 @@
     height: #{$w}% !important;
   }
 }
-
+#{$about-me},
+#{$carousel} .carousel-item {
+    height: 11.875rem;
+}
+#{$carousel} .carousel-thumbnail {
+    height: 5.875rem;
+}
 /*小屏*/
 @media (min-width: 576px) {
   @each $w in 0, 25, 30, 50, 70, 75, 100 {
@@ -41,6 +50,10 @@
       .h-sm-#{$w} {
         height: #{$w}% !important;
       }
+  }
+  #{$carousel} .carousel-thumbnail,
+  #{$carousel} .carousel-item {
+      height: $carousel-sm-height;
   }
 };
 /*中屏*/
@@ -54,6 +67,16 @@
         height: #{$w}% !important;
       }
   }
+
+  #{$about-me},
+  #{$carousel} .carousel-thumbnail,
+  #{$carousel} .carousel-item {
+      height: $carousel-md-height;
+  }
+
+  #{$about-me} {
+      width: $carousel-md-width;
+  }
 };
 /*大屏*/
 @media (min-width: 992px) {
@@ -65,6 +88,15 @@
         height: #{$w}% !important;
       }
   }
+
+    #{$about-me},
+    #{$carousel}.carousel-thumbnail,
+    #{$carousel}.carousel-item {
+        height: $carousel-lg-height;
+    }
+    #{$about-me} {
+        width: $carousel-lg-width;
+    }
 };
 /*超大屏*/
 @media (min-width: 1200px) {
@@ -76,4 +108,13 @@
         height: #{$w}% !important;
       }
   }
+
+  #{$about-me},
+  #{$carousel} .carousel-thumbnail,
+  #{$carousel} .carousel-item {
+        height: $carousel-xl-height;
+    }
+    #{$about-me} {
+        width: $carousel-xl-width;
+    }
 };

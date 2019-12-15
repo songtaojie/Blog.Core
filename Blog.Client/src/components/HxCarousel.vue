@@ -1,15 +1,14 @@
 
 <template>
   <div>
-    <b-carousel class="carousel-img-border"  fade indicators controls label-prev="前一张">
-      <b-carousel-slide
-        v-for="item in ImgItems"
-        :key="item.Id"
-      >
-       <template v-slot:img>
-          <img class="d-block img-fluid w-100 img-thumbnail"
+    <b-carousel class="carousel-img-border" fade indicators controls label-prev="前一张">
+      <b-carousel-slide v-for="item in ImgItems" :key="item.Id">
+        <template v-slot:img>
+          <img
+            class="d-block img-fluid w-100 h-100"
+            :class="{'img-thumbnail':Border}"
             :src="item.src"
-          >
+          />
         </template>
       </b-carousel-slide>
       <!-- <b-carousel-slide caption="First slide" img-src="https://picsum.photos/1024/480/?image=10"></b-carousel-slide>
@@ -28,6 +27,12 @@ export default {
     Items: {
       type: Array,
       required: true
+    },
+    // 是否有边框
+    Border: {
+      type: Boolean,
+      required: false,
+      default: true
     }
   },
   data() {
@@ -47,11 +52,8 @@ export default {
 
       return imgItems
     }
-  },
-  methods: {},
-  mounted() { }
+  }
 }
 </script>
 <style lang="scss" scoped>
-
 </style>

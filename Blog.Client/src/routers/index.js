@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '../views/Home/Index.vue'
 // import Edit from '../views/Blog/Edit.vue'
-import { isLogin } from '../store/user.js'
+import { isLogin } from '../store/auth.js'
 Vue.use(Router)
 const routes = [{
   path: '',
@@ -18,6 +18,7 @@ const routes = [{
   path: '*',
   redirect: '/'
 }, {
+  name:'edit',
   path: '/blog/edit',
   component: () => import('../views/Blog/Edit.vue')
 }]

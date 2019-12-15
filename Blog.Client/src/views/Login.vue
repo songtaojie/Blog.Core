@@ -67,7 +67,7 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
-import { SIGNIN } from '../store/user.js'
+import { SIGNIN } from '../store/auth.js'
 export default {
   data() {
     return {
@@ -85,7 +85,7 @@ export default {
       window.from = _that.$refs.form
       if (_that.$refs.form.checkValidity()) {
         _that.SIGNIN({
-          user: _that.form,
+          form: _that.form,
           success: function() {
             _that.$router.replace(_that.$route.query.redirect || '/')
           }

@@ -56,7 +56,6 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import { isLogin } from '../store/user'
 import imgUrl from '../assets/images/avatar1_small.jpg'
 export default {
   data() {
@@ -78,7 +77,7 @@ export default {
   },
   computed: mapState({
     isLogin: function() {
-      return isLogin()
+      return this.$store.getters.auth.isLogin
     },
     colclass: function() {
       return {

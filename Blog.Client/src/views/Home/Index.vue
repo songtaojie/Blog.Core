@@ -1,14 +1,14 @@
 <template>
   <div>
     <hx-header></hx-header>
-    <div class="container-fluid d-flex mt-1">
+    <div class="container-fluid hx-container d-flex mt-1">
       <div class="flex-fill">
         <div class="d-flex pt-1">
           <div class="flex-fill d-flex flex-column flex-sm-row">
-            <div class="h-100 w-100 w-sm-70">
-              <hx-carousel :Items="ImgItems"></hx-carousel>
+            <div class="h-100 w-100 w-sm-70 hx-carousel">
+              <hx-carousel :Items="ImgItems" ></hx-carousel>
             </div>
-            <div class="ml-sm-2 mt-2 mt-sm-0 w-100 w-sm-30">
+            <div class="ml-sm-2 mt-2 mt-sm-0 w-100 w-sm-30 hx-carousel">
               <div class="d-flex flex-row flex-sm-column carousel-thumbnail">
                 <a class="mb-2 w-50 w-sm-100">
                   <img src="https://picsum.photos/1024/480/?image=10" class="img-thumbnail" />
@@ -39,10 +39,10 @@ export default {
       ImgItems: [
         {
           src: 'https://picsum.photos/1024/480/?image=10'
-        },
-        {
-          src: 'https://picsum.photos/1024/480/?image=12'
         }
+        // {
+        //   src: 'https://picsum.photos/1024/480/?image=12'
+        // }
       ]
     }
   },

@@ -23,9 +23,10 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 
 axios.interceptors.request.use((r) => {
   if (window.sessionStorage.Token && window.sessionStorage.Token.length >= 128) {
-    r.headers.Authorization = 'Bearer ' + window.sessionStorage.Token
+    r.headers.Authorization = `Bearer ${window.sessionStorage.Token}`
   }
-  return r
+
+return r
 }, (e) => {
   return Promise.reject(e)
 })
@@ -36,7 +37,8 @@ axios.interceptors.response.use((res) => {
   if (res.data.success === false) {
     return Promise.reject(res)
   }
-  return res.data
+
+return res.data
 }, (e) => {
   debugger
   if (e.response.status === 401) {
@@ -47,7 +49,8 @@ axios.interceptors.response.use((res) => {
       }
     })
   }
-  return Promise.reject(e)
+
+return Promise.reject(e)
 })
 
 /**
@@ -67,7 +70,8 @@ function filterNull (o) {
       o[key] = filterNull(o[key])
     }
   }
-  return o
+
+return o
 }
 
 /**
@@ -79,7 +83,8 @@ export function get (url, params) {
   if (!isEmpty(params)) {
     params = filterNull(params)
   }
-  return new Promise((resolve, reject) => {
+
+return new Promise((resolve, reject) => {
     axios.get(url, {
       params: params
     }).then(res => {
@@ -99,7 +104,8 @@ export function post (url, params) {
   if (!isEmpty(params)) {
     params = filterNull(params)
   }
-  return new Promise((resolve, reject) => {
+
+return new Promise((resolve, reject) => {
     axios.post(url, QS.stringify(params)).then(res => {
       resolve(res)
     }).catch(err => {
@@ -116,7 +122,8 @@ export function put (url, params) {
   if (!isEmpty(params)) {
     params = filterNull(params)
   }
-  return new Promise((resolve, reject) => {
+
+return new Promise((resolve, reject) => {
     axios.put(url, QS.stringify(params)).then(res => {
       resolve(res)
     }).catch(err => {
@@ -133,7 +140,8 @@ export function del (url, params) {
   if (!isEmpty(params)) {
     params = filterNull(params)
   }
-  return new Promise((resolve, reject) => {
+
+return new Promise((resolve, reject) => {
     axios.delete(url, QS.stringify(params)).then(res => {
       resolve(res)
     }).catch(err => {

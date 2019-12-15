@@ -32,27 +32,25 @@ namespace WebApi.Controllers
         /// <returns></returns>
         [Route("api/login")]
         [HttpPost]
-        public async Task<ActionResult> Login([FromForm]string username, [FromForm]string password)
+        public async Task<dynamic> Login([FromForm]string username, [FromForm]string password)
         {
-            string jwtStr = string.Empty;
-            AjaxResult result = new AjaxResult();
             string md5pwd = SafeHelper.MD5TwoEncrypt(password);
             UserInfo userInfo = await _userService.QueryEntity(u => u.UserName == username && u.PassWord == md5pwd);
-            if (userInfo != null)
+            if (userInfo == null) throw new UserFriendlyException("用户名或密码错误");
+            JwtModel jwtModel = new JwtModel
             {
-                JwtModel jwtModel = new JwtModel
-                {
-                    Uid = userInfo.Id,
-                    //Role = "admin"
-                };
-                result.Data = JwtHelper.IssueJwt(jwtModel);
-            }
-            else
-            {
-                result.Success = false;
-                result.Message = "用户名或密码错误";
-            }
-            return Ok(result);
+                Uid = userInfo.Id,
+                //Role = "admin"
+            };
+            string jwtStr= JwtHelper.IssueJwt(jwtModel);
+
+            return new { 
+                Token = jwtStr,
+                userId = userInfo.HexId,
+                userInfo.UserName,
+                userInfo.NickName,
+                userInfo.AvatarUrl,
+            };
         }
     }
 }

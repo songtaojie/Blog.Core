@@ -24,8 +24,8 @@ a{
 .#{$prefix}-container{
   margin: 0 auto;
   max-width: $max-width;
-  margin-top: $header-height+0.25rem;
 }
+@import 'function';
 @import 'size';
 @import 'text';
 @import 'bootstrap'
