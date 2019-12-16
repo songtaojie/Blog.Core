@@ -3,9 +3,9 @@
 </template>
 
 <script>
-import CKEditor from '@ckeditor/ckeditor5-vue';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import '@ckeditor/ckeditor5-build-classic/build/translations/zh-cn';
+import CKEditor from '@ckeditor/ckeditor5-vue'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import '@ckeditor/ckeditor5-build-classic/build/translations/zh-cn'
 export default {
   components: {
     ckeditor: CKEditor.component
@@ -27,8 +27,8 @@ export default {
         },
         language: 'zh-cn'
       }
-    };
+    }
   },
   created: function() {}
-};
+}
 </script>

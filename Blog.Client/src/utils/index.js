@@ -6,17 +6,6 @@
 export const isString = function (value) {
   return typeof value === 'string'
 }
-
-/**
- * 判断给定值是否为空
- * @param {any} value 要判断的值
- * @param {Boolean} allowEmptyString 是否允许空字符串
- * @returns {Boolean} true为空，false不为空
- */
-export const isEmpty = function (value, allowEmptyString) {
-  return (value === undefined || value === null) || (!allowEmptyString ? value === '' : false) || (isArray(value) && value.length === 0)
-}
-
 /**
  * 如果传递的值是JavaScript数组则返回true，否则返回false。
  * @param {Object} value 要测试的目标。
@@ -30,6 +19,16 @@ export const isArray = function (value) {
   }
 }
 /**
+ * 判断给定值是否为空
+ * @param {any} value 要判断的值
+ * @param {Boolean} allowEmptyString 是否允许空字符串
+ * @returns {Boolean} true为空，false不为空
+ */
+export const isEmpty = function (value, allowEmptyString) {
+  return value === undefined || value === null || (!allowEmptyString ? value === '' : false) || isArray(value) && value.length === 0
+}
+
+/**
  * 判断给定制是否是对象
  * @param {any} value 要验证的值
  * @returns {Boolean} true代表是对象，false代表不是对象
@@ -39,9 +38,10 @@ export const isObject = function (value) {
   if (toString.call(null) === '[object Object]') {
     // 在这里检查ownerDocument以排除DOM节点
     return value !== null && toString.call(value) === '[object Object]' && value.ownerDocument === undefined
-  } else {
-    return toString.call(value) === '[object Object]'
   }
+
+return toString.call(value) === '[object Object]'
+
 }
 
 /**
@@ -79,9 +79,9 @@ export const isNumber = function (value) {
 export const isFunction = function (value) {
   if (typeof document !== 'undefined' && typeof document.getElementsByTagName('body') === 'function') {
     return !!value && toString.call(value) === '[object Function]'
-  } else {
-    return !!value && typeof value === 'function'
   }
+
+  return !!value && typeof value === 'function'
 }
 
 // 默认导出所有方法

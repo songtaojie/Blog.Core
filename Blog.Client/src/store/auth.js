@@ -29,6 +29,7 @@ const sessionStoragePlugin = store => {
     // 每次 mutation 之后调用
     // mutation 的格式为 { type, payload }
     sessionStorage.setItem(AUTH_KEY, JSON.stringify(state))
+    console.log(state)
   })
 }
 if (!isEmpty(sessionStorage.getItem(AUTH_KEY))) {

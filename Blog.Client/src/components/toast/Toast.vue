@@ -1,5 +1,5 @@
 <template>
-  <b-toast v-model="visible" :variant="variant" :toaster="toaster" 
+  <b-toast v-model="visible" :variant="variant" :toaster="toaster"
   :auto-hide-delay="autoHideDelay" :no-auto-hide = "noAutoHide" solid>
       <div slot="toast-title" class="d-flex flex-grow-1 align-items-baseline">
         <!-- <b-img blank blank-color="#ff5555" class="mr-2" width="12" height="12"></b-img> -->
@@ -11,7 +11,7 @@
 <script>
 export default {
   name: 'toast',
-  data(){
+  data() {
     return {
       visible:true,
       variant:'info',
@@ -22,5 +22,5 @@ export default {
       noAutoHide:false
     }
   }
-};
+}
 </script>
