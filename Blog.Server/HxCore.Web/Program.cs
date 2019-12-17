@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using NLog.Web;
 
-namespace WebApi
+namespace HxCore.Web
 {
     public class Program
     {

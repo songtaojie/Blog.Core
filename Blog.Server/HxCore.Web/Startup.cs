@@ -11,11 +11,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
-using WebApi.Filter;
+using HxCore.Web.Filter;
 using HxCore.Model.Context;
-using WebApi.Services;
+using HxCore.Web.Services;
 
-namespace WebApi
+namespace HxCore.Web
 {
     public class Startup
     {

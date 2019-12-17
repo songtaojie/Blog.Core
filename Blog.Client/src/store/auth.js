@@ -61,6 +61,7 @@ const auth = {
       failure
     }) {
       post(LOGIN_API, form).then(r => {
+        debugger
         if (r && r.success) {
           this.commit('UPDATE_AUTH', r.data)
           if (isFunction(success)) {

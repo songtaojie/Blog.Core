@@ -6,10 +6,10 @@ using HxCore.Common.Security;
 using HxCore.IServices;
 using HxCore.Model;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Auth;
-using WebApi.Model;
+using HxCore.Web.Auth;
+using HxCore.Web.Model;
 
-namespace WebApi.Controllers
+namespace HxCore.Web.Controllers
 {
     /// <summary>
     /// 账户相关的控制器类

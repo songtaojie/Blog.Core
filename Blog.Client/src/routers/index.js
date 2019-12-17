@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '../views/Home/Index.vue'
 // import Edit from '../views/Blog/Edit.vue'
-import { isLogin } from '../store/auth.js'
+const islogin = true
 Vue.use(Router)
 const routes = [{
   path: '',
@@ -30,7 +30,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   if (to.meta.auth) {
     debugger
-    if (isLogin()) {
+    if (islogin) {
       next()
     } else {
       next({

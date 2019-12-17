@@ -44,8 +44,8 @@
               <b-form-checkbox
                 name="Remember"
                 v-model="form.remember"
-                value="Y"
-                unchecked-value="N"
+                value="true"
+                unchecked-value="false"
               >记住我</b-form-checkbox>
             </b-col>
             <b-col class="text-right">
@@ -74,7 +74,7 @@ export default {
       form: {
         username: 'Admin',
         password: '123456',
-        remember: 'N'
+        remember: false
       }
     }
   },
