@@ -45,24 +45,24 @@ namespace HxCore.Web.Services
             {
                 Type[] interTypes = type.GetInterfaces();
                 if (interTypes.Length == 0) continue;
-                Type interType = interTypes.FirstOrDefault(t => t.HasAttribute<SingletonDependencyAttribute>());
+                Type interType = interTypes.FirstOrDefault(t => t.HasAttribute<ScropedDependencyAttribute>());
                 if (interType != null)
                 {
-                    services.AddSingleton(interType, type);
+                    services.AddScoped(interType, type);
                 }
                 else
                 {
-                    interType = interTypes.FirstOrDefault(t => t.HasAttribute<ScropedDependencyAttribute>());
+                    interType = interTypes.FirstOrDefault(t => t.HasAttribute<TransientDependencyAttribute>());
                     if (interType != null)
                     {
-                        services.AddScoped(interType, type);
+                        services.AddTransient(interType, type);
                     }
                     else
                     {
-                        interType = interTypes.FirstOrDefault(t => t.HasAttribute<TransientDependencyAttribute>());
+                        interType = interTypes.FirstOrDefault(t => t.HasAttribute<SingletonDependencyAttribute>());
                         if (interType != null)
                         {
-                            services.AddTransient(interType, type);
+                            services.AddSingleton(interType, type);
                         }
                     }
                 }
