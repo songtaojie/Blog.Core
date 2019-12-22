@@ -5,7 +5,7 @@ import {
   isObject,
   isArray,
   isEmpty
-} from '../utils'
+} from '../common'
 import router from '../routers'
 import toast from '../components/toast/'
 // 设置环境切换时的接口url前缀
@@ -41,16 +41,28 @@ axios.interceptors.response.use((res) => {
 return res.data
 }, (e) => {
   debugger
-  if (e.response.status === 401) {
-    router.push({
-      path: '/login',
-      query: {
-        redirect: router.path
-      }
-    })
+  switch (e.response.status) {
+    case 401:
+      router.push({
+        path: '/login',
+        query: {
+          redirect: router.path
+        }
+      })
+      break
+    case 403:
+      router.push({
+        path: '/login',
+        query: {
+          redirect: router.path
+        }
+      })
+      break
+    default:
+      break
   }
 
-return Promise.reject(e)
+  return Promise.reject(e)
 })
 
 /**
@@ -176,6 +188,21 @@ export function ajaxError (err) {
         variant: 'danger'
       })
     }
+  }
+}
+
+export const saveRefreshtime = () => {
+  const nowtime = new Date()
+  let lastRefreshtime = window.localStorage.refreshtime ? new Date(window.localStorage.refreshtime) : new Date(-1)
+  const expiretime = new Date(Date.parse(window.localStorage.TokenExpire))
+
+  const refreshCount = 1 // 滑动系数
+  if (lastRefreshtime >= nowtime) {
+      lastRefreshtime = nowtime > expiretime ? nowtime : expiretime
+      lastRefreshtime.setMinutes(lastRefreshtime.getMinutes() + refreshCount)
+      window.localStorage.refreshtime = lastRefreshtime
+  }else {
+      window.localStorage.refreshtime = new Date(-1)
   }
 }
 

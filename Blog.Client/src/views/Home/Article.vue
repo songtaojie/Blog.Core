@@ -1,0 +1,30 @@
+<template>
+  <div>
+    <div v-for="item in blogList" :key="item.HexId">
+      <h4>{{item.Title}}</h4>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      blogList: []
+    }
+  },
+  created() {
+    this.getList()
+  },
+  methods: {
+    getList:function () {
+      var that = this
+      that.$api.post('api/blog/getlist', function(data) {
+        debugger
+      if(data) {
+        that.blogList = data
+      }
+    })
+    }
+  }
+}
+</script>

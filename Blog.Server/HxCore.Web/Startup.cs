@@ -15,6 +15,11 @@ using HxCore.Web.Filter;
 using HxCore.Model.Context;
 using HxCore.Web.Services;
 using HxCore.Web.Common;
+using HxCore.Web.Middlewares;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
+using HxCore.Web.Auth;
+using System.Security.Claims;
 
 namespace HxCore.Web
 {
@@ -39,17 +44,29 @@ namespace HxCore.Web
             #endregion
 
             #region Authorize 权限三步走
+            Auth.JwtSettings jwtSetting = Configuration.GetSection("JwtSettings").Get<Auth.JwtSettings>();
+            SymmetricSecurityKey signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSetting.SecretKey));
+            var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
             // 1.使用基于角色的授权，仅仅在api上配置，第一步：[Authorize(Roles = "admin")]，第二步：配置统一认证服务，第三步：开启中间件
             //基于策略的
+            var permissionRequirement = new PermissionRequirement(
+               "/api/denied",// 拒绝授权的跳转地址（目前无用）
+               ClaimTypes.Role,//基于角色的授权
+               jwtSetting.Issuer,//发行人
+               jwtSetting.Audience,//听众
+               signingCredentials: signingCredentials,//签名凭据
+               expiration: TimeSpan.FromSeconds(60 * 60)//接口的过期时间
+               );
             services.AddAuthorization(c =>
             {
                 c.AddPolicy(ConstInfo.AdminPolicy, policy => policy.RequireRole(ConstInfo.AdminPolicy));
                 c.AddPolicy(ConstInfo.ClientPolicy, policy => policy.RequireRole(ConstInfo.ClientPolicy));
+                c.AddPolicy("Permission", policy => policy.Requirements.Add(permissionRequirement));
             });
 
             //配置认证服务
-            Auth.JwtSettings jwtSetting = Configuration.GetSection("JwtSettings").Get<Auth.JwtSettings>();
-            SymmetricSecurityKey signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSetting.SecretKey));
+            
+            
             //令牌验证参数
             TokenValidationParameters tokenParams = new TokenValidationParameters
             {
@@ -59,7 +76,7 @@ namespace HxCore.Web
                 ValidateAudience = true,
                 ValidIssuer = jwtSetting.Issuer,
                 ValidAudience = jwtSetting.Audience,
-                ClockSkew = TimeSpan.FromSeconds(30),
+                ClockSkew = TimeSpan.FromSeconds(1),
                 RequireExpirationTime = true
             };
             services.AddAuthentication(c =>
@@ -82,6 +99,7 @@ namespace HxCore.Web
                     }
                 };
             });
+            services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
             #endregion
 
             #region Swagger
@@ -110,15 +128,15 @@ namespace HxCore.Web
             });
             #endregion
 
-            #region 数据库链接，上下文NLogLoggerProvider
+            #region 数据库链接，上下文
             services.AddDbContext<HxContext>();
             #endregion
 
             #region MVC，路由配置
             services.AddMvc(c =>
             {
-                c.Filters.Add(typeof(ExceptionFilter));
-                c.Filters.Add(typeof(ApiResultAttribute));
+                c.AddFilters(typeof(ExceptionFilter), typeof(ApiResultAttribute));
+                c.AddGlobalRoutePrefix(new RouteAttribute(ConstInfo.RoutePrefix));
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             #endregion
@@ -126,6 +144,10 @@ namespace HxCore.Web
             #region 单例模块
             services.AddSingleton(new AppSettings(Environment));
             services.AddSingleton(new DbFactory(services.BuildServiceProvider()));
+            // Httpcontext 注入
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IUserContext, UserContext>();
+
             #endregion
 
             #region 业务类映射

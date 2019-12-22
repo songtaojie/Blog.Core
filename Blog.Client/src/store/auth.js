@@ -6,32 +6,18 @@ import {
 import {
   isFunction,
   isEmpty
-} from '../utils'
-export const SIGNIN = 'SIGNIN' // 登录
-export const SIGNOUT = 'SIGNOUT' // 登出
-export const LOGIN_API = 'api/login'
-const AUTH_KEY = 'storage_auth'
-
+} from '../common'
+import { SIGNIN, SIGNOUT, LOGIN_API, AUTH_KEY } from '../common/constkey'
 let stateData = {
   isLogin: false,
   token: null,
+  tokenExpire: null,
   userId: null,
   userName: null,
   nickName: null,
   avatarUrl: null
 }
 
-const sessionStoragePlugin = store => {
-  debugger
-  // 当 store 初始化后调用
-  store.subscribe((mutation, state) => {
-    debugger
-    // 每次 mutation 之后调用
-    // mutation 的格式为 { type, payload }
-    sessionStorage.setItem(AUTH_KEY, JSON.stringify(state))
-    console.log(state)
-  })
-}
 if (!isEmpty(sessionStorage.getItem(AUTH_KEY))) {
   stateData = JSON.parse(sessionStorage.getItem(AUTH_KEY))
 }
@@ -42,7 +28,8 @@ const auth = {
     auth: state => {
       return {
         isLogin: state.isLogin,
-        token: state.token
+        token: state.token,
+        tokenExpire: state.tokenExpire
       }
     },
     user: state => {
@@ -64,6 +51,10 @@ const auth = {
         debugger
         if (r && r.success) {
           this.commit('UPDATE_AUTH', r.data)
+          var curTime = new Date()
+          var expiredate = new Date(curTime.setSeconds(curTime.getSeconds() + r.data.expires)) // 定义过期时间
+          this.commit('saveTokenExpire', expiredate) // 保存过期时间
+          window.localStorage.refreshtime = expiredate // 保存刷新时间，这里的和过期时间一致
           if (isFunction(success)) {
             success.call(this, r)
           }
@@ -90,6 +81,12 @@ const auth = {
       Object.assign(state, payload, {
         isLogin: true
       })
+    },
+    UPDATE_TOKEN(state, token) {
+      state.token = token
+    },
+    saveTokenExpire(state, tokenExpire) {
+      state.tokenExpire = tokenExpire
     }
   },
   actions: {
@@ -103,7 +100,6 @@ const auth = {
     }) {
       commit(SIGNOUT)
     }
-  },
-  plugins: [sessionStoragePlugin]
+  }
 }
 export default auth

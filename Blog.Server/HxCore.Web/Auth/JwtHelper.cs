@@ -27,7 +27,7 @@ namespace HxCore.Web.Auth
                 new Claim(JwtRegisteredClaimNames.Iat,$"{new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds()}"),
                 new Claim(JwtRegisteredClaimNames.Nbf,$"{new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds()}"),
                 //这个就是过期时间，目前是过期1000秒，可自定义，注意JWT有自己的缓冲过期时间
-                new Claim(JwtRegisteredClaimNames.Exp,$"{new DateTimeOffset(DateTime.Now.AddHours(2)).ToUnixTimeSeconds()}"),
+                new Claim(JwtRegisteredClaimNames.Exp,$"{new DateTimeOffset(DateTime.Now.AddSeconds(120)).ToUnixTimeSeconds()}"),
                 new Claim(JwtRegisteredClaimNames.Iss,settings.Issuer),
                 new Claim(JwtRegisteredClaimNames.Aud,settings.Audience)
             };

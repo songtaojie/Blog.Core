@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import auth from './auth.js'
+import { AUTH_KEY } from '../common/constkey.js'
 Vue.use(Vuex)
-const AUTH_KEY = 'STORAGE_AUTH_KEY'
 const sessionStoragePlugin = store => {
   // 当 store 初始化后调用
   store.subscribe((mutation, state) => {

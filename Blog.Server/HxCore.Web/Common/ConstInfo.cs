@@ -55,5 +55,8 @@ namespace HxCore.Web.Common
         public const string ClientPolicy = "CLIENT";
         public const string AdminPolicy = "ADMIN";
         #endregion
+        #region 路有前缀
+        public const string RoutePrefix = "/api";
+        #endregion
     }
 }

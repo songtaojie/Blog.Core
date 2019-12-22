@@ -195,6 +195,7 @@ namespace HxCore.Common.Security
         /// <returns></returns>
         public static string Md5Encrypt32(string value)
         {
+            if (string.IsNullOrEmpty(value)) return string.Empty;
             byte[] bytes;
             using (var md5 = MD5.Create())
             {

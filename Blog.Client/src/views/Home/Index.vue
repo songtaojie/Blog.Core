@@ -20,7 +20,7 @@
             </div>
           </div>
           <div>
-            hhhh
+            <hx-article></hx-article>
           </div>
         </div>
       </div>
@@ -34,6 +34,7 @@
 import HxHeader from '@/components/HxHeader.vue'
 import HxCarousel from '@/components/HxCarousel.vue'
 import HxCard from './Card'
+import HxArticle from './Article'
 import toast from '@/components/toast/'
 export default {
   data() {
@@ -52,7 +53,8 @@ export default {
   components: {
     HxHeader,
     HxCarousel,
-    HxCard
+    HxCard,
+    HxArticle
   },
   methods: {
     showToast() {

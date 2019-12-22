@@ -67,7 +67,7 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
-import { SIGNIN } from '../store/auth.js'
+import { SIGNIN } from '../common/constkey.js'
 export default {
   data() {
     return {
