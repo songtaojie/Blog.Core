@@ -3,7 +3,7 @@
     <hx-header></hx-header>
     <div class="container-fluid hx-container d-flex mt-1">
       <div class="flex-fill">
-        <div class="d-flex pt-1">
+        <div class="d-flex flex-column pt-1">
           <div class="flex-fill d-flex flex-column flex-sm-row">
             <div class="h-100 w-100 w-sm-70 hx-carousel">
               <hx-carousel :Items="ImgItems" ></hx-carousel>
@@ -18,6 +18,9 @@
                 </a>
               </div>
             </div>
+          </div>
+          <div>
+            hhhh
           </div>
         </div>
       </div>

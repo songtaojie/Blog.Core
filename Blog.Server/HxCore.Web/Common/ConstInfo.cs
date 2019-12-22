@@ -50,5 +50,10 @@ namespace HxCore.Web.Common
         /// 缩略图存放的文件
         /// </summary>
         public const string thumbPath = "thumbPath";
+        #region 策略
+        public const string SystemPolicy = "SYSTEM";
+        public const string ClientPolicy = "CLIENT";
+        public const string AdminPolicy = "ADMIN";
+        #endregion
     }
 }

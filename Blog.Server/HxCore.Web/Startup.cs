@@ -14,6 +14,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using HxCore.Web.Filter;
 using HxCore.Model.Context;
 using HxCore.Web.Services;
+using HxCore.Web.Common;
 
 namespace HxCore.Web
 {
@@ -42,7 +43,8 @@ namespace HxCore.Web
             //基于策略的
             services.AddAuthorization(c =>
             {
-                c.AddPolicy("Admin", policy => policy.RequireRole("Admin", "System"));
+                c.AddPolicy(ConstInfo.AdminPolicy, policy => policy.RequireRole(ConstInfo.AdminPolicy));
+                c.AddPolicy(ConstInfo.ClientPolicy, policy => policy.RequireRole(ConstInfo.ClientPolicy));
             });
 
             //配置认证服务
@@ -107,6 +109,7 @@ namespace HxCore.Web
                 });
             });
             #endregion
+
             #region 数据库链接，上下文NLogLoggerProvider
             services.AddDbContext<HxContext>();
             #endregion
