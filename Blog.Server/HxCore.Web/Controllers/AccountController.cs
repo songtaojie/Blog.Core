@@ -41,7 +41,7 @@ namespace HxCore.Web.Controllers
             if (userInfo == null) throw new UserFriendlyException("用户名或密码错误");
             JwtModel jwtModel = new JwtModel
             {
-                Uid = userInfo.Id,
+                UserHexId = userInfo.HexId,
                 Role = userInfo.IsAdmin? string.Join(",", ConstInfo.ClientPolicy, ConstInfo.AdminPolicy)
                 :ConstInfo.ClientPolicy
             };
@@ -57,26 +57,25 @@ namespace HxCore.Web.Controllers
         /// <param name="password">密码</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<UserModel> Login([FromForm] UserParam param)
+        [Route("login")]
+        public async Task<LoginModel> Login([FromForm] LoginParam param)
         {
             string md5pwd = SafeHelper.MD5TwoEncrypt(param.PassWord);
             UserInfo userInfo = await _userService.QueryEntity(u => u.UserName == param.UserName && u.PassWord == md5pwd);
             if (userInfo == null) throw new UserFriendlyException("用户名或密码错误");
             JwtModel jwtModel = new JwtModel
             {
-                Uid = userInfo.Id,
-                //Role = "admin"
+                UserHexId = userInfo.HexId,
+                UserName = userInfo.UserName,
+                Expiration = TimeSpan.FromSeconds(60 * 60),
+                Role = userInfo.IsAdmin ? string.Join(",", ConstInfo.ClientPolicy, ConstInfo.AdminPolicy)
+               : ConstInfo.ClientPolicy
             };
             string jwtStr= JwtHelper.IssueJwt(jwtModel);
-
-            return new UserModel
-            { 
-                Token = jwtStr,
-                UserId = userInfo.HexId,
-                UserName =userInfo.UserName,
-                NickName =userInfo.NickName,
-                AvatarUrl =userInfo.AvatarUrl,
-            };
+            var result=JwtHelper.BuildJwtToken(jwtModel);
+            result.NickName = userInfo.NickName;
+            result.AvatarUrl = userInfo.AvatarUrl;
+            return result;
         }
     }
 }

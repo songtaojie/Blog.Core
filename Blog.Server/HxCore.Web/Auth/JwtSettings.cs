@@ -43,14 +43,18 @@ namespace HxCore.Web.Auth
         /// <summary>
         /// Id
         /// </summary>
-        public long Uid { get; set; }
+        public string UserHexId { get; set; }
+        /// <summary>
+        /// Id
+        /// </summary>
+        public string UserName { get; set; }
         /// <summary>
         /// 角色
         /// </summary>
         public string Role { get; set; }
         /// <summary>
-        /// 职能
+        /// 过期时间
         /// </summary>
-        public string Work { get; set; }
+        public TimeSpan Expiration { get; set; }
     }
 }

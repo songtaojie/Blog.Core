@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HxCore.Web.Model
 {
-    public class UserParam
+    public class LoginParam
     {
         /// <summary>
         /// 用户名

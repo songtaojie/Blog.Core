@@ -48,20 +48,10 @@ namespace HxCore.Web
             SymmetricSecurityKey signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSetting.SecretKey));
             var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
             // 1.使用基于角色的授权，仅仅在api上配置，第一步：[Authorize(Roles = "admin")]，第二步：配置统一认证服务，第三步：开启中间件
-            //基于策略的
-            var permissionRequirement = new PermissionRequirement(
-               "/api/denied",// 拒绝授权的跳转地址（目前无用）
-               ClaimTypes.Role,//基于角色的授权
-               jwtSetting.Issuer,//发行人
-               jwtSetting.Audience,//听众
-               signingCredentials: signingCredentials,//签名凭据
-               expiration: TimeSpan.FromSeconds(60 * 60)//接口的过期时间
-               );
             services.AddAuthorization(c =>
             {
                 c.AddPolicy(ConstInfo.AdminPolicy, policy => policy.RequireRole(ConstInfo.AdminPolicy));
                 c.AddPolicy(ConstInfo.ClientPolicy, policy => policy.RequireRole(ConstInfo.ClientPolicy));
-                c.AddPolicy("Permission", policy => policy.Requirements.Add(permissionRequirement));
             });
 
             //配置认证服务

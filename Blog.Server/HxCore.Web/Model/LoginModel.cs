@@ -5,12 +5,22 @@ using System.Threading.Tasks;
 
 namespace HxCore.Web.Model
 {
-    public class UserModel
+    public class LoginModel
     {
         /// <summary>
         /// 令牌
         /// </summary>
         public string Token { get; set; } 
+
+        /// <summary>
+        /// 过期时间
+        /// </summary>
+        public double Expires { get; set; }
+
+        /// <summary>
+        /// token的前缀
+        /// </summary>
+        public string TokenType { get; set; } = "Bearer";
 
         /// <summary>
         /// 用户的id

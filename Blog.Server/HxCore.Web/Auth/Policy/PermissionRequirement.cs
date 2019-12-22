@@ -19,6 +19,7 @@ namespace HxCore.Web.Auth
         ///// 同理，一个网站的认证发行中，也有很多权限详情(这里是Role和URL的关系)
         ///// </summary>
         //public List<PermissionItem> Permissions { get; set; }
+        public List<string> Roles { get; set; }
         /// <summary>
         /// 无权限action
         /// </summary>

@@ -1,4 +1,5 @@
 ﻿using HxCore.Common;
+using HxCore.Web.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -13,6 +14,54 @@ namespace HxCore.Web.Auth
 {
     public class JwtHelper
     {
+
+        /// <summary>
+        /// 获取基于JWT的Token
+        /// </summary>
+        /// <param name="claims">需要在登陆的时候配置</param>
+        /// <param name="permissionRequirement">在startup中定义的参数</param>
+        /// <returns></returns>
+        public static LoginModel BuildJwtToken(JwtModel model)
+        {
+            JwtSettings settings = AppSettings.Get<JwtSettings>("JwtSettings");
+            var now = DateTime.Now;
+            var claims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.Name, model.UserName),
+                new Claim(JwtRegisteredClaimNames.Jti, model.UserHexId),
+                new Claim(ClaimTypes.Expiration, DateTime.Now.AddSeconds(model.Expiration.TotalSeconds).ToString()),
+                new Claim(JwtRegisteredClaimNames.Iss,settings.Issuer),
+                new Claim(JwtRegisteredClaimNames.Aud,settings.Audience)
+            };
+            if (!string.IsNullOrEmpty(model.Role))
+            {
+                claims.AddRange(model.Role.Split(',').Select(s => new Claim(ClaimTypes.Role, s)));
+            }
+            // 实例化JwtSecurityToken
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.SecretKey));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var jwt = new JwtSecurityToken(
+                issuer: settings.Issuer,
+                audience: settings.Audience,
+                claims: claims,
+                notBefore: now,
+                expires: now.Add(model.Expiration),
+                signingCredentials: creds
+            );
+            // 生成 Token
+            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+
+            //打包返回前台
+            var responseJson = new LoginModel
+            {
+                UserId = model.UserHexId,
+                UserName = model.UserName,
+                Token = encodedJwt,
+                Expires = model.Expiration.TotalSeconds,
+            };
+            return responseJson;
+        }
+
         /// <summary>
         /// 颁发jwt字符串
         /// </summary>
@@ -23,7 +72,7 @@ namespace HxCore.Web.Auth
             JwtSettings settings = AppSettings.Get<JwtSettings>("JwtSettings");
             var claims = new List<Claim>()
             {
-                new Claim(JwtRegisteredClaimNames.Jti,model.Uid.ToString()),
+                new Claim(JwtRegisteredClaimNames.Jti,model.UserHexId),
                 new Claim(JwtRegisteredClaimNames.Iat,$"{new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds()}"),
                 new Claim(JwtRegisteredClaimNames.Nbf,$"{new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds()}"),
                 //这个就是过期时间，目前是过期1000秒，可自定义，注意JWT有自己的缓冲过期时间
@@ -60,7 +109,7 @@ namespace HxCore.Web.Auth
             try
             {
                 jwtToken.Payload.TryGetValue(ClaimTypes.Role, out object role);
-                model.Uid = Convert.ToInt64(jwtToken.Id);
+                model.UserHexId = jwtToken.Id;
                 model.Role = role.ToString();
             }
             catch
