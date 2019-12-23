@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { isEmpty } from '../../utils'
+import { isEmpty } from '../../common/'
 import toast from './Toast.vue'
 
 const ToastConstructor = Vue.extend(toast)

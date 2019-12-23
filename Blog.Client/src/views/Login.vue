@@ -66,8 +66,6 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
-import { SIGNIN } from '../common/constkey.js'
 export default {
   data() {
     return {
@@ -79,16 +77,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions([SIGNIN]),
     onlogin() {
       const _that = this
       window.from = _that.$refs.form
       if (_that.$refs.form.checkValidity()) {
-        _that.SIGNIN({
-          form: _that.form,
-          success: function() {
-            _that.$router.replace(_that.$route.query.redirect || '/')
-          }
+        _that.$api.login(_that.form, function() {
+          _that.$router.replace(_that.$route.query.redirect || '/')
         })
       }
     }

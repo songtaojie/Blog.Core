@@ -40,7 +40,7 @@ export const isObject = function (value) {
     return value !== null && toString.call(value) === '[object Object]' && value.ownerDocument === undefined
   }
 
-return toString.call(value) === '[object Object]'
+  return toString.call(value) === '[object Object]'
 
 }
 
@@ -52,7 +52,21 @@ return toString.call(value) === '[object Object]'
 export const isSimpleObject = function (value) {
   return value instanceof Object && value.constructor === Object
 }
+/**
+ * 监察对象是否为空
+ * @param {Object} object 要检查的对象
+ * @return {Boolean} true不为空
+ */
+export const isEmptyObject = function(object) {
+  var key
+  for (key in object) {
+      if (object.hasOwnProperty(key)) {
+          return false
+      }
+  }
 
+  return true
+}
 /**
  * 是否是boolean
  * @param {any} value 要验证的值
@@ -93,5 +107,6 @@ export default {
   isFunction,
   isNumber,
   isObject,
-  isSimpleObject
+  isSimpleObject,
+  isEmptyObject
 }

@@ -1,13 +1,10 @@
 import axios from 'axios'
 import QS from 'qs'
-import {
-  isString,
-  isObject,
-  isArray,
-  isEmpty
-} from '../common'
+import utils from '../common'
+import {LOGIN_API, REFRESH_TOKEN_API } from '../common/constkey.js'
 import router from '../routers'
 import toast from '../components/toast/'
+import store from '../store'
 // 设置环境切换时的接口url前缀
 // if (process.env.NODE_ENV === 'development') {
 //   axios.defaults.baseURL = 'https://localhost:44354/'
@@ -21,16 +18,37 @@ axios.defaults.timeout = 5000
 // 设置post请求头
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 
-axios.interceptors.request.use((r) => {
-  if (window.sessionStorage.Token && window.sessionStorage.Token.length >= 128) {
-    r.headers.Authorization = `Bearer ${window.sessionStorage.Token}`
+axios.interceptors.request.use((req) => {
+  debugger
+  var token = store.getters.auth.token
+  var tokenExpire = store.getters.auth.tokenExpire
+  var curTime = new Date()
+  var expiretime = new Date(Date.parse(tokenExpire))
+  console.log(store)
+  if (token && tokenExpire && curTime < expiretime) {
+    req.headers.Authorization = `Bearer ${token}`
   }
 
-return r
+  return req
 }, (e) => {
   return Promise.reject(e)
 })
-
+function loginSuccess(res) {
+  var curTime = new Date()
+  var expiredate = new Date(curTime.setSeconds(curTime.getSeconds() + res.data.expires)) // 定义过期时间
+  res.data.tokenExpire = expiredate
+  store.commit('UPDATE_AUTH', res.data)
+  window.localStorage.refreshtime = expiredate // 保存刷新时间，这里的和过期时间一致
+}
+function toLogin() {
+  store.commit('CLEAR_AUTH')
+  router.push({
+    path: '/login',
+    query: {
+      redirect: router.path
+    }
+  })
+}
 // 返回状态判断(添加响应拦截器)
 axios.interceptors.response.use((res) => {
   // 对响应数据做些事
@@ -38,25 +56,27 @@ axios.interceptors.response.use((res) => {
     return Promise.reject(res)
   }
 
-return res.data
+  return res.data
 }, (e) => {
   debugger
   switch (e.response.status) {
     case 401:
-      router.push({
-        path: '/login',
-        query: {
-          redirect: router.path
-        }
-      })
+      var curTime = new Date()
+      var refreshtime = new Date(Date.parse(window.localStorage.refreshtime))
+      if(window.localStorage.refreshtime && curTime <= refreshtime) {
+        var token = store.getters.auth.token
+        this.post(REFRESH_TOKEN_API, {token: token})
+        .then(res => {
+          if(res && res.success) {
+            debugger
+            loginSuccess(res)
+          }
+        })
+      }
+      toLogin()
       break
     case 403:
-      router.push({
-        path: '/login',
-        query: {
-          redirect: router.path
-        }
-      })
+      toLogin()
       break
     default:
       break
@@ -71,14 +91,14 @@ return res.data
  */
 function filterNull (o) {
   for (var key in o) {
-    if (isEmpty(o[key])) {
+    if (utils.isEmpty(o[key])) {
       delete o[key]
     }
-    if (isString(o[key])) {
+    if (utils.isString(o[key])) {
       o[key] = o[key].trim()
-    } else if (isObject(o[key])) {
+    } else if (utils.isObject(o[key])) {
       o[key = filterNull(o[key])]
-    } else if (isArray(o[key])) {
+    } else if (utils.isArray(o[key])) {
       o[key] = filterNull(o[key])
     }
   }
@@ -92,7 +112,7 @@ return o
  * @param {Object} params 传递的参数
  */
 export function get (url, params) {
-  if (!isEmpty(params)) {
+  if (!utils.isEmpty(params)) {
     params = filterNull(params)
   }
 
@@ -113,11 +133,11 @@ return new Promise((resolve, reject) => {
  * @param {Object} params 请求时传递的参数
  */
 export function post (url, params) {
-  if (!isEmpty(params)) {
+  if (!utils.isEmpty(params)) {
     params = filterNull(params)
   }
 
-return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     axios.post(url, QS.stringify(params)).then(res => {
       resolve(res)
     }).catch(err => {
@@ -131,7 +151,7 @@ return new Promise((resolve, reject) => {
  * @param {Object} params 请求时传递的参数
  */
 export function put (url, params) {
-  if (!isEmpty(params)) {
+  if (!utils.isEmpty(params)) {
     params = filterNull(params)
   }
 
@@ -149,7 +169,7 @@ return new Promise((resolve, reject) => {
  * @param {Object} params 请求时传递的参数
  */
 export function del (url, params) {
-  if (!isEmpty(params)) {
+  if (!utils.isEmpty(params)) {
     params = filterNull(params)
   }
 
@@ -190,6 +210,37 @@ export function ajaxError (err) {
     }
   }
 }
+/**
+ * 登录功能
+ * @param {Object} form 登录参数
+ * @param {Function} success 成功的回调
+ * @param {Function} failure 失败的回调
+ */
+export function login(form, success, failure) {
+  debugger
+  if(utils.isEmptyObject(form)) throw new Error('empty login parameters ')
+  post(LOGIN_API, form).then(res => {
+    debugger
+    if (res && res.success) {
+      loginSuccess(res)
+      if (utils.isFunction(success)) {
+        success.call(this, res)
+      }
+    } else {
+      if (utils.isFunction(failure)) {
+        failure.call(this, res)
+      } else {
+        ajaxError(res)
+      }
+    }
+  }).catch(e => {
+    if (utils.isFunction(failure)) {
+      failure.call(this, e)
+    } else {
+      ajaxError(e)
+    }
+  })
+}
 
 export const saveRefreshtime = () => {
   const nowtime = new Date()
@@ -211,5 +262,6 @@ export default {
   post,
   put,
   del,
-  ajaxError
+  ajaxError,
+  login
 }

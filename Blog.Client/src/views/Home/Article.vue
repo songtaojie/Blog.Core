@@ -18,12 +18,13 @@ export default {
   methods: {
     getList:function () {
       var that = this
-      that.$api.post('api/blog/getlist', function(data) {
+      that.$api.post('api/blog/getlist')
+      .then(res => {
         debugger
-      if(data) {
-        that.blogList = data
-      }
-    })
+        if(res && res.success) {
+          that.blogList = res.data
+        }
+      })
     }
   }
 }

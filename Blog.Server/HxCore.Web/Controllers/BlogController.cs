@@ -24,7 +24,7 @@ namespace HxCore.Web.Controllers
         {
             _blogService = blogService;
         }
-        [HttpGet,HttpPost]
+        [HttpPost]
         public List<Blog> GetList()
         {
             return this._blogService.QueryEntities(s=>true).ToList();

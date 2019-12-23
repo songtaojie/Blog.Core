@@ -19,7 +19,7 @@
   </div>
 </template>
 <script>
-import { isEmpty } from '../utils/'
+import { isEmpty } from '../common/'
 export default {
   name: 'HxCarousel',
   props: {
