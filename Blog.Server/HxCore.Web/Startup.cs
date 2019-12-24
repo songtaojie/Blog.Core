@@ -89,7 +89,7 @@ namespace HxCore.Web
                     }
                 };
             });
-            services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
+            //services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
             #endregion
 
             #region Swagger

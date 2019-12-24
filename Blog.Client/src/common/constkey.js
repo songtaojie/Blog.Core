@@ -11,6 +11,10 @@ export const REFRESH_TOKEN_API = 'api/refreshtoken'
  */
 export const TOKEN_KEY = 'SESSIONSTORAGE_TOKEN'
 /**
+ * token的前缀
+ */
+export const TOKEN_TYPE = 'Bearer '
+/**
  * 登录的方法名
  */
 export const SIGNIN = 'SIGNIN'

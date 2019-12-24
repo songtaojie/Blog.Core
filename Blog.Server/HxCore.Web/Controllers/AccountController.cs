@@ -61,7 +61,7 @@ namespace HxCore.Web.Controllers
         /// <param name="password">密码</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<LoginModel> RefreshToken(string token)
+        public async Task<LoginModel> RefreshToken([FromForm]string token)
         {
             if (string.IsNullOrEmpty(token)) throw new  NoAuthorizeException("token无效，请重新登录！");
             var tokenModel = JwtHelper.SerializeJwt(token);

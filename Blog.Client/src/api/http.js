@@ -1,10 +1,11 @@
 import axios from 'axios'
 import QS from 'qs'
 import utils from '../common'
-import {LOGIN_API, REFRESH_TOKEN_API } from '../common/constkey.js'
+import {LOGIN_API, REFRESH_TOKEN_API, TOKEN_TYPE } from '../common/constkey.js'
 import router from '../routers'
 import toast from '../components/toast/'
 import store from '../store'
+
 // 设置环境切换时的接口url前缀
 // if (process.env.NODE_ENV === 'development') {
 //   axios.defaults.baseURL = 'https://localhost:44354/'
@@ -18,21 +19,21 @@ axios.defaults.timeout = 5000
 // 设置post请求头
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 
-axios.interceptors.request.use((req) => {
-  debugger
-  var token = store.getters.auth.token
-  var tokenExpire = store.getters.auth.tokenExpire
-  var curTime = new Date()
-  var expiretime = new Date(Date.parse(tokenExpire))
-  console.log(store)
-  if (token && tokenExpire && curTime < expiretime) {
-    req.headers.Authorization = `Bearer ${token}`
-  }
+export const saveRefreshtime = () => {
+  const nowtime = new Date()
+  const tokenExpire = store.getters.auth.tokenExpire
+  let lastRefreshtime = window.localStorage.refreshtime ? new Date(window.localStorage.refreshtime) : new Date(-1)
+  const expiretime = new Date(Date.parse(tokenExpire))
 
-  return req
-}, (e) => {
-  return Promise.reject(e)
-})
+  const refreshCount = 1 // 滑动系数
+  if (lastRefreshtime >= nowtime) {
+      lastRefreshtime = nowtime > expiretime ? nowtime : expiretime
+      lastRefreshtime.setMinutes(lastRefreshtime.getMinutes() + refreshCount)
+      window.localStorage.refreshtime = lastRefreshtime
+  }else {
+      window.localStorage.refreshtime = new Date(-1)
+  }
+}
 function loginSuccess(res) {
   var curTime = new Date()
   var expiredate = new Date(curTime.setSeconds(curTime.getSeconds() + res.data.expires)) // 定义过期时间
@@ -49,41 +50,6 @@ function toLogin() {
     }
   })
 }
-// 返回状态判断(添加响应拦截器)
-axios.interceptors.response.use((res) => {
-  // 对响应数据做些事
-  if (res.data.success === false) {
-    return Promise.reject(res)
-  }
-
-  return res.data
-}, (e) => {
-  debugger
-  switch (e.response.status) {
-    case 401:
-      var curTime = new Date()
-      var refreshtime = new Date(Date.parse(window.localStorage.refreshtime))
-      if(window.localStorage.refreshtime && curTime <= refreshtime) {
-        var token = store.getters.auth.token
-        this.post(REFRESH_TOKEN_API, {token: token})
-        .then(res => {
-          if(res && res.success) {
-            debugger
-            loginSuccess(res)
-          }
-        })
-      }
-      toLogin()
-      break
-    case 403:
-      toLogin()
-      break
-    default:
-      break
-  }
-
-  return Promise.reject(e)
-})
 
 /**
  * 参数过滤
@@ -155,7 +121,7 @@ export function put (url, params) {
     params = filterNull(params)
   }
 
-return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     axios.put(url, QS.stringify(params)).then(res => {
       resolve(res)
     }).catch(err => {
@@ -173,7 +139,7 @@ export function del (url, params) {
     params = filterNull(params)
   }
 
-return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     axios.delete(url, QS.stringify(params)).then(res => {
       resolve(res)
     }).catch(err => {
@@ -217,10 +183,8 @@ export function ajaxError (err) {
  * @param {Function} failure 失败的回调
  */
 export function login(form, success, failure) {
-  debugger
   if(utils.isEmptyObject(form)) throw new Error('empty login parameters ')
   post(LOGIN_API, form).then(res => {
-    debugger
     if (res && res.success) {
       loginSuccess(res)
       if (utils.isFunction(success)) {
@@ -242,20 +206,68 @@ export function login(form, success, failure) {
   })
 }
 
-export const saveRefreshtime = () => {
-  const nowtime = new Date()
-  let lastRefreshtime = window.localStorage.refreshtime ? new Date(window.localStorage.refreshtime) : new Date(-1)
-  const expiretime = new Date(Date.parse(window.localStorage.TokenExpire))
-
-  const refreshCount = 1 // 滑动系数
-  if (lastRefreshtime >= nowtime) {
-      lastRefreshtime = nowtime > expiretime ? nowtime : expiretime
-      lastRefreshtime.setMinutes(lastRefreshtime.getMinutes() + refreshCount)
-      window.localStorage.refreshtime = lastRefreshtime
-  }else {
-      window.localStorage.refreshtime = new Date(-1)
+axios.interceptors.request.use((req) => {
+  var token = store.getters.auth.token
+  var tokenExpire = store.getters.auth.tokenExpire
+  var curTime = new Date()
+  var expiretime = new Date(Date.parse(tokenExpire))
+  console.log(store)
+  if (token && tokenExpire && curTime < expiretime) {
+    req.headers.Authorization = TOKEN_TYPE + token
   }
-}
+  saveRefreshtime()
+
+  return req
+}, (e) => {
+  return Promise.reject(e)
+})
+
+// 返回状态判断(添加响应拦截器)
+axios.interceptors.response.use((res) => {
+  // 对响应数据做些事
+  if (res.data.success === false) {
+    return Promise.reject(res)
+  }
+
+  return res.data
+}, (e) => {
+  debugger
+  switch (e.response.status) {
+    case 401:
+      var curTime = new Date()
+      var refreshtime = new Date(Date.parse(window.localStorage.refreshtime))
+      if(window.localStorage.refreshtime && curTime <= refreshtime) {
+        var token = store.getters.auth.token
+        post(REFRESH_TOKEN_API, {token: token})
+        .then(res => {
+          if(res && res.success) {
+            debugger
+            loginSuccess(res)
+            e.config.__isRetryRequest = true
+            e.config.headers.Authorization = TOKEN_TYPE + res.data.token
+
+            return axios(e.config)
+          }
+          // 刷新token失败 清除token信息并跳转到登录页面
+          toLogin()
+        })
+      }else {
+        toLogin()
+      }
+
+      return null
+    case 403:
+      toast.show('您没有该操作的权限!', {
+        variant: 'danger'
+      })
+
+      return null
+    default:
+      break
+  }
+
+  return Promise.reject(e)
+})
 
 export default {
   get,
@@ -263,5 +275,6 @@ export default {
   put,
   del,
   ajaxError,
-  login
+  login,
+  saveRefreshtime
 }

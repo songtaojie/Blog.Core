@@ -1,4 +1,5 @@
-﻿using HxCore.IServices;
+﻿using HxCore.IRepository;
+using HxCore.IServices;
 using HxCore.Model;
 using System;
 using System.Collections.Generic;
@@ -8,5 +9,9 @@ namespace HxCore.Services
 {
     public class BlogService:BaseService<Blog>,IBlogService
     {
+        public BlogService(IBlogRepository _blogDal)
+        {
+            this.baseDal = _blogDal;
+        }
     }
 }

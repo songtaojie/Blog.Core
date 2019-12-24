@@ -14,7 +14,7 @@ namespace HxCore.Web.Controllers
     /// <summary>
     /// 博客相关的控制器类
     /// </summary>
-    [Authorize(Policy =ConstInfo.ClientPolicy)]
+    [Authorize(Policy = ConstInfo.ClientPolicy)]
     [Route("[controller]/[action]")]
     [ApiController]
     public class BlogController : ControllerBase
@@ -27,7 +27,8 @@ namespace HxCore.Web.Controllers
         [HttpPost]
         public List<Blog> GetList()
         {
-            return this._blogService.QueryEntities(s=>true).ToList();
+            var result = _blogService.QueryEntitiesNoTrack(b => true).ToList();
+            return result;
         }
     }
 }
