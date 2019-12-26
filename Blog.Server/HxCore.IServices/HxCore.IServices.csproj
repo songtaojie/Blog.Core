@@ -1,10 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HxCore.Entity\HxCore.Entity.csproj" />
     <ProjectReference Include="..\HxCore.Model\HxCore.Model.csproj" />
   </ItemGroup>
 

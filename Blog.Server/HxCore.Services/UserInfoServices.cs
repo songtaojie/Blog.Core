@@ -1,6 +1,6 @@
 ﻿using HxCore.IRepository;
 using HxCore.IServices;
-using HxCore.Model;
+using HxCore.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;

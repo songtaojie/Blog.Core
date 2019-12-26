@@ -1,4 +1,4 @@
-﻿using HxCore.Web.Model;
+﻿using HxCore.Model.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -16,7 +16,7 @@ namespace HxCore.Web.Auth
         /// <param name="claims">需要在登陆的时候配置</param>
         /// <param name="permissionRequirement">在startup中定义的参数</param>
         /// <returns></returns>
-        public static LoginModel BuildJwtToken(List<Claim> claims, PermissionRequirement model)
+        public static LoginViewModel BuildJwtToken(List<Claim> claims, PermissionRequirement model)
         {
             var now = DateTime.Now;
             if (claims != null)
@@ -40,7 +40,7 @@ namespace HxCore.Web.Auth
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
             //打包返回前台
-            var responseJson = new LoginModel
+            var responseJson = new LoginViewModel
             {
                 Token = encodedJwt,
                 Expires = model.Expiration.TotalSeconds,

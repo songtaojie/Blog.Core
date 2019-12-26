@@ -1,6 +1,6 @@
 ﻿using HxCore.Common;
-using HxCore.Model;
-using HxCore.Model.Context;
+using HxCore.Entity;
+using HxCore.Entity.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;

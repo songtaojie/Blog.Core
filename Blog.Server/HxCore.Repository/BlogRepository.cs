@@ -1,5 +1,5 @@
 ﻿using HxCore.IRepository;
-using HxCore.Model;
+using HxCore.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;

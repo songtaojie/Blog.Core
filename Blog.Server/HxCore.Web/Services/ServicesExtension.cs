@@ -1,4 +1,4 @@
-﻿using HxCore.Model.Dependency;
+﻿using HxCore.Entity.Dependency;
 using HxCore.Common.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using System;

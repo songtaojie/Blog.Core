@@ -11,7 +11,7 @@ namespace HxCore.Repository
         protected DbContext DbContext { get; }
         public BaseRepository()
         {
-            DbContext = Model.Context.DbFactory.GetDbContext();
+            DbContext = Entity.Context.DbFactory.GetDbContext();
         }
         #region 查询
         public async Task<T> QueryEntity(Expression<Func<T, bool>> predicate)

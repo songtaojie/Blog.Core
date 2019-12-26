@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HxCore.IServices", "HxCore.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HxCore.Services", "HxCore.Services\HxCore.Services.csproj", "{257CC86D-4AA7-467B-8005-61E10BFA6D35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HxCore.Web", "HxCore.Web\HxCore.Web.csproj", "{64041B11-6F3B-4343-B141-B47FAEC69AD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HxCore.Web", "HxCore.Web\HxCore.Web.csproj", "{64041B11-6F3B-4343-B141-B47FAEC69AD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HxCore.Entity", "HxCore.Entity\HxCore.Entity.csproj", "{45F5EDD5-4307-4CB5-8E4F-95A1D5E92AFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{64041B11-6F3B-4343-B141-B47FAEC69AD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64041B11-6F3B-4343-B141-B47FAEC69AD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64041B11-6F3B-4343-B141-B47FAEC69AD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45F5EDD5-4307-4CB5-8E4F-95A1D5E92AFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45F5EDD5-4307-4CB5-8E4F-95A1D5E92AFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45F5EDD5-4307-4CB5-8E4F-95A1D5E92AFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45F5EDD5-4307-4CB5-8E4F-95A1D5E92AFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

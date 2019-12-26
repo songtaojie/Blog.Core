@@ -49,7 +49,7 @@
               >记住我</b-form-checkbox>
             </b-col>
             <b-col class="text-right">
-              <b-button type="submit" variant="success" right>登录</b-button>
+              <b-button type="submit" disabled="isLoading" variant="success" right>登录</b-button>
             </b-col>
           </b-form-row>
           <div>
@@ -69,6 +69,7 @@
 export default {
   data() {
     return {
+      isLoading:false,
       form: {
         username: 'Admin',
         password: '123456',
@@ -78,11 +79,12 @@ export default {
   },
   methods: {
     onlogin() {
-      const _that = this
-      window.from = _that.$refs.form
-      if (_that.$refs.form.checkValidity()) {
-        _that.$api.login(_that.form, function() {
-          _that.$router.replace(_that.$route.query.redirect || '/')
+      const that = this
+      window.from = that.$refs.form
+      if (that.$refs.form.checkValidity()) {
+        that.isLoading = true
+        that.$api.login(that.form, function() {
+          that.$router.replace(that.$route.query.redirect || '/')
         })
       }
     }

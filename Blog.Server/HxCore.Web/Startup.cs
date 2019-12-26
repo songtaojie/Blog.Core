@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 using HxCore.Web.Filter;
-using HxCore.Model.Context;
+//using HxCore.Entity.Context;
 using HxCore.Web.Services;
 using HxCore.Web.Common;
 using HxCore.Web.Middlewares;
@@ -119,7 +119,7 @@ namespace HxCore.Web
             #endregion
 
             #region 数据库链接，上下文
-            services.AddDbContext<HxContext>();
+            //services.AddDbContext<HxContext>();
             #endregion
 
             #region MVC，路由配置
@@ -133,7 +133,7 @@ namespace HxCore.Web
 
             #region 单例模块
             services.AddSingleton(new AppSettings(Environment));
-            services.AddSingleton(new DbFactory(services.BuildServiceProvider()));
+            //services.AddSingleton(new DbFactory(services.BuildServiceProvider()));
             // Httpcontext 注入
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IUserContext, UserContext>();

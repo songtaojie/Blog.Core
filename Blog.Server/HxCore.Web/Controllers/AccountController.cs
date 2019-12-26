@@ -7,9 +7,10 @@ using HxCore.IServices;
 using HxCore.Model;
 using Microsoft.AspNetCore.Mvc;
 using HxCore.Web.Auth;
-using HxCore.Web.Model;
 using HxCore.Web.Common;
 using HxCore.Common;
+using HxCore.Model.ViewModels;
+using HxCore.Entity;
 
 namespace HxCore.Web.Controllers
 {
@@ -35,7 +36,7 @@ namespace HxCore.Web.Controllers
         /// <param name="password">密码</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<LoginModel> Login([FromForm] LoginParam param)
+        public async Task<LoginViewModel> Login([FromForm] LoginParam param)
         {
             string md5pwd = SafeHelper.MD5TwoEncrypt(param.PassWord);
             UserInfo userInfo = await _userService.QueryEntity(u => u.UserName == param.UserName && u.PassWord == md5pwd);
@@ -61,7 +62,7 @@ namespace HxCore.Web.Controllers
         /// <param name="password">密码</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<LoginModel> RefreshToken([FromForm]string token)
+        public async Task<LoginViewModel> RefreshToken([FromForm]string token)
         {
             if (string.IsNullOrEmpty(token)) throw new  NoAuthorizeException("token无效，请重新登录！");
             var tokenModel = JwtHelper.SerializeJwt(token);

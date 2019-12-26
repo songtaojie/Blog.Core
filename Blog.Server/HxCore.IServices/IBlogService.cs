@@ -1,5 +1,5 @@
-﻿using HxCore.Model;
-using HxCore.Model.Dependency;
+﻿using HxCore.Entity;
+using HxCore.Entity.Dependency;
 using System;
 using System.Collections.Generic;
 using System.Text;

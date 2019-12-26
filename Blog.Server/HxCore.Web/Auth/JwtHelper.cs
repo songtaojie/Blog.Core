@@ -1,5 +1,5 @@
 ﻿using HxCore.Common;
-using HxCore.Web.Model;
+using HxCore.Model.ViewModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -21,7 +21,7 @@ namespace HxCore.Web.Auth
         /// <param name="claims">需要在登陆的时候配置</param>
         /// <param name="permissionRequirement">在startup中定义的参数</param>
         /// <returns></returns>
-        public static LoginModel BuildJwtToken(JwtModel model)
+        public static LoginViewModel BuildJwtToken(JwtModel model)
         {
             JwtSettings settings = AppSettings.Get<JwtSettings>("JwtSettings");
             var now = DateTime.Now;
@@ -52,7 +52,7 @@ namespace HxCore.Web.Auth
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
             //打包返回前台
-            var responseJson = new LoginModel
+            var responseJson = new LoginViewModel
             {
                 UserId = model.UserHexId,
                 UserName = model.UserName,
