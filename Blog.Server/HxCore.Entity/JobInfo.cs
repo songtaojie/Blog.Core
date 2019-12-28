@@ -37,7 +37,7 @@ namespace HxCore.Entity
         /// <summary>
         /// 工作年限
         /// </summary>
-        public int WorkYear
+        public int? WorkYear
         {
             get; set;
         }

@@ -22,7 +22,7 @@ namespace HxCore.Entity
         /// <summary>
         /// 排序
         /// </summary>
-        public int Order { get; set; }
+        public int? Order { get; set; }
         /// <summary>
         /// 备注
         /// </summary>

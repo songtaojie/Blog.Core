@@ -43,7 +43,7 @@ namespace HxCore.Web.Controllers
             if (userInfo == null) throw new UserFriendlyException("用户名或密码错误");
             JwtModel jwtModel = new JwtModel
             {
-                UserHexId = userInfo.HexId,
+                UserHexId = userInfo.Id,
                 UserName = userInfo.UserName,
                 Expiration = TimeSpan.FromSeconds(60),
                 Role = userInfo.IsAdmin ? string.Join(",", ConstInfo.ClientPolicy, ConstInfo.AdminPolicy)
@@ -71,7 +71,7 @@ namespace HxCore.Web.Controllers
             if (userInfo == null) throw new NoAuthorizeException("token无效，请重新登录！");
             JwtModel jwtModel = new JwtModel
             {
-                UserHexId = userInfo.HexId,
+                UserHexId = userInfo.Id,
                 UserName = userInfo.UserName,
                 Expiration = TimeSpan.FromSeconds(60),
                 Role = userInfo.IsAdmin ? string.Join(",", ConstInfo.ClientPolicy, ConstInfo.AdminPolicy)

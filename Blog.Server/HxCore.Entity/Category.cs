@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace HxCore.Entity
@@ -9,6 +10,7 @@ namespace HxCore.Entity
     /// 博客分类
     /// </summary>
     [Serializable]
+    //[Table("Category")]
     public class Category : Base.BaseEntity
     {
         /// <summary>
@@ -19,7 +21,7 @@ namespace HxCore.Entity
         /// <summary>
         /// 排序
         /// </summary>
-        public int Order { get; set; }
+        public int? Order { get; set; }
         /// <summary>
         /// 备注
         /// </summary>

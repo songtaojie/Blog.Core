@@ -96,9 +96,18 @@ namespace HxCore.Common
         /// 获取雪花ID
         /// </summary>
         /// <returns></returns>
-        public static long GetSnowId()
+        public static long GetLongSnowId()
         {
             return Snowflake.Instance().GetId();
+        }
+
+        /// <summary>
+        /// 获取雪花ID
+        /// </summary>
+        /// <returns></returns>
+        public static string GetSnowId()
+        {
+            return GetLongSnowId().ToString();
         }
     }
 }

@@ -38,7 +38,7 @@ namespace HxCore.Entity.Context
         {
             modelBuilder.Entity<UserInfo>().HasData(new UserInfo()
             {
-                Id = 1000,
+                Id = Helper.GetSnowId(),
                 UserName = "Admin",
                 PassWord = Common.Security.SafeHelper.MD5TwoEncrypt("123456"),
                 Activate = "Y",

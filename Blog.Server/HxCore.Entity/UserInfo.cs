@@ -9,16 +9,13 @@ namespace HxCore.Entity
 {
     [Table("UserInfo")]
     [Serializable]
-    public class UserInfo : Base.BaseModel, Base.IEntity<long>
+    public class UserInfo : Base.BaseModel, Base.IEntity<string>
     {
         [Key]
-        public long Id
+        [StringLength(100)]
+        public string Id
         {
             get; set;
-        }
-        public string HexId
-        {
-            get { return Helper.ToHex(Id); }
         }
         /// <summary>
         /// 用户名称
@@ -59,14 +56,6 @@ namespace HxCore.Entity
         [StringLength(80)]
         public string OpenId { get; set; }
 
-        /// <summary>
-		/// 是都锁定
-		/// </summary>
-        [NotMapped]
-        public bool IsLock
-        {
-            get { return Helper.IsYes(Lock); }
-        }
         [StringLength(1)]
         [Column(TypeName = "char")]
         public string Lock { set; get; } = "N";
@@ -82,10 +71,8 @@ namespace HxCore.Entity
         /// 是否是管理员
         /// </summary>
         [NotMapped]
-        public bool IsAdmin
-        {
-            get { return Helper.IsYes(Admin); }
-        }
+        public bool IsAdmin => Helper.IsYes(Admin);
+
         [StringLength(1)]
         [Column(TypeName = "char")]
         public string Admin
@@ -96,10 +83,8 @@ namespace HxCore.Entity
         /// 是否激活
         /// </summary>
         [NotMapped]
-        public bool IsActivate
-        {
-            get { return Helper.IsYes(Activate); }
-        }
+        public bool IsActivate => Helper.IsYes(Activate);
+
         /// <summary>
         /// 是否激活
         /// </summary>
@@ -114,15 +99,12 @@ namespace HxCore.Entity
         /// </summary>
         [DataType(DataType.DateTime)]
         public DateTime RegisterTime { get; set; } = DateTime.Now;
-      
+
         /// <summary>
         /// 是否被删除,假删除，数据库中还有记录
         /// </summary>
         [NotMapped]
-        public bool IsDeleted
-        {
-            get { return Helper.IsYes(Delete); }
-        }
+        public bool IsDeleted => Helper.IsYes(Delete);
         /// <summary>
         /// 是否被删除,假删除，数据库中还有记录
         /// </summary>
@@ -140,10 +122,7 @@ namespace HxCore.Entity
         /// 使用MarkDown编辑器
         /// </summary>
         [NotMapped]
-        public bool IsUseMdEdit
-        {
-            get { return Helper.IsYes(UseMdEdit); }
-        }
+        public bool IsUseMdEdit => Helper.IsYes(UseMdEdit);
         // <summary>
         /// 使用MarkDown编辑器
         /// </summary>
@@ -164,13 +143,13 @@ namespace HxCore.Entity
         /// <summary>
         /// 基础信息
         /// </summary>
-        [ForeignKey("BasicId")]
-        public BasicInfo BasicInfo { get; set; }
+        [StringLength(100)]
+        public string BasicInfoId { get; set; }
 
         /// <summary>
         /// 工作信息
         /// </summary>
-        [ForeignKey("JobId")]
-        public JobInfo JobInfo { get; set; }
+        [StringLength(100)]
+        public JobInfo JobInfoId { get; set; }
     }
 }

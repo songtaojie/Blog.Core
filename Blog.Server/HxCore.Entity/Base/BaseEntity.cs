@@ -6,10 +6,11 @@ using System.Text;
 
 namespace HxCore.Entity.Base
 {
-    public abstract class BaseEntity : BaseModel,IEntity<long>
+    public abstract class BaseEntity : BaseModel,IEntity<string>
     {
         [Key]
-        public long Id
+        [StringLength(100)]
+        public string Id
         {
             get;
             set;
@@ -24,7 +25,8 @@ namespace HxCore.Entity.Base
         /// <summary>
         /// 这条记录属于哪个用户
         /// </summary>
-        public virtual long UserId { get; set; }
+        [StringLength(100)]
+        public virtual string UserId { get; set; }
         /// <summary>
         /// 用户的登录名称
         /// </summary>
@@ -37,13 +39,7 @@ namespace HxCore.Entity.Base
         /// 是否被删除
         /// </summary>
         [NotMapped]
-        public virtual bool IsDelete
-        {
-            get
-            {
-                return HxCore.Common.Helper.IsYes(Delete);
-            }
-        }
+        public virtual bool IsDelete=> HxCore.Common.Helper.IsYes(Delete);
 
         [StringLength(1)]
         [Column(TypeName = "char")]
@@ -54,7 +50,8 @@ namespace HxCore.Entity.Base
         /// <summary>
         /// 删除人ID
         /// </summary>
-        public virtual long? DeletelId { get; set; }
+        [StringLength(100)]
+        public virtual string DeletelUserId { get; set; }
 
         /// <summary>
         /// 删除时间
