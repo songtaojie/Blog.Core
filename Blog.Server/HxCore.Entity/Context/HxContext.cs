@@ -12,12 +12,13 @@ namespace HxCore.Entity.Context
 {
     public class HxContext : DbContext
     {
+        private ILoggerFactory _loggerFactory;
         public HxContext() : base()
         {
         }
-        public HxContext(DbContextOptions<DbContext> options) : base(options)
+        public HxContext(DbContextOptions<DbContext> options,ILoggerFactory loggerFactory) : base(options)
         {
-
+            _loggerFactory = loggerFactory;
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,7 +31,7 @@ namespace HxCore.Entity.Context
             bool? enable =  AppSettings.Get("Logging", "EnableSql").ToBool();
             if (enable.HasValue && enable.Value)
             {
-                optionsBuilder.UseLoggerFactory(new LoggerFactory().AddNLog());
+                optionsBuilder.UseLoggerFactory(_loggerFactory);
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

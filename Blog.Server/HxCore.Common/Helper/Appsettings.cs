@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,7 +23,7 @@ namespace HxCore.Common
         /// 构造函数
         /// </summary>
         /// <param name="env">环境对象</param>
-        public AppSettings(IHostingEnvironment env)
+        public AppSettings(IHostEnvironment env)
         {
             ContentPath = env.ContentRootPath;
             //可以直接读目录里的json文件，而不是 bin 文件夹下的，所以不用修改复制属性

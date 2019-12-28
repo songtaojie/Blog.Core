@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
@@ -17,9 +18,9 @@ namespace HxCore.Web.Filter
     /// </summary>
     public class ExceptionFilter : IExceptionFilter, IAsyncExceptionFilter
     {
-        private readonly IHostingEnvironment _env;
+        private readonly IHostEnvironment _env;
         private readonly ILogger<ExceptionFilter> _logger;
-        public ExceptionFilter(IHostingEnvironment env, ILogger<ExceptionFilter> logger )
+        public ExceptionFilter(IHostEnvironment env, ILogger<ExceptionFilter> logger )
         {
             _env = env;
             _logger = logger;

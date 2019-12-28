@@ -13,18 +13,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.6.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HxCore.Common\HxCore.Common.csproj" />
-    <ProjectReference Include="..\HxCore.Entity\HxCore.Entity.csproj" />
-    <ProjectReference Include="..\HxCore.Model\HxCore.Model.csproj" />
     <ProjectReference Include="..\HxCore.Repository\HxCore.Repository.csproj" />
     <ProjectReference Include="..\HxCore.Services\HxCore.Services.csproj" />
   </ItemGroup>

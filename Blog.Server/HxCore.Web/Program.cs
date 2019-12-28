@@ -1,6 +1,6 @@
 ﻿using System;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NLog.Web;
 
@@ -13,7 +13,7 @@ namespace HxCore.Web
             var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             try
             {
-                var host = CreateWebHostBuilder(args).Build();
+                var host = CreateHostBuilder(args).Build();
                 logger.Info("应用程序启动成功!");
                 host.Run();
             }
@@ -29,14 +29,18 @@ namespace HxCore.Web
             }
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-            .ConfigureLogging(logging =>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(builder =>
             {
-                logging.ClearProviders();
-                logging.SetMinimumLevel(LogLevel.Warning);
-            })
-            .UseNLog();
+                builder.UseStartup<Startup>()
+                .ConfigureLogging(logging =>
+                {
+                    logging.ClearProviders();
+                    logging.SetMinimumLevel(LogLevel.Warning);
+                })
+                .UseNLog();
+            });
+
     }
 }

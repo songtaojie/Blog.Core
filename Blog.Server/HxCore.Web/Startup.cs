@@ -12,22 +12,20 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 using HxCore.Web.Filter;
-//using HxCore.Entity.Context;
 using HxCore.Web.Services;
 using HxCore.Web.Common;
 using HxCore.Web.Middlewares;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authorization;
-using HxCore.Web.Auth;
-using System.Security.Claims;
+using Microsoft.Extensions.Hosting;
+using HxCore.Entity.Context;
 
 namespace HxCore.Web
 {
     public class Startup
     {
-        public IHostingEnvironment Environment { get; }
+        public IWebHostEnvironment Environment { get; }
         public IConfiguration Configuration { get; }
-        public Startup(IConfiguration configuration, IHostingEnvironment _env)
+        public Startup(IConfiguration configuration, IWebHostEnvironment _env)
         {
             Configuration = configuration;
             Environment = _env;
@@ -119,15 +117,15 @@ namespace HxCore.Web
             #endregion
 
             #region 数据库链接，上下文
-            //services.AddDbContext<HxContext>();
+            services.AddDbContext<HxContext>();
             #endregion
 
             #region MVC，路由配置
-            services.AddMvc(c =>
+            services.AddControllers(c =>
             {
                 c.AddFilters(typeof(ExceptionFilter), typeof(ApiResultAttribute));
                 c.AddGlobalRoutePrefix(new RouteAttribute(ConstInfo.RoutePrefix));
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             #endregion
 
@@ -173,7 +171,7 @@ namespace HxCore.Web
             app.UseCookiePolicy();
             //app.UseStatusCodePages();
             app.UseHttpsRedirection();
-            app.UseMvc();
+            //app.UseMvc();
         }
     }
 }
