@@ -56,8 +56,7 @@ namespace HxCore.Entity
         [StringLength(80)]
         public string OpenId { get; set; }
 
-        [StringLength(1)]
-        [Column(TypeName = "char")]
+        [Column(TypeName = "char(1)")]
         public string Lock { set; get; } = "N";
         /// <summary>
         /// 头像存储文件路径
@@ -73,8 +72,7 @@ namespace HxCore.Entity
         [NotMapped]
         public bool IsAdmin => Helper.IsYes(Admin);
 
-        [StringLength(1)]
-        [Column(TypeName = "char")]
+        [Column(TypeName = "char(1)")]
         public string Admin
         {
             get; set;
@@ -88,8 +86,7 @@ namespace HxCore.Entity
         /// <summary>
         /// 是否激活
         /// </summary>
-        [StringLength(1)]
-        [Column(TypeName = "char")]
+        [Column(TypeName = "char(1)")]
         public string Activate
         {
             get; set;
@@ -108,8 +105,7 @@ namespace HxCore.Entity
         /// <summary>
         /// 是否被删除,假删除，数据库中还有记录
         /// </summary>
-        [StringLength(1)]
-        [Column(TypeName = "char")]
+        [Column(TypeName = "char(1)")]
         public string Delete { get; set; } = "N";
 
         /// <summary>
@@ -122,12 +118,11 @@ namespace HxCore.Entity
         /// 使用MarkDown编辑器
         /// </summary>
         [NotMapped]
-        public bool IsUseMdEdit => Helper.IsYes(UseMdEdit);
+        public bool IsUseMdEdit => Helper.IsYes(UseMdEdit.ToString());
         // <summary>
         /// 使用MarkDown编辑器
         /// </summary>
-        [StringLength(1)]
-        [Column(TypeName = "char")]
+        [Column(TypeName = "char(1)")]
         public string UseMdEdit { get; set; } = "N";
         /// <summary>
         /// 登录的ip
@@ -150,6 +145,6 @@ namespace HxCore.Entity
         /// 工作信息
         /// </summary>
         [StringLength(100)]
-        public JobInfo JobInfoId { get; set; }
+        public string JobInfoId { get; set; }
     }
 }

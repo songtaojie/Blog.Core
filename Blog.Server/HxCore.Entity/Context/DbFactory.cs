@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -7,13 +8,23 @@ using System.Threading.Tasks;
 
 namespace HxCore.Entity.Context
 {
-    public class DbFactory
+    /// <summary>
+    /// 数据库上下文工厂
+    /// </summary>
+    public class DbFactory:IDbFactory
     {
-        public DbFactory(IServiceProvider serviceProvider)
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="service">HttpContext</param>
+        public DbFactory(IServiceProvider service)
         {
-            ServiceProvider = serviceProvider;
+            ServiceProvider = service;
         }
-        private static IServiceProvider ServiceProvider
+        /// <summary>
+        /// 当前请求的ServiceProvider实例
+        /// </summary>
+        public IServiceProvider ServiceProvider
         {
             get;set;
         }
@@ -21,9 +32,9 @@ namespace HxCore.Entity.Context
         /// 获取ef上下文
         /// </summary>
         /// <returns></returns>
-        public static DbContext GetDbContext()
+        public DbContext GetDbContext()
         {
-            HxContext context = ServiceProvider.GetRequiredService<HxContext>();
+            HxContext context = GetRequiredService<HxContext>();
             return context;
         }
 
@@ -32,20 +43,9 @@ namespace HxCore.Entity.Context
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static T GetService<T>()
+        public T GetRequiredService<T>()
         {
             return ServiceProvider.GetRequiredService<T>();
-        }
-
-        /// <summary>
-        /// 保存改变
-        /// </summary>
-        /// <returns></returns>
-        public static async Task<bool> SaveChangeAsync()
-        {
-            DbContext context = GetDbContext();
-            int result = await context.SaveChangesAsync();
-            return result > 0;
         }
     }
 }

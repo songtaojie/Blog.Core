@@ -6,8 +6,15 @@ using NLog.Web;
 
 namespace HxCore.Web
 {
+    /// <summary>
+    /// 主程序
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// 主函数
+        /// </summary>
+        /// <param name="args">参数</param>
         public static void Main(string[] args)
         {
             var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
@@ -28,7 +35,11 @@ namespace HxCore.Web
                 NLog.LogManager.Shutdown();
             }
         }
-
+        /// <summary>
+        /// 创建Host
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(builder =>

@@ -30,8 +30,7 @@ namespace HxCore.Entity
         /// <summary>
         /// 是否使用MarkDown编辑的
         /// </summary>
-        [Column(TypeName = "char")]
-        [StringLength(1)]
+        [Column(TypeName = "char(1)")]
         public string MarkDown { get; set; } = "N";
 
         /// <summary>
@@ -41,14 +40,12 @@ namespace HxCore.Entity
         /// <summary>
         /// 是否是转发文章
         /// </summary>
-        [StringLength(1)]
-        [Column(TypeName = "char")]
+        [Column(TypeName = "char(1)")]
         public string Forward { get; set; } = "N";
         /// <summary>
         /// 是否发布，true代表发布，false代表不发布即是草稿
         /// </summary>
-        [StringLength(1)]
-        [Column(TypeName = "char")]
+        [Column(TypeName = "char(1)")]
         public string Publish { get; set; } = "Y";
 
         /// <summary>
@@ -60,14 +57,12 @@ namespace HxCore.Entity
         /// <summary>
         /// 置顶 Y权值加10年
         /// </summary>
-        [StringLength(1)]
-        [Column(TypeName = "char")]
+        [Column(TypeName = "char(1)")]
         public string Top { get; set; } = "N";
         /// <summary>
         /// 精华 Y权值加10天
         /// </summary>
-        [StringLength(1)]
-        [Column(TypeName = "char")]
+        [Column(TypeName = "char(1)")]
         public string Essence { get; set; } = "N";
         /// <summary>
         /// 原链接
@@ -87,8 +82,7 @@ namespace HxCore.Entity
         /// <summary>
         /// 允许评论
         /// </summary>
-        [StringLength(1)]
-        [Column(TypeName = "char")]
+        [Column(TypeName = "char(1)")]
         public string CanCmt { get; set; } = "Y";
 
         /// <summary>
@@ -110,8 +104,7 @@ namespace HxCore.Entity
         /// <summary>
         /// 个人置顶 标识该文档是否置顶,置顶的文章在个人主页中排序靠前
         /// </summary>
-        [StringLength(1)]
-        [Column(TypeName = "char")]
+        [Column(TypeName = "char(1)")]
         public string PersonTop { get; set; } = "N";
         /// <summary>
         /// 主题中的第一张图的地址
@@ -142,15 +135,16 @@ namespace HxCore.Entity
         /// <summary>
         /// 系统分类，前端、后端、编程语言等
         /// </summary> 
-        public long CategoryId { get; set; }
+        [StringLength(100)]
+        public string CategoryId { get; set; }
 
         ///// <summary>
         ///// 博客类型，是转发，原创，还是翻译等
         ///// </summary> 
-        public long BlogTypeId { get; set; }
+        [StringLength(100)]
+        public string BlogTypeId { get; set; }
 
-        [StringLength(1)]
-        [Column(TypeName = "char")]
+        [Column(TypeName = "char(1)")]
         public string Carousel { get; set; } = "N";
     }
 }

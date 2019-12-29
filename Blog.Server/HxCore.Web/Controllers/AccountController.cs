@@ -32,8 +32,7 @@ namespace HxCore.Web.Controllers
         /// <summary>
         /// 用户登录
         /// </summary>
-        /// <param name="username">用户名</param>
-        /// <param name="password">密码</param>
+        /// <param name="param">密码</param>
         /// <returns></returns>
         [HttpPost]
         public async Task<LoginViewModel> Login([FromForm] LoginParam param)
@@ -58,8 +57,7 @@ namespace HxCore.Web.Controllers
         /// <summary>
         /// 用户登录
         /// </summary>
-        /// <param name="username">用户名</param>
-        /// <param name="password">密码</param>
+        /// <param name="token">旧的token</param>
         /// <returns></returns>
         [HttpPost]
         public async Task<LoginViewModel> RefreshToken([FromForm]string token)

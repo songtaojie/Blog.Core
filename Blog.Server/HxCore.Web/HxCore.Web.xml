@@ -1,0 +1,372 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HxCore.Web</name>
+    </assembly>
+    <members>
+        <member name="M:HxCore.Web.Auth.JwtHelper.BuildJwtToken(HxCore.Web.Auth.JwtModel)">
+            <summary>
+            获取基于JWT的Token
+            </summary>
+            <param name="claims">需要在登陆的时候配置</param>
+            <param name="permissionRequirement">在startup中定义的参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Web.Auth.JwtHelper.IssueJwt(HxCore.Web.Auth.JwtModel)">
+            <summary>
+            颁发jwt字符串
+            </summary>
+            <param name="model">jwt实体类</param>
+            <returns>token字符串</returns>
+        </member>
+        <member name="M:HxCore.Web.Auth.JwtHelper.SerializeJwt(System.String)">
+            <summary>
+            序列化jwt字符串
+            </summary>
+            <param name="jwtStr">jwt字符串</param>
+            <returns>序列化后的jwt实体类</returns>
+        </member>
+        <member name="T:HxCore.Web.Auth.JwtSettings">
+            <summary>
+            jwt的配置
+            </summary>
+        </member>
+        <member name="P:HxCore.Web.Auth.JwtSettings.Issuer">
+            <summary>
+            谁颁发的jwt
+            </summary>
+        </member>
+        <member name="P:HxCore.Web.Auth.JwtSettings.Audience">
+            <summary>
+            谁使用这个jwt
+            </summary>
+        </member>
+        <member name="P:HxCore.Web.Auth.JwtSettings.SecretKey">
+            <summary>
+            secret是保存在服务器端的，jwt的前发声明也是在服务器端的，secret就是用来进行jwt的
+            签发和jwt的验证，所以他就是你服务器端的私钥，在任何场景都不应该流露出去。
+            一旦客户端得知这个secret, 那就意味着客户端是可以自我签发jwt了
+            通过jwt header中声明的加密方式进行加盐secret组合加密，然后就构成了jwt的第三部分
+            </summary>
+        </member>
+        <member name="P:HxCore.Web.Auth.JwtModel.UserHexId">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:HxCore.Web.Auth.JwtModel.UserName">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:HxCore.Web.Auth.JwtModel.Role">
+            <summary>
+            角色
+            </summary>
+        </member>
+        <member name="P:HxCore.Web.Auth.JwtModel.Expiration">
+            <summary>
+            过期时间
+            </summary>
+        </member>
+        <member name="M:HxCore.Web.Auth.JwtToken.BuildJwtToken(System.Collections.Generic.List{System.Security.Claims.Claim},HxCore.Web.Auth.PermissionRequirement)">
+            <summary>
+            获取基于JWT的Token
+            </summary>
+            <param name="claims">需要在登陆的时候配置</param>
+            <param name="permissionRequirement">在startup中定义的参数</param>
+            <returns></returns>
+        </member>
+        <member name="T:HxCore.Web.Auth.PermissionHandler">
+            <summary>
+            权限授权处理器
+            </summary>
+        </member>
+        <member name="P:HxCore.Web.Auth.PermissionHandler.Schemes">
+            <summary>
+            验证方案提供对象
+            </summary>
+        </member>
+        <member name="M:HxCore.Web.Auth.PermissionHandler.#ctor(Microsoft.AspNetCore.Authentication.IAuthenticationSchemeProvider,HxCore.Common.IUserContext)">
+            <summary>
+            构造函数注入
+            </summary>
+            <param name="schemes"></param>
+            <param name="roleModulePermissionServices"></param>
+        </member>
+        <member name="T:HxCore.Web.Auth.PermissionRequirement">
+            <summary>
+            必要参数类，类似一个订单信息
+            继承 IAuthorizationRequirement，用于设计自定义权限处理器PermissionHandler
+            因为AuthorizationHandler 中的泛型参数 TRequirement 必须继承 IAuthorizationRequirement
+            </summary>
+        </member>
+        <member name="P:HxCore.Web.Auth.PermissionRequirement.DeniedAction">
+            <summary>
+            无权限action
+            </summary>
+        </member>
+        <member name="P:HxCore.Web.Auth.PermissionRequirement.ClaimType">
+            <summary>
+            认证授权类型
+            </summary>
+        </member>
+        <member name="P:HxCore.Web.Auth.PermissionRequirement.LoginPath">
+            <summary>
+            请求路径
+            </summary>
+        </member>
+        <member name="P:HxCore.Web.Auth.PermissionRequirement.Issuer">
+            <summary>
+            发行人
+            </summary>
+        </member>
+        <member name="P:HxCore.Web.Auth.PermissionRequirement.Audience">
+            <summary>
+            订阅人
+            </summary>
+        </member>
+        <member name="P:HxCore.Web.Auth.PermissionRequirement.Expiration">
+            <summary>
+            过期时间
+            </summary>
+        </member>
+        <member name="P:HxCore.Web.Auth.PermissionRequirement.SigningCredentials">
+            <summary>
+            签名验证
+            </summary>
+        </member>
+        <member name="M:HxCore.Web.Auth.PermissionRequirement.#ctor(System.String,System.String,System.String,System.String,Microsoft.IdentityModel.Tokens.SigningCredentials,System.TimeSpan)">
+            <summary>
+            构造
+            </summary>
+            <param name="deniedAction">拒约请求的url</param>
+            <param name="permissions">权限集合</param>
+            <param name="claimType">声明类型</param>
+            <param name="issuer">发行人</param>
+            <param name="audience">订阅人</param>
+            <param name="signingCredentials">签名验证实体</param>
+            <param name="expiration">过期时间</param>
+        </member>
+        <member name="T:HxCore.Web.Common.ConstInfo">
+            <summary>
+            常量
+            </summary>
+        </member>
+        <member name="F:HxCore.Web.Common.ConstInfo.SessionID">
+            <summary>
+            用来模拟session的标志
+            </summary>
+        </member>
+        <member name="F:HxCore.Web.Common.ConstInfo.VCode">
+            <summary>
+            验证码存储在Session中的标志
+            </summary>
+        </member>
+        <member name="F:HxCore.Web.Common.ConstInfo.UploadPath">
+            <summary>
+            文件上传时根目录
+            </summary>
+        </member>
+        <member name="F:HxCore.Web.Common.ConstInfo.maxLength">
+            <summary>
+            最大上传文件大小
+            </summary>
+        </member>
+        <member name="F:HxCore.Web.Common.ConstInfo.returnUrl">
+            <summary>
+            返回连接
+            </summary>
+        </member>
+        <member name="F:HxCore.Web.Common.ConstInfo.systemConfig">
+            <summary>
+            系统配置
+            </summary>
+        </member>
+        <member name="F:HxCore.Web.Common.ConstInfo.carouselPath">
+            <summary>
+            轮播图存放的文件
+            </summary>
+        </member>
+        <member name="F:HxCore.Web.Common.ConstInfo.thumbPath">
+            <summary>
+            缩略图存放的文件
+            </summary>
+        </member>
+        <member name="T:HxCore.Web.Controllers.AccountController">
+            <summary>
+            账户相关的控制器类
+            </summary>
+        </member>
+        <member name="F:HxCore.Web.Controllers.AccountController._userService">
+            <summary>
+            用户服务类
+            </summary>
+        </member>
+        <member name="M:HxCore.Web.Controllers.AccountController.Login(HxCore.Model.ViewModels.LoginParam)">
+            <summary>
+            用户登录
+            </summary>
+            <param name="param">密码</param>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Web.Controllers.AccountController.RefreshToken(System.String)">
+            <summary>
+            用户登录
+            </summary>
+            <param name="token">旧的token</param>
+            <returns></returns>
+        </member>
+        <member name="T:HxCore.Web.Controllers.BlogController">
+            <summary>
+            博客相关的控制器类
+            </summary>
+        </member>
+        <member name="M:HxCore.Web.Extensions.DbSetup.AddDbSetup(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加数据库上下文
+            </summary>
+            <param name="services">服务集合</param>
+        </member>
+        <member name="T:HxCore.Web.Extensions.SwaggerSetup">
+            <summary>
+            Swagger 启动服务
+            </summary>
+        </member>
+        <member name="M:HxCore.Web.Extensions.SwaggerSetup.AddSwaggerSetup(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加Swagger
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:HxCore.Web.Extensions.SwaggerSetup.UseSwaggerSetup(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            使用Swagger
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="T:HxCore.Web.Filter.ApiResultAttribute">
+            <summary>
+            返回结果统一处理
+            </summary>
+        </member>
+        <member name="T:HxCore.Web.Filter.ExceptionFilter">
+            <summary>
+            异常过滤器
+            </summary>
+        </member>
+        <member name="M:HxCore.Web.Filter.ExceptionFilter.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <summary>
+            处理异常
+            </summary>
+            <param name="context">异常上下文</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:HxCore.Web.Filter.ExceptionFilter.WriteLog(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)" -->
+        <member name="T:HxCore.Web.Filter.GlobalRouteConvention">
+            <summary>
+            全局路由公约
+            </summary>
+        </member>
+        <member name="T:HxCore.Web.Middlewares.JwtTokenAuth">
+            <summary>
+            jwt中间件
+            </summary>
+        </member>
+        <member name="T:HxCore.Web.Middlewares.MiddleWareExtension">
+            <summary>
+            中间件扩展
+            </summary>
+        </member>
+        <member name="M:HxCore.Web.Middlewares.MiddleWareExtension.UseJwtTokenAuth(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            使用jwt授权
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="M:HxCore.Web.Middlewares.MiddleWareExtension.AddGlobalRoutePrefix(Microsoft.AspNetCore.Mvc.MvcOptions,Microsoft.AspNetCore.Mvc.Routing.IRouteTemplateProvider)">
+            <summary>
+            使用全局路由前缀设置
+            </summary>
+            <param name="opts"></param>
+            <param name="routeAttribute"></param>
+        </member>
+        <member name="M:HxCore.Web.Middlewares.MiddleWareExtension.AddFilters(Microsoft.AspNetCore.Mvc.MvcOptions,System.Type[])">
+            <summary>
+            使用过滤器
+            </summary>
+            <param name="opts"></param>
+            <param name="routeAttribute"></param>
+        </member>
+        <member name="T:HxCore.Web.Program">
+            <summary>
+            主程序
+            </summary>
+        </member>
+        <member name="M:HxCore.Web.Program.Main(System.String[])">
+            <summary>
+            主函数
+            </summary>
+            <param name="args">参数</param>
+        </member>
+        <member name="M:HxCore.Web.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            创建Host
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Web.Services.ServicesExtension.AddDIServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            使用自带的依赖注入注入服务类
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:HxCore.Web.Services.ServicesExtension.AddDIRepository(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            使用自带的依赖注入注入仓库类
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:HxCore.Web.Services.ServicesExtension.DIServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            依赖注入
+            </summary>
+            <param name="services">服务描述集合</param>
+            <param name="dllName">程序集dll</param>
+        </member>
+        <member name="T:HxCore.Web.Startup">
+            <summary>
+            启动
+            </summary>
+        </member>
+        <member name="M:HxCore.Web.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configuration">配置</param>
+            <param name="_env">环境</param>
+        </member>
+        <member name="M:HxCore.Web.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            服务
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:HxCore.Web.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            配置
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="F:HxCore.Web.SwaggerHelper.ApiVersions.V1">
+            <summary>
+            V1 版本
+            </summary>
+        </member>
+        <member name="F:HxCore.Web.SwaggerHelper.ApiVersions.V2">
+            <summary>
+            V2 版本
+            </summary>
+        </member>
+    </members>
+</doc>

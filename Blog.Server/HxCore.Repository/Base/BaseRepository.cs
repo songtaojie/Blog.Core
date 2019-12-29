@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HxCore.Entity.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
@@ -9,9 +10,9 @@ namespace HxCore.Repository
     public abstract class BaseRepository<T>where T:class,new()
     {
         protected DbContext DbContext { get; }
-        public BaseRepository()
+        public BaseRepository(IDbFactory dbFactory)
         {
-            DbContext = Entity.Context.DbFactory.GetDbContext();
+            DbContext = dbFactory.GetDbContext();
         }
         #region 查询
         public async Task<T> QueryEntity(Expression<Func<T, bool>> predicate)

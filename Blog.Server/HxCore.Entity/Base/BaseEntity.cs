@@ -41,8 +41,7 @@ namespace HxCore.Entity.Base
         [NotMapped]
         public virtual bool IsDelete=> HxCore.Common.Helper.IsYes(Delete);
 
-        [StringLength(1)]
-        [Column(TypeName = "char")]
+        [Column(TypeName = "char(1)")]
         public virtual string Delete
         {
             get; set;

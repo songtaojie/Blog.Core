@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using HxCore.Common;
@@ -10,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Swashbuckle.AspNetCore.Swagger;
 using HxCore.Web.Filter;
 using HxCore.Web.Services;
 using HxCore.Web.Common;
@@ -18,20 +16,35 @@ using HxCore.Web.Middlewares;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using HxCore.Entity.Context;
+using HxCore.Web.Extensions;
 
 namespace HxCore.Web
 {
+    /// <summary>
+    /// 启动
+    /// </summary>
     public class Startup
     {
-        public IWebHostEnvironment Environment { get; }
-        public IConfiguration Configuration { get; }
+        
+        private IWebHostEnvironment Environment { get; }
+        private IConfiguration Configuration { get; }
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="configuration">配置</param>
+        /// <param name="_env">环境</param>
         public Startup(IConfiguration configuration, IWebHostEnvironment _env)
         {
             Configuration = configuration;
             Environment = _env;
         }
+        /// <summary>
+        /// 服务
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(new AppSettings(Environment));
             #region 跨域CORS
             //services.AddCors(c=> {
             //    c.AddPolicy("AllRequests", policy =>
@@ -91,33 +104,17 @@ namespace HxCore.Web
             #endregion
 
             #region Swagger
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info
-                {
-                    Version = "v0.0.1",
-                    Title = "API文档",
-                    Description = "框架API文档",
-                    TermsOfService = "None"
-                });
-
-                var security = new Dictionary<string, IEnumerable<string>>
-                {
-                    { "HxCore",new string[]{ } }
-                };
-                c.AddSecurityRequirement(security);
-                c.AddSecurityDefinition("HxCore", new ApiKeyScheme
-                {
-                    Description = "JWT授权(数据将在请求头中进行传输) 直接在下框中输入Bearer {token}（注意两者之间是一个空格）",
-                    Name = "Authorization",//jwt默认的参数名称
-                    In = "Header",//jwt默认存放Authorization信息的位置(请求头中)
-                    Type = "apiKey"
-                });
-            });
+            services.AddSwaggerSetup();
+            #endregion
+            #region 单例模块
+            // Httpcontext 注入
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IUserContext, UserContext>();
+            
             #endregion
 
             #region 数据库链接，上下文
-            services.AddDbContext<HxContext>();
+            services.AddDbSetup();
             #endregion
 
             #region MVC，路由配置
@@ -129,14 +126,6 @@ namespace HxCore.Web
 
             #endregion
 
-            #region 单例模块
-            services.AddSingleton(new AppSettings(Environment));
-            //services.AddSingleton(new DbFactory(services.BuildServiceProvider()));
-            // Httpcontext 注入
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IUserContext, UserContext>();
-
-            #endregion
 
             #region 业务类映射
             services.AddDIServices();
@@ -146,17 +135,17 @@ namespace HxCore.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// 配置
+        /// </summary>
+        /// <param name="app"></param>
         public void Configure(IApplicationBuilder app)
         {
             if (Environment.IsDevelopment())
             {
                 //app.UseDeveloperExceptionPage();
                 #region Swagger
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-                });
+                app.UseSwaggerSetup();
                 #endregion
             }
             else
@@ -172,6 +161,14 @@ namespace HxCore.Web
             //app.UseStatusCodePages();
             app.UseHttpsRedirection();
             //app.UseMvc();
+            app.UseRouting();//路由中间件
+                             // 短路中间件，配置Controller路由
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }
