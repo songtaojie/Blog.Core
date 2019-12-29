@@ -8,13 +8,16 @@ using System.Threading.Tasks;
 
 namespace HxCore.Web.Auth
 {
+    /// <summary>
+    /// JwtToken
+    /// </summary>
     public class JwtToken
     {
         /// <summary>
         /// 获取基于JWT的Token
         /// </summary>
         /// <param name="claims">需要在登陆的时候配置</param>
-        /// <param name="permissionRequirement">在startup中定义的参数</param>
+        /// <param name="model">在startup中定义的参数</param>
         /// <returns></returns>
         public static LoginViewModel BuildJwtToken(List<Claim> claims, PermissionRequirement model)
         {

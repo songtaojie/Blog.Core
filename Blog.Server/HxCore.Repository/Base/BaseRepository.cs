@@ -10,9 +10,9 @@ namespace HxCore.Repository
     public abstract class BaseRepository<T>where T:class,new()
     {
         protected DbContext DbContext { get; }
-        public BaseRepository(IDbFactory dbFactory)
+        public BaseRepository(IDbSession dbSession)
         {
-            DbContext = dbFactory.GetDbContext();
+            DbContext = dbSession.DbContext;
         }
         #region 查询
         public async Task<T> QueryEntity(Expression<Func<T, bool>> predicate)

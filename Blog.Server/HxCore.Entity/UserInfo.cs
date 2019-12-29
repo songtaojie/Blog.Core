@@ -7,10 +7,16 @@ using HxCore.Common;
 
 namespace HxCore.Entity
 {
+    /// <summary>
+    /// 用户信息类
+    /// </summary>
     [Table("UserInfo")]
     [Serializable]
     public class UserInfo : Base.BaseModel, Base.IEntity<string>
     {
+        /// <summary>
+        /// 主键
+        /// </summary>
         [Key]
         [StringLength(100)]
         public string Id
@@ -56,6 +62,9 @@ namespace HxCore.Entity
         [StringLength(80)]
         public string OpenId { get; set; }
 
+        /// <summary>
+        /// 是否锁定
+        /// </summary>
         [Column(TypeName = "char(1)")]
         public string Lock { set; get; } = "N";
         /// <summary>
@@ -71,7 +80,9 @@ namespace HxCore.Entity
         /// </summary>
         [NotMapped]
         public bool IsAdmin => Helper.IsYes(Admin);
-
+        /// <summary>
+        /// 是否是管理员
+        /// </summary>
         [Column(TypeName = "char(1)")]
         public string Admin
         {
@@ -119,7 +130,7 @@ namespace HxCore.Entity
         /// </summary>
         [NotMapped]
         public bool IsUseMdEdit => Helper.IsYes(UseMdEdit.ToString());
-        // <summary>
+        /// <summary>
         /// 使用MarkDown编辑器
         /// </summary>
         [Column(TypeName = "char(1)")]

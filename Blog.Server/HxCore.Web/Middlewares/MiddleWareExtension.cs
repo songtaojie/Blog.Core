@@ -36,7 +36,7 @@ namespace HxCore.Web.Middlewares
         /// 使用过滤器
         /// </summary>
         /// <param name="opts"></param>
-        /// <param name="routeAttribute"></param>
+        /// <param name="types"></param>
         public static void AddFilters(this MvcOptions opts, params Type[] types)
         {
             if (types != null && types.Length > 0)

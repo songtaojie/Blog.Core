@@ -25,6 +25,10 @@ namespace HxCore.Web.Controllers
         /// 用户服务类
         /// </summary>
         private IUserInfoService _userService;
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="userService"></param>
         public AccountController(IUserInfoService userService)
         {
             _userService = userService;
@@ -42,7 +46,7 @@ namespace HxCore.Web.Controllers
             if (userInfo == null) throw new UserFriendlyException("用户名或密码错误");
             JwtModel jwtModel = new JwtModel
             {
-                UserHexId = userInfo.Id,
+                UserId = userInfo.Id,
                 UserName = userInfo.UserName,
                 Expiration = TimeSpan.FromSeconds(60),
                 Role = userInfo.IsAdmin ? string.Join(",", ConstInfo.ClientPolicy, ConstInfo.AdminPolicy)
@@ -64,12 +68,11 @@ namespace HxCore.Web.Controllers
         {
             if (string.IsNullOrEmpty(token)) throw new  NoAuthorizeException("token无效，请重新登录！");
             var tokenModel = JwtHelper.SerializeJwt(token);
-            long userId = Convert.ToInt64(Helper.FromHex(tokenModel.UserHexId));
-            UserInfo userInfo = await _userService.QueryEntityById(userId);
+            UserInfo userInfo = await _userService.QueryEntityById(tokenModel.UserId);
             if (userInfo == null) throw new NoAuthorizeException("token无效，请重新登录！");
             JwtModel jwtModel = new JwtModel
             {
-                UserHexId = userInfo.Id,
+                UserId = userInfo.Id,
                 UserName = userInfo.UserName,
                 Expiration = TimeSpan.FromSeconds(60),
                 Role = userInfo.IsAdmin ? string.Join(",", ConstInfo.ClientPolicy, ConstInfo.AdminPolicy)

@@ -14,11 +14,19 @@ namespace HxCore.Web.Middlewares
     public class JwtTokenAuth
     {
         private readonly RequestDelegate _next;
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="next">下一个管道</param>
         public JwtTokenAuth(RequestDelegate next)
         {
             _next = next;
         }
-
+        /// <summary>
+        /// 执行
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public async Task InvokeAsync(HttpContext context)
         {
             if (!context.Request.Headers.ContainsKey("Authorization"))

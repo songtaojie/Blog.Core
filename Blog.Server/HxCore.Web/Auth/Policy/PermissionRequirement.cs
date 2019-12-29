@@ -19,6 +19,9 @@ namespace HxCore.Web.Auth
         ///// 同理，一个网站的认证发行中，也有很多权限详情(这里是Role和URL的关系)
         ///// </summary>
         //public List<PermissionItem> Permissions { get; set; }
+        /// <summary>
+        /// 角色
+        /// </summary>
         public List<string> Roles { get; set; }
         /// <summary>
         /// 无权限action
@@ -55,7 +58,6 @@ namespace HxCore.Web.Auth
         /// 构造
         /// </summary>
         /// <param name="deniedAction">拒约请求的url</param>
-        /// <param name="permissions">权限集合</param>
         /// <param name="claimType">声明类型</param>
         /// <param name="issuer">发行人</param>
         /// <param name="audience">订阅人</param>

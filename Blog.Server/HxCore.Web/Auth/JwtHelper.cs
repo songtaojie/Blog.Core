@@ -12,14 +12,16 @@ using System.Threading.Tasks;
 
 namespace HxCore.Web.Auth
 {
+    /// <summary>
+    /// jwt的帮助类
+    /// </summary>
     public class JwtHelper
     {
 
         /// <summary>
         /// 获取基于JWT的Token
         /// </summary>
-        /// <param name="claims">需要在登陆的时候配置</param>
-        /// <param name="permissionRequirement">在startup中定义的参数</param>
+        /// <param name="model">模型</param>
         /// <returns></returns>
         public static LoginViewModel BuildJwtToken(JwtModel model)
         {
@@ -28,7 +30,7 @@ namespace HxCore.Web.Auth
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.Name, model.UserName),
-                new Claim(JwtRegisteredClaimNames.Jti, model.UserHexId),
+                new Claim(JwtRegisteredClaimNames.Jti, model.UserId),
                 new Claim(ClaimTypes.Expiration, DateTime.Now.AddSeconds(model.Expiration.TotalSeconds).ToString()),
                 new Claim(JwtRegisteredClaimNames.Iss,settings.Issuer),
                 new Claim(JwtRegisteredClaimNames.Aud,settings.Audience)
@@ -54,7 +56,7 @@ namespace HxCore.Web.Auth
             //打包返回前台
             var responseJson = new LoginViewModel
             {
-                UserId = model.UserHexId,
+                UserId = model.UserId,
                 UserName = model.UserName,
                 Token = encodedJwt,
                 Expires = model.Expiration.TotalSeconds,
@@ -72,7 +74,7 @@ namespace HxCore.Web.Auth
             JwtSettings settings = AppSettings.Get<JwtSettings>("JwtSettings");
             var claims = new List<Claim>()
             {
-                new Claim(JwtRegisteredClaimNames.Jti,model.UserHexId),
+                new Claim(JwtRegisteredClaimNames.Jti,model.UserId),
                 new Claim(JwtRegisteredClaimNames.Iat,$"{new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds()}"),
                 new Claim(JwtRegisteredClaimNames.Nbf,$"{new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds()}"),
                 //这个就是过期时间，目前是过期1000秒，可自定义，注意JWT有自己的缓冲过期时间
@@ -109,7 +111,7 @@ namespace HxCore.Web.Auth
             try
             {
                 jwtToken.Payload.TryGetValue(ClaimTypes.Role, out object role);
-                model.UserHexId = jwtToken.Id;
+                model.UserId = jwtToken.Id;
                 model.Role = role.ToString();
             }
             catch

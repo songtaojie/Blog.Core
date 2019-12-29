@@ -15,13 +15,23 @@ namespace HxCore.Web.Controllers
     /// 博客相关的控制器类
     /// </summary>
     [Route("[controller]/[action]")]
-    public class BlogController : BaseApiController
+    [Authorize]
+    [ApiController]
+    public class BlogController : ControllerBase
     {
         private IBlogService _blogService;
+        /// <summary>
+        ///构造函数
+        /// </summary>
+        /// <param name="blogService"></param>
         public BlogController(IBlogService blogService)
         {
             _blogService = blogService;
         }
+        /// <summary>
+        /// 获取博客列表
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public List<Blog> GetList()
         {

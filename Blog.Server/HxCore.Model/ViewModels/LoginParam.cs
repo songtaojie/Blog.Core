@@ -4,6 +4,9 @@ using System.Text;
 
 namespace HxCore.Model.ViewModels
 {
+    /// <summary>
+    /// 登录参数
+    /// </summary>
     public class LoginParam
     {
         /// <summary>

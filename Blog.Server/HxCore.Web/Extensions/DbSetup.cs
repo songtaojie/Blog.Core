@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace HxCore.Web.Extensions
 {
+    /// <summary>
+    /// 数据库上下文
+    /// </summary>
     public static class DbSetup
     {
         /// <summary>
@@ -17,7 +20,9 @@ namespace HxCore.Web.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
             services.AddDbContext<HxContext>();
-            services.AddScoped<IDbFactory,DbFactory>();
+            services.AddScoped<IDbSession,DbSession>();
+            services.AddDIServices();
+            services.AddDIRepository();
         }
     }
 }

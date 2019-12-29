@@ -4,6 +4,9 @@ using System.Text;
 
 namespace HxCore.Model.ViewModels
 {
+    /// <summary>
+    /// 博客视图类
+    /// </summary>
     public class BlogViewModel
     {
         /// <summary>
@@ -56,7 +59,9 @@ namespace HxCore.Model.ViewModels
         /// 个人置顶 标识该文档是否置顶,置顶的文章在个人主页中排序靠前
         /// </summary>
         public string PersonTop { get; set; } = "N";
-        
+        /// <summary>
+        /// 是否是轮播图
+        /// </summary>
         public string Carousel { get; set; } = "N";
     }
 }

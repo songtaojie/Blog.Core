@@ -13,10 +13,18 @@ namespace HxCore.Web.Filter
     public class GlobalRouteConvention : IApplicationModelConvention
     {
         private readonly AttributeRouteModel _centralPrefix;
+        /// <summary>
+        /// 全局路由公约
+        /// </summary>
+        /// <param name="routeTemplateProvider"></param>
         public GlobalRouteConvention(IRouteTemplateProvider routeTemplateProvider)
         {
             _centralPrefix = new AttributeRouteModel(routeTemplateProvider);
         }
+        /// <summary>
+        /// 应用
+        /// </summary>
+        /// <param name="application"></param>
         public void Apply(ApplicationModel application)
         {
             //遍历所有的 Controller

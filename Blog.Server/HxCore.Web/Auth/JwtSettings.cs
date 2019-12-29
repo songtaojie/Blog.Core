@@ -37,13 +37,15 @@ namespace HxCore.Web.Auth
             get;set;
         }
     }
-
+    /// <summary>
+    /// jwt的模型
+    /// </summary>
     public class JwtModel
     {
         /// <summary>
         /// Id
         /// </summary>
-        public string UserHexId { get; set; }
+        public string UserId { get; set; }
         /// <summary>
         /// Id
         /// </summary>

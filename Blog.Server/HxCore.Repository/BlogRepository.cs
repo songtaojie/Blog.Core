@@ -9,7 +9,7 @@ namespace HxCore.Repository
 {
     public class BlogRepository:BaseRepository<Blog>,IBlogRepository
     {
-        public BlogRepository(IDbFactory dbFactory) : base(dbFactory)
+        public BlogRepository(IDbSession dbSession) : base(dbSession)
         { }
     }
 }

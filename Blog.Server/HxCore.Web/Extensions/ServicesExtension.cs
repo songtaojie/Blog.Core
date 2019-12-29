@@ -9,8 +9,11 @@ using System.Reflection;
 using System.Threading.Tasks;
 
 
-namespace HxCore.Web.Services
+namespace HxCore.Web.Extensions
 {
+    /// <summary>
+    /// 服务的扩展
+    /// </summary>
     public static class ServicesExtension
     {
         /// <summary>

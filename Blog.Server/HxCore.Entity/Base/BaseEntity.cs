@@ -6,8 +6,14 @@ using System.Text;
 
 namespace HxCore.Entity.Base
 {
+    /// <summary>
+    /// 基础的实体类，封装了公共的字段
+    /// </summary>
     public abstract class BaseEntity : BaseModel,IEntity<string>
     {
+        /// <summary>
+        /// 主键
+        /// </summary>
         [Key]
         [StringLength(100)]
         public string Id
@@ -41,6 +47,9 @@ namespace HxCore.Entity.Base
         [NotMapped]
         public virtual bool IsDelete=> HxCore.Common.Helper.IsYes(Delete);
 
+        /// <summary>
+        /// 是否删除
+        /// </summary>
         [Column(TypeName = "char(1)")]
         public virtual string Delete
         {

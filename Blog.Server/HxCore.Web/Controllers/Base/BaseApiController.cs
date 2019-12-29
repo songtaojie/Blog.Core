@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace HxCore.Web.Controllers
 {
+    /// <summary>
+    /// 基础的api
+    /// </summary>
     [Authorize(Policy = ConstInfo.ClientPolicy)]
     [ApiController]
     public class BaseApiController: ControllerBase

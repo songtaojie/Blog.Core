@@ -28,14 +28,19 @@ namespace HxCore.Web.Auth
         /// 构造函数注入
         /// </summary>
         /// <param name="schemes"></param>
-        /// <param name="roleModulePermissionServices"></param>
+        /// <param name="userContext"></param>
         public PermissionHandler(IAuthenticationSchemeProvider schemes,IUserContext userContext)
         {
             Schemes = schemes;
             _userContext = userContext;
         }
 
-        // 重载异步处理程序
+        /// <summary>
+        /// // 重载异步处理程序
+        /// </summary>
+        /// <param name="context">上下文</param>
+        /// <param name="requirement">对象</param>
+        /// <returns></returns>
         protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, PermissionRequirement requirement)
         {
             // 将最新的角色和接口列表更新

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
@@ -6,8 +7,19 @@ using System.Threading.Tasks;
 
 namespace HxCore.Entity.Context
 {
+    /// <summary>
+    /// 数据库上下文操作类
+    /// </summary>
     public interface IDbSession
     {
+        /// <summary>
+        /// 服务的实例
+        /// </summary>
+        IServiceProvider ServiceProvider { get;}
+        /// <summary>
+        /// 数据库上下文
+        /// </summary>
+        DbContext DbContext { get; }
         /// <summary>
         ///  根据Id获取实体数据
         /// </summary>

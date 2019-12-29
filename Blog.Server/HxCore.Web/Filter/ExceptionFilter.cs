@@ -20,6 +20,11 @@ namespace HxCore.Web.Filter
     {
         private readonly IHostEnvironment _env;
         private readonly ILogger<ExceptionFilter> _logger;
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="env">环境</param>
+        /// <param name="logger">日志记录</param>
         public ExceptionFilter(IHostEnvironment env, ILogger<ExceptionFilter> logger )
         {
             _env = env;
@@ -62,17 +67,21 @@ namespace HxCore.Web.Filter
                 context.Result = new JsonResult(result);
             }
         }
-
+        /// <summary>
+        /// 异步异常的处理
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public Task OnExceptionAsync(ExceptionContext context)
         {
             OnException(context);
             return Task.CompletedTask;
         }
 
-        // <summary>
+        /// <summary>
         /// 写入日志（log4net）
-        /// </summary>
         /// <param name="context">提供使用</param>
+        /// </summary>
         private void WriteLog(ExceptionContext context)
         {
             if (context == null)

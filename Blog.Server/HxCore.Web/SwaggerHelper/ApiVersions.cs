@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace HxCore.Web.SwaggerHelper
 {
+    /// <summary>
+    /// api Swagger版本
+    /// </summary>
     public enum ApiVersions
     {
         /// <summary>

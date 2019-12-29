@@ -14,6 +14,10 @@ namespace HxCore.Web.Filter
     /// </summary>
     public class ApiResultAttribute: ActionFilterAttribute
     {
+        /// <summary>
+        /// 重载结果处理
+        /// </summary>
+        /// <param name="context"></param>
         public override void OnResultExecuting(ResultExecutingContext context)
         {
             if (context.Result is ObjectResult)

@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using HxCore.Web.Filter;
-using HxCore.Web.Services;
 using HxCore.Web.Common;
 using HxCore.Web.Middlewares;
 using Microsoft.AspNetCore.Http;
@@ -55,51 +54,7 @@ namespace HxCore.Web
             #endregion
 
             #region Authorize 权限三步走
-            Auth.JwtSettings jwtSetting = Configuration.GetSection("JwtSettings").Get<Auth.JwtSettings>();
-            SymmetricSecurityKey signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSetting.SecretKey));
-            var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
-            // 1.使用基于角色的授权，仅仅在api上配置，第一步：[Authorize(Roles = "admin")]，第二步：配置统一认证服务，第三步：开启中间件
-            services.AddAuthorization(c =>
-            {
-                c.AddPolicy(ConstInfo.AdminPolicy, policy => policy.RequireRole(ConstInfo.AdminPolicy));
-                c.AddPolicy(ConstInfo.ClientPolicy, policy => policy.RequireRole(ConstInfo.ClientPolicy));
-            });
-
-            //配置认证服务
-            
-            
-            //令牌验证参数
-            TokenValidationParameters tokenParams = new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = signingKey,
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidIssuer = jwtSetting.Issuer,
-                ValidAudience = jwtSetting.Audience,
-                ClockSkew = TimeSpan.FromSeconds(1),
-                RequireExpirationTime = true
-            };
-            services.AddAuthentication(c =>
-            {
-                c.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                c.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(c =>
-            {
-                c.TokenValidationParameters = tokenParams;
-                c.Events = new JwtBearerEvents()
-                {
-                    OnAuthenticationFailed = context =>
-                    {
-                        if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
-                        {
-                            context.Response.Headers.Add("Token-Expired", "true");
-                        }
-                        return Task.CompletedTask;
-                    }
-                };
-            });
+            services.AddAuthorizeSetup();
             //services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
             #endregion
 
@@ -153,21 +108,23 @@ namespace HxCore.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseRouting();//路由中间件
             //app.UseCors("AllRequests");
             //app.UseJwtTokenAuth();
             //使用官方的认证，ConfigureServices中的AddAuthentication和AddJwtBearer缺一不可
+            // 先开启认证
             app.UseAuthentication();
+            // 然后是授权中间件
+            app.UseAuthorization();
             app.UseCookiePolicy();
             //app.UseStatusCodePages();
             app.UseHttpsRedirection();
-            //app.UseMvc();
-            app.UseRouting();//路由中间件
-                             // 短路中间件，配置Controller路由
+            // 短路中间件，配置Controller路由
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller}/{action}/{id?}");
             });
         }
     }

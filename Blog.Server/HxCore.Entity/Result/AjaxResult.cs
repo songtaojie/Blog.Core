@@ -4,6 +4,9 @@ using System.Text;
 
 namespace HxCore.Entity
 {
+    /// <summary>
+    /// ajax返回结果统一封装
+    /// </summary>
     public class AjaxResult
     {
         /// <summary>

@@ -7,9 +7,15 @@ using System.Text;
 
 namespace HxCore.Entity.Base
 {
+    /// <summary>
+    /// 基本的模型，封装了索引器登方法
+    /// </summary>
     [Serializable]
     public abstract class BaseModel : INotifyPropertyChanged
     {
+        /// <summary>
+        /// 属性变化的事件
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
         /// <summary>
         /// 属性发生改变时

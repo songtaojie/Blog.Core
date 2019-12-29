@@ -7,6 +7,9 @@ using System.Text;
 
 namespace HxCore.Entity
 {
+    /// <summary>
+    /// 博客类
+    /// </summary>
     [Table("Blog")]
     [Serializable]
     public class Blog : Base.BaseEntity
@@ -122,7 +125,9 @@ namespace HxCore.Entity
         /// </summary>
         [StringLength(255)]
         public string Location { get; set; }
-
+        /// <summary>
+        /// 城市
+        /// </summary>
         [StringLength(50)]
         public string City { get; set; }
         /// <summary>
@@ -138,12 +143,15 @@ namespace HxCore.Entity
         [StringLength(100)]
         public string CategoryId { get; set; }
 
-        ///// <summary>
-        ///// 博客类型，是转发，原创，还是翻译等
-        ///// </summary> 
+        /// <summary>
+        /// 博客类型，是转发，原创，还是翻译等
+        /// </summary> 
         [StringLength(100)]
         public string BlogTypeId { get; set; }
 
+        /// <summary>
+        /// 是否是轮播图
+        /// </summary>
         [Column(TypeName = "char(1)")]
         public string Carousel { get; set; } = "N";
     }
