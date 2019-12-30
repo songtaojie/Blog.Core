@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HxCore.Common\HxCore.Common.csproj" />
+    <ProjectReference Include="..\HxCore.Entity\HxCore.Entity.csproj" />
   </ItemGroup>
 
   <ItemGroup>

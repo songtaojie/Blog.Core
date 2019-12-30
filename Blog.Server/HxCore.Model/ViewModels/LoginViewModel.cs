@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HxCore.Entity;
+using HxCore.Entity.Dependency;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,7 +9,7 @@ namespace HxCore.Model.ViewModels
     /// <summary>
     /// 登录视图模型
     /// </summary>
-    public class LoginViewModel
+    public class LoginViewModel: IAutoMapper<UserInfo>
     {
         /// <summary>
         /// 令牌

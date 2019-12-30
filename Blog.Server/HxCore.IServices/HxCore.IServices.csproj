@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HxCore.Entity\HxCore.Entity.csproj" />
     <ProjectReference Include="..\HxCore.Model\HxCore.Model.csproj" />
   </ItemGroup>
 

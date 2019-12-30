@@ -11,6 +11,7 @@ using HxCore.Web.Common;
 using HxCore.Common;
 using HxCore.Model.ViewModels;
 using HxCore.Entity;
+using AutoMapper;
 
 namespace HxCore.Web.Controllers
 {
@@ -25,13 +26,16 @@ namespace HxCore.Web.Controllers
         /// 用户服务类
         /// </summary>
         private IUserInfoService _userService;
+        private IMapper _mapper;
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="userService"></param>
-        public AccountController(IUserInfoService userService)
+        /// <param name="mapper"></param>
+        public AccountController(IUserInfoService userService,IMapper mapper)
         {
             _userService = userService;
+            _mapper = mapper;
         }
         /// <summary>
         /// 用户登录
@@ -44,6 +48,7 @@ namespace HxCore.Web.Controllers
             string md5pwd = SafeHelper.MD5TwoEncrypt(param.PassWord);
             UserInfo userInfo = await _userService.QueryEntity(u => u.UserName == param.UserName && u.PassWord == md5pwd);
             if (userInfo == null) throw new UserFriendlyException("用户名或密码错误");
+            
             JwtModel jwtModel = new JwtModel
             {
                 UserId = userInfo.Id,
@@ -53,6 +58,7 @@ namespace HxCore.Web.Controllers
                : ConstInfo.ClientPolicy
             };
             var result=JwtHelper.BuildJwtToken(jwtModel);
+            var result2 = _mapper.Map<LoginViewModel>(userInfo);
             result.NickName = userInfo.NickName;
             result.AvatarUrl = userInfo.AvatarUrl;
             return result;

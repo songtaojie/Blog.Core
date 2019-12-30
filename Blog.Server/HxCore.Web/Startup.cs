@@ -65,7 +65,10 @@ namespace HxCore.Web
             // Httpcontext 注入
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IUserContext, UserContext>();
-            
+
+            #endregion
+            #region AutoMapper
+            services.AddAutoMapperSetup();
             #endregion
 
             #region 数据库链接，上下文
