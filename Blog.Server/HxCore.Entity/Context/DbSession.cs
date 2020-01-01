@@ -62,6 +62,16 @@ namespace HxCore.Entity.Context
         {
             return this.DbContext.Set<T>().FirstOrDefaultAsync(predicate);
         }
+        /// <summary>
+        /// 获取满足指定条件的一条数据
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="predicate">获取数据的条件lambda</param>
+        /// <returns>满足当前条件的一个实体</returns>
+        public IQueryable<T> QueryEntities<T>(Expression<Func<T, bool>> predicate) where T : class
+        {
+            return this.DbContext.Set<T>().Where(predicate);
+        }
 
     }
 }

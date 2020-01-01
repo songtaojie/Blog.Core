@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,5 +36,13 @@ namespace HxCore.Entity.Context
         /// <param name="predicate">获取数据的条件lambda</param>
         /// <returns>满足当前条件的一个实体</returns>
         Task<T> QueryEntity<T>(Expression<Func<T, bool>> predicate) where T : class;
+
+        /// <summary>
+        /// 获取满足指定条件的一条数据
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="predicate">获取数据的条件lambda</param>
+        /// <returns>满足当前条件的一个实体</returns>
+        IQueryable<T> QueryEntities<T>(Expression<Func<T, bool>> predicate) where T : class;
     }
 }

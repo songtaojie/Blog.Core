@@ -68,7 +68,7 @@ namespace HxCore.Entity.Context
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserInfo>().HasData(new UserInfo()
+            UserInfo userInfo = new UserInfo()
             {
                 Id = Helper.GetSnowId(),
                 UserName = "Admin",
@@ -77,6 +77,57 @@ namespace HxCore.Entity.Context
                 Email = "stjworkemail@163.com",
                 NickName = "超级管理员",
                 LastLoginTime = DateTime.Now
+            };
+            modelBuilder.Entity<UserInfo>().HasData(userInfo);
+            modelBuilder.Entity<BlogType>().HasData(new BlogType[] {
+                new BlogType
+                {
+                    Id = Helper.GetSnowId(),
+                    Name="原创",
+                    UserId = userInfo.Id,
+                    UserName = userInfo.UserName,
+                    CreateTime = DateTime.Now
+                },
+                new BlogType
+                {
+                    Id = Helper.GetSnowId(),
+                    Name="转载",
+                    UserId = userInfo.Id,
+                    UserName = userInfo.UserName,
+                    CreateTime = DateTime.Now
+                },
+                new BlogType
+                {
+                    Id = Helper.GetSnowId(),
+                    Name="翻译",
+                    UserId = userInfo.Id,
+                    UserName = userInfo.UserName,
+                    CreateTime = DateTime.Now
+                }
+            });
+            modelBuilder.Entity<Category>().HasData(new Category[] {
+                new Category{
+                    Name="前端",
+                    Id = Helper.GetSnowId(),
+                    UserId = userInfo.Id,
+                    UserName = userInfo.UserName,
+                    CreateTime = DateTime.Now
+                },
+                new Category
+                {
+                    Name="后端",
+                    Id = Helper.GetSnowId(),
+                    UserId = userInfo.Id,
+                    UserName = userInfo.UserName,
+                    CreateTime = DateTime.Now},
+                new Category
+                {
+                    Name="编程语言",
+                    Id = Helper.GetSnowId(),
+                    UserId = userInfo.Id,
+                    UserName = userInfo.UserName,
+                    CreateTime = DateTime.Now
+                }
             });
             base.OnModelCreating(modelBuilder);
         }

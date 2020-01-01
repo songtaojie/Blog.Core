@@ -11,7 +11,6 @@ namespace HxCore.Web.Controllers
     /// 附件控制器
     /// </summary>
     [Route("[controller]/[action]")]
-    [ApiController]
     public class AttachController : BaseAuthApiController
     {
 

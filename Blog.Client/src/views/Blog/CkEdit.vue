@@ -40,6 +40,15 @@
             >添加分类</b-button>
           </b-col>
         </b-form-row>
+        <b-form-row>
+          <b-col class="col-sm-4 col-xs-12">
+            <b-form-select v-model="fromData.typeselected" :options="types" placeholder="请选择文章类型">
+            </b-form-select>
+          </b-col>
+          <b-col class="col-sm-8 col-xs-12">
+
+          </b-col>
+        </b-form-row>
       </b-form>
     </div>
   </div>
@@ -61,7 +70,11 @@ export default {
   },
   data() {
     return {
+      types: [
+          { value: null, text: '请选择文章类型' }
+        ],
       fromData: {
+        typeselected:null,
         title: '',
         personTags: [{
           Id:'111',
@@ -70,8 +83,9 @@ export default {
         }]
       },
       editor: ClassicEditor,
-      editorData: '<p>Content of the editor.</p>',
+      editorData: '',
       editorConfig: {
+        placeholder: '开始编写博客!',
         removePlugins: ['Link', 'BlockQuote', 'MediaEmbed'],
         ckfinder: {
           // Upload the images to the server using the CKFinder QuickUpload command.
