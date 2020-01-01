@@ -25,15 +25,18 @@
         </b-form-row>
         <b-form-row>
           <b-col class="d-flex align-items-center">
-            <label class="text-left mb-1 blog-category-label">个人分类:</label>
-            <!-- <div class="blog-tag-box">
-              <div class="tag" contenteditable="true" tabindex="0" v-html="content" @input="content=$event.target.innerHTML"></div>
-              <i class="hx-icon-times"></i>
-            </div> -->
-            <hx-input v-model="content" @clear="onClear"></hx-input>
+            <label class="text-left mb-1 blog-category-label">个人分类：</label>
+            <hx-input  v-for="item in fromData.personTags" :id="item.Id"
+            :key="item.Id"
+            v-model.trim="item.value"
+            :editable="item.editable"
+            @clear="onClear"
+             @blur="onInputBlur"
+             @enter="onEnter"></hx-input>
             <b-button
               variant="link"
               class="hx-icon-square hx-tag-btn d-flex align-items-center"
+              @click="onAddTag"
             >添加分类</b-button>
           </b-col>
         </b-form-row>
@@ -49,6 +52,7 @@ import '@ckeditor/ckeditor5-build-classic/build/translations/zh-cn'
 import '@/sass/hxeditor.scss'
 import HxHeader from '@/components/HxHeader.vue'
 import HxInput from '@/components/HxInput.vue'
+import {guid, isEmpty} from '../../common/index'
 export default {
   components: {
     ckeditor: CKEditor.component,
@@ -57,10 +61,13 @@ export default {
   },
   data() {
     return {
-      content:'1',
       fromData: {
         title: '',
-        tag: ''
+        personTags: [{
+          Id:'111',
+          value:'ssss',
+          editable:false
+        }]
       },
       editor: ClassicEditor,
       editorData: '<p>Content of the editor.</p>',
@@ -80,8 +87,45 @@ export default {
     }
   },
   methods:{
-    onClear() {
-      console.log('clear')
+    onClear(input) {
+     this.removeTag(input, true)
+    },
+    onInputBlur(input) {
+      this.removeTag(input)
+    },
+    onAddTag() {
+      this.fromData.personTags.push({
+        Id: guid(),
+        editable:true,
+        value:''
+      })
+    },
+    onEnter(input) {
+      this.removeTag(input)
+    },
+    removeTag(input, isClear) {
+      var id = input.id
+      var tags = this.fromData.personTags
+      var index = tags.findIndex(p => {return p.Id === id})
+      if(index >= 0) {
+        var o = tags[index]
+        var value = o.value
+        if(isClear) {
+          this.fromData.personTags.splice(index, 1)
+        }else {
+          if(isEmpty(o.value)) {
+            this.fromData.personTags.splice(index, 1)
+          }else {
+            var filterTags = tags.filter(p => {return p.value === value})
+            if(filterTags.length > 1) {
+              this.fromData.personTags.splice(index, 1)
+            }else {
+              this.fromData.personTags[index].editable = false
+              input.blur()
+            }
+          }
+        }
+      }
     }
   },
   created: function () { }

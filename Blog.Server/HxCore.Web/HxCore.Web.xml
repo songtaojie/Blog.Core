@@ -4,12 +4,16 @@
         <name>HxCore.Web</name>
     </assembly>
     <members>
+        <member name="T:HxCore.Web.Auth.JwtHelper">
+            <summary>
+            jwt的帮助类
+            </summary>
+        </member>
         <member name="M:HxCore.Web.Auth.JwtHelper.BuildJwtToken(HxCore.Web.Auth.JwtModel)">
             <summary>
             获取基于JWT的Token
             </summary>
-            <param name="claims">需要在登陆的时候配置</param>
-            <param name="permissionRequirement">在startup中定义的参数</param>
+            <param name="model">模型</param>
             <returns></returns>
         </member>
         <member name="M:HxCore.Web.Auth.JwtHelper.IssueJwt(HxCore.Web.Auth.JwtModel)">
@@ -49,7 +53,12 @@
             通过jwt header中声明的加密方式进行加盐secret组合加密，然后就构成了jwt的第三部分
             </summary>
         </member>
-        <member name="P:HxCore.Web.Auth.JwtModel.UserHexId">
+        <member name="T:HxCore.Web.Auth.JwtModel">
+            <summary>
+            jwt的模型
+            </summary>
+        </member>
+        <member name="P:HxCore.Web.Auth.JwtModel.UserId">
             <summary>
             Id
             </summary>
@@ -69,12 +78,17 @@
             过期时间
             </summary>
         </member>
+        <member name="T:HxCore.Web.Auth.JwtToken">
+            <summary>
+            JwtToken
+            </summary>
+        </member>
         <member name="M:HxCore.Web.Auth.JwtToken.BuildJwtToken(System.Collections.Generic.List{System.Security.Claims.Claim},HxCore.Web.Auth.PermissionRequirement)">
             <summary>
             获取基于JWT的Token
             </summary>
             <param name="claims">需要在登陆的时候配置</param>
-            <param name="permissionRequirement">在startup中定义的参数</param>
+            <param name="model">在startup中定义的参数</param>
             <returns></returns>
         </member>
         <member name="T:HxCore.Web.Auth.PermissionHandler">
@@ -92,13 +106,26 @@
             构造函数注入
             </summary>
             <param name="schemes"></param>
-            <param name="roleModulePermissionServices"></param>
+            <param name="userContext"></param>
+        </member>
+        <member name="M:HxCore.Web.Auth.PermissionHandler.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,HxCore.Web.Auth.PermissionRequirement)">
+            <summary>
+            // 重载异步处理程序
+            </summary>
+            <param name="context">上下文</param>
+            <param name="requirement">对象</param>
+            <returns></returns>
         </member>
         <member name="T:HxCore.Web.Auth.PermissionRequirement">
             <summary>
             必要参数类，类似一个订单信息
             继承 IAuthorizationRequirement，用于设计自定义权限处理器PermissionHandler
             因为AuthorizationHandler 中的泛型参数 TRequirement 必须继承 IAuthorizationRequirement
+            </summary>
+        </member>
+        <member name="P:HxCore.Web.Auth.PermissionRequirement.Roles">
+            <summary>
+            角色
             </summary>
         </member>
         <member name="P:HxCore.Web.Auth.PermissionRequirement.DeniedAction">
@@ -141,16 +168,46 @@
             构造
             </summary>
             <param name="deniedAction">拒约请求的url</param>
-            <param name="permissions">权限集合</param>
             <param name="claimType">声明类型</param>
             <param name="issuer">发行人</param>
             <param name="audience">订阅人</param>
             <param name="signingCredentials">签名验证实体</param>
             <param name="expiration">过期时间</param>
         </member>
+        <member name="T:HxCore.Web.AutoMapper.MyMapperProfile">
+            <summary>
+            automapper配置文件
+            </summary>
+        </member>
+        <member name="M:HxCore.Web.AutoMapper.MyMapperProfile.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="T:HxCore.Web.AutoMapper.AutoMapperConfig">
+            <summary>
+            静态全局 AutoMapper 配置文件
+            </summary>
+        </member>
+        <member name="M:HxCore.Web.AutoMapper.AutoMapperConfig.RegisterMappings">
+            <summary>
+            注册
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:HxCore.Web.Common.ConstInfo">
             <summary>
             常量
+            </summary>
+        </member>
+        <member name="F:HxCore.Web.Common.ConstInfo.CookieName">
+            <summary>
+            cookie中存储的名字
+            </summary>
+        </member>
+        <member name="F:HxCore.Web.Common.ConstInfo.CacheKeyCookieName">
+            <summary>
+            缓存中存储的名字
             </summary>
         </member>
         <member name="F:HxCore.Web.Common.ConstInfo.SessionID">
@@ -193,6 +250,49 @@
             缩略图存放的文件
             </summary>
         </member>
+        <member name="F:HxCore.Web.Common.ConstInfo.SystemPolicy">
+            <summary>
+            系统策略
+            </summary>
+        </member>
+        <member name="F:HxCore.Web.Common.ConstInfo.ClientPolicy">
+            <summary>
+            客户端
+            </summary>
+        </member>
+        <member name="F:HxCore.Web.Common.ConstInfo.AdminPolicy">
+            <summary>
+            管理员
+            </summary>
+        </member>
+        <member name="F:HxCore.Web.Common.ConstInfo.PermissionPolicy">
+            <summary>
+            PermissionPolicy
+            </summary>
+        </member>
+        <member name="F:HxCore.Web.Common.ConstInfo.RoutePrefix">
+            <summary>
+            路有前缀
+            </summary>
+        </member>
+        <member name="T:HxCore.Web.Common.RuntimeHelper">
+            <summary>
+            运行时的帮助类
+            </summary>
+        </member>
+        <member name="M:HxCore.Web.Common.RuntimeHelper.GetAllAssembly">
+            <summary>
+            获取所有的程序集
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Web.Common.RuntimeHelper.GetAssembly(System.String)">
+            <summary>
+            获取指定程序集名称的程序集
+            </summary>
+            <param name="assemblyName">程序集的全名</param>
+            <returns></returns>
+        </member>
         <member name="T:HxCore.Web.Controllers.AccountController">
             <summary>
             账户相关的控制器类
@@ -202,6 +302,12 @@
             <summary>
             用户服务类
             </summary>
+        </member>
+        <member name="M:HxCore.Web.Controllers.AccountController.#ctor(HxCore.IServices.IUserInfoService)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="userService"></param>
         </member>
         <member name="M:HxCore.Web.Controllers.AccountController.Login(HxCore.Model.ViewModels.LoginParam)">
             <summary>
@@ -217,9 +323,100 @@
             <param name="token">旧的token</param>
             <returns></returns>
         </member>
+        <member name="T:HxCore.Web.Controllers.AttachController">
+            <summary>
+            附件控制器
+            </summary>
+        </member>
+        <member name="T:HxCore.Web.Controllers.BaseApiController">
+            <summary>
+            基础的api
+            </summary>
+        </member>
+        <member name="T:HxCore.Web.Controllers.BaseAuthApiController">
+            <summary>
+            客户端使用的api
+            </summary>
+        </member>
         <member name="T:HxCore.Web.Controllers.BlogController">
             <summary>
             博客相关的控制器类
+            </summary>
+        </member>
+        <member name="M:HxCore.Web.Controllers.BlogController.#ctor(HxCore.IServices.IBlogService)">
+             <summary>
+            构造函数
+             </summary>
+             <param name="blogService"></param>
+        </member>
+        <member name="M:HxCore.Web.Controllers.BlogController.GetList">
+            <summary>
+            获取博客列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HxCore.Web.Controllers.ValuesController">
+            <summary>
+            测试
+            </summary>
+        </member>
+        <member name="M:HxCore.Web.Controllers.ValuesController.Get">
+            <summary>
+            // GET api/values
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Web.Controllers.ValuesController.Get(System.Int32)">
+            <summary>
+            GET api/values/5
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Web.Controllers.ValuesController.Post(System.String)">
+            <summary>
+            POST api/values
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:HxCore.Web.Controllers.ValuesController.Put(System.Int32,System.String)">
+            <summary>
+            PUT api/values/5
+            </summary>
+            <param name="id"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:HxCore.Web.Controllers.ValuesController.Delete(System.Int32)">
+            <summary>
+            DELETE api/values/5
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="T:HxCore.Web.Extensions.AuthorizeSetup">
+            <summary>
+            权限启动服务注册
+            </summary>
+        </member>
+        <member name="M:HxCore.Web.Extensions.AuthorizeSetup.AddAuthorizeSetup(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加权限
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="T:HxCore.Web.Extensions.AutoMapperSetup">
+            <summary>
+            autoMapper启动类
+            </summary>
+        </member>
+        <member name="M:HxCore.Web.Extensions.AutoMapperSetup.AddAutoMapperSetup(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加数据库上下文
+            </summary>
+            <param name="services">服务集合</param>
+        </member>
+        <member name="T:HxCore.Web.Extensions.DbSetup">
+            <summary>
+            数据库上下文
             </summary>
         </member>
         <member name="M:HxCore.Web.Extensions.DbSetup.AddDbSetup(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
@@ -227,6 +424,30 @@
             添加数据库上下文
             </summary>
             <param name="services">服务集合</param>
+        </member>
+        <member name="T:HxCore.Web.Extensions.ServicesExtension">
+            <summary>
+            服务的扩展
+            </summary>
+        </member>
+        <member name="M:HxCore.Web.Extensions.ServicesExtension.AddDIServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            使用自带的依赖注入注入服务类
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:HxCore.Web.Extensions.ServicesExtension.AddDIRepository(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            使用自带的依赖注入注入仓库类
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:HxCore.Web.Extensions.ServicesExtension.DIServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            依赖注入
+            </summary>
+            <param name="services">服务描述集合</param>
+            <param name="dllName">程序集dll</param>
         </member>
         <member name="T:HxCore.Web.Extensions.SwaggerSetup">
             <summary>
@@ -250,10 +471,23 @@
             返回结果统一处理
             </summary>
         </member>
+        <member name="M:HxCore.Web.Filter.ApiResultAttribute.OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)">
+            <summary>
+            重载结果处理
+            </summary>
+            <param name="context"></param>
+        </member>
         <member name="T:HxCore.Web.Filter.ExceptionFilter">
             <summary>
             异常过滤器
             </summary>
+        </member>
+        <member name="M:HxCore.Web.Filter.ExceptionFilter.#ctor(Microsoft.Extensions.Hosting.IHostEnvironment,Microsoft.Extensions.Logging.ILogger{HxCore.Web.Filter.ExceptionFilter})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="env">环境</param>
+            <param name="logger">日志记录</param>
         </member>
         <member name="M:HxCore.Web.Filter.ExceptionFilter.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
             <summary>
@@ -261,16 +495,53 @@
             </summary>
             <param name="context">异常上下文</param>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:HxCore.Web.Filter.ExceptionFilter.WriteLog(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)" -->
+        <member name="M:HxCore.Web.Filter.ExceptionFilter.OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <summary>
+            异步异常的处理
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Web.Filter.ExceptionFilter.WriteLog(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <summary>
+            写入日志（log4net）
+            <param name="context">提供使用</param>
+            </summary>
+        </member>
         <member name="T:HxCore.Web.Filter.GlobalRouteConvention">
             <summary>
             全局路由公约
             </summary>
         </member>
+        <member name="M:HxCore.Web.Filter.GlobalRouteConvention.#ctor(Microsoft.AspNetCore.Mvc.Routing.IRouteTemplateProvider)">
+            <summary>
+            全局路由公约
+            </summary>
+            <param name="routeTemplateProvider"></param>
+        </member>
+        <member name="M:HxCore.Web.Filter.GlobalRouteConvention.Apply(Microsoft.AspNetCore.Mvc.ApplicationModels.ApplicationModel)">
+            <summary>
+            应用
+            </summary>
+            <param name="application"></param>
+        </member>
         <member name="T:HxCore.Web.Middlewares.JwtTokenAuth">
             <summary>
             jwt中间件
             </summary>
+        </member>
+        <member name="M:HxCore.Web.Middlewares.JwtTokenAuth.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="next">下一个管道</param>
+        </member>
+        <member name="M:HxCore.Web.Middlewares.JwtTokenAuth.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            执行
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
         </member>
         <member name="T:HxCore.Web.Middlewares.MiddleWareExtension">
             <summary>
@@ -295,7 +566,7 @@
             使用过滤器
             </summary>
             <param name="opts"></param>
-            <param name="routeAttribute"></param>
+            <param name="types"></param>
         </member>
         <member name="T:HxCore.Web.Program">
             <summary>
@@ -314,25 +585,6 @@
             </summary>
             <param name="args"></param>
             <returns></returns>
-        </member>
-        <member name="M:HxCore.Web.Services.ServicesExtension.AddDIServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            使用自带的依赖注入注入服务类
-            </summary>
-            <param name="services"></param>
-        </member>
-        <member name="M:HxCore.Web.Services.ServicesExtension.AddDIRepository(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            使用自带的依赖注入注入仓库类
-            </summary>
-            <param name="services"></param>
-        </member>
-        <member name="M:HxCore.Web.Services.ServicesExtension.DIServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
-            <summary>
-            依赖注入
-            </summary>
-            <param name="services">服务描述集合</param>
-            <param name="dllName">程序集dll</param>
         </member>
         <member name="T:HxCore.Web.Startup">
             <summary>
@@ -357,6 +609,11 @@
             配置
             </summary>
             <param name="app"></param>
+        </member>
+        <member name="T:HxCore.Web.SwaggerHelper.ApiVersions">
+            <summary>
+            api Swagger版本
+            </summary>
         </member>
         <member name="F:HxCore.Web.SwaggerHelper.ApiVersions.V1">
             <summary>

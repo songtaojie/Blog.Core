@@ -28,7 +28,7 @@
           <b-form-row class="mb-3">
             <b-input-group>
               <b-input-group-prepend is-text>
-                <i class="hx-icon-lock-solid"></i>
+                <i class="hx-icon-lock"></i>
               </b-input-group-prepend>
               <b-form-input
                 type="password"

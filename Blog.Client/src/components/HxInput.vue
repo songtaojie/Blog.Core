@@ -2,21 +2,27 @@
   <div class="hx-input-box">
     <div
       class="hx-input"
-      ref="inputBox"
+      ref="inputRef"
       v-html="innerText"
+      tabindex="0"
       :contenteditable="editable"
+      :Id="id"
       @focus="isLocked = true"
       @blur="onInputBlur"
-      @input="changeText"
-    ></div>
+      @input="onInputChange"
+      @keydown.enter="onEnterKey"></div>
     <i class="hx-icon-times" @click="onClear"></i>
   </div>
 </template>
 <script>
-// vue div contenteditable属性，模拟v-model双向数据绑定功能
 export default {
   name: 'HxInput',
   props: {
+    id:{
+      type:String,
+      default:'',
+      required:true
+    },
     value: {
       type: String,
       default: ''
@@ -30,26 +36,34 @@ export default {
   data() {
     return {
       innerText: this.value,
-      isLocked: false
+      isLocked: true
     }
   },
   watch: {
     'value'() {
-      if (!this.isLocked || !this.innerText) {
+      if (!this.isLocked) {
         this.innerText = this.value
       }
     }
   },
   methods: {
-    changeText() {
-      this.$emit('input', this.$refs.inputBox.innerHTML)
+    onInputChange() {
+      this.$emit('input', this.$refs.inputRef.innerHTML)
     },
     onInputBlur() {
       this.isLocked = false
-      console.log('blur')
+      this.$emit('blur', this.$refs.inputRef)
     },
     onClear() {
-      this.$emit('clear', this.$refs.inputBox.innerHTML)
+      this.$emit('clear', this.$refs.inputRef)
+    },
+    onEnterKey() {
+      this.$emit('enter', this.$refs.inputRef)
+    }
+  },
+  mounted() {
+    if(this.editable) {
+      this.$refs.inputRef.focus()
     }
   }
 }
@@ -80,9 +94,9 @@ export default {
     white-space: nowrap;
     box-sizing: border-box;
     outline: none;
-    user-select: text;
-    white-space: pre-wrap;
-    text-align: left;
+    // user-select: text;
+    // white-space: pre-wrap;
+    // text-align: left;
   }
 }
 .hx-input2 {

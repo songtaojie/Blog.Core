@@ -97,7 +97,15 @@ export const isFunction = function (value) {
 
   return !!value && typeof value === 'function'
 }
-
+/**
+ * 生成四位随机的十六进制数字
+ */
+function s4() {
+  return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1)
+}
+export const guid = function() {
+  return `${s4() + s4()}-${s4()}-${s4()}-${s4() + s4() + s4()}`
+}
 // 默认导出所有方法
 export default {
   isString,
@@ -108,5 +116,6 @@ export default {
   isNumber,
   isObject,
   isSimpleObject,
-  isEmptyObject
+  isEmptyObject,
+  guid
 }

@@ -4,6 +4,11 @@
         <name>HxCore.Model</name>
     </assembly>
     <members>
+        <member name="T:HxCore.Model.ViewModels.BlogViewModel">
+            <summary>
+            博客视图类
+            </summary>
+        </member>
         <member name="P:HxCore.Model.ViewModels.BlogViewModel.Title">
             <summary>
             博客标题
@@ -59,6 +64,16 @@
             个人置顶 标识该文档是否置顶,置顶的文章在个人主页中排序靠前
             </summary>
         </member>
+        <member name="P:HxCore.Model.ViewModels.BlogViewModel.Carousel">
+            <summary>
+            是否是轮播图
+            </summary>
+        </member>
+        <member name="T:HxCore.Model.ViewModels.LoginParam">
+            <summary>
+            登录参数
+            </summary>
+        </member>
         <member name="P:HxCore.Model.ViewModels.LoginParam.UserName">
             <summary>
             用户名
@@ -72,6 +87,11 @@
         <member name="P:HxCore.Model.ViewModels.LoginParam.Remember">
             <summary>
             记住我
+            </summary>
+        </member>
+        <member name="T:HxCore.Model.ViewModels.LoginViewModel">
+            <summary>
+            登录视图模型
             </summary>
         </member>
         <member name="P:HxCore.Model.ViewModels.LoginViewModel.Token">

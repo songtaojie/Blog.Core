@@ -4,6 +4,16 @@
         <name>HxCore.Entity</name>
     </assembly>
     <members>
+        <member name="T:HxCore.Entity.Base.BaseEntity">
+            <summary>
+            基础的实体类，封装了公共的字段
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.Base.BaseEntity.Id">
+            <summary>
+            主键
+            </summary>
+        </member>
         <member name="P:HxCore.Entity.Base.BaseEntity.CreateTime">
             <summary>
             创建时间
@@ -24,6 +34,11 @@
             是否被删除
             </summary>
         </member>
+        <member name="P:HxCore.Entity.Base.BaseEntity.Delete">
+            <summary>
+            是否删除
+            </summary>
+        </member>
         <member name="P:HxCore.Entity.Base.BaseEntity.DeletelUserId">
             <summary>
             删除人ID
@@ -37,6 +52,16 @@
         <member name="P:HxCore.Entity.Base.BaseEntity.LastModifyTime">
             <summary>
             最后更新时间
+            </summary>
+        </member>
+        <member name="T:HxCore.Entity.Base.BaseModel">
+            <summary>
+            基本的模型，封装了索引器登方法
+            </summary>
+        </member>
+        <member name="E:HxCore.Entity.Base.BaseModel.PropertyChanged">
+            <summary>
+            属性变化的事件
             </summary>
         </member>
         <member name="M:HxCore.Entity.Base.BaseModel.OnPropertyChanged(System.String)">
@@ -73,6 +98,17 @@
             把指定的模型中值复制到当前模型中
             </summary>
             <param name="model">要复制数据的模型</param>
+        </member>
+        <member name="T:HxCore.Entity.Base.IEntity`1">
+            <summary>
+            主键接口
+            </summary>
+            <typeparam name="T">主键的类型</typeparam>
+        </member>
+        <member name="P:HxCore.Entity.Base.IEntity`1.Id">
+            <summary>
+            主键
+            </summary>
         </member>
         <member name="T:HxCore.Entity.BasicInfo">
             <summary>
@@ -132,6 +168,11 @@
         <member name="P:HxCore.Entity.BasicInfo.School">
             <summary>
             用户毕业学校
+            </summary>
+        </member>
+        <member name="T:HxCore.Entity.Blog">
+            <summary>
+            博客类
             </summary>
         </member>
         <member name="P:HxCore.Entity.Blog.Title">
@@ -244,6 +285,11 @@
             发改主题时的坐标
             </summary>
         </member>
+        <member name="P:HxCore.Entity.Blog.City">
+            <summary>
+            城市
+            </summary>
+        </member>
         <member name="P:HxCore.Entity.Blog.OrderFactor">
             <summary>
             热门程度
@@ -253,6 +299,16 @@
             <summary>
             系统分类，前端、后端、编程语言等
             </summary> 
+        </member>
+        <member name="P:HxCore.Entity.Blog.BlogTypeId">
+            <summary>
+            博客类型，是转发，原创，还是翻译等
+            </summary> 
+        </member>
+        <member name="P:HxCore.Entity.Blog.Carousel">
+            <summary>
+            是否是轮播图
+            </summary>
         </member>
         <member name="T:HxCore.Entity.BlogType">
             <summary>
@@ -294,39 +350,49 @@
             备注
             </summary>
         </member>
-        <member name="T:HxCore.Entity.Context.DbFactory">
+        <member name="T:HxCore.Entity.Context.DbSession">
             <summary>
-            数据库上下文工厂
+            如果没有提供对应模型的服务类，可以使用该方法进行CRUD操作
             </summary>
         </member>
-        <member name="M:HxCore.Entity.Context.DbFactory.#ctor(System.IServiceProvider)">
+        <member name="P:HxCore.Entity.Context.DbSession.ServiceProvider">
+            <summary>
+            服务的实例
+            </summary>
+        </member>
+        <member name="M:HxCore.Entity.Context.DbSession.#ctor(System.IServiceProvider)">
             <summary>
             构造函数
             </summary>
-            <param name="service">HttpContext</param>
+            <param name="service">服务的实例</param>
         </member>
-        <member name="P:HxCore.Entity.Context.DbFactory.ServiceProvider">
+        <member name="P:HxCore.Entity.Context.DbSession.DbContext">
             <summary>
-            当前请求的ServiceProvider实例
+            ef数据库上下文
             </summary>
         </member>
-        <member name="M:HxCore.Entity.Context.DbFactory.GetDbContext">
-            <summary>
-            获取ef上下文
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:HxCore.Entity.Context.DbFactory.GetRequiredService``1">
+        <member name="M:HxCore.Entity.Context.DbSession.GetRequiredService``1">
             <summary>
             获取使用原生的DI注入的服务类(一般不不用这个，而是使用构造函数注入)
             </summary>
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="T:HxCore.Entity.Context.DbSession">
+        <member name="M:HxCore.Entity.Context.DbSession.QueryById``1(System.Object[])">
             <summary>
-            如果没有提供对应模型的服务类，可以使用该方法进行CRUD操作
+            根据id获取对象
             </summary>
+            <typeparam name="T"></typeparam>
+            <param name="keyValues"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Entity.Context.DbSession.QueryEntity``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            获取满足条件的集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="predicate"></param>
+            <returns></returns>
         </member>
         <member name="T:HxCore.Entity.Context.HxContext">
             <summary>
@@ -382,28 +448,20 @@
             博客分类
             </summary>
         </member>
-        <member name="T:HxCore.Entity.Context.IDbFactory">
+        <member name="T:HxCore.Entity.Context.IDbSession">
             <summary>
-            数据库上下文工厂
+            数据库上下文操作类
             </summary>
         </member>
-        <member name="P:HxCore.Entity.Context.IDbFactory.ServiceProvider">
+        <member name="P:HxCore.Entity.Context.IDbSession.ServiceProvider">
             <summary>
-            当前请求的ServiceProvider实例
+            服务的实例
             </summary>
         </member>
-        <member name="M:HxCore.Entity.Context.IDbFactory.GetDbContext">
+        <member name="P:HxCore.Entity.Context.IDbSession.DbContext">
             <summary>
-            获取数据库上下文
+            数据库上下文
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:HxCore.Entity.Context.IDbFactory.GetRequiredService``1">
-            <summary>
-            获取服务的实例
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
         </member>
         <member name="M:HxCore.Entity.Context.IDbSession.QueryById``1(System.Object[])">
             <summary>
@@ -420,6 +478,12 @@
             <typeparam name="T">实体类型</typeparam>
             <param name="predicate">获取数据的条件lambda</param>
             <returns>满足当前条件的一个实体</returns>
+        </member>
+        <member name="T:HxCore.Entity.Dependency.IAutoMapper`1">
+            <summary>
+            自动映射接口，只要实体类继承该接口，即可使用Mapper进行映射属性
+            </summary>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="T:HxCore.Entity.Dependency.ScropedDependencyAttribute">
             <summary>
@@ -491,6 +555,11 @@
             擅长的领域
             </summary>
         </member>
+        <member name="T:HxCore.Entity.AjaxResult">
+            <summary>
+            ajax返回结果统一封装
+            </summary>
+        </member>
         <member name="P:HxCore.Entity.AjaxResult.Success">
             <summary>
             是否成功
@@ -511,9 +580,47 @@
             获取 返回数据
             </summary>
         </member>
+        <member name="T:HxCore.Entity.UserFriendlyException">
+            <summary>
+            用户友好的异常提示
+            </summary>
+        </member>
+        <member name="M:HxCore.Entity.UserFriendlyException.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="message"></param>
+        </member>
         <member name="T:HxCore.Entity.NoAuthorizeException">
             <summary>
             没有被授权的异常
+            </summary>
+        </member>
+        <member name="M:HxCore.Entity.NoAuthorizeException.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="T:HxCore.Entity.NotFoundException">
+            <summary>
+            没有发现文件的异常
+            </summary>
+        </member>
+        <member name="M:HxCore.Entity.NotFoundException.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="T:HxCore.Entity.UserInfo">
+            <summary>
+            用户信息类
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.UserInfo.Id">
+            <summary>
+            主键
             </summary>
         </member>
         <member name="P:HxCore.Entity.UserInfo.UserName">
@@ -541,12 +648,22 @@
             第三方登录唯一标识
             </summary>
         </member>
+        <member name="P:HxCore.Entity.UserInfo.Lock">
+            <summary>
+            是否锁定
+            </summary>
+        </member>
         <member name="P:HxCore.Entity.UserInfo.AvatarUrl">
             <summary>
             头像存储文件路径
             </summary>
         </member>
         <member name="P:HxCore.Entity.UserInfo.IsAdmin">
+            <summary>
+            是否是管理员
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.UserInfo.Admin">
             <summary>
             是否是管理员
             </summary>
@@ -586,7 +703,11 @@
             使用MarkDown编辑器
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:HxCore.Entity.UserInfo.UseMdEdit" -->
+        <member name="P:HxCore.Entity.UserInfo.UseMdEdit">
+            <summary>
+            使用MarkDown编辑器
+            </summary>
+        </member>
         <member name="P:HxCore.Entity.UserInfo.LoginIp">
             <summary>
             登录的ip
