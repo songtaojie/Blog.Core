@@ -26,16 +26,13 @@ namespace HxCore.Web.Controllers
         /// 用户服务类
         /// </summary>
         private IUserInfoService _userService;
-        private IMapper _mapper;
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="userService"></param>
-        /// <param name="mapper"></param>
-        public AccountController(IUserInfoService userService,IMapper mapper)
+        public AccountController(IUserInfoService userService)
         {
             _userService = userService;
-            _mapper = mapper;
         }
         /// <summary>
         /// 用户登录
@@ -58,7 +55,6 @@ namespace HxCore.Web.Controllers
                : ConstInfo.ClientPolicy
             };
             var result=JwtHelper.BuildJwtToken(jwtModel);
-            var result2 = _mapper.Map<LoginViewModel>(userInfo);
             result.NickName = userInfo.NickName;
             result.AvatarUrl = userInfo.AvatarUrl;
             return result;

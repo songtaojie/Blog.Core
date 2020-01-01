@@ -15,9 +15,7 @@ namespace HxCore.Web.Controllers
     /// 博客相关的控制器类
     /// </summary>
     [Route("[controller]/[action]")]
-    [Authorize]
-    [ApiController]
-    public class BlogController : ControllerBase
+    public class BlogController : BaseApiController
     {
         private IBlogService _blogService;
         /// <summary>

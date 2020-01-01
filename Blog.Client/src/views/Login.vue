@@ -49,7 +49,7 @@
               >记住我</b-form-checkbox>
             </b-col>
             <b-col class="text-right">
-              <b-button type="submit" disabled="isLoading" variant="success" right>登录</b-button>
+              <b-button type="submit" :disabled="isLoading" variant="success" right>登录</b-button>
             </b-col>
           </b-form-row>
           <div>
@@ -83,8 +83,11 @@ export default {
       window.from = that.$refs.form
       if (that.$refs.form.checkValidity()) {
         that.isLoading = true
-        that.$api.login(that.form, function() {
+        that.$api.login(that.form, () => {
+          that.isLoading = false
           that.$router.replace(that.$route.query.redirect || '/')
+        }, () => {
+           that.isLoading = false
         })
       }
     }

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '../views/Home/Index.vue'
-// import Edit from '../views/Blog/Edit.vue'
 const islogin = true
 Vue.use(Router)
 const routes = [{
@@ -20,7 +19,7 @@ const routes = [{
 }, {
   name:'edit',
   path: '/blog/edit',
-  component: () => import('../views/Blog/Edit.vue')
+  component: () => import('../views/Blog/CkEdit.vue')
 }]
 const router = new Router({
   mode: 'history',
