@@ -4,80 +4,80 @@
         <name>HxCore.Entity</name>
     </assembly>
     <members>
-        <member name="T:HxCore.Entity.Base.BaseEntity">
+        <member name="T:HxCore.Entity.BaseEntity">
             <summary>
             基础的实体类，封装了公共的字段
             </summary>
         </member>
-        <member name="P:HxCore.Entity.Base.BaseEntity.Id">
+        <member name="P:HxCore.Entity.BaseEntity.Id">
             <summary>
             主键
             </summary>
         </member>
-        <member name="P:HxCore.Entity.Base.BaseEntity.CreateTime">
+        <member name="P:HxCore.Entity.BaseEntity.CreateTime">
             <summary>
             创建时间
             </summary>
         </member>
-        <member name="P:HxCore.Entity.Base.BaseEntity.UserId">
+        <member name="P:HxCore.Entity.BaseEntity.UserId">
             <summary>
             这条记录属于哪个用户
             </summary>
         </member>
-        <member name="P:HxCore.Entity.Base.BaseEntity.UserName">
+        <member name="P:HxCore.Entity.BaseEntity.UserName">
             <summary>
             用户的登录名称
             </summary>
         </member>
-        <member name="P:HxCore.Entity.Base.BaseEntity.IsDelete">
+        <member name="P:HxCore.Entity.BaseEntity.IsDelete">
             <summary>
             是否被删除
             </summary>
         </member>
-        <member name="P:HxCore.Entity.Base.BaseEntity.Delete">
+        <member name="P:HxCore.Entity.BaseEntity.Delete">
             <summary>
             是否删除
             </summary>
         </member>
-        <member name="P:HxCore.Entity.Base.BaseEntity.DeletelUserId">
+        <member name="P:HxCore.Entity.BaseEntity.DeletelUserId">
             <summary>
             删除人ID
             </summary>
         </member>
-        <member name="P:HxCore.Entity.Base.BaseEntity.DeleteTime">
+        <member name="P:HxCore.Entity.BaseEntity.DeleteTime">
             <summary>
             删除时间
             </summary>
         </member>
-        <member name="P:HxCore.Entity.Base.BaseEntity.LastModifyTime">
+        <member name="P:HxCore.Entity.BaseEntity.LastModifyTime">
             <summary>
             最后更新时间
             </summary>
         </member>
-        <member name="T:HxCore.Entity.Base.BaseModel">
+        <member name="T:HxCore.Entity.BaseModel">
             <summary>
             基本的模型，封装了索引器登方法
             </summary>
         </member>
-        <member name="E:HxCore.Entity.Base.BaseModel.PropertyChanged">
+        <member name="E:HxCore.Entity.BaseModel.PropertyChanged">
             <summary>
             属性变化的事件
             </summary>
         </member>
-        <member name="M:HxCore.Entity.Base.BaseModel.OnPropertyChanged(System.String)">
+        <member name="M:HxCore.Entity.BaseModel.OnPropertyChanged(System.String)">
             <summary>
             属性发生改变时
             </summary>
             <param name="propertyName"></param>
         </member>
-        <member name="M:HxCore.Entity.Base.BaseModel.GetPropertyValue(System.String)">
+        <member name="M:HxCore.Entity.BaseModel.GetPropertyValue(System.String)">
             <summary>
             根据属性的名称获取属性的值
             </summary>
             <param name="name"></param>
             <returns></returns>
         </member>
-        <member name="M:HxCore.Entity.Base.BaseModel.SetProperty``1(``0@,``0,System.String)">
+        <member name="M:HxCore.Entity.BaseModel.SetProperty``1(``0@,``0,System.String)">
             <summary>
             根据属性的名称设置属性的值
             </summary>
@@ -86,26 +86,26 @@
             <param name="value"></param>
             <param name="propertyName"></param>
         </member>
-        <member name="P:HxCore.Entity.Base.BaseModel.Item(System.String)">
+        <member name="P:HxCore.Entity.BaseModel.Item(System.String)">
             <summary>
             索引器，根据属性的名称获取值
             </summary>
             <param name="name"></param>
             <returns></returns>
         </member>
-        <member name="M:HxCore.Entity.Base.BaseModel.CopyFrom(HxCore.Entity.Base.BaseModel)">
+        <member name="M:HxCore.Entity.BaseModel.CopyFrom(HxCore.Entity.BaseModel)">
             <summary>
             把指定的模型中值复制到当前模型中
             </summary>
             <param name="model">要复制数据的模型</param>
         </member>
-        <member name="T:HxCore.Entity.Base.IEntity`1">
+        <member name="T:HxCore.Entity.IEntity`1">
             <summary>
             主键接口
             </summary>
             <typeparam name="T">主键的类型</typeparam>
         </member>
-        <member name="P:HxCore.Entity.Base.IEntity`1.Id">
+        <member name="P:HxCore.Entity.IEntity`1.Id">
             <summary>
             主键
             </summary>
@@ -394,6 +394,32 @@
             <param name="predicate"></param>
             <returns></returns>
         </member>
+        <member name="M:HxCore.Entity.Context.DbSession.QueryEntities``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            获取满足指定条件的一条数据
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">获取数据的条件lambda</param>
+            <returns>满足当前条件的一个实体</returns>
+        </member>
+        <member name="M:HxCore.Entity.Context.DbSession.Excute(System.EventHandler)">
+            <summary>
+            执行事务
+            </summary>
+            <param name="handler"></param>
+        </member>
+        <member name="M:HxCore.Entity.Context.DbSession.SaveChanges">
+            <summary>
+            保存更改
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Entity.Context.DbSession.SaveChangesAsync">
+            <summary>
+            保存更改
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:HxCore.Entity.Context.HxContext">
             <summary>
             数据库上下文
@@ -479,6 +505,32 @@
             <param name="predicate">获取数据的条件lambda</param>
             <returns>满足当前条件的一个实体</returns>
         </member>
+        <member name="M:HxCore.Entity.Context.IDbSession.QueryEntities``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            获取满足指定条件的一条数据
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="predicate">获取数据的条件lambda</param>
+            <returns>满足当前条件的一个实体</returns>
+        </member>
+        <member name="M:HxCore.Entity.Context.IDbSession.Excute(System.EventHandler)">
+            <summary>
+            执行事务
+            </summary>
+            <param name="handler"></param>
+        </member>
+        <member name="M:HxCore.Entity.Context.IDbSession.SaveChanges">
+            <summary>
+            保存更改
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Entity.Context.IDbSession.SaveChangesAsync">
+            <summary>
+            保存更改
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:HxCore.Entity.Dependency.IAutoMapper`1">
             <summary>
             自动映射接口，只要实体类继承该接口，即可使用Mapper进行映射属性
@@ -518,6 +570,11 @@
         <member name="P:HxCore.Entity.Extension.DecimalPrecisionAttribute.Scale">
             <summary>
             保留位数（默认4）
+            </summary>
+        </member>
+        <member name="T:HxCore.Entity.JobInfo">
+            <summary>
+            工作信息
             </summary>
         </member>
         <member name="P:HxCore.Entity.JobInfo.Position">

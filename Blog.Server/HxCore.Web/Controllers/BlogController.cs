@@ -26,9 +26,7 @@ namespace HxCore.Web.Controllers
         ///构造函数
         /// </summary>
         /// <param name="_blogService"></param>
-        /// <param name="dbSession"></param>
-        /// <param name="mapper"></param>
-        public BlogController(IBlogService _blogService, IDbSession dbSession,IMapper mapper):base(mapper,dbSession)
+        public BlogController(IBlogService _blogService)
         {
             blogService = _blogService;
         }
@@ -40,7 +38,6 @@ namespace HxCore.Web.Controllers
         public List<Blog> GetList()
         {
             var user = User;
-            var db = this.Db;
             var result = blogService.QueryEntitiesNoTrack(b => true).ToList();
             return result;
         }
@@ -51,20 +48,13 @@ namespace HxCore.Web.Controllers
         /// </summary>
         /// <param name="editInfo"></param>
         /// <returns></returns>
+        [Authorize(Policy =ConstInfo.ClientPolicy)]
         [HttpPost]
         public bool Save([FromForm]BlogViewModel editInfo)
         {
             bool isEdit = false;
             var user = User;
-            var db = this.Db;
-            db.Excute(delegate
-            {
-                Blog blogInfo = Mapper.Map<Blog>(editInfo);
-                if (string.IsNullOrEmpty(blogInfo.Id))
-                {
-                    blogInfo.Id = Helper.GetSnowId();
-                }
-            });
+            blogService.Insert(editInfo);
             return true;
             //if (ModelState.IsValid)
             //{

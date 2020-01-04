@@ -100,5 +100,25 @@ namespace HxCore.Entity.Context
                 throw new System.Reflection.TargetInvocationException(inner);
             }
         }
+
+        /// <summary>
+        /// 保存更改
+        /// </summary>
+        /// <returns></returns>
+        public bool SaveChanges()
+        {
+            var result = this.DbContext.SaveChanges();
+            return result > 0;
+        }
+
+        /// <summary>
+        /// 保存更改
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> SaveChangesAsync()
+        {
+            var result = await this.DbContext.SaveChangesAsync();
+            return result > 0;
+        }
     }
 }

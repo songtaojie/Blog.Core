@@ -12,6 +12,15 @@ namespace HxCore.Common
         /// </summary>
         HttpContext HttpContext { get; }
         /// <summary>
+        /// 用户名
+        /// </summary>
+        public string UserName { get; }
+        /// <summary>
+        /// 用户的id
+        /// </summary>
+        public string UserId { get; }
+
+        /// <summary>
         /// 设置cookie的值
         /// </summary>
         /// <param name="cookieName">cookie的名称</param>
@@ -24,5 +33,16 @@ namespace HxCore.Common
         /// <param name="cookieName">cookie的键</param>
         /// <returns></returns>
         string GetCookieValue(string cookieName);
+        /// <summary>
+        /// 是否已授权
+        /// </summary>
+        public bool IsAuthenticated { get; }
+       
+        /// <summary>
+        /// 根据claim获取相应的值
+        /// </summary>
+        /// <param name="ClaimType"></param>
+        /// <returns></returns>
+        public List<string> GetClaimValueByType(string ClaimType);
     }
 }

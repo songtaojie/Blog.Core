@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -41,5 +42,42 @@ namespace HxCore.IRepository
         /// <param name="predicate">lambda表达式</param>
         /// <returns></returns>
         IQueryable<T> QueryEntitiesNoTrack(Expression<Func<T, bool>> lambda);
+
+
+        #region 新增
+        /// <summary>
+        /// 插入一条数据
+        /// </summary>
+        /// <param name="entity">数据实体</param>
+        /// <returns></returns>
+        Task<T> Insert(T entity);
+        /// <summary>
+        /// 插入集合
+        /// </summary>
+        /// <param name="entityList"></param>
+        /// <returns></returns>
+        bool Insert(IEnumerable<T> entityList);
+        #endregion
+        #region 更新
+        T Update(T entity);
+        /// <summary>
+        /// 更新实体的部分字段
+        /// </summary>
+        /// <param name="entity">实体</param>
+        /// <param name="fields">要更新的字段的集合</param>
+        void UpdatePartial(T entity, IEnumerable<string> fields);
+
+        /// <summary>
+        /// 更新实体的部分字段
+        /// </summary>
+        /// <param name="entity">实体</param>
+        /// <param name="fields">要更新的字段的集合</param>
+        void UpdatePartial(T entity, params string[] fields);
+        #endregion
+
+        #region 保存更改
+        bool SaveChanges();
+        Task<bool> SaveChangesAsync();
+        #endregion
     }
 }

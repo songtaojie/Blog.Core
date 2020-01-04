@@ -4,6 +4,86 @@
         <name>HxCore.Model</name>
     </assembly>
     <members>
+        <member name="T:HxCore.Model.BlogViewModel">
+            <summary>
+            博客视图模型
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogViewModel.Id">
+            <summary>
+            博客id
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogViewModel.Title">
+            <summary>
+            博客标题
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogViewModel.Content">
+            <summary>
+            博客内容
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogViewModel.BlogTypeId">
+            <summary>
+            文章类型
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogViewModel.CategoryId">
+            <summary>
+            系统分类
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogViewModel.PersonTop">
+            <summary>
+            个人置顶
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogViewModel.Private">
+            <summary>
+            仅自己可见
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogViewModel.Publish">
+            <summary>
+            是否发布
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogViewModel.CanCmt">
+            <summary>
+            是否可评论
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogViewModel.PersonTags">
+            <summary>
+            个人标签
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogViewModel.MarkDown">
+            <summary>
+            是否是markdown
+            </summary>
+        </member>
+        <member name="T:HxCore.Model.PersonTag">
+            <summary>
+            个人标签
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.PersonTag.Id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.PersonTag.Value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.PersonTag.Editable">
+            <summary>
+            是否可编辑
+            </summary>
+        </member>
         <member name="T:HxCore.Model.ViewModels.BlogViewModel">
             <summary>
             博客视图类

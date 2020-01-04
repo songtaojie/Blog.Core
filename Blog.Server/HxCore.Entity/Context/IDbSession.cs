@@ -50,5 +50,17 @@ namespace HxCore.Entity.Context
         /// </summary>
         /// <param name="handler"></param>
         void Excute(EventHandler handler);
+
+        /// <summary>
+        /// 保存更改
+        /// </summary>
+        /// <returns></returns>
+        bool SaveChanges();
+
+        /// <summary>
+        /// 保存更改
+        /// </summary>
+        /// <returns></returns>
+        Task<bool> SaveChangesAsync();
     }
 }

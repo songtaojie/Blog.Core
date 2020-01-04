@@ -13,7 +13,7 @@ namespace HxCore.Web.Controllers
     /// 枚举的控制器
     /// </summary>
     [Route("[controller]/[action]")]
-    public class EnumController : BaseApiController
+    public class EnumController : BaseAuthApiController
     {
         private IDbSession db;
         /// <summary>

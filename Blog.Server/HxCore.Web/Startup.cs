@@ -61,12 +61,13 @@ namespace HxCore.Web
             #region Swagger
             services.AddSwaggerSetup();
             #endregion
+
             #region 单例模块
             // Httpcontext 注入
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IUserContext, UserContext>();
-
             #endregion
+
             #region AutoMapper
             services.AddAutoMapperSetup();
             #endregion
@@ -86,8 +87,8 @@ namespace HxCore.Web
 
 
             #region 业务类映射
-            services.AddDIServices();
-            services.AddDIRepository();
+            //services.AddDIServices();
+            //services.AddDIRepository();
             #endregion
 
         }

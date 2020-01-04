@@ -1,10 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using HxCore.Common.Extensions;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
 using System.Text;
 
 namespace HxCore.Common
 {
+    /// <summary>
+    /// 用户上下文操作类
+    /// </summary>
     public class UserContext: IUserContext
     {
         /// <summary>
@@ -24,6 +31,14 @@ namespace HxCore.Common
         {
             _contextAccessor = contextAccessor;
         }
+        /// <summary>
+        /// 用户的名字
+        /// </summary>
+        public string UserName => HttpContext.User.Identity.Name;
+        /// <summary>
+        /// 用户的id
+        /// </summary>
+        public string UserId => GetClaimValueByType("jti").FirstOrDefault();
 
         /// <summary>
         /// 获取cookie的值
@@ -61,9 +76,57 @@ namespace HxCore.Common
         /// 是否已经验证，即是否一登录
         /// </summary>
         /// <returns></returns>
-        public bool IsAuthenticated()
+        public bool IsAuthenticated => HttpContext.User.Identity.IsAuthenticated;
+        /// <summary>
+        /// 获取token
+        /// </summary>
+        /// <returns></returns>
+        public string GetToken()
         {
-            return HttpContext.User.Identity.IsAuthenticated;
+            return HttpContext.Request.Headers["Authorization"].ObjToString().Replace("Bearer ", "");
+        }
+        /// <summary>
+        /// 获取用户信息
+        /// </summary>
+        /// <param name="ClaimType"></param>
+        /// <returns></returns>
+        public List<string> GetUserInfoFromToken(string ClaimType)
+        {
+
+            var jwtHandler = new JwtSecurityTokenHandler();
+            if (!string.IsNullOrEmpty(GetToken()))
+            {
+                JwtSecurityToken jwtToken = jwtHandler.ReadJwtToken(GetToken());
+
+                return (from item in jwtToken.Claims
+                        where item.Type == ClaimType
+                        select item.Value).ToList();
+            }
+            else
+            {
+                return new List<string>() { };
+            }
+        }
+        /// <summary>
+        /// 获取claims集合
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Claim> GetClaimsIdentity()
+        {
+            return HttpContext.User.Claims;
+        }
+        /// <summary>
+        /// 根据claim获取相应的值
+        /// </summary>
+        /// <param name="ClaimType"></param>
+        /// <returns></returns>
+        public List<string> GetClaimValueByType(string ClaimType)
+        {
+
+            return (from item in GetClaimsIdentity()
+                    where item.Type == ClaimType
+                    select item.Value).ToList();
+
         }
     }
 }

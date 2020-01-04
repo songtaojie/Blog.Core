@@ -9,11 +9,8 @@ namespace HxCore.Services
 {
     public class UserInfoServices:BaseService<UserInfo>, IUserInfoService
     {
-        private IUserInfoRepository _dal;
-        public UserInfoServices(IUserInfoRepository userDal)
+        public UserInfoServices(IUserInfoRepository userDal):base(userDal)
         {
-            this.baseDal = userDal;
-            this._dal = userDal;
         }
     }
 }
