@@ -11,7 +11,7 @@ namespace HxCore.Entity
     /// </summary>
     [Serializable]
     //[Table("Category")]
-    public class Category : Base.BaseEntity
+    public class Category : BaseEntity
     {
         /// <summary>
         /// 分类名字

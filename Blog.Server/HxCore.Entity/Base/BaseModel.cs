@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace HxCore.Entity.Base
+namespace HxCore.Entity
 {
     /// <summary>
     /// 基本的模型，封装了索引器登方法

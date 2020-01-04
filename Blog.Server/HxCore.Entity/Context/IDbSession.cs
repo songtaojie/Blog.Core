@@ -44,5 +44,11 @@ namespace HxCore.Entity.Context
         /// <param name="predicate">获取数据的条件lambda</param>
         /// <returns>满足当前条件的一个实体</returns>
         IQueryable<T> QueryEntities<T>(Expression<Func<T, bool>> predicate) where T : class;
+
+        /// <summary>
+        /// 执行事务
+        /// </summary>
+        /// <param name="handler"></param>
+        void Excute(EventHandler handler);
     }
 }

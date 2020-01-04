@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace HxCore.Entity.Context
 {
@@ -73,5 +74,31 @@ namespace HxCore.Entity.Context
             return this.DbContext.Set<T>().Where(predicate);
         }
 
+        /// <summary>
+        /// 执行事务
+        /// </summary>
+        /// <param name="handler"></param>
+        public void Excute(EventHandler handler)
+        {
+            Exception inner = null;
+            
+            using (IDbContextTransaction transaction = DbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    handler?.Invoke(null, EventArgs.Empty);
+                    transaction.Commit();
+                }
+                catch (Exception e)
+                {
+                    inner = e;
+                    transaction.Rollback();
+                }
+            }
+            if (inner != null)
+            {
+                throw new System.Reflection.TargetInvocationException(inner);
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace HxCore.Entity
     /// </summary>
     [Table("UserInfo")]
     [Serializable]
-    public class UserInfo : Base.BaseModel, Base.IEntity<string>
+    public class UserInfo : BaseModel, IEntity<string>
     {
         /// <summary>
         /// 主键

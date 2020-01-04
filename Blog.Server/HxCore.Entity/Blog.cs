@@ -12,7 +12,7 @@ namespace HxCore.Entity
     /// </summary>
     [Table("Blog")]
     [Serializable]
-    public class Blog : Base.BaseEntity
+    public class Blog : BaseEntity
     {
         /// <summary>
         /// 博客标题

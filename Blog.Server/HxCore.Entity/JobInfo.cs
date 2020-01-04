@@ -6,9 +6,12 @@ using System.Text;
 
 namespace HxCore.Entity
 {
+    /// <summary>
+    /// 工作信息
+    /// </summary>
     [Table("JobInfo")]
     [Serializable]
-    public class JobInfo : Base.BaseEntity
+    public class JobInfo : BaseEntity
     {
         /// <summary>
         /// 职位

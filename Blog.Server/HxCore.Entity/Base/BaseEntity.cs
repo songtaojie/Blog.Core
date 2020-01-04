@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace HxCore.Entity.Base
+namespace HxCore.Entity
 {
     /// <summary>
     /// 基础的实体类，封装了公共的字段

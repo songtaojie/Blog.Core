@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HxCore.Entity.Base
+namespace HxCore.Entity
 {
     /// <summary>
     /// 主键接口

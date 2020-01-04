@@ -232,7 +232,7 @@ axios.interceptors.response.use((res) => {
   return res.data
 }, (e) => {
   debugger
-  switch (e.response.status) {
+  switch (e.response && e.response.status) {
     case 401:
       var curTime = new Date()
       var refreshtime = new Date(Date.parse(window.localStorage.refreshtime))
