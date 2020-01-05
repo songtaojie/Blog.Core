@@ -12,38 +12,38 @@ namespace HxCore.Repository
 {
     public abstract class BaseRepository<T>where T:class,new()
     {
-        protected DbContext DbContext { get; }
-        public BaseRepository(IDbSession dbSession)
+        protected DbContext Db { get; }
+        public BaseRepository(DbContext db)
         {
-            DbContext = dbSession.DbContext;
+            this.Db = db;
         }
         #region 查询
         public async Task<T> QueryEntity(Expression<Func<T, bool>> predicate)
         {
-            return await DbContext.Set<T>().FirstOrDefaultAsync(predicate);
+            return await Db.Set<T>().FirstOrDefaultAsync(predicate);
         }
 
         public async Task<T> QueryEntityById(object id)
         {
-            return await DbContext.Set<T>().FindAsync(id);
+            return await Db.Set<T>().FindAsync(id);
         }
 
         public async Task<T> QueryEntityNoTrack(Expression<Func<T, bool>> lambda)
         {
-            var result = DbContext.Set<T>().AsNoTracking().Where(lambda);
+            var result = Db.Set<T>().AsNoTracking().Where(lambda);
             
             return await result.FirstOrDefaultAsync();
         }
 
         public IQueryable<T> QueryEntities(Expression<Func<T, bool>> lambda)
         {
-            var result = DbContext.Set<T>().Where(lambda);
+            var result = Db.Set<T>().Where(lambda);
             return result;
         }
 
         public virtual IQueryable<T> QueryEntitiesNoTrack(Expression<Func<T, bool>> lambda)
         {
-            var result = DbContext.Set<T>()
+            var result = Db.Set<T>()
                 .AsNoTracking()
                 .Where(lambda);
             return result;
@@ -58,7 +58,7 @@ namespace HxCore.Repository
         /// <returns></returns>
         public async Task<T> Insert(T entity)
         {
-            var result= await this.DbContext.Set<T>().AddAsync(entity);
+            var result= await this.Db.Set<T>().AddAsync(entity);
             return result.Entity;
         }
         /// <summary>
@@ -66,16 +66,17 @@ namespace HxCore.Repository
         /// </summary>
         /// <param name="entityList"></param>
         /// <returns></returns>
-        public bool Insert(IEnumerable<T> entityList)
+        public Task Insert(IEnumerable<T> entityList)
         {
-            var result = this.DbContext.Set<T>().AddRangeAsync(entityList);
-            return result.IsCompletedSuccessfully;
+            var result = this.Db.Set<T>().AddRangeAsync(entityList);
+            return result;
         }
         #endregion
+
         #region 更新
         public T Update(T entity)
         {
-            var result = DbContext.Set<T>().Update(entity);
+            var result = Db.Set<T>().Update(entity);
             return result.Entity;
         }
         /// <summary>
@@ -87,10 +88,10 @@ namespace HxCore.Repository
         {
             if (entity != null && fields != null)
             {
-                this.DbContext.Set<T>().Attach(entity);
+                this.Db.Set<T>().Attach(entity);
                 foreach (var item in fields)
                 {
-                    this.DbContext.Entry<T>(entity).Property(item).IsModified = true;
+                    this.Db.Entry<T>(entity).Property(item).IsModified = true;
                 }
             }
         }
@@ -104,10 +105,10 @@ namespace HxCore.Repository
         {
             if (entity != null && fields != null)
             {
-                this.DbContext.Set<T>().Attach(entity);
+                this.Db.Set<T>().Attach(entity);
                 foreach (var item in fields)
                 {
-                    this.DbContext.Entry<T>(entity).Property(item).IsModified = true;
+                    this.Db.Entry<T>(entity).Property(item).IsModified = true;
                 }
             }
         }
@@ -119,12 +120,25 @@ namespace HxCore.Repository
         #region 保存更改
         public bool SaveChanges()
         {
-            return this.DbContext.SaveChanges() > 0;
+            return this.Db.SaveChanges() > 0;
         }
         public async Task<bool> SaveChangesAsync()
         {
-            var result = await this.DbContext.SaveChangesAsync();
+            var result = await this.Db.SaveChangesAsync();
             return result > 0;
+        }
+        #endregion
+
+        #region 判断
+        /// <summary>
+        /// 判断是否存在满足条件的数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public Task<bool> Exist<T>(Expression<Func<T, bool>> predicate) where T : class
+        {
+            return this.Db.Set<T>().AnyAsync(predicate);
         }
         #endregion
     }

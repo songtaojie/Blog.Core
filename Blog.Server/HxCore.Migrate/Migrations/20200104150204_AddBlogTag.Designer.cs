@@ -4,14 +4,16 @@ using HxCore.Entity.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HxCore.Migrate.Migrations
 {
     [DbContext(typeof(HxContext))]
-    partial class HxContextModelSnapshot : ModelSnapshot
+    [Migration("20200104150204_AddBlogTag")]
+    partial class AddBlogTag
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

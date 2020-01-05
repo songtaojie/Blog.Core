@@ -2,6 +2,7 @@
 using HxCore.Common;
 using HxCore.Common.Extensions;
 using HxCore.Entity;
+using HxCore.Entity.Context;
 using HxCore.IRepository;
 using System;
 using System.Collections.Generic;
@@ -16,20 +17,18 @@ namespace HxCore.Services
         protected IBaseRepository<T> Repository { get; }
         protected IUserContext UserContext { get; }
         protected IMapper Mapper { get; }
+        protected IDbSession DbSession { get; }
         public BaseService(IBaseRepository<T> repository)
         {
             this.Repository = repository;
         }
-        public BaseService(IBaseRepository<T> repository, IUserContext userContext)
+        
+        public BaseService(IBaseRepository<T> repository,IDbSession dbSession)
         {
             this.Repository = repository;
-            this.UserContext = userContext;
-        }
-        public BaseService(IBaseRepository<T> repository,IUserContext userContext,IMapper mapper)
-        {
-            this.Repository = repository;
-            this.UserContext = userContext;
-            this.Mapper = mapper;
+            this.DbSession = dbSession;
+            this.UserContext = dbSession.GetRequiredService<IUserContext>();
+            this.Mapper = dbSession.GetRequiredService<IMapper>();
         }
         #region 查询
         public async Task<T> QueryEntity(Expression<Func<T, bool>> predicate, bool defaultFilter = true)
@@ -105,9 +104,17 @@ namespace HxCore.Services
         /// </summary>
         /// <param name="entityList"></param>
         /// <returns></returns>
-        public virtual async Task<bool> Insert(IEnumerable<T> entityList)
+        public async Task<bool> Insert(IEnumerable<T> entityList)
         {
-            Repository.Insert(entityList);
+            List<T> newList = new List<T>();
+            if (entityList != null && entityList.Count() > 0)
+            {
+                foreach (var entity in entityList)
+                {
+                    newList.Add(this.BeforeInsert(entity));
+                }
+            }
+            await Repository.Insert(newList);
             var result = await this.Repository.SaveChangesAsync();
             return result;
         }
@@ -154,5 +161,17 @@ namespace HxCore.Services
         }
         #endregion
 
+        #region 判断
+        /// <summary>
+        /// 判断是否存在满足条件的数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public Task<bool> Exist(Expression<Func<T, bool>> predicate)
+        {
+            return this.Repository.Exist(predicate);
+        }
+        #endregion
     }
 }

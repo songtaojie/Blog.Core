@@ -10,7 +10,7 @@ namespace HxCore.Repository
 {
     public class UserInfoRepository:BaseRepository<UserInfo>,IUserInfoRepository
     {
-        public UserInfoRepository(IDbSession dbSession) : base(dbSession)
+        public UserInfoRepository(DbContext dbSession) : base(dbSession)
         { }
     }
 }

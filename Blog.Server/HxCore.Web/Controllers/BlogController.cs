@@ -50,15 +50,12 @@ namespace HxCore.Web.Controllers
         /// <returns></returns>
         [Authorize(Policy =ConstInfo.ClientPolicy)]
         [HttpPost]
-        public bool Save([FromForm]BlogViewModel editInfo)
+        public async Task<bool> Save([FromForm]BlogViewModel editInfo)
         {
-            bool isEdit = false;
-            var user = User;
-            blogService.Insert(editInfo);
-            return true;
+            return await blogService.Insert(editInfo);
             //if (ModelState.IsValid)
             //{
-               
+
             //    //TransactionManager.Excute(delegate
             //    //{
             //    //    Blog blogInfo = MapperManager.Map<Blog>(editInfo);

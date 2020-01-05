@@ -211,7 +211,6 @@ axios.interceptors.request.use((req) => {
   var tokenExpire = store.getters.auth.tokenExpire
   var curTime = new Date()
   var expiretime = new Date(Date.parse(tokenExpire))
-  console.log(store)
   if (token && tokenExpire && curTime < expiretime) {
     req.headers.Authorization = TOKEN_TYPE + token
   }
@@ -231,7 +230,6 @@ axios.interceptors.response.use((res) => {
 
   return res.data
 }, (e) => {
-  debugger
   switch (e.response && e.response.status) {
     case 401:
       var curTime = new Date()

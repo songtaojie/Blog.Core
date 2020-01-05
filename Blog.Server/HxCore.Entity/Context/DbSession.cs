@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore.Storage;
+using System.Collections.Generic;
 
 namespace HxCore.Entity.Context
 {
@@ -23,16 +22,18 @@ namespace HxCore.Entity.Context
         /// 构造函数
         /// </summary>
         /// <param name="service">服务的实例</param>
-        public DbSession(IServiceProvider service)
+        /// <param name="db">服务的实例</param>
+        public DbSession(IServiceProvider service, DbContext db)
         {
             ServiceProvider = service;
+            this.Db = db;
         }
         /// <summary>
         /// ef数据库上下文
         /// </summary>
-        public DbContext DbContext
+        public DbContext Db
         {
-            get { return GetRequiredService<HxContext>(); }
+            get;
         }
         /// <summary>
         /// 获取使用原生的DI注入的服务类(一般不不用这个，而是使用构造函数注入)
@@ -51,7 +52,7 @@ namespace HxCore.Entity.Context
         /// <returns></returns>
         public Task<T> QueryById<T>(params object[] keyValues) where T : class
         {
-            return this.DbContext.FindAsync<T>(keyValues).AsTask();
+            return this.Db.FindAsync<T>(keyValues).AsTask();
         }
         /// <summary>
         /// 获取满足条件的集合
@@ -61,7 +62,7 @@ namespace HxCore.Entity.Context
         /// <returns></returns>
         public Task<T> QueryEntity<T>(Expression<Func<T, bool>> predicate) where T : class
         {
-            return this.DbContext.Set<T>().FirstOrDefaultAsync(predicate);
+            return this.Db.Set<T>().FirstOrDefaultAsync(predicate);
         }
         /// <summary>
         /// 获取满足指定条件的一条数据
@@ -71,7 +72,7 @@ namespace HxCore.Entity.Context
         /// <returns>满足当前条件的一个实体</returns>
         public IQueryable<T> QueryEntities<T>(Expression<Func<T, bool>> predicate) where T : class
         {
-            return this.DbContext.Set<T>().Where(predicate);
+            return this.Db.Set<T>().Where(predicate);
         }
 
         /// <summary>
@@ -82,7 +83,7 @@ namespace HxCore.Entity.Context
         {
             Exception inner = null;
             
-            using (IDbContextTransaction transaction = DbContext.Database.BeginTransaction())
+            using (IDbContextTransaction transaction = Db.Database.BeginTransaction())
             {
                 try
                 {
@@ -100,14 +101,49 @@ namespace HxCore.Entity.Context
                 throw new System.Reflection.TargetInvocationException(inner);
             }
         }
+        /// <summary>
+        /// 异步执行
+        /// </summary>
+        /// <param name="handler"></param>
+        public async Task ExcuteAsync(EventHandler handler)
+        {
+            Exception inner = null;
 
+            using (Task<IDbContextTransaction> transaction = Db.Database.BeginTransactionAsync())
+            {
+                try
+                {
+                    handler?.Invoke(null, EventArgs.Empty);
+                    await transaction.Result.CommitAsync();
+                }
+                catch (Exception e)
+                {
+                    inner = e;
+                    await transaction.Result.RollbackAsync();
+                }
+            }
+            if (inner != null)
+            {
+                throw new System.Reflection.TargetInvocationException(inner);
+            }
+        }
+        /// <summary>
+        /// 判断是否存在满足条件的数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public Task<bool> Exist<T>(Expression<Func<T, bool>> predicate)where T:class
+        {
+            return this.Db.Set<T>().AnyAsync(predicate);
+        }
         /// <summary>
         /// 保存更改
         /// </summary>
         /// <returns></returns>
         public bool SaveChanges()
         {
-            var result = this.DbContext.SaveChanges();
+            var result = this.Db.SaveChanges();
             return result > 0;
         }
 
@@ -117,8 +153,30 @@ namespace HxCore.Entity.Context
         /// <returns></returns>
         public async Task<bool> SaveChangesAsync()
         {
-            var result = await this.DbContext.SaveChangesAsync();
+            var result = await this.Db.SaveChangesAsync();
             return result > 0;
         }
+
+        #region 新增
+        /// <summary>
+        /// 插入一条数据
+        /// </summary>
+        /// <param name="entity">数据实体</param>
+        /// <returns></returns>
+        public async Task<T> Insert<T>(T entity)where T:class,new()
+        {
+            var result = await this.Db.Set<T>().AddAsync(entity);
+            return result.Entity;
+        }
+        /// <summary>
+        /// 插入集合
+        /// </summary>
+        /// <param name="entityList"></param>
+        /// <returns></returns>
+        public void Insert<T>(IEnumerable<T> entityList) where T : class, new()
+        {
+            this.Db.Set<T>().AddRange(entityList);
+        }
+        #endregion
     }
 }

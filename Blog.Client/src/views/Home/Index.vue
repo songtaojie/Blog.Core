@@ -58,7 +58,6 @@ export default {
   },
   methods: {
     showToast() {
-      debugger
       toast.show('测试', {
         variant: 'danger',
         noAutoHide: true

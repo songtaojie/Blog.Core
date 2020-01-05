@@ -35,17 +35,14 @@ const auth = {
   },
   mutations: {
     UPDATE_AUTH(state, payload) {
-      debugger
       Object.assign(state, payload, {
         isLogin: true
       })
     },
     UPDATE_TOKEN(state, token) {
-      debugger
       state.token = token
     },
     UPDATE_EXPIRE(state, tokenExpire) {
-      debugger
       state.tokenExpire = tokenExpire
     },
     CLEAR_AUTH(state) {

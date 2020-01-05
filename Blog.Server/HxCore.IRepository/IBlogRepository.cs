@@ -6,8 +6,13 @@ using System.Text;
 
 namespace HxCore.IRepository
 {
-    [TransientDependency]
+    [ScropedDependency]
     public interface IBlogRepository:IBaseRepository<Blog>
+    {
+    }
+
+    [ScropedDependency]
+    public interface IBlogTagRepository : IBaseRepository<BlogTag>
     {
     }
 }

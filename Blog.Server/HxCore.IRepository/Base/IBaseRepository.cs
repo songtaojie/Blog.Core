@@ -8,6 +8,7 @@ namespace HxCore.IRepository
 {
     public interface IBaseRepository<T>where T:class,new()
     {
+        #region 查询
         /// <summary>
         /// 根据Id获取模型数据
         /// </summary>
@@ -42,7 +43,7 @@ namespace HxCore.IRepository
         /// <param name="predicate">lambda表达式</param>
         /// <returns></returns>
         IQueryable<T> QueryEntitiesNoTrack(Expression<Func<T, bool>> lambda);
-
+        #endregion
 
         #region 新增
         /// <summary>
@@ -56,8 +57,9 @@ namespace HxCore.IRepository
         /// </summary>
         /// <param name="entityList"></param>
         /// <returns></returns>
-        bool Insert(IEnumerable<T> entityList);
+        Task Insert(IEnumerable<T> entityList);
         #endregion
+
         #region 更新
         T Update(T entity);
         /// <summary>
@@ -78,6 +80,16 @@ namespace HxCore.IRepository
         #region 保存更改
         bool SaveChanges();
         Task<bool> SaveChangesAsync();
+        #endregion
+
+        #region 判断
+        /// <summary>
+        /// 判断是否存在满足条件的数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        Task<bool> Exist<T>(Expression<Func<T, bool>> predicate) where T : class;
         #endregion
     }
 }

@@ -17,10 +17,13 @@ namespace HxCore.Entity.Context
         /// 服务的实例
         /// </summary>
         IServiceProvider ServiceProvider { get;}
+        
         /// <summary>
-        /// 数据库上下文
+        /// 获取服务
         /// </summary>
-        DbContext DbContext { get; }
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        T GetRequiredService<T>();
         /// <summary>
         ///  根据Id获取实体数据
         /// </summary>
@@ -44,13 +47,24 @@ namespace HxCore.Entity.Context
         /// <param name="predicate">获取数据的条件lambda</param>
         /// <returns>满足当前条件的一个实体</returns>
         IQueryable<T> QueryEntities<T>(Expression<Func<T, bool>> predicate) where T : class;
+        /// <summary>
+        /// 判断是否存在满足条件的数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        Task<bool> Exist<T>(Expression<Func<T, bool>> predicate) where T : class;
 
         /// <summary>
         /// 执行事务
         /// </summary>
         /// <param name="handler"></param>
         void Excute(EventHandler handler);
-
+        /// <summary>
+        /// 执行事务
+        /// </summary>
+        /// <param name="handler"></param>
+        Task ExcuteAsync(EventHandler handler);
         /// <summary>
         /// 保存更改
         /// </summary>
@@ -62,5 +76,20 @@ namespace HxCore.Entity.Context
         /// </summary>
         /// <returns></returns>
         Task<bool> SaveChangesAsync();
+
+        #region 新增
+        /// <summary>
+        /// 插入一条数据
+        /// </summary>
+        /// <param name="entity">数据实体</param>
+        /// <returns></returns>
+        Task<T> Insert<T>(T entity) where T : class, new();
+        /// <summary>
+        /// 插入集合
+        /// </summary>
+        /// <param name="entityList"></param>
+        /// <returns></returns>
+        void Insert<T>(IEnumerable<T> entityList) where T : class, new();
+        #endregion
     }
 }

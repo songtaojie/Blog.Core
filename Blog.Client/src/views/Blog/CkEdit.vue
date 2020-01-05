@@ -114,10 +114,17 @@ export default {
         ckfinder: {
           // Upload the images to the server using the CKFinder QuickUpload command.
           uploadUrl:
-            '/file/upload?command=QuickUpload&type=Images&responseType=json',
+            '/api/attach/upload?command=QuickUpload&type=Images&responseType=json',
           // Define the CKFinder configuration (if necessary).
           options: {
-            resourceType: 'Images'
+            resourceType: 'Images',
+            onInit: function(finder) {
+              debugger
+              finder.on('files:choose', evt => {
+                console.log('files:choose')
+                console.log(evt)
+              })
+            }
           }
         },
         language: 'zh-cn'

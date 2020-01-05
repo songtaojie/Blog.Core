@@ -155,5 +155,10 @@ namespace HxCore.Entity.Context
         /// 博客分类
         /// </summary>
         public DbSet<Category> Category { get; set; }
+
+        /// <summary>
+        /// 博客个人标签
+        /// </summary>
+        public DbSet<BlogTag> BlogTag { get; set; }
     }
 }

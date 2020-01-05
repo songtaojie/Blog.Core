@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HxCore.IServices
 {
-    [TransientDependency]
+    [ScropedDependency]
     public interface IBlogService:IBaseService<Blog>
     {
         Task<bool> Insert(BlogViewModel blogModel);

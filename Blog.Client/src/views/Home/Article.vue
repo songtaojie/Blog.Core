@@ -20,7 +20,6 @@ export default {
       var that = this
       that.$api.post('api/blog/getlist')
       .then(res => {
-        debugger
         if(res && res.success) {
           that.blogList = res.data
         }

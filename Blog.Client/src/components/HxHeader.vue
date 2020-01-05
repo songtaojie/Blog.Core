@@ -33,7 +33,7 @@
             <b-img :src="imgUrl" rounded="circle"></b-img>
             <!-- <img src="../assets/images/avatar1_small.jpg" alt=""> -->
           </template>
-          <b-dropdown-item target="_blank" href="/blog/edit">
+          <b-dropdown-item href="/blog/edit">
             <span class="hx-icon-edit mr-1"></span>写博客
           </b-dropdown-item>
           <b-dropdown-item>

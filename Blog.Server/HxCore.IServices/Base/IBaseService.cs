@@ -59,6 +59,7 @@ namespace HxCore.IServices
         /// <returns></returns>
         Task<bool> Insert(IEnumerable<T> entityList);
         #endregion
+
         #region 更新
         Task<bool> Update(T entity);
         /// <summary>
@@ -74,6 +75,10 @@ namespace HxCore.IServices
         /// <param name="entity">实体</param>
         /// <param name="fields">要更新的字段的集合</param>
         Task<bool> UpdatePartial(T entity, params string[] fields);
+        #endregion
+
+        #region 判断
+        Task<bool> Exist(Expression<Func<T, bool>> predicate);
         #endregion
     }
 }

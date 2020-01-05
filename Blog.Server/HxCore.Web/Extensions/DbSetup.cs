@@ -1,4 +1,5 @@
 ﻿using HxCore.Entity.Context;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,8 @@ namespace HxCore.Web.Extensions
         public static void AddDbSetup(this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            services.AddDbContext<HxContext>();
+            //services.AddDbContext<HxContext>();
+            services.AddDbContext<DbContext, HxContext>();
             services.AddScoped<IDbSession,DbSession>();
             services.AddDIServices();
             services.AddDIRepository();
