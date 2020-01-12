@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration.Json;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace HxCore.Common

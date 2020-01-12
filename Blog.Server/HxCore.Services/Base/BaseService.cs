@@ -168,9 +168,9 @@ namespace HxCore.Services
         /// <typeparam name="T"></typeparam>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public Task<bool> Exist(Expression<Func<T, bool>> predicate)
+        public Task<bool> ExistAsync(Expression<Func<T, bool>> predicate)
         {
-            return this.Repository.Exist(predicate);
+            return this.Repository.ExistAsync(predicate);
         }
         #endregion
     }

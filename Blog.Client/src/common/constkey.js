@@ -1,11 +1,11 @@
 /**
  * 登录的地址
  */
-export const LOGIN_API = 'api/login'
+export const LOGIN_API = '/api/login'
 /**
  * 刷新token的api
  */
-export const REFRESH_TOKEN_API = 'api/refreshtoken'
+export const REFRESH_TOKEN_API = '/api/refreshtoken'
 /**
  * 存储在sessionstorage中的token的key
  */

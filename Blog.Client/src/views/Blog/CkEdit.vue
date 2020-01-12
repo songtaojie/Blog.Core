@@ -19,7 +19,7 @@
         </b-form-row>
         <b-form-row class="mb-2">
           <b-col>
-            <ckeditor :editor="editor" v-model="formData.Content" :config="editorConfig"></ckeditor>
+            <ckeditor :editor="editor" v-model="formData.Content" :config="editorConfig" @ready="onEditorReady"></ckeditor>
           </b-col>
         </b-form-row>
         <b-form-row  class="mb-2">
@@ -27,9 +27,9 @@
             <label class="text-left mb-1 blog-category-label">个人分类：</label>
             <hx-input
               v-for="item in formData.PersonTags"
-              :id="item.Id"
-              :key="item.Id"
-              v-model.trim="item.value"
+              :id="item.id"
+              :key="item.id"
+              v-model.trim="item.name"
               :editable="item.editable"
               @clear="onClear"
               @blur="onInputBlur"
@@ -40,6 +40,28 @@
               class="hx-icon-square hx-tag-btn d-flex align-items-center"
               @click="onAddTag"
             >添加分类</b-button>
+          </b-col>
+        </b-form-row>
+        <b-form-row class="mb-2">
+          <b-col class="col-sm-9 col-md-5">
+            <b-form-group label="">
+              <!-- <b-form-checkbox
+                v-for="option in tagList"
+                v-model="tagSelected"
+                :key="option.id"
+                :value="option.id"
+                @change="onTagChange"
+                inline
+              >
+                {{ option.name }}
+              </b-form-checkbox> -->
+              <b-form-checkbox-group
+                v-model="tagSelected"
+                value-field="id"
+                text-field="name"
+                :options="tagList"
+              ></b-form-checkbox-group>
+            </b-form-group>
           </b-col>
         </b-form-row>
         <b-form-row  class="mb-2">
@@ -73,6 +95,7 @@
 <script>
 import CKEditor from '@ckeditor/ckeditor5-vue'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import MyUploadAdapter from '@/components/ckeditor/MyUploadAdapter.js'
 import '@ckeditor/ckeditor5-build-classic/build/translations/zh-cn'
 import '@/sass/hxeditor.scss'
 import HxHeader from '@/components/HxHeader.vue'
@@ -88,6 +111,8 @@ export default {
   },
   data() {
     return {
+      tagList:[],
+      tagSelected:[],
       formData: {
         MarkDown:'N',
         BlogTypeId: null,
@@ -99,19 +124,20 @@ export default {
         Content:'',
         Publish: 'N',
         PersonTags: [{
-          Id: '111',
-          value: 'ssss',
+          id: '111',
+          name: 'ssss',
           editable: false
         }]
       },
       editor: ClassicEditor,
       editorConfig: {
         placeholder: '开始编写博客!',
-        removePlugins: ['Link', 'BlockQuote', 'MediaEmbed'],
+        removePlugins: ['Link', 'BlockQuote', 'MediaEmbed', 'CKFinder'],
+        // extraPlugins:[MyUploadPlugin],
         toolbar: {
           items:['heading', '|', 'bold', 'italic', '|', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'imageUpload', 'insertTable', '|', 'undo', 'redo']
         },
-        ckfinder: {
+        file: {
           // Upload the images to the server using the CKFinder QuickUpload command.
           uploadUrl:
             '/api/attach/upload?command=QuickUpload&type=Images&responseType=json',
@@ -152,15 +178,19 @@ export default {
     },
     onClear(input) {
       this.removeTag(input, true)
+      var index = this.tagSelected.findIndex(t => {return t === input.id})
+      if(index >= 0) {
+        this.tagSelected.splice(index, 1)
+      }
     },
     onInputBlur(input) {
       this.removeTag(input)
     },
     onAddTag() {
       this.formData.PersonTags.push({
-        Id: guid(),
+        id: `newData${guid()}`,
         editable: true,
-        value: ''
+        name: ''
       })
     },
     onEnter(input) {
@@ -169,29 +199,83 @@ export default {
     removeTag(input, isClear) {
       var id = input.id
       var tags = this.formData.PersonTags
-      var index = tags.findIndex(p => {return p.Id === id})
+      var index = tags.findIndex(p => {return p.id === id})
       if (index >= 0) {
         var o = tags[index]
-        var value = o.value
+        var name = o.name
         if (isClear) {
-          this.formData.PersonTags.splice(index, 1)
+          tags.splice(index, 1)
         } else {
-          if (isEmpty(o.value)) {
-            this.formData.PersonTags.splice(index, 1)
+          if (isEmpty(name)) {
+            tags.splice(index, 1)
           } else {
-            var filterTags = tags.filter(p => {return p.value === value})
+            var filterTags = tags.filter(p => {return p.name === name})
             if (filterTags.length > 1) {
-              this.formData.PersonTags.splice(index, 1)
+              tags.splice(index, 1)
             } else {
-              this.formData.PersonTags[index].editable = false
+              tags.editable = false
               input.blur()
             }
           }
         }
       }
+    },
+    removeTag2(id) {
+      var tags = this.formData.PersonTags
+      var index = tags.findIndex(p => {return p.id === id})
+      if (index >= 0) {
+        var o = tags[index]
+        var name = o.name
+         if (isEmpty(name)) {
+            this.formData.PersonTags.splice(index, 1)
+          } else {
+            var filterTags = tags.filter(p => {return p.name === name})
+            if (filterTags.length > 1) {
+              this.formData.PersonTags.splice(index, 1)
+            } else {
+              this.formData.PersonTags[index].editable = false
+            }
+          }
+      }
+    },
+    onEditorReady(editor) {
+      const url = editor.config.get('file.uploadUrl')
+      editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+          return new MyUploadAdapter(loader, url, editor.t)
+      }
+    },
+    getBlogTagList() {
+      var that = this
+      this.$api.post('/api/blog/QueryTagList')
+      .then(res => {
+        if(res && res.success) {
+          that.tagList = res.data
+        }
+      })
+    }
+  },
+  watch: {
+    tagSelected:function (newTags, oldTags) {
+      var that = this
+      var personTags = that.formData.PersonTags
+      var tagList = that.tagList
+      oldTags.forEach(t => {
+        var index = personTags.findIndex(p => p.id === t)
+        if(index >= 0) {
+          personTags.splice(index, 1)
+        }
+      })
+      newTags.forEach(t => {
+        var index = personTags.findIndex(p => p.id === t)
+        var o = tagList.find(p => p.id === t)
+        if(index < 0) {
+          personTags.push(o)
+        }
+      })
     }
   },
   created: function () {
+    this.getBlogTagList()
   }
 }
 </script>

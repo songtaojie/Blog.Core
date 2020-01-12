@@ -78,7 +78,7 @@ namespace HxCore.IServices
         #endregion
 
         #region 判断
-        Task<bool> Exist(Expression<Func<T, bool>> predicate);
+        Task<bool> ExistAsync(Expression<Func<T, bool>> predicate);
         #endregion
     }
 }

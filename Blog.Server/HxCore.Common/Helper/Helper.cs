@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace HxCore.Common
 {
@@ -109,5 +110,58 @@ namespace HxCore.Common
         {
             return GetLongSnowId().ToString();
         }
+
+        #region Html
+        /// <summary>
+        ///从html文本中获取图片链接
+        /// </summary>
+        /// <param name="sHtmlText"></param>
+        /// <returns></returns>
+        public static IEnumerable<string> GetHtmlImageUrlList(string sHtmlText)
+        {
+            var result = new List<string>();
+            if (string.IsNullOrEmpty(sHtmlText)) return result;
+            // 定义正则表达式用来匹配 img 标签   
+            Regex regImg = new Regex(@"<img\b[^<>]*?\bsrc[\s\t\r\n]*=[\s\t\r\n]*[""']?[\s\t\r\n]*(?<imgUrl>[^\s\t\r\n""'<>]*)[^<>]*?/?[\s\t\r\n]*>", RegexOptions.IgnoreCase);
+
+            // 搜索匹配的字符串   
+            MatchCollection matches = regImg.Matches(sHtmlText);
+
+            // 取得匹配项列表   
+            foreach (Match match in matches)
+            {
+                result.Add(match.Groups["imgUrl"].Value);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 过滤html中的p标签
+        /// </summary>
+        /// <param name="html">html字符串</param>
+        /// <param name="maxSize">返回的字符串最大长度为多少</param>
+        /// <param name="onlyText">是否只返回纯文本，还是返回带有标签的</param>
+        /// <returns></returns>
+        public static string FilterHtmlP(string html, int maxSize, bool onlyText = true)
+        {
+            if (string.IsNullOrEmpty(html)) return "";
+            Regex rReg = new Regex(@"<P>[\s\S]*?</P>", RegexOptions.IgnoreCase);
+            var matchs = Regex.Matches(html, @"<P>[\s\S]*?</P>", RegexOptions.IgnoreCase);
+            StringBuilder sb = new StringBuilder();
+            foreach (Match match in matchs)
+            {
+                string pContent = match.Value;
+                if (onlyText)
+                {
+                    pContent = Regex.Replace(pContent, @"<(.[^>]*)>", "", RegexOptions.IgnoreCase);
+                    pContent = Regex.Replace(pContent, @"&(nbsp|#160);", "   ", RegexOptions.IgnoreCase);
+                }
+                sb.Append(pContent);
+            }
+            string result = sb.ToString();
+            if (string.IsNullOrEmpty(result) || result.Length < maxSize) return result;
+            return result.Substring(0, maxSize);
+        }
+        #endregion
     }
 }

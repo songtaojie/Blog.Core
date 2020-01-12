@@ -50,7 +50,17 @@ namespace HxCore.Entity.Context
         /// <typeparam name="T"></typeparam>
         /// <param name="keyValues"></param>
         /// <returns></returns>
-        public Task<T> QueryById<T>(params object[] keyValues) where T : class
+        public T GetById<T>(params object[] keyValues) where T : class
+        {
+            return this.Db.Find<T>(keyValues);
+        }
+        /// <summary>
+        /// 根据id获取对象
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="keyValues"></param>
+        /// <returns></returns>
+        public Task<T> GetByIdAsync<T>(params object[] keyValues) where T : class
         {
             return this.Db.FindAsync<T>(keyValues).AsTask();
         }
@@ -127,13 +137,24 @@ namespace HxCore.Entity.Context
                 throw new System.Reflection.TargetInvocationException(inner);
             }
         }
+
         /// <summary>
         /// 判断是否存在满足条件的数据
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public Task<bool> Exist<T>(Expression<Func<T, bool>> predicate)where T:class
+        public bool Exist<T>(Expression<Func<T, bool>> predicate) where T : class
+        {
+            return this.Db.Set<T>().Any(predicate);
+        }
+        /// <summary>
+        /// 判断是否存在满足条件的数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public Task<bool> ExistAsync<T>(Expression<Func<T, bool>> predicate)where T:class
         {
             return this.Db.Set<T>().AnyAsync(predicate);
         }
@@ -163,7 +184,7 @@ namespace HxCore.Entity.Context
         /// </summary>
         /// <param name="entity">数据实体</param>
         /// <returns></returns>
-        public async Task<T> Insert<T>(T entity)where T:class,new()
+        public async Task<T> InsertAsync<T>(T entity)where T:class,new()
         {
             var result = await this.Db.Set<T>().AddAsync(entity);
             return result.Entity;
@@ -173,9 +194,9 @@ namespace HxCore.Entity.Context
         /// </summary>
         /// <param name="entityList"></param>
         /// <returns></returns>
-        public void Insert<T>(IEnumerable<T> entityList) where T : class, new()
+        public Task InsertAsync<T>(IEnumerable<T> entityList) where T : class, new()
         {
-            this.Db.Set<T>().AddRange(entityList);
+            return this.Db.Set<T>().AddRangeAsync(entityList);
         }
         #endregion
     }

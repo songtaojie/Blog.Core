@@ -30,7 +30,7 @@ bld/
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
-
+file[Uu]pload/
 # NUNIT
 *.VisualState.xml
 TestResult.xml

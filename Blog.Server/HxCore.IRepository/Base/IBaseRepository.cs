@@ -86,10 +86,9 @@ namespace HxCore.IRepository
         /// <summary>
         /// 判断是否存在满足条件的数据
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="predicate"></param>
+        /// <param name="predicate">lambda表达式</param>
         /// <returns></returns>
-        Task<bool> Exist<T>(Expression<Func<T, bool>> predicate) where T : class;
+        Task<bool> ExistAsync(Expression<Func<T, bool>> predicate);
         #endregion
     }
 }

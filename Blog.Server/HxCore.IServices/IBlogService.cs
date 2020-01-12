@@ -11,6 +11,21 @@ namespace HxCore.IServices
     [ScropedDependency]
     public interface IBlogService:IBaseService<Blog>
     {
-        Task<bool> Insert(BlogViewModel blogModel);
+        /// <summary>
+        /// 插入一条数据
+        /// </summary>
+        /// <param name="blogModel"></param>
+        /// <returns></returns>
+        Task<bool> InsertAsync(BlogCreateModel blogModel);
+        /// <summary>
+        /// 获取博客标签列表
+        /// </summary>
+        /// <returns></returns>
+        List<BlogViewModel> QueryBlogList();
+        /// <summary>
+        /// 获取博客标签列表
+        /// </summary>
+        /// <returns></returns>
+        List<PersonTag> QueryTagList();
     }
 }

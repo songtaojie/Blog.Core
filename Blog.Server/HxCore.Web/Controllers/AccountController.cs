@@ -50,7 +50,7 @@ namespace HxCore.Web.Controllers
             {
                 UserId = userInfo.Id,
                 UserName = userInfo.UserName,
-                Expiration = TimeSpan.FromSeconds(60),
+                Expiration = TimeSpan.FromSeconds(60*60),
                 Role = userInfo.IsAdmin ? string.Join(",", ConstInfo.ClientPolicy, ConstInfo.AdminPolicy)
                : ConstInfo.ClientPolicy
             };
@@ -76,7 +76,7 @@ namespace HxCore.Web.Controllers
             {
                 UserId = userInfo.Id,
                 UserName = userInfo.UserName,
-                Expiration = TimeSpan.FromSeconds(60),
+                Expiration = TimeSpan.FromSeconds(60*60),
                 Role = userInfo.IsAdmin ? string.Join(",", ConstInfo.ClientPolicy, ConstInfo.AdminPolicy)
                : ConstInfo.ClientPolicy
             };

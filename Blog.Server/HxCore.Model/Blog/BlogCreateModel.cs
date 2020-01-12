@@ -8,9 +8,9 @@ using System.Text;
 namespace HxCore.Model
 {
     /// <summary>
-    /// 博客视图模型
+    /// 博客创建所用模型
     /// </summary>
-    public class BlogViewModel:IAutoMapper<Blog>
+    public class BlogCreateModel : IAutoMapper<Blog>
     {
         /// <summary>
         /// 博客id
@@ -30,14 +30,6 @@ namespace HxCore.Model
         {
             get; set;
         }
-        /// <summary>
-        /// 用户名
-        /// </summary>
-        public string UserName { get; set; }
-        /// <summary>
-        /// 首页显示的内容
-        /// </summary>
-        public string HomeContent => Helper.FilterHtmlP(Content, 100);
         /// <summary>
         /// 文章类型
         /// </summary>
@@ -84,7 +76,13 @@ namespace HxCore.Model
         {
             get; set;
         } = "Y";
-       
+        /// <summary>
+        /// 个人标签
+        /// </summary>
+        public List<PersonTag> PersonTags
+        {
+            get; set;
+        }
         /// <summary>
         /// 是否是markdown
         /// </summary>
@@ -92,25 +90,5 @@ namespace HxCore.Model
         {
             get; set;
         } = "N";
-    }
-    /// <summary>
-    /// 个人标签
-    /// </summary>
-    public class PersonTag
-    {
-        /// <summary>
-        /// id
-        /// </summary>
-        public string Id { get; set; }
-
-        /// <summary>
-        /// 值
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// 是否可编辑
-        /// </summary>
-        public bool? Editable { get; set; } = false;
     }
 }

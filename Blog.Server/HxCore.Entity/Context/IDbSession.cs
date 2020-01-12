@@ -30,7 +30,14 @@ namespace HxCore.Entity.Context
         /// <typeparam name="T">实体类型</typeparam>
         /// <param name="keyValues">实体的ID</param>
         /// <returns></returns>
-        Task<T> QueryById<T>(params object[] keyValues) where T:class;
+        T GetById<T>(params object[] keyValues) where T : class;
+        /// <summary>
+        ///  根据Id获取实体数据
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="keyValues">实体的ID</param>
+        /// <returns></returns>
+        Task<T> GetByIdAsync<T>(params object[] keyValues) where T:class;
 
         /// <summary>
         /// 获取满足指定条件的一条数据
@@ -53,7 +60,14 @@ namespace HxCore.Entity.Context
         /// <typeparam name="T"></typeparam>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        Task<bool> Exist<T>(Expression<Func<T, bool>> predicate) where T : class;
+        Task<bool> ExistAsync<T>(Expression<Func<T, bool>> predicate) where T : class;
+        /// <summary>
+        /// 判断是否存在满足条件的数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        bool Exist<T>(Expression<Func<T, bool>> predicate) where T : class;
 
         /// <summary>
         /// 执行事务
@@ -83,13 +97,13 @@ namespace HxCore.Entity.Context
         /// </summary>
         /// <param name="entity">数据实体</param>
         /// <returns></returns>
-        Task<T> Insert<T>(T entity) where T : class, new();
+        Task<T> InsertAsync<T>(T entity) where T : class, new();
         /// <summary>
         /// 插入集合
         /// </summary>
         /// <param name="entityList"></param>
         /// <returns></returns>
-        void Insert<T>(IEnumerable<T> entityList) where T : class, new();
+        Task InsertAsync<T>(IEnumerable<T> entityList) where T : class, new();
         #endregion
     }
 }

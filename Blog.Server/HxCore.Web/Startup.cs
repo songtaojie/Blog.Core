@@ -66,6 +66,7 @@ namespace HxCore.Web
             // Httpcontext 注入
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IUserContext, UserContext>();
+            services.AddSingleton<WebHelper>();
             #endregion
 
             #region AutoMapper
@@ -112,6 +113,7 @@ namespace HxCore.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseStaticFiles();
             app.UseRouting();//路由中间件
             //app.UseCors("AllRequests");
             //app.UseJwtTokenAuth();

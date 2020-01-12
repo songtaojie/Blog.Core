@@ -35,10 +35,21 @@ namespace HxCore.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public List<Blog> GetList()
+        public List<BlogViewModel> QueryBlogList()
         {
-            var user = User;
-            var result = blogService.QueryEntitiesNoTrack(b => true).ToList();
+            var result = blogService.QueryBlogList();
+            return result;
+        }
+
+        /// <summary>
+        /// 获取博客列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [Authorize(Policy = ConstInfo.ClientPolicy)]
+        public List<PersonTag> QueryTagList()
+        {
+            var result = blogService.QueryTagList();
             return result;
         }
 
@@ -50,9 +61,9 @@ namespace HxCore.Web.Controllers
         /// <returns></returns>
         [Authorize(Policy =ConstInfo.ClientPolicy)]
         [HttpPost]
-        public async Task<bool> Save([FromForm]BlogViewModel editInfo)
+        public async Task<bool> Save([FromForm]BlogCreateModel editInfo)
         {
-            return await blogService.Insert(editInfo);
+            return await blogService.InsertAsync(editInfo);
             //if (ModelState.IsValid)
             //{
 
@@ -146,5 +157,6 @@ namespace HxCore.Web.Controllers
             //return Json(result, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
     }
 }
