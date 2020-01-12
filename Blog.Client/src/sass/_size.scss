@@ -90,8 +90,8 @@ $carousel: name(carousel);
   }
 
     #{$about-me},
-    #{$carousel}.carousel-thumbnail,
-    #{$carousel}.carousel-item {
+    #{$carousel} .carousel-thumbnail,
+    #{$carousel} .carousel-item {
         height: $carousel-lg-height;
     }
     #{$about-me} {

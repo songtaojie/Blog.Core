@@ -1,42 +1,45 @@
 <template>
-  <article class="d-flex flex-column justify-content-start hx-blog">
+  <article class="d-flex mt-2 flex-column justify-content-start hx-blog">
     <div v-for="item in blogList" :key="item.id" class="mb-2 bg-white blog-item">
       <div class="blog-item-title">
-        <h4>{{item.title}}</h4>
+        <h4>
+          <b-link href="#foo">{{item.title}}</b-link>
+        </h4>
       </div>
       <div class="blog-item-summary blog-content-nowrap">
         <p>{{item.homeContent}}</p>
       </div>
       <div class="blog-item-user d-flex justify-content-start align-items-center">
-                <div class="hx-avatar _32x32  hx-circle mr-2">
-                    <a>
-                        <img :src="avatarUrl" />
-                    </a>
-                </div>
-                <div class="mr-1">@(UserContext.GetDisplayName(blog.User))</div>
-                <div class="mr-1">@(WebHelper.GetDispayDate(blog.PublishDate))</div>
-                <div class="blog-read ml-auto">
-                    <a>
-                        <span class="hx-text-gray">阅读</span>
-                        <span class="hx-text-blue">@blog.ReadCount</span>
-                    </a>
-                </div>
-                <div class="blog-comment ml-2">
-                    <a>
-                        <span class="hx-text-gray">评论</span>
-                        <span class="hx-text-blue">@blog.CmtCount</span>
-                    </a>
-                </div>
-            </div>
+        <div class="hx-avatar _32x32 hx-circle mr-2">
+          <a>
+            <img :src="item.avatarUrl?item.avatarUrl:avatarUrl" />
+          </a>
+        </div>
+        <div class="mr-1">{{item.userName}}</div>
+        <div class="mr-1">{{dateFormat(item.publishDate)}}</div>
+        <div class="blog-read ml-auto">
+          <a>
+            <span class="hx-text-gray">阅读</span>
+            <span class="hx-text-blue">{{item.readCount}}</span>
+          </a>
+        </div>
+        <div class="blog-comment ml-2">
+          <a>
+            <span class="hx-text-gray">评论</span>
+            <span class="hx-text-blue">{{item.cmtCount}}</span>
+          </a>
+        </div>
+      </div>
     </div>
   </article>
 </template>
 <script>
+import { dateFormat } from '../../common/'
 export default {
   name: 'HxArticle',
   data() {
     return {
-      avatarUrl:'',
+      avatarUrl: require('../../assets/images/avatar1_small.jpg'),
       blogList: []
     }
   },
@@ -44,6 +47,9 @@ export default {
     this.getList()
   },
   methods: {
+    dateFormat(time) {
+      return dateFormat(time)
+    },
     getList: function () {
       var that = this
       that.$api.post('api/blog/QueryBlogList')
@@ -71,6 +77,14 @@ export default {
     transition: box-shadow 0.2s ease, -webkit-box-shadow 0.1s ease;
     .blog-item-title {
       width: 100%;
+      a {
+        color: #3d3d3d;
+        font-weight: 700;
+        &:hover {
+          color: #4183c4;
+          text-decoration: none;
+        }
+      }
     }
     .blog-item-summary {
       margin-bottom: 0.35rem;
@@ -84,11 +98,20 @@ export default {
       white-space: nowrap;
     }
     .blog-item-user {
-      margin: .5rem 0 0;
-      color: rgba(0,0,0,.4);
+      margin: 0.5rem 0 0;
+      color: rgba(0, 0, 0, 0.4);
       box-shadow: none;
-      transition: color .1s ease;
-  }
+      transition: color 0.1s ease;
+    }
+    .blog-comment,
+    .blog-read {
+      cursor: pointer;
+      &:hover {
+        span {
+          color: #157dcf;
+        }
+      }
+    }
   }
 }
 </style>

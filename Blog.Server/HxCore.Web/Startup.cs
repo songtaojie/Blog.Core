@@ -66,7 +66,7 @@ namespace HxCore.Web
             // Httpcontext 注入
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IUserContext, UserContext>();
-            services.AddSingleton<WebHelper>();
+            services.AddSingleton(new WebManager(Environment));
             #endregion
 
             #region AutoMapper

@@ -35,10 +35,15 @@ namespace HxCore.Common
         /// 用户的名字
         /// </summary>
         public string UserName => HttpContext.User.Identity.Name;
+
         /// <summary>
         /// 用户的id
         /// </summary>
-        public string UserId => GetClaimValueByType("jti").FirstOrDefault();
+        public string NickName => GetClaimValueByType(HxCoreClaimTypes.NickName).FirstOrDefault();
+        /// <summary>
+        /// 用户的id
+        /// </summary>
+        public string UserId => GetClaimValueByType(JwtRegisteredClaimNames.Jti).FirstOrDefault();
 
         /// <summary>
         /// 获取cookie的值

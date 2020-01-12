@@ -16,6 +16,10 @@ namespace HxCore.Common
         /// </summary>
         public string UserName { get; }
         /// <summary>
+        /// 昵称名
+        /// </summary>
+        public string NickName { get; }
+        /// <summary>
         /// 用户的id
         /// </summary>
         public string UserId { get; }

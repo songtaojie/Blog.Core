@@ -37,61 +37,26 @@ namespace HxCore.Model
         /// <summary>
         /// 首页显示的内容
         /// </summary>
-        public string HomeContent => Helper.FilterHtmlP(Content, 100);
+        public string HomeContent => WebHelper.FilterHtmlP(Content, 100);
+
         /// <summary>
-        /// 文章类型
+        /// 阅读量
         /// </summary>
-        public string BlogTypeId
-        {
-            get; set;
-        }
-        /// <summary>
-        /// 系统分类
-        /// </summary>
-        public string CategoryId
-        {
-            get; set;
-        }
-        /// <summary>
-        /// 个人置顶
-        /// </summary>
-        public string PersonTop
-        {
-            get; set;
-        } = "N";
-        /// <summary>
-        /// 仅自己可见
-        /// </summary>
-        public string Private
-        {
-            get; set;
-        } = "N";
-        /// <summary>
-        /// 是否发布
-        /// </summary>
-        public string Publish
-        {
-            get; set;
-        } = "Y";
-        /// <summary>
-        /// 是否发布
-        /// </summary>
-        public bool IsPublish => Helper.IsYes(Publish);
-        /// <summary>
-        /// 是否可评论
-        /// </summary>
-        public string CanCmt
-        {
-            get; set;
-        } = "Y";
+        public long ReadCount { get; set; }
        
         /// <summary>
-        /// 是否是markdown
+        /// 被评论次数
         /// </summary>
-        public string MarkDown
-        {
-            get; set;
-        } = "N";
+        public long CmtCount { get; set; }
+
+        /// <summary>
+        /// 发布日期
+        /// </summary>
+        public DateTime? PublishDate { get; set; }
+        /// <summary>
+        /// 头像链接
+        /// </summary>
+        public string AvatarUrl { get; set; }
     }
     /// <summary>
     /// 个人标签

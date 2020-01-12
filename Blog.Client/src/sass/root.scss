@@ -26,6 +26,8 @@ a{
   max-width: $max-width;
 }
 @import 'function';
+@import 'site';
 @import 'size';
 @import 'text';
-@import 'bootstrap'
+@import 'bootstrap';
+@import 'color';

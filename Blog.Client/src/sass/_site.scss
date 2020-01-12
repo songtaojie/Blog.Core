@@ -1,0 +1,28 @@
+.#{$prefix}-circle {
+  border-radius: 50% !important;
+  -o-object-fit: cover;
+  object-fit: cover;
+  overflow: hidden;
+}
+.#{$prefix}-avatar {
+  position: relative;
+  display: inline-block;
+  &._160x160 img,
+  &._80x80 img,
+  &._50x50 img,
+  &._32x32 img {
+      width: 100%;
+      height: 100%;
+      display: inline-block;
+  }
+  a {
+      display: block;
+  }
+}
+
+@each $i in 32,50,80,160 {
+  &._#{$i}x#{$i} {
+      width: ($i / 16)+rem;
+      height: ($i / 16)+rem;
+  }
+}

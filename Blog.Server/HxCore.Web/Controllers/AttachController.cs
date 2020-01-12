@@ -18,14 +18,14 @@ namespace HxCore.Web.Controllers
     [Route("[controller]/[action]")]
     public class AttachController : BaseApiController
     {
-        private readonly WebHelper webHelper;
+        private readonly WebManager webManager;
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="webHelper"></param>
-        public AttachController(WebHelper webHelper)
+        public AttachController(WebManager webManager)
         {
-            this.webHelper = webHelper;
+            this.webManager = webManager;
         }
         /// <summary>
         /// 附件上传
@@ -69,7 +69,7 @@ namespace HxCore.Web.Controllers
             string userName = User.Identity.IsAuthenticated ? User.Identity.Name : "Anonymous";
             string dirPath = rootPath + "/article/" + userName + "/" + DateTime.Now.Year + "/" + DateTime.Now.Month.ToString("00") + "/";
             //绝对路径
-            string mapRootPath = Path.Combine(webHelper.WebRootPath, dirPath);
+            string mapRootPath = Path.Combine(webManager.WebRootPath, dirPath);
             FileHelper.TryCreateDirectory(mapRootPath);
             //文件名
             string guid = DateTime.Now.ToString("yyyyMMddHHmmss") + DateTime.Now.Millisecond;
@@ -99,7 +99,7 @@ namespace HxCore.Web.Controllers
                     ImageManager.MakeThumbnail(sourceFilePath, _120FilePath, 200, 120, ThumbnailMode.Max);
                 }
             });
-            string fullUrl = webHelper.GetFullUrl(webHelper.ToRelativePath(sourceFilePath));
+            string fullUrl = webManager.GetFullUrl(webManager.ToRelativePath(sourceFilePath));
             result["success"] = 1;
             result["uploaded"] = true;
             result["url"] = fullUrl;

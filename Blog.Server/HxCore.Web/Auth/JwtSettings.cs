@@ -50,6 +50,11 @@ namespace HxCore.Web.Auth
         /// Id
         /// </summary>
         public string UserName { get; set; }
+
+        /// <summary>
+        /// 昵称
+        /// </summary>
+        public string NickName { get; set; }
         /// <summary>
         /// 角色
         /// </summary>

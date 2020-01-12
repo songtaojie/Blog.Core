@@ -49,6 +49,7 @@ namespace HxCore.Web.Controllers
             JwtModel jwtModel = new JwtModel
             {
                 UserId = userInfo.Id,
+                NickName = userInfo.NickName,
                 UserName = userInfo.UserName,
                 Expiration = TimeSpan.FromSeconds(60*60),
                 Role = userInfo.IsAdmin ? string.Join(",", ConstInfo.ClientPolicy, ConstInfo.AdminPolicy)
@@ -75,6 +76,7 @@ namespace HxCore.Web.Controllers
             JwtModel jwtModel = new JwtModel
             {
                 UserId = userInfo.Id,
+                NickName = userInfo.NickName,
                 UserName = userInfo.UserName,
                 Expiration = TimeSpan.FromSeconds(60*60),
                 Role = userInfo.IsAdmin ? string.Join(",", ConstInfo.ClientPolicy, ConstInfo.AdminPolicy)

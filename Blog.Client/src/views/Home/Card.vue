@@ -5,7 +5,7 @@
     <p>职业：Web前端设计师、后端开发</p>
     <p>现居：河南省-郑州市</p>
     <p>Email：stjworkemail@163.com</p>
-    <div class="d-none d-lg-flex align-items-center justify-content-around">
+    <div class="d-none d-md-flex align-items-center justify-content-around">
       <a class="about-info" href="/" target="_blank" title="网站地址">
         <i class="hx-icon-home hx-3x text-info"></i>
       </a>

@@ -28,7 +28,7 @@ namespace HxCore.Services
             {
                 entity.PublishDate = DateTime.Now;
             }
-            var imgList = Helper.GetHtmlImageUrlList(entity.Content).ToList();
+            var imgList = WebHelper.GetHtmlImageUrlList(entity.Content).ToList();
             if (imgList.Count > 0)
             {
                 entity.ImgUrl = imgList[0];
@@ -83,14 +83,21 @@ namespace HxCore.Services
         /// <returns></returns>
         public List<BlogViewModel> QueryBlogList()
         {
-            var blogList = this.Repository.QueryEntitiesNoTrack(b => true)
-                .Select(s => this.Mapper.Map<BlogViewModel>(s))
-                .ToList();
-            this.UserContext.UserName
-            //var blog = this.Repository.QueryEntitiesNoTrack(b => true);
-            //var tagList = this.TagRepository.QueryEntitiesNoTrack(t => true);
-            //blog.Join(tagList,b=>b.BlogTags)
-            return blogList;
+            var blogList = this.Repository.QueryEntitiesNoTrack(b => b.Publish == "Y");
+            var userList = this.DbSession.QueryEntities<UserInfo>(u => u.Delete == "N");
+            WebManager webManager = this.DbSession.GetRequiredService<WebManager>();
+            var resultList =blogList.Join(userList, b => b.UserId, u => u.Id, (b, u) => new BlogViewModel
+            {
+                Id = b.Id,
+                UserName = string.IsNullOrEmpty(u.NickName)?u.UserName:u.NickName,
+                Title = b.Title,
+                Content = b.Content,
+                ReadCount = b.ReadCount,
+                CmtCount = b.CmtCount,
+                PublishDate = b.PublishDate,
+                AvatarUrl = webManager.GetFullUrl(u.AvatarUrl)
+            }).ToList();
+            return resultList;
         }
 
         /// <summary>
