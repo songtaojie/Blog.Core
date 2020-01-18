@@ -8,12 +8,8 @@
     border-color: rgb(221, 221, 221) !important;
     .v-note-op {
       border-bottom: 1px solid #ddd !important;
-      .v-left-item{
+      .v-left-item,.v-right-item{
         min-height: 38px;
-      }
-      .op-icon{
-        margin: 0 !important;
-        padding: 11px 6px 11px 3.5px !important;
       }
       .op-icon-divider {
         padding: 9px 0;
