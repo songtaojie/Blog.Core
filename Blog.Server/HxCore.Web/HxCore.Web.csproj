@@ -11,13 +11,9 @@
 
   <ItemGroup>
     <Compile Remove="ViewModel\**" />
-    <Compile Remove="wwwroot\新文件夹\**" />
     <Content Remove="ViewModel\**" />
-    <Content Remove="wwwroot\新文件夹\**" />
     <EmbeddedResource Remove="ViewModel\**" />
-    <EmbeddedResource Remove="wwwroot\新文件夹\**" />
     <None Remove="ViewModel\**" />
-    <None Remove="wwwroot\新文件夹\**" />
   </ItemGroup>
 
   <ItemGroup>

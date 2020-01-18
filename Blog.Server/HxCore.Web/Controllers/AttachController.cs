@@ -22,7 +22,7 @@ namespace HxCore.Web.Controllers
         /// <summary>
         /// 构造函数
         /// </summary>
-        /// <param name="webHelper"></param>
+        /// <param name="webManager"></param>
         public AttachController(WebManager webManager)
         {
             this.webManager = webManager;
@@ -30,7 +30,7 @@ namespace HxCore.Web.Controllers
         /// <summary>
         /// 附件上传
         /// </summary>
-        /// <param name="upload">上传的文件</param>
+        /// <param name="file">上传的文件</param>
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
@@ -105,5 +105,16 @@ namespace HxCore.Web.Controllers
             result["url"] = fullUrl;
             return fullUrl;
         }
+
+        /// <summary>
+        /// 获取md编辑器的模板内容
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet,HttpPost]
+        public string GetMdTemplate()
+        {
+            return FileHelper.GetString(Path.Combine(webManager.WebRootPath, "static/template.md"));
+        }
+
     }
 }

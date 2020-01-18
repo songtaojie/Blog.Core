@@ -58,6 +58,7 @@ namespace HxCore.Web.Controllers
             var result=JwtHelper.BuildJwtToken(jwtModel);
             result.NickName = userInfo.NickName;
             result.AvatarUrl = userInfo.AvatarUrl;
+            result.UseMdEdit = userInfo.UseMdEdit;
             return result;
         }
 
@@ -85,6 +86,7 @@ namespace HxCore.Web.Controllers
             var result = JwtHelper.BuildJwtToken(jwtModel);
             result.NickName = userInfo.NickName;
             result.AvatarUrl = userInfo.AvatarUrl;
+            result.UseMdEdit = userInfo.UseMdEdit;
             return result;
         }
     }

@@ -110,7 +110,7 @@ module.exports = {
 
 		"no-new-func": 0, // 禁用Function构造函数 
 		"no-return-assign": 2, // 禁止在返回语句中赋值  
-		"newline-before-return": 1, // 要求 return 语句之前有一空行
+		// "newline-before-return": 1, // 要求 return 语句之前有一空行
 
 		"new-cap": 0, // 函数名首行大写必须使用new方式调用，首行小写必须用不带new方式调用
 

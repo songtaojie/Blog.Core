@@ -19,7 +19,7 @@ const routes = [{
 }, {
   name:'edit',
   path: '/blog/edit',
-  component: () => import('../views/Blog/CkEdit.vue')
+  component: () => import('../views/Blog/Edit.vue')
 }]
 const router = new Router({
   mode: 'history',

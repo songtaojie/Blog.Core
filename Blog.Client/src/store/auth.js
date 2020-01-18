@@ -7,7 +7,8 @@ let stateData = {
   userId: null,
   userName: null,
   nickName: null,
-  avatarUrl: null
+  avatarUrl: null,
+  useMdEdit: null
 }
 
 if (!isEmpty(sessionStorage.getItem(AUTH_KEY))) {
@@ -29,7 +30,8 @@ const auth = {
         userId: state.userId,
         userName: state.userName,
         nickName: state.nickName,
-        avatarUrl: state.avatarUrl
+        avatarUrl: state.avatarUrl,
+        useMdEdit: state.useMdEdit
       }
     }
   },
@@ -53,7 +55,8 @@ const auth = {
         userId: null,
         userName: null,
         nickName: null,
-        avatarUrl: null
+        avatarUrl: null,
+        useMdEdit:null
       })
     }
   },

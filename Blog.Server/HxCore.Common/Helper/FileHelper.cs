@@ -50,5 +50,43 @@ namespace HxCore.Common
         {
             return Directory.Exists(path);
         }
+
+        /// <summary>
+        /// 读取文件的文本
+        /// </summary>
+        /// <param name="fileFullPath">文件路径</param>
+        /// <returns></returns>
+        public static string GetString(string fileFullPath)
+        {
+            return GetString(fileFullPath, Encoding.UTF8);
+        }
+        /// <summary>
+        /// 使用指定的编码读取文件的文本
+        /// </summary>
+        /// <param name="fileFullPath">文件路径</param>
+        /// <param name="encoding">编码</param>
+        /// <returns></returns>
+        public static string GetString(string fileFullPath, Encoding encoding)
+        {
+            if (!File.Exists(fileFullPath))
+                throw new DirectoryNotFoundException("找不到文件!");
+            return File.ReadAllText(fileFullPath, encoding);
+        }
+        /// <summary>
+        /// 读取文件的字节数组
+        /// </summary>
+        /// <param name="fileFullPath">文件的全路径</param>
+        /// <returns></returns>
+        public static byte[] GetFile(string fileFullPath)
+        {
+            if (!File.Exists(fileFullPath))
+                throw new DirectoryNotFoundException("找不到文件!");
+            using (FileStream fileStream = new FileStream(fileFullPath, FileMode.Open))
+            {
+                byte[] buffer = new byte[fileStream.Length];
+                fileStream.Read(buffer, 0, (int)fileStream.Length);
+                return buffer;
+            }
+        }
     }
 }

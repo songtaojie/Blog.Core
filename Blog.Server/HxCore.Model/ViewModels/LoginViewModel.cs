@@ -1,4 +1,5 @@
-﻿using HxCore.Entity;
+﻿using HxCore.Common;
+using HxCore.Entity;
 using HxCore.Entity.Dependency;
 using System;
 using System.Collections.Generic;
@@ -45,5 +46,15 @@ namespace HxCore.Model.ViewModels
         /// 用户头像链接
         /// </summary>
         public string AvatarUrl { get; set; }
+
+        /// <summary>
+        /// 使用MarkDown编辑器
+        /// </summary>
+        public bool IsUseMdEdit => Helper.IsYes(UseMdEdit);
+
+        /// <summary>
+        /// 使用MarkDown编辑器
+        /// </summary>
+        public string UseMdEdit { get; set; } = "N";
     }
 }

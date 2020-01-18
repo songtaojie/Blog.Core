@@ -33,10 +33,10 @@
             <b-img :src="imgUrl" rounded="circle"></b-img>
             <!-- <img src="../assets/images/avatar1_small.jpg" alt=""> -->
           </template>
-          <b-dropdown-item href="/blog/edit">
+          <b-dropdown-item :to="editRoute">
             <span class="hx-icon-edit mr-1"></span>写博客
           </b-dropdown-item>
-          <b-dropdown-item>
+          <b-dropdown-item @click="onClick">
             <i class="hx-icon-user mr-1"></i>个人中心
           </b-dropdown-item>
           <b-dropdown-item>
@@ -59,7 +59,15 @@ import { mapState } from 'vuex'
 import imgUrl from '../assets/images/avatar1_small.jpg'
 export default {
   data() {
+    var that = this
+
     return {
+      editRoute:{
+        name:'edit',
+        params:{
+            useMdEdit:that.$store.getters.user.useMdEdit
+          }
+      },
       imgUrl,
       show: false
     }
@@ -73,6 +81,15 @@ export default {
     },
     doColClick() {
       console.log('dddd')
+    },
+    onClick() {
+      this.$router.push({
+        path:'/blog/edit',
+        params:{
+          Id:'1123213',
+          isMd:false
+        }
+      })
     }
   },
   computed: mapState({

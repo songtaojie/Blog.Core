@@ -111,11 +111,6 @@ namespace HxCore.Entity
         /// <summary>
         /// 是否被删除,假删除，数据库中还有记录
         /// </summary>
-        [NotMapped]
-        public bool IsDeleted => Helper.IsYes(Delete);
-        /// <summary>
-        /// 是否被删除,假删除，数据库中还有记录
-        /// </summary>
         [Column(TypeName = "char(1)")]
         public string Delete { get; set; } = "N";
 
@@ -125,11 +120,6 @@ namespace HxCore.Entity
         [DataType(DataType.DateTime)]
         public virtual DateTime? DeleteTime { get; set; }
 
-        /// <summary>
-        /// 使用MarkDown编辑器
-        /// </summary>
-        [NotMapped]
-        public bool IsUseMdEdit => Helper.IsYes(UseMdEdit.ToString());
         /// <summary>
         /// 使用MarkDown编辑器
         /// </summary>

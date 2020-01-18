@@ -14,6 +14,11 @@ Vue.config.productionTip = false
 Vue.prototype.$api = api
 Vue.prototype.$toast = toast
 Vue.use(BootstrapVue)
+// md编辑器
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+// use
+Vue.use(mavonEditor)
 new Vue({
   router,
   store,

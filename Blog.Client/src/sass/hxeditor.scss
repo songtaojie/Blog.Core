@@ -1,5 +1,24 @@
 .hx-editor {
-  .ck-content {
-    min-height: calc(100vh - 19rem);
+  .ck-content,.v-note-panel {
+    min-height: calc(100vh - 23.5rem);
+    max-height: 100vh;
+  }
+  .v-note-wrapper {
+    z-index: 999;
+    border-color: rgb(221, 221, 221) !important;
+    .v-note-op {
+      border-bottom: 1px solid #ddd !important;
+      .v-left-item{
+        min-height: 38px;
+      }
+      .op-icon{
+        margin: 0 !important;
+        padding: 11px 6px 11px 3.5px !important;
+      }
+      .op-icon-divider {
+        padding: 9px 0;
+        border-bottom: 1px solid #ddd !important;
+      }
+    }
   }
 }
