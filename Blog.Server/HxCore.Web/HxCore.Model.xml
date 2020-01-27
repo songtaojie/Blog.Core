@@ -4,6 +4,71 @@
         <name>HxCore.Model</name>
     </assembly>
     <members>
+        <member name="T:HxCore.Model.BlogCreateModel">
+            <summary>
+            博客创建所用模型
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogCreateModel.Id">
+            <summary>
+            博客id
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogCreateModel.Title">
+            <summary>
+            博客标题
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogCreateModel.Content">
+            <summary>
+            博客内容
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogCreateModel.BlogTypeId">
+            <summary>
+            文章类型
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogCreateModel.CategoryId">
+            <summary>
+            系统分类
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogCreateModel.PersonTop">
+            <summary>
+            个人置顶
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogCreateModel.Private">
+            <summary>
+            仅自己可见
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogCreateModel.Publish">
+            <summary>
+            是否发布
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogCreateModel.IsPublish">
+            <summary>
+            是否发布
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogCreateModel.CanCmt">
+            <summary>
+            是否可评论
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogCreateModel.PersonTags">
+            <summary>
+            个人标签
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogCreateModel.MarkDown">
+            <summary>
+            是否是markdown
+            </summary>
+        </member>
         <member name="T:HxCore.Model.BlogViewModel">
             <summary>
             博客视图模型
@@ -24,44 +89,34 @@
             博客内容
             </summary>
         </member>
-        <member name="P:HxCore.Model.BlogViewModel.BlogTypeId">
+        <member name="P:HxCore.Model.BlogViewModel.UserName">
             <summary>
-            文章类型
+            用户名
             </summary>
         </member>
-        <member name="P:HxCore.Model.BlogViewModel.CategoryId">
+        <member name="P:HxCore.Model.BlogViewModel.HomeContent">
             <summary>
-            系统分类
+            首页显示的内容
             </summary>
         </member>
-        <member name="P:HxCore.Model.BlogViewModel.PersonTop">
+        <member name="P:HxCore.Model.BlogViewModel.ReadCount">
             <summary>
-            个人置顶
+            阅读量
             </summary>
         </member>
-        <member name="P:HxCore.Model.BlogViewModel.Private">
+        <member name="P:HxCore.Model.BlogViewModel.CmtCount">
             <summary>
-            仅自己可见
+            被评论次数
             </summary>
         </member>
-        <member name="P:HxCore.Model.BlogViewModel.Publish">
+        <member name="P:HxCore.Model.BlogViewModel.PublishDate">
             <summary>
-            是否发布
+            发布日期
             </summary>
         </member>
-        <member name="P:HxCore.Model.BlogViewModel.CanCmt">
+        <member name="P:HxCore.Model.BlogViewModel.AvatarUrl">
             <summary>
-            是否可评论
-            </summary>
-        </member>
-        <member name="P:HxCore.Model.BlogViewModel.PersonTags">
-            <summary>
-            个人标签
-            </summary>
-        </member>
-        <member name="P:HxCore.Model.BlogViewModel.MarkDown">
-            <summary>
-            是否是markdown
+            头像链接
             </summary>
         </member>
         <member name="T:HxCore.Model.PersonTag">
@@ -74,7 +129,7 @@
             id
             </summary>
         </member>
-        <member name="P:HxCore.Model.PersonTag.Value">
+        <member name="P:HxCore.Model.PersonTag.Name">
             <summary>
             值
             </summary>
@@ -207,6 +262,16 @@
         <member name="P:HxCore.Model.ViewModels.LoginViewModel.AvatarUrl">
             <summary>
             用户头像链接
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.ViewModels.LoginViewModel.IsUseMdEdit">
+            <summary>
+            使用MarkDown编辑器
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.ViewModels.LoginViewModel.UseMdEdit">
+            <summary>
+            使用MarkDown编辑器
             </summary>
         </member>
     </members>

@@ -68,6 +68,11 @@
             Id
             </summary>
         </member>
+        <member name="P:HxCore.Web.Auth.JwtModel.NickName">
+            <summary>
+            昵称
+            </summary>
+        </member>
         <member name="P:HxCore.Web.Auth.JwtModel.Role">
             <summary>
             角色
@@ -328,6 +333,25 @@
             附件控制器
             </summary>
         </member>
+        <member name="M:HxCore.Web.Controllers.AttachController.#ctor(HxCore.Common.WebManager)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="webManager"></param>
+        </member>
+        <member name="M:HxCore.Web.Controllers.AttachController.Upload(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            附件上传
+            </summary>
+            <param name="file">上传的文件</param>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Web.Controllers.AttachController.GetMdTemplate">
+            <summary>
+            获取md编辑器的模板内容
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:HxCore.Web.Controllers.BaseApiController">
             <summary>
             基础的api
@@ -371,13 +395,19 @@
              </summary>
              <param name="_blogService"></param>
         </member>
-        <member name="M:HxCore.Web.Controllers.BlogController.GetList">
+        <member name="M:HxCore.Web.Controllers.BlogController.QueryBlogList">
             <summary>
             获取博客列表
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HxCore.Web.Controllers.BlogController.Save(HxCore.Model.BlogViewModel)">
+        <member name="M:HxCore.Web.Controllers.BlogController.QueryTagList">
+            <summary>
+            获取博客列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Web.Controllers.BlogController.Save(HxCore.Model.BlogCreateModel)">
             <summary>
             博客的编辑
             </summary>

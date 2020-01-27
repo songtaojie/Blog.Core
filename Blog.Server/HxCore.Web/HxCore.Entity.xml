@@ -310,6 +310,26 @@
             是否是轮播图
             </summary>
         </member>
+        <member name="T:HxCore.Entity.BlogTag">
+            <summary>
+            博客标签
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.BlogTag.Name">
+            <summary>
+            标签名字
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.BlogTag.Description">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.BlogTag.Order">
+            <summary>
+            排序
+            </summary>
+        </member>
         <member name="T:HxCore.Entity.BlogType">
             <summary>
             博客的类型
@@ -360,13 +380,14 @@
             服务的实例
             </summary>
         </member>
-        <member name="M:HxCore.Entity.Context.DbSession.#ctor(System.IServiceProvider)">
+        <member name="M:HxCore.Entity.Context.DbSession.#ctor(System.IServiceProvider,Microsoft.EntityFrameworkCore.DbContext)">
             <summary>
             构造函数
             </summary>
             <param name="service">服务的实例</param>
+            <param name="db">服务的实例</param>
         </member>
-        <member name="P:HxCore.Entity.Context.DbSession.DbContext">
+        <member name="P:HxCore.Entity.Context.DbSession.Db">
             <summary>
             ef数据库上下文
             </summary>
@@ -378,7 +399,15 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:HxCore.Entity.Context.DbSession.QueryById``1(System.Object[])">
+        <member name="M:HxCore.Entity.Context.DbSession.GetById``1(System.Object[])">
+            <summary>
+            根据id获取对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="keyValues"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Entity.Context.DbSession.GetByIdAsync``1(System.Object[])">
             <summary>
             根据id获取对象
             </summary>
@@ -408,6 +437,28 @@
             </summary>
             <param name="handler"></param>
         </member>
+        <member name="M:HxCore.Entity.Context.DbSession.ExcuteAsync(System.EventHandler)">
+            <summary>
+            异步执行
+            </summary>
+            <param name="handler"></param>
+        </member>
+        <member name="M:HxCore.Entity.Context.DbSession.Exist``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            判断是否存在满足条件的数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Entity.Context.DbSession.ExistAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            判断是否存在满足条件的数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
         <member name="M:HxCore.Entity.Context.DbSession.SaveChanges">
             <summary>
             保存更改
@@ -418,6 +469,20 @@
             <summary>
             保存更改
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Entity.Context.DbSession.InsertAsync``1(``0)">
+            <summary>
+            插入一条数据
+            </summary>
+            <param name="entity">数据实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Entity.Context.DbSession.InsertAsync``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            插入集合
+            </summary>
+            <param name="entityList"></param>
             <returns></returns>
         </member>
         <member name="T:HxCore.Entity.Context.HxContext">
@@ -474,6 +539,11 @@
             博客分类
             </summary>
         </member>
+        <member name="P:HxCore.Entity.Context.HxContext.BlogTag">
+            <summary>
+            博客个人标签
+            </summary>
+        </member>
         <member name="T:HxCore.Entity.Context.IDbSession">
             <summary>
             数据库上下文操作类
@@ -484,12 +554,22 @@
             服务的实例
             </summary>
         </member>
-        <member name="P:HxCore.Entity.Context.IDbSession.DbContext">
+        <member name="M:HxCore.Entity.Context.IDbSession.GetRequiredService``1">
             <summary>
-            数据库上下文
+            获取服务
             </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
         </member>
-        <member name="M:HxCore.Entity.Context.IDbSession.QueryById``1(System.Object[])">
+        <member name="M:HxCore.Entity.Context.IDbSession.GetById``1(System.Object[])">
+            <summary>
+             根据Id获取实体数据
+            </summary>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="keyValues">实体的ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Entity.Context.IDbSession.GetByIdAsync``1(System.Object[])">
             <summary>
              根据Id获取实体数据
             </summary>
@@ -513,7 +593,29 @@
             <param name="predicate">获取数据的条件lambda</param>
             <returns>满足当前条件的一个实体</returns>
         </member>
+        <member name="M:HxCore.Entity.Context.IDbSession.ExistAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            判断是否存在满足条件的数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Entity.Context.IDbSession.Exist``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            判断是否存在满足条件的数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
         <member name="M:HxCore.Entity.Context.IDbSession.Excute(System.EventHandler)">
+            <summary>
+            执行事务
+            </summary>
+            <param name="handler"></param>
+        </member>
+        <member name="M:HxCore.Entity.Context.IDbSession.ExcuteAsync(System.EventHandler)">
             <summary>
             执行事务
             </summary>
@@ -529,6 +631,20 @@
             <summary>
             保存更改
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Entity.Context.IDbSession.InsertAsync``1(``0)">
+            <summary>
+            插入一条数据
+            </summary>
+            <param name="entity">数据实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Entity.Context.IDbSession.InsertAsync``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            插入集合
+            </summary>
+            <param name="entityList"></param>
             <returns></returns>
         </member>
         <member name="T:HxCore.Entity.Dependency.IAutoMapper`1">
@@ -740,11 +856,6 @@
             用户注册时间
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.IsDeleted">
-            <summary>
-            是否被删除,假删除，数据库中还有记录
-            </summary>
-        </member>
         <member name="P:HxCore.Entity.UserInfo.Delete">
             <summary>
             是否被删除,假删除，数据库中还有记录
@@ -753,11 +864,6 @@
         <member name="P:HxCore.Entity.UserInfo.DeleteTime">
             <summary>
             删除时间
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.UserInfo.IsUseMdEdit">
-            <summary>
-            使用MarkDown编辑器
             </summary>
         </member>
         <member name="P:HxCore.Entity.UserInfo.UseMdEdit">
