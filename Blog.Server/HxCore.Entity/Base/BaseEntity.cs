@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HxCore.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -54,7 +55,7 @@ namespace HxCore.Entity
         public virtual string Delete
         {
             get; set;
-        } = "N";
+        } = ConstKey.No;
         /// <summary>
         /// 删除人ID
         /// </summary>

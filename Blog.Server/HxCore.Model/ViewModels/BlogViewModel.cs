@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HxCore.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -26,20 +27,20 @@ namespace HxCore.Model.ViewModels
         /// <summary>
         /// 是否使用MarkDown编辑的
         /// </summary>
-        public string MarkDown { get; set; } = "N";
+        public string MarkDown { get; set; } = ConstKey.No;
 
         /// <summary>
         /// 是否是私人的
         /// </summary>
-        public string Private { get; set; } = "N";
+        public string Private { get; set; } = ConstKey.No;
         /// <summary>
         /// 是否是转发文章
         /// </summary>
-        public string Forward { get; set; } = "N";
+        public string Forward { get; set; } = ConstKey.No;
         /// <summary>
         /// 是否发布，true代表发布，false代表不发布即是草稿
         /// </summary>
-        public string Publish { get; set; } = "Y";
+        public string Publish { get; set; } = ConstKey.Yes;
 
         /// <summary>
         /// 原链接
@@ -53,15 +54,15 @@ namespace HxCore.Model.ViewModels
         /// <summary>
         /// 允许评论
         /// </summary>
-        public string CanCmt { get; set; } = "Y";
+        public string CanCmt { get; set; } = ConstKey.Yes;
 
         /// <summary>
         /// 个人置顶 标识该文档是否置顶,置顶的文章在个人主页中排序靠前
         /// </summary>
-        public string PersonTop { get; set; } = "N";
+        public string PersonTop { get; set; } = ConstKey.No;
         /// <summary>
         /// 是否是轮播图
         /// </summary>
-        public string Carousel { get; set; } = "N";
+        public string Carousel { get; set; } = ConstKey.No;
     }
 }

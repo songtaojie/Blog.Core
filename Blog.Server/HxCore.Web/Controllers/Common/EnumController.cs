@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HxCore.Common;
 using HxCore.Entity;
 using HxCore.Entity.Context;
 using Microsoft.AspNetCore.Http;
@@ -31,7 +32,7 @@ namespace HxCore.Web.Controllers
         [HttpPost,HttpGet]
         public List<BlogType> GetBlogTypeList()
         {
-            var list = this.db.QueryEntities<BlogType>(b => b.Delete == "N").ToList();
+            var list = this.db.QueryEntities<BlogType>(b => b.Delete == ConstKey.No).ToList();
             return list;
         }
 
@@ -42,7 +43,7 @@ namespace HxCore.Web.Controllers
         [HttpPost, HttpGet]
         public List<Category> GetCategoryList()
         {
-            return this.db.QueryEntities<Category>(b => b.Delete == "N").ToList();
+            return this.db.QueryEntities<Category>(b => b.Delete == ConstKey.No).ToList();
         }
     }
 }

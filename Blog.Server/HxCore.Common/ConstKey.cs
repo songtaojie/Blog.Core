@@ -17,5 +17,14 @@ namespace HxCore.Common
         /// mySql数据库名字
         /// </summary>
         public const string MySqlName = "MySql";
+        /// <summary>
+        /// Y
+        /// </summary>
+        public const string Yes = "Y";
+
+        /// <summary>
+        /// N
+        /// </summary>
+        public const string No = "N";
     }
 }

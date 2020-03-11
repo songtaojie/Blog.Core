@@ -34,22 +34,22 @@ namespace HxCore.Entity
         /// 是否使用MarkDown编辑的
         /// </summary>
         [Column(TypeName = "char(1)")]
-        public string MarkDown { get; set; } = "N";
+        public string MarkDown { get; set; } = ConstKey.No;
 
         /// <summary>
         /// 是否是私人的
         /// </summary>
-        public string Private { get; set; } = "N";
+        public string Private { get; set; } = ConstKey.No;
         /// <summary>
         /// 是否是转发文章
         /// </summary>
         [Column(TypeName = "char(1)")]
-        public string Forward { get; set; } = "N";
+        public string Forward { get; set; } = ConstKey.No;
         /// <summary>
         /// 是否发布，true代表发布，false代表不发布即是草稿
         /// </summary>
         [Column(TypeName = "char(1)")]
-        public string Publish { get; set; } = "Y";
+        public string Publish { get; set; } = ConstKey.Yes;
 
         /// <summary>
         /// 发布日期
@@ -61,12 +61,12 @@ namespace HxCore.Entity
         /// 置顶 Y权值加10年
         /// </summary>
         [Column(TypeName = "char(1)")]
-        public string Top { get; set; } = "N";
+        public string Top { get; set; } = ConstKey.No;
         /// <summary>
         /// 精华 Y权值加10天
         /// </summary>
         [Column(TypeName = "char(1)")]
-        public string Essence { get; set; } = "N";
+        public string Essence { get; set; } = ConstKey.No;
         /// <summary>
         /// 原链接
         /// </summary>
@@ -86,7 +86,7 @@ namespace HxCore.Entity
         /// 允许评论
         /// </summary>
         [Column(TypeName = "char(1)")]
-        public string CanCmt { get; set; } = "Y";
+        public string CanCmt { get; set; } = ConstKey.Yes;
 
         /// <summary>
         /// 阅读量
@@ -108,7 +108,7 @@ namespace HxCore.Entity
         /// 个人置顶 标识该文档是否置顶,置顶的文章在个人主页中排序靠前
         /// </summary>
         [Column(TypeName = "char(1)")]
-        public string PersonTop { get; set; } = "N";
+        public string PersonTop { get; set; } = ConstKey.No;
         /// <summary>
         /// 主题中的第一张图的地址
         /// </summary>
@@ -153,6 +153,6 @@ namespace HxCore.Entity
         /// 是否是轮播图
         /// </summary>
         [Column(TypeName = "char(1)")]
-        public string Carousel { get; set; } = "N";
+        public string Carousel { get; set; } = ConstKey.No;
     }
 }

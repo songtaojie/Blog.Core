@@ -66,7 +66,7 @@ namespace HxCore.Entity
         /// 是否锁定
         /// </summary>
         [Column(TypeName = "char(1)")]
-        public string Lock { set; get; } = "N";
+        public string Lock { set; get; } = ConstKey.No;
         /// <summary>
         /// 头像存储文件路径
         /// </summary>
@@ -87,7 +87,7 @@ namespace HxCore.Entity
         public string Admin
         {
             get; set;
-        } = "N";
+        } = ConstKey.No;
         /// <summary>
         /// 是否激活
         /// </summary>
@@ -101,7 +101,7 @@ namespace HxCore.Entity
         public string Activate
         {
             get; set;
-        } = "N";
+        } = ConstKey.No;
         /// <summary>
         /// 用户注册时间
         /// </summary>
@@ -112,7 +112,7 @@ namespace HxCore.Entity
         /// 是否被删除,假删除，数据库中还有记录
         /// </summary>
         [Column(TypeName = "char(1)")]
-        public string Delete { get; set; } = "N";
+        public string Delete { get; set; } = ConstKey.No;
 
         /// <summary>
         /// 删除时间
@@ -124,7 +124,7 @@ namespace HxCore.Entity
         /// 使用MarkDown编辑器
         /// </summary>
         [Column(TypeName = "char(1)")]
-        public string UseMdEdit { get; set; } = "N";
+        public string UseMdEdit { get; set; } = ConstKey.No;
         /// <summary>
         /// 登录的ip
         /// </summary>

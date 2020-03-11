@@ -83,8 +83,8 @@ namespace HxCore.Services
         /// <returns></returns>
         public List<BlogViewModel> QueryBlogList()
         {
-            var blogList = this.Repository.QueryEntitiesNoTrack(b => b.Publish == "Y");
-            var userList = this.DbSession.QueryEntities<UserInfo>(u => u.Delete == "N");
+            var blogList = this.Repository.QueryEntitiesNoTrack(b => b.Publish == ConstKey.Yes);
+            var userList = this.DbSession.QueryEntities<UserInfo>(u => u.Delete == ConstKey.No);
             WebManager webManager = this.DbSession.GetRequiredService<WebManager>();
             var resultList =blogList.Join(userList, b => b.UserId, u => u.Id, (b, u) => new BlogViewModel
             {

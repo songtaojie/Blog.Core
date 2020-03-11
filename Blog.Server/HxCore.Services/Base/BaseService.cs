@@ -64,7 +64,7 @@ namespace HxCore.Services
             {
                 ParameterExpression parameterExp = Expression.Parameter(typeof(T), "table");
                 MemberExpression deleteProp = Expression.Property(parameterExp, "Delete");
-                var lambda = Expression.Lambda<Func<T, bool>>(Expression.Equal(deleteProp, Expression.Constant("N")), parameterExp);
+                var lambda = Expression.Lambda<Func<T, bool>>(Expression.Equal(deleteProp, Expression.Constant(ConstKey.No)), parameterExp);
                 return lambdaWhere.And(lambda);
             }
             return lambdaWhere;

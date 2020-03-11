@@ -50,21 +50,21 @@ namespace HxCore.Model
         public string PersonTop
         {
             get; set;
-        } = "N";
+        } = ConstKey.No;
         /// <summary>
         /// 仅自己可见
         /// </summary>
         public string Private
         {
             get; set;
-        } = "N";
+        } = ConstKey.No;
         /// <summary>
         /// 是否发布
         /// </summary>
         public string Publish
         {
             get; set;
-        } = "Y";
+        } = ConstKey.No;
         /// <summary>
         /// 是否发布
         /// </summary>
@@ -75,7 +75,7 @@ namespace HxCore.Model
         public string CanCmt
         {
             get; set;
-        } = "Y";
+        } = ConstKey.Yes;
         /// <summary>
         /// 个人标签
         /// </summary>
@@ -89,6 +89,6 @@ namespace HxCore.Model
         public string MarkDown
         {
             get; set;
-        } = "N";
+        } = ConstKey.No;
     }
 }

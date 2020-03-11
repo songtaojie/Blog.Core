@@ -42,7 +42,7 @@
           <b-dropdown-item>
             <i class="hx-icon-cfg mr-1"></i>系统管理
           </b-dropdown-item>
-          <b-dropdown-item>
+          <b-dropdown-item @click="onSignOut">
             <i class="hx-icon-logout-solid mr-1"></i>退出
           </b-dropdown-item>
         </b-nav-dropdown>
@@ -90,6 +90,10 @@ export default {
           isMd:false
         }
       })
+    },
+    // 退出
+    onSignOut() {
+      this.$store.commit('CLEAR_AUTH')
     }
   },
   computed: mapState({
