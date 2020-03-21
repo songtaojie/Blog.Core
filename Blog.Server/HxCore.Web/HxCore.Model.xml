@@ -194,6 +194,26 @@
             头像链接
             </summary>
         </member>
+        <member name="P:HxCore.Model.BlogViewModel.PreId">
+            <summary>
+            上一篇博客的id
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogViewModel.PreName">
+            <summary>
+            上一篇博客的名字
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogViewModel.NextId">
+            <summary>
+            下一篇博客的id
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogViewModel.NextName">
+            <summary>
+            下一篇博客的名字
+            </summary>
+        </member>
         <member name="T:HxCore.Model.ViewModels.LoginParam">
             <summary>
             登录参数

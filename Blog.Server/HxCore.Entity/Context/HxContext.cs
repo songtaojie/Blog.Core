@@ -70,7 +70,7 @@ namespace HxCore.Entity.Context
         {
             UserInfo userInfo = new UserInfo()
             {
-                Id = Helper.GetSnowId(),
+                Id = Guid.NewGuid().ToString(),
                 UserName = "Admin",
                 PassWord = Common.Security.SafeHelper.MD5TwoEncrypt("123456"),
                 Activate = "Y",
@@ -82,7 +82,7 @@ namespace HxCore.Entity.Context
             modelBuilder.Entity<BlogType>().HasData(new BlogType[] {
                 new BlogType
                 {
-                    Id = Helper.GetSnowId(),
+                    Id = Helper.GetLongSnowId(),
                     Name="原创",
                     UserId = userInfo.Id,
                     UserName = userInfo.UserName,
@@ -90,7 +90,7 @@ namespace HxCore.Entity.Context
                 },
                 new BlogType
                 {
-                    Id = Helper.GetSnowId(),
+                    Id = Helper.GetLongSnowId(),
                     Name="转载",
                     UserId = userInfo.Id,
                     UserName = userInfo.UserName,
@@ -98,7 +98,7 @@ namespace HxCore.Entity.Context
                 },
                 new BlogType
                 {
-                    Id = Helper.GetSnowId(),
+                    Id = Helper.GetLongSnowId(),
                     Name="翻译",
                     UserId = userInfo.Id,
                     UserName = userInfo.UserName,
@@ -108,7 +108,7 @@ namespace HxCore.Entity.Context
             modelBuilder.Entity<Category>().HasData(new Category[] {
                 new Category{
                     Name="前端",
-                    Id = Helper.GetSnowId(),
+                    Id = Helper.GetLongSnowId(),
                     UserId = userInfo.Id,
                     UserName = userInfo.UserName,
                     CreateTime = DateTime.Now
@@ -116,14 +116,14 @@ namespace HxCore.Entity.Context
                 new Category
                 {
                     Name="后端",
-                    Id = Helper.GetSnowId(),
+                    Id = Helper.GetLongSnowId(),
                     UserId = userInfo.Id,
                     UserName = userInfo.UserName,
                     CreateTime = DateTime.Now},
                 new Category
                 {
                     Name="编程语言",
-                    Id = Helper.GetSnowId(),
+                    Id = Helper.GetLongSnowId(),
                     UserId = userInfo.Id,
                     UserName = userInfo.UserName,
                     CreateTime = DateTime.Now

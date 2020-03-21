@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HxCore.Migrate.Migrations
 {
-    public partial class AddTable : Migration
+    public partial class AddTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +11,8 @@ namespace HxCore.Migrate.Migrations
                 name: "BasicInfo",
                 columns: table => new
                 {
-                    Id = table.Column<string>(maxLength: 100, nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CreateTime = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<string>(maxLength: 100, nullable: true),
                     UserName = table.Column<string>(maxLength: 50, nullable: true),
@@ -40,7 +41,8 @@ namespace HxCore.Migrate.Migrations
                 name: "Blog",
                 columns: table => new
                 {
-                    Id = table.Column<string>(maxLength: 100, nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CreateTime = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<string>(maxLength: 100, nullable: true),
                     UserName = table.Column<string>(maxLength: 50, nullable: true),
@@ -82,10 +84,33 @@ namespace HxCore.Migrate.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BlogTag",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreateTime = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<string>(maxLength: 100, nullable: true),
+                    UserName = table.Column<string>(maxLength: 50, nullable: true),
+                    Delete = table.Column<string>(type: "char(1)", nullable: true),
+                    DeletelUserId = table.Column<string>(maxLength: 100, nullable: true),
+                    DeleteTime = table.Column<DateTime>(nullable: true),
+                    LastModifyTime = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(maxLength: 40, nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Order = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BlogTag", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "BlogType",
                 columns: table => new
                 {
-                    Id = table.Column<string>(maxLength: 100, nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CreateTime = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<string>(maxLength: 100, nullable: true),
                     UserName = table.Column<string>(maxLength: 50, nullable: true),
@@ -106,7 +131,8 @@ namespace HxCore.Migrate.Migrations
                 name: "Category",
                 columns: table => new
                 {
-                    Id = table.Column<string>(maxLength: 100, nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CreateTime = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<string>(maxLength: 100, nullable: true),
                     UserName = table.Column<string>(maxLength: 50, nullable: true),
@@ -127,7 +153,8 @@ namespace HxCore.Migrate.Migrations
                 name: "JobInfo",
                 columns: table => new
                 {
-                    Id = table.Column<string>(maxLength: 100, nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CreateTime = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<string>(maxLength: 100, nullable: true),
                     UserName = table.Column<string>(maxLength: 50, nullable: true),
@@ -177,9 +204,29 @@ namespace HxCore.Migrate.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "BlogType",
+                columns: new[] { "Id", "CreateTime", "Delete", "DeleteTime", "DeletelUserId", "Description", "LastModifyTime", "Name", "Order", "UserId", "UserName" },
+                values: new object[,]
+                {
+                    { 850152162976595968L, new DateTime(2020, 3, 21, 23, 21, 11, 737, DateTimeKind.Local).AddTicks(8088), "N", null, null, null, null, "原创", null, "b7a14451-b51b-4b2c-87fe-34a948e0746b", "Admin" },
+                    { 850152162976595969L, new DateTime(2020, 3, 21, 23, 21, 11, 737, DateTimeKind.Local).AddTicks(8798), "N", null, null, null, null, "转载", null, "b7a14451-b51b-4b2c-87fe-34a948e0746b", "Admin" },
+                    { 850152162976595970L, new DateTime(2020, 3, 21, 23, 21, 11, 737, DateTimeKind.Local).AddTicks(8806), "N", null, null, null, null, "翻译", null, "b7a14451-b51b-4b2c-87fe-34a948e0746b", "Admin" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Category",
+                columns: new[] { "Id", "CreateTime", "Delete", "DeleteTime", "DeletelUserId", "Description", "LastModifyTime", "Name", "Order", "UserId", "UserName" },
+                values: new object[,]
+                {
+                    { 850152162980790272L, new DateTime(2020, 3, 21, 23, 21, 11, 738, DateTimeKind.Local).AddTicks(708), "N", null, null, null, null, "前端", null, "b7a14451-b51b-4b2c-87fe-34a948e0746b", "Admin" },
+                    { 850152162980790273L, new DateTime(2020, 3, 21, 23, 21, 11, 738, DateTimeKind.Local).AddTicks(752), "N", null, null, null, null, "后端", null, "b7a14451-b51b-4b2c-87fe-34a948e0746b", "Admin" },
+                    { 850152162980790274L, new DateTime(2020, 3, 21, 23, 21, 11, 738, DateTimeKind.Local).AddTicks(760), "N", null, null, null, null, "编程语言", null, "b7a14451-b51b-4b2c-87fe-34a948e0746b", "Admin" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "UserInfo",
                 columns: new[] { "Id", "Activate", "Admin", "AvatarUrl", "BasicInfoId", "Delete", "DeleteTime", "Email", "JobInfoId", "LastLoginTime", "Lock", "LoginIp", "NickName", "OpenId", "PassWord", "RegisterTime", "UseMdEdit", "UserName" },
-                values: new object[] { "819691921952735232", "Y", "N", null, null, "N", null, "stjworkemail@163.com", null, new DateTime(2019, 12, 28, 22, 3, 4, 357, DateTimeKind.Local).AddTicks(1957), "N", null, "超级管理员", null, "F59BD65F7EDAFB087A81D4DCA06C4910", new DateTime(2019, 12, 28, 22, 3, 4, 352, DateTimeKind.Local).AddTicks(7635), "N", "Admin" });
+                values: new object[] { "b7a14451-b51b-4b2c-87fe-34a948e0746b", "Y", "N", null, null, "N", null, "stjworkemail@163.com", null, new DateTime(2020, 3, 21, 23, 21, 11, 734, DateTimeKind.Local).AddTicks(7683), "N", null, "超级管理员", null, "F59BD65F7EDAFB087A81D4DCA06C4910", new DateTime(2020, 3, 21, 23, 21, 11, 731, DateTimeKind.Local).AddTicks(6753), "N", "Admin" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -189,6 +236,9 @@ namespace HxCore.Migrate.Migrations
 
             migrationBuilder.DropTable(
                 name: "Blog");
+
+            migrationBuilder.DropTable(
+                name: "BlogTag");
 
             migrationBuilder.DropTable(
                 name: "BlogType");

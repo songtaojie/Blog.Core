@@ -399,7 +399,7 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:HxCore.Entity.Context.DbSession.GetById``1(System.Object[])">
+        <member name="M:HxCore.Entity.Context.DbSession.FindById``1(System.Object[])">
             <summary>
             根据id获取对象
             </summary>
@@ -407,7 +407,7 @@
             <param name="keyValues"></param>
             <returns></returns>
         </member>
-        <member name="M:HxCore.Entity.Context.DbSession.GetByIdAsync``1(System.Object[])">
+        <member name="M:HxCore.Entity.Context.DbSession.FindByIdAsync``1(System.Object[])">
             <summary>
             根据id获取对象
             </summary>
@@ -415,7 +415,7 @@
             <param name="keyValues"></param>
             <returns></returns>
         </member>
-        <member name="M:HxCore.Entity.Context.DbSession.QueryEntity``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+        <member name="M:HxCore.Entity.Context.DbSession.FindEntity``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
             <summary>
             获取满足条件的集合
             </summary>
@@ -561,7 +561,7 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:HxCore.Entity.Context.IDbSession.GetById``1(System.Object[])">
+        <member name="M:HxCore.Entity.Context.IDbSession.FindById``1(System.Object[])">
             <summary>
              根据Id获取实体数据
             </summary>
@@ -569,7 +569,7 @@
             <param name="keyValues">实体的ID</param>
             <returns></returns>
         </member>
-        <member name="M:HxCore.Entity.Context.IDbSession.GetByIdAsync``1(System.Object[])">
+        <member name="M:HxCore.Entity.Context.IDbSession.FindByIdAsync``1(System.Object[])">
             <summary>
              根据Id获取实体数据
             </summary>
@@ -577,7 +577,7 @@
             <param name="keyValues">实体的ID</param>
             <returns></returns>
         </member>
-        <member name="M:HxCore.Entity.Context.IDbSession.QueryEntity``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+        <member name="M:HxCore.Entity.Context.IDbSession.FindEntity``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
             <summary>
             获取满足指定条件的一条数据
             </summary>

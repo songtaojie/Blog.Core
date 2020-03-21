@@ -41,7 +41,7 @@ namespace HxCore.Services
             List<BlogTag> tagEntityList = new List<BlogTag>();
             if (blogModel.PersonTags != null && blogModel.PersonTags.Count > 0)
             {
-                List<string> blogTagList = new List<string>();
+                List<long> blogTagList = new List<long>();
                 blogModel.PersonTags.ForEach(p =>
                 {
                     if (!string.IsNullOrEmpty(p.Name))
@@ -50,7 +50,7 @@ namespace HxCore.Services
                         {
                             var newBlogTag = new BlogTag
                             {
-                                Id = Helper.GetSnowId(),
+                                Id = Helper.GetLongSnowId(),
                                 Name = p.Name,
                                 UserId = UserContext.UserId,
                                 UserName = UserContext.UserName
@@ -117,7 +117,7 @@ namespace HxCore.Services
             return this.TagRepository.QueryEntitiesNoTrack(t => t.UserId == UserContext.UserId)
                 .Select(t => new PersonTag
                 {
-                    Id = t.Id,
+                    Id = t.Id.ToString(),
                     Name = t.Name
                 }).ToList();
         }

@@ -21,9 +21,10 @@ namespace HxCore.Migrate.Migrations
 
             modelBuilder.Entity("HxCore.Entity.BasicInfo", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(200)")
@@ -99,9 +100,10 @@ namespace HxCore.Migrate.Migrations
 
             modelBuilder.Entity("HxCore.Entity.Blog", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("BlogTags")
                         .HasColumnType("nvarchar(40)")
@@ -225,9 +227,10 @@ namespace HxCore.Migrate.Migrations
 
             modelBuilder.Entity("HxCore.Entity.BlogTag", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
@@ -270,9 +273,10 @@ namespace HxCore.Migrate.Migrations
 
             modelBuilder.Entity("HxCore.Entity.BlogType", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
@@ -315,38 +319,39 @@ namespace HxCore.Migrate.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "822243480372772864",
-                            CreateTime = new DateTime(2020, 1, 4, 23, 2, 3, 287, DateTimeKind.Local).AddTicks(1784),
+                            Id = 850152162976595968L,
+                            CreateTime = new DateTime(2020, 3, 21, 23, 21, 11, 737, DateTimeKind.Local).AddTicks(8088),
                             Delete = "N",
                             Name = "原创",
-                            UserId = "822243480343412736",
+                            UserId = "b7a14451-b51b-4b2c-87fe-34a948e0746b",
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = "822243480376967168",
-                            CreateTime = new DateTime(2020, 1, 4, 23, 2, 3, 287, DateTimeKind.Local).AddTicks(2469),
+                            Id = 850152162976595969L,
+                            CreateTime = new DateTime(2020, 3, 21, 23, 21, 11, 737, DateTimeKind.Local).AddTicks(8798),
                             Delete = "N",
                             Name = "转载",
-                            UserId = "822243480343412736",
+                            UserId = "b7a14451-b51b-4b2c-87fe-34a948e0746b",
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = "822243480376967169",
-                            CreateTime = new DateTime(2020, 1, 4, 23, 2, 3, 287, DateTimeKind.Local).AddTicks(2477),
+                            Id = 850152162976595970L,
+                            CreateTime = new DateTime(2020, 3, 21, 23, 21, 11, 737, DateTimeKind.Local).AddTicks(8806),
                             Delete = "N",
                             Name = "翻译",
-                            UserId = "822243480343412736",
+                            UserId = "b7a14451-b51b-4b2c-87fe-34a948e0746b",
                             UserName = "Admin"
                         });
                 });
 
             modelBuilder.Entity("HxCore.Entity.Category", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
@@ -389,38 +394,39 @@ namespace HxCore.Migrate.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "822243480376967170",
-                            CreateTime = new DateTime(2020, 1, 4, 23, 2, 3, 287, DateTimeKind.Local).AddTicks(4082),
+                            Id = 850152162980790272L,
+                            CreateTime = new DateTime(2020, 3, 21, 23, 21, 11, 738, DateTimeKind.Local).AddTicks(708),
                             Delete = "N",
                             Name = "前端",
-                            UserId = "822243480343412736",
+                            UserId = "b7a14451-b51b-4b2c-87fe-34a948e0746b",
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = "822243480376967171",
-                            CreateTime = new DateTime(2020, 1, 4, 23, 2, 3, 287, DateTimeKind.Local).AddTicks(4108),
+                            Id = 850152162980790273L,
+                            CreateTime = new DateTime(2020, 3, 21, 23, 21, 11, 738, DateTimeKind.Local).AddTicks(752),
                             Delete = "N",
                             Name = "后端",
-                            UserId = "822243480343412736",
+                            UserId = "b7a14451-b51b-4b2c-87fe-34a948e0746b",
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = "822243480376967172",
-                            CreateTime = new DateTime(2020, 1, 4, 23, 2, 3, 287, DateTimeKind.Local).AddTicks(4115),
+                            Id = 850152162980790274L,
+                            CreateTime = new DateTime(2020, 3, 21, 23, 21, 11, 738, DateTimeKind.Local).AddTicks(760),
                             Delete = "N",
                             Name = "编程语言",
-                            UserId = "822243480343412736",
+                            UserId = "b7a14451-b51b-4b2c-87fe-34a948e0746b",
                             UserName = "Admin"
                         });
                 });
 
             modelBuilder.Entity("HxCore.Entity.JobInfo", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
@@ -554,16 +560,16 @@ namespace HxCore.Migrate.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "822243480343412736",
+                            Id = "b7a14451-b51b-4b2c-87fe-34a948e0746b",
                             Activate = "Y",
                             Admin = "N",
                             Delete = "N",
                             Email = "stjworkemail@163.com",
-                            LastLoginTime = new DateTime(2020, 1, 4, 23, 2, 3, 283, DateTimeKind.Local).AddTicks(8830),
+                            LastLoginTime = new DateTime(2020, 3, 21, 23, 21, 11, 734, DateTimeKind.Local).AddTicks(7683),
                             Lock = "N",
                             NickName = "超级管理员",
                             PassWord = "F59BD65F7EDAFB087A81D4DCA06C4910",
-                            RegisterTime = new DateTime(2020, 1, 4, 23, 2, 3, 278, DateTimeKind.Local).AddTicks(6321),
+                            RegisterTime = new DateTime(2020, 3, 21, 23, 21, 11, 731, DateTimeKind.Local).AddTicks(6753),
                             UseMdEdit = "N",
                             UserName = "Admin"
                         });

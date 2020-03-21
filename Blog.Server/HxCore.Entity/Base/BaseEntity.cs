@@ -10,14 +10,13 @@ namespace HxCore.Entity
     /// <summary>
     /// 基础的实体类，封装了公共的字段
     /// </summary>
-    public abstract class BaseEntity : BaseModel,IEntity<string>
+    public abstract class BaseEntity : BaseModel,IEntity<long>
     {
         /// <summary>
         /// 主键
         /// </summary>
         [Key]
-        [StringLength(100)]
-        public string Id
+        public long Id
         {
             get;
             set;

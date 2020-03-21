@@ -70,7 +70,7 @@ namespace HxCore.Entity.Context
         /// <typeparam name="T"></typeparam>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public Task<T> QueryEntity<T>(Expression<Func<T, bool>> predicate) where T : class
+        public Task<T> FindEntity<T>(Expression<Func<T, bool>> predicate) where T : class
         {
             return this.Db.Set<T>().FirstOrDefaultAsync(predicate);
         }
