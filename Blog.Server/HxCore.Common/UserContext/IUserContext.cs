@@ -19,6 +19,11 @@ namespace HxCore.Common
         /// 昵称名
         /// </summary>
         public string NickName { get; }
+
+        /// <summary>
+        /// 是否是管理员
+        /// </summary>
+        public bool IsAdmin { get; }
         /// <summary>
         /// 用户的id
         /// </summary>

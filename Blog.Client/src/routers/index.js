@@ -20,6 +20,10 @@ const routes = [{
   name:'edit',
   path: '/blog/edit',
   component: () => import('../views/Blog/Edit.vue')
+}, {
+  name:'view',
+  path: '/article/:userName/:id',
+  component: () => import('../views/Blog/View.vue')
 }]
 const router = new Router({
   mode: 'history',

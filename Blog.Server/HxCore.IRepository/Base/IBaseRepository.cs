@@ -14,14 +14,14 @@ namespace HxCore.IRepository
         /// </summary>
         /// <param name="id">id</param>
         /// <returns>模型数据</returns>
-        Task<T> QueryEntityById(object id);
+        Task<T> FindEntityById(object id);
 
         /// <summary>
         /// 获取满足指定条件的一条数据
         /// </summary>
         /// <param name="predicate">获取数据的条件lambda</param>
         /// <returns>满足当前条件的一个实体</returns>
-        Task<T> QueryEntity(Expression<Func<T, bool>> predicate);
+        Task<T> FindEntity(Expression<Func<T, bool>> predicate);
 
         /// <summary>
         /// 根据lambda表达式查询出单个实体（不进行跟踪）

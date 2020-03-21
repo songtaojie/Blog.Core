@@ -18,12 +18,12 @@ namespace HxCore.Repository
             this.Db = db;
         }
         #region 查询
-        public async Task<T> QueryEntity(Expression<Func<T, bool>> predicate)
+        public async Task<T> FindEntity(Expression<Func<T, bool>> predicate)
         {
             return await Db.Set<T>().FirstOrDefaultAsync(predicate);
         }
 
-        public async Task<T> QueryEntityById(object id)
+        public async Task<T> FindEntityById(object id)
         {
             return await Db.Set<T>().FindAsync(id);
         }

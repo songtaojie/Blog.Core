@@ -55,6 +55,12 @@ namespace HxCore.Web.Auth
         /// 昵称
         /// </summary>
         public string NickName { get; set; }
+
+        /// <summary>
+        ///是否是管理员
+        /// </summary>
+        public bool IsAdmin { get; set; }
+
         /// <summary>
         /// 角色
         /// </summary>

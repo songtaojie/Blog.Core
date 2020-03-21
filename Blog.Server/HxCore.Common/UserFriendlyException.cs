@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HxCore.Entity
+namespace HxCore.Common
 {
     /// <summary>
     /// 用户友好的异常提示
     /// </summary>
-    public class UserFriendlyException:Exception
+    public class UserFriendlyException : Exception
     {
         /// <summary>
         /// 构造函数

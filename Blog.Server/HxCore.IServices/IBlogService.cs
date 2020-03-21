@@ -21,11 +21,13 @@ namespace HxCore.IServices
         /// 获取博客标签列表
         /// </summary>
         /// <returns></returns>
-        List<BlogViewModel> QueryBlogList();
+        Task<List<BlogQueryModel>> QueryBlogList();
         /// <summary>
         /// 获取博客标签列表
         /// </summary>
         /// <returns></returns>
         List<PersonTag> QueryTagList();
+
+        Task<BlogViewModel> FindById(string id);
     }
 }

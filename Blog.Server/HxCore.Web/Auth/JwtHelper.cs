@@ -31,6 +31,7 @@ namespace HxCore.Web.Auth
             {
                 new Claim(ClaimTypes.Name, model.UserName),
                 new Claim(HxCoreClaimTypes.NickName, model.NickName),
+                new Claim(HxCoreClaimTypes.IsAdmin, model.IsAdmin.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, model.UserId),
                 new Claim(ClaimTypes.Expiration, DateTime.Now.AddSeconds(model.Expiration.TotalSeconds).ToString()),
                 new Claim(JwtRegisteredClaimNames.Iss,settings.Issuer),

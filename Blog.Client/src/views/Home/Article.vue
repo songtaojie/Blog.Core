@@ -3,7 +3,7 @@
     <div v-for="item in blogList" :key="item.id" class="mb-2 bg-white blog-item">
       <div class="blog-item-title">
         <h4>
-          <b-link href="#foo">{{item.title}}</b-link>
+          <b-link target="_blank" :href="'/article/'+ item.userName+ '/' + item.id">{{item.title}}</b-link>
         </h4>
       </div>
       <div class="blog-item-summary blog-content-nowrap">
@@ -15,7 +15,7 @@
             <img :src="item.avatarUrl?item.avatarUrl:avatarUrl" />
           </a>
         </div>
-        <div class="mr-1">{{item.userName}}</div>
+        <div class="mr-1">{{isEmpty(item.nickName)?item.userName:item.nickName}}</div>
         <div class="mr-1">{{dateFormat(item.publishDate)}}</div>
         <div class="blog-read ml-auto">
           <a>
@@ -34,7 +34,7 @@
   </article>
 </template>
 <script>
-import { dateFormat } from '../../common/'
+import { dateFormat, isEmpty } from '../../common/'
 export default {
   name: 'HxArticle',
   data() {
@@ -47,9 +47,8 @@ export default {
     this.getList()
   },
   methods: {
-    dateFormat(time) {
-      return dateFormat(time)
-    },
+    isEmpty,
+    dateFormat,
     getList: function () {
       var that = this
       that.$api.post('api/blog/QueryBlogList')

@@ -31,14 +31,14 @@ namespace HxCore.Services
             this.Mapper = dbSession.GetRequiredService<IMapper>();
         }
         #region 查询
-        public async Task<T> QueryEntity(Expression<Func<T, bool>> predicate, bool defaultFilter = true)
+        public async Task<T> FindEntity(Expression<Func<T, bool>> predicate, bool defaultFilter = true)
         {
-            return await Repository.QueryEntity(GetLambda(predicate,defaultFilter));
+            return await Repository.FindEntity(GetLambda(predicate,defaultFilter));
         }
 
-        public async Task<T> QueryEntityById(object id)
+        public async Task<T> FindEntityById(object id)
         {
-            return await Repository.QueryEntityById(id);
+            return await Repository.FindEntityById(id);
         }
 
         public async Task<T> QueryEntityNoTrack(Expression<Func<T, bool>> predicate, bool defaultFilter = true)

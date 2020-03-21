@@ -10,9 +10,13 @@ using HxCore.Common;
 using AutoMapper;
 using HxCore.Entity.Context;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace HxCore.Services
 {
+    /// <summary>
+    /// 博客的服务类
+    /// </summary>
     public class BlogService:BaseService<Blog>,IBlogService
     {
         private IBlogTagRepository TagRepository { get; }
@@ -21,6 +25,7 @@ namespace HxCore.Services
         {
             this.TagRepository = tagRepository;
         }
+        #region 新增编辑
         public async Task<bool> InsertAsync(BlogCreateModel blogModel)
         {
             var entity = this.Mapper.Map<Blog>(blogModel);
@@ -55,7 +60,7 @@ namespace HxCore.Services
                         }
                         else
                         {
-                            var blogTag = this.DbSession.GetById<BlogTag>(p.Id);
+                            var blogTag = this.DbSession.FindById<BlogTag>(p.Id);
                             if (blogTag != null)
                             {
                                 blogTagList.Add(blogTag.Id);
@@ -68,35 +73,38 @@ namespace HxCore.Services
             Task<bool> result = Task.FromResult(false);
             await this.DbSession.ExcuteAsync(delegate
             {
-                
+
                 entity = this.BeforeInsert(entity);
-                 this.Repository.Insert(entity);
-                 this.TagRepository.Insert(tagEntityList);
+                this.Repository.Insert(entity);
+                this.TagRepository.Insert(tagEntityList);
                 result = this.DbSession.SaveChangesAsync();
             });
             return await result;
         }
+        #endregion
 
+        #region 查询
         /// <summary>
         /// 获取博客标签列表
         /// </summary>
         /// <returns></returns>
-        public List<BlogViewModel> QueryBlogList()
+        public Task<List<BlogQueryModel>> QueryBlogList()
         {
             var blogList = this.Repository.QueryEntitiesNoTrack(b => b.Publish == ConstKey.Yes);
             var userList = this.DbSession.QueryEntities<UserInfo>(u => u.Delete == ConstKey.No);
             WebManager webManager = this.DbSession.GetRequiredService<WebManager>();
-            var resultList =blogList.Join(userList, b => b.UserId, u => u.Id, (b, u) => new BlogViewModel
+            var resultList = blogList.Join(userList, b => b.UserId, u => u.Id, (b, u) => new BlogQueryModel
             {
                 Id = b.Id,
-                UserName = string.IsNullOrEmpty(u.NickName)?u.UserName:u.NickName,
+                NickName = u.NickName,
+                UserName = u.UserName,
                 Title = b.Title,
                 Content = b.Content,
                 ReadCount = b.ReadCount,
                 CmtCount = b.CmtCount,
                 PublishDate = b.PublishDate,
                 AvatarUrl = webManager.GetFullUrl(u.AvatarUrl)
-            }).ToList();
+            }).ToListAsync();
             return resultList;
         }
 
@@ -108,10 +116,22 @@ namespace HxCore.Services
         {
             return this.TagRepository.QueryEntitiesNoTrack(t => t.UserId == UserContext.UserId)
                 .Select(t => new PersonTag
-                { 
+                {
                     Id = t.Id,
                     Name = t.Name
                 }).ToList();
         }
+
+        public async Task<BlogViewModel> FindById(string id)
+        {
+            var blog = await this.FindEntityById(id);
+            if (blog == null || (blog.Publish == ConstKey.No && (UserContext == null || UserContext.UserId != blog.UserId || !UserContext.IsAdmin))) throw new NotFoundException("找不到您访问的页面");
+            var blogModel = this.Mapper.Map<BlogViewModel>(blog);
+            var userInfo = await this.DbSession.FindEntity<UserInfo>(u => u.UserName == blog.UserName);
+            blogModel.NickName = userInfo.NickName;
+            return blogModel;
+        }
+        #endregion
+
     }
 }

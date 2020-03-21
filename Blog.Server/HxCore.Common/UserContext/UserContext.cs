@@ -12,7 +12,7 @@ namespace HxCore.Common
     /// <summary>
     /// 用户上下文操作类
     /// </summary>
-    public class UserContext: IUserContext
+    public class UserContext : IUserContext
     {
         /// <summary>
         /// HttpContext访问器
@@ -37,9 +37,14 @@ namespace HxCore.Common
         public string UserName => HttpContext.User.Identity.Name;
 
         /// <summary>
-        /// 用户的id
+        /// 用户的昵称
         /// </summary>
         public string NickName => GetClaimValueByType(HxCoreClaimTypes.NickName).FirstOrDefault();
+
+        /// <summary>
+        /// 用户的昵称
+        /// </summary>
+        public bool IsAdmin => GetClaimValueByType<bool>(HxCoreClaimTypes.IsAdmin);
         /// <summary>
         /// 用户的id
         /// </summary>
@@ -132,6 +137,34 @@ namespace HxCore.Common
                     where item.Type == ClaimType
                     select item.Value).ToList();
 
+        }
+
+        public T GetClaimValueByType<T>(string ClaimType)
+        {
+            var claim = GetClaimValueByType(ClaimType).FirstOrDefault();
+            if (claim == null) return default;
+            var type = typeof(T);
+            if (type == typeof(int) || type == typeof(int?))
+            {
+                int.TryParse(claim, out int result);
+                return (T)(object)result;
+            }
+            else if (type == typeof(bool) || type == typeof(bool?))
+            {
+                bool.TryParse(claim, out bool result);
+                return (T)(object)result;
+            }
+            else if (type == typeof(decimal) || type == typeof(decimal?))
+            {
+                decimal.TryParse(claim, out decimal result);
+                return (T)(object)result;
+            }
+            else if (type == typeof(DateTime) || type == typeof(DateTime?))
+            {
+                DateTime.TryParse(claim, out DateTime result);
+                return (T)(object)result;
+            }
+            return default;
         }
     }
 }

@@ -1,6 +1,4 @@
 ﻿using HxCore.Common;
-using HxCore.Entity;
-using HxCore.Entity.Dependency;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,9 +6,9 @@ using System.Text;
 namespace HxCore.Model
 {
     /// <summary>
-    /// 博客视图模型
+    /// 博客查询实体类
     /// </summary>
-    public class BlogViewModel:IAutoMapper<Blog>
+    public class BlogQueryModel
     {
         /// <summary>
         /// 博客id
@@ -38,12 +36,16 @@ namespace HxCore.Model
         /// 昵称
         /// </summary>
         public string NickName { get; set; }
+        /// <summary>
+        /// 首页显示的内容
+        /// </summary>
+        public string HomeContent => WebHelper.FilterHtmlP(Content, 100);
 
         /// <summary>
         /// 阅读量
         /// </summary>
         public long ReadCount { get; set; }
-       
+
         /// <summary>
         /// 被评论次数
         /// </summary>
@@ -57,27 +59,26 @@ namespace HxCore.Model
         /// 头像链接
         /// </summary>
         public string AvatarUrl { get; set; }
-
-        /// <summary>
-        /// 上一篇博客的id
-        /// </summary>
-        public string PreId { get; set; }
-
-        /// <summary>
-        /// 上一篇博客的名字
-        /// </summary>
-        public string PreName { get; set; }
-
-        /// <summary>
-        /// 下一篇博客的id
-        /// </summary>
-        public string NextId { get; set; }
-
-        /// <summary>
-        /// 下一篇博客的名字
-        /// </summary>
-        public string NextName { get; set; }
-
     }
-    
+
+    /// <summary>
+    /// 个人标签
+    /// </summary>
+    public class PersonTag
+    {
+        /// <summary>
+        /// id
+        /// </summary>
+        public string Id { get; set; }
+
+        /// <summary>
+        /// 值
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 是否可编辑
+        /// </summary>
+        public bool? Editable { get; set; } = false;
+    }
 }

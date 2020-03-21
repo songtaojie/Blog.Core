@@ -73,6 +73,11 @@
             昵称
             </summary>
         </member>
+        <member name="P:HxCore.Web.Auth.JwtModel.IsAdmin">
+             <summary>
+            是否是管理员
+             </summary>
+        </member>
         <member name="P:HxCore.Web.Auth.JwtModel.Role">
             <summary>
             角色
@@ -405,6 +410,14 @@
             <summary>
             获取博客列表
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HxCore.Web.Controllers.BlogController.FindById(System.String,System.String)">
+            <summary>
+            根据博客id获取博客信息
+            </summary>
+            <param name="userName">当前博客所属用户</param>
+            <param name="id">博客id</param>
             <returns></returns>
         </member>
         <member name="M:HxCore.Web.Controllers.BlogController.Save(HxCore.Model.BlogCreateModel)">

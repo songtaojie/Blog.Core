@@ -30,15 +30,15 @@ namespace HxCore.Web.Controllers
         {
             blogService = _blogService;
         }
+        #region 博客查询
         /// <summary>
         /// 获取博客列表
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public List<BlogViewModel> QueryBlogList()
+        public Task<List<BlogQueryModel>> QueryBlogList()
         {
-            var result = blogService.QueryBlogList();
-            return result;
+            return blogService.QueryBlogList();
         }
 
         /// <summary>
@@ -52,6 +52,21 @@ namespace HxCore.Web.Controllers
             var result = blogService.QueryTagList();
             return result;
         }
+
+        /// <summary>
+        /// 根据博客id获取博客信息
+        /// </summary>
+        /// <param name="userName">当前博客所属用户</param>
+        /// <param name="id">博客id</param>
+        /// <returns></returns>
+        [HttpPost]
+        public Task<BlogViewModel> FindById(string userName,string id)
+        {
+            return blogService.FindById(id);
+        }
+        #endregion 
+
+
 
         #region 博客的保存编辑
         /// <summary>
@@ -158,6 +173,5 @@ namespace HxCore.Web.Controllers
         }
         #endregion
 
-        
     }
 }

@@ -50,7 +50,7 @@ namespace HxCore.Entity.Context
         /// <typeparam name="T"></typeparam>
         /// <param name="keyValues"></param>
         /// <returns></returns>
-        public T GetById<T>(params object[] keyValues) where T : class
+        public T FindById<T>(params object[] keyValues) where T : class
         {
             return this.Db.Find<T>(keyValues);
         }
@@ -60,7 +60,7 @@ namespace HxCore.Entity.Context
         /// <typeparam name="T"></typeparam>
         /// <param name="keyValues"></param>
         /// <returns></returns>
-        public Task<T> GetByIdAsync<T>(params object[] keyValues) where T : class
+        public Task<T> FindByIdAsync<T>(params object[] keyValues) where T : class
         {
             return this.Db.FindAsync<T>(keyValues).AsTask();
         }
