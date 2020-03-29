@@ -28,6 +28,6 @@ namespace HxCore.IServices
         /// <returns></returns>
         List<PersonTag> QueryTagList();
 
-        Task<BlogViewModel> FindById(string id);
+        Task<BlogViewModel> FindById(long id);
     }
 }

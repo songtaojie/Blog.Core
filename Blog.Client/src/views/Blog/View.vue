@@ -1,18 +1,28 @@
 <template>
   <div>
     <hx-header></hx-header>
-    <div>{{userName + id}}</div>
+    <div class="container">
+      <header>
+        <h4 class="article-title">
+          <b-link> {{detail.title}}</b-link>
+        </h4>
+      </header>
+      <article>
+
+      </article>
+    </div>
   </div>
 </template>
 
 <script>
 import HxHeader from '@/components/HxHeader.vue'
 export default {
-  name:'view',
+  // name:'view',
   data() {
     return {
       userName:this.$route.params.userName,
-      id:this.$route.params.id
+      id:this.$route.params.id,
+      detail:{}
     }
   },
   components:{
@@ -23,8 +33,9 @@ export default {
       var that = this
       that.$api.post(`/api/blog/FindById?userName=${that.userName}&id=${that.id}`)
         .then(res => {
-          debugger
-          console.log(res)
+          if(res && res.success) {
+            that.detail = res.data
+          }
         })
     }
   },
@@ -36,5 +47,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
+.article-title{
+  margin-bottom: 10px;
+}
 </style>

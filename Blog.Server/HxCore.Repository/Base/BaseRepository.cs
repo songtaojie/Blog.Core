@@ -66,7 +66,7 @@ namespace HxCore.Repository
         /// </summary>
         /// <param name="entityList"></param>
         /// <returns></returns>
-        public Task Insert(IEnumerable<T> entityList)
+        public Task BatchInsert(IEnumerable<T> entityList)
         {
             var result = this.Db.Set<T>().AddRangeAsync(entityList);
             return result;

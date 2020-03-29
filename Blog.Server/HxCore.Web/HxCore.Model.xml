@@ -214,6 +214,36 @@
             下一篇博客的名字
             </summary>
         </member>
+        <member name="T:HxCore.Model.BlogTypeModel">
+            <summary>
+            博客类型的模型
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogTypeModel.Id">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogTypeModel.Name">
+            <summary>
+            名字
+            </summary>
+        </member>
+        <member name="T:HxCore.Model.CategoryModel">
+            <summary>
+            分类
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.CategoryModel.Id">
+            <summary>
+            主键（long）
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.CategoryModel.Name">
+            <summary>
+            名字
+            </summary>
+        </member>
         <member name="T:HxCore.Model.ViewModels.LoginParam">
             <summary>
             登录参数

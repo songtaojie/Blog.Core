@@ -78,7 +78,7 @@ namespace HxCore.Services
         {
             if (entity != null && typeof(Entity.BaseEntity).IsAssignableFrom(typeof(T)))
             {
-                entity["Id"] = Helper.GetSnowId();
+                entity["Id"] = Helper.GetLongSnowId();
                 if (UserContext.IsAuthenticated)
                 { 
                     entity["UserId"] = UserContext.UserId;
@@ -104,7 +104,7 @@ namespace HxCore.Services
         /// </summary>
         /// <param name="entityList"></param>
         /// <returns></returns>
-        public async Task<bool> Insert(IEnumerable<T> entityList)
+        public async Task<bool> BatchInsert(IEnumerable<T> entityList)
         {
             List<T> newList = new List<T>();
             if (entityList != null && entityList.Count() > 0)
@@ -114,7 +114,7 @@ namespace HxCore.Services
                     newList.Add(this.BeforeInsert(entity));
                 }
             }
-            await Repository.Insert(newList);
+            await Repository.BatchInsert(newList);
             var result = await this.Repository.SaveChangesAsync();
             return result;
         }

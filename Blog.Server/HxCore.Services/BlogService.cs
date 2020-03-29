@@ -60,7 +60,8 @@ namespace HxCore.Services
                         }
                         else
                         {
-                            var blogTag = this.DbSession.FindById<BlogTag>(p.Id);
+                            long.TryParse(p.Id, out long longId);
+                            var blogTag = this.DbSession.FindById<BlogTag>(longId);
                             if (blogTag != null)
                             {
                                 blogTagList.Add(blogTag.Id);
@@ -70,16 +71,14 @@ namespace HxCore.Services
                 });
                 entity.BlogTags = string.Join(",", blogTagList);
             }
-            Task<bool> result = Task.FromResult(false);
-            await this.DbSession.ExcuteAsync(delegate
-            {
-
-                entity = this.BeforeInsert(entity);
-                this.Repository.Insert(entity);
-                this.TagRepository.Insert(tagEntityList);
-                result = this.DbSession.SaveChangesAsync();
-            });
-            return await result;
+            bool result = await this.DbSession.ExcuteAsync(async delegate
+             {
+                 entity = this.BeforeInsert(entity);
+                 await this.Repository.Insert(entity);
+                 await this.TagRepository.BatchInsert(tagEntityList);
+                 await this.DbSession.SaveChangesAsync();
+             });
+            return result;
         }
         #endregion
 
@@ -95,7 +94,7 @@ namespace HxCore.Services
             WebManager webManager = this.DbSession.GetRequiredService<WebManager>();
             var resultList = blogList.Join(userList, b => b.UserId, u => u.Id, (b, u) => new BlogQueryModel
             {
-                Id = b.Id,
+                Id = b.Id.ToString(),
                 NickName = u.NickName,
                 UserName = u.UserName,
                 Title = b.Title,
@@ -122,7 +121,7 @@ namespace HxCore.Services
                 }).ToList();
         }
 
-        public async Task<BlogViewModel> FindById(string id)
+        public async Task<BlogViewModel> FindById(long id)
         {
             var blog = await this.FindEntityById(id);
             if (blog == null || (blog.Publish == ConstKey.No && (UserContext == null || UserContext.UserId != blog.UserId || !UserContext.IsAdmin))) throw new NotFoundException("找不到您访问的页面");

@@ -36,9 +36,10 @@ namespace HxCore.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public Task<List<BlogQueryModel>> QueryBlogList()
+        public async Task<List<BlogQueryModel>> QueryBlogList()
         {
-            return blogService.QueryBlogList();
+            var result = await blogService.QueryBlogList();
+            return result;
         }
 
         /// <summary>
@@ -60,7 +61,7 @@ namespace HxCore.Web.Controllers
         /// <param name="id">博客id</param>
         /// <returns></returns>
         [HttpPost]
-        public Task<BlogViewModel> FindById(string userName,string id)
+        public Task<BlogViewModel> FindById(string userName,long id)
         {
             return blogService.FindById(id);
         }

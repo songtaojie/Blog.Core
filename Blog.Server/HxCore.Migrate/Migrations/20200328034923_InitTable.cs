@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HxCore.Migrate.Migrations
 {
-    public partial class AddTables : Migration
+    public partial class InitTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,8 +11,7 @@ namespace HxCore.Migrate.Migrations
                 name: "BasicInfo",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(nullable: false),
                     CreateTime = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<string>(maxLength: 100, nullable: true),
                     UserName = table.Column<string>(maxLength: 50, nullable: true),
@@ -41,8 +40,7 @@ namespace HxCore.Migrate.Migrations
                 name: "Blog",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(nullable: false),
                     CreateTime = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<string>(maxLength: 100, nullable: true),
                     UserName = table.Column<string>(maxLength: 50, nullable: true),
@@ -87,8 +85,7 @@ namespace HxCore.Migrate.Migrations
                 name: "BlogTag",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(nullable: false),
                     CreateTime = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<string>(maxLength: 100, nullable: true),
                     UserName = table.Column<string>(maxLength: 50, nullable: true),
@@ -109,8 +106,7 @@ namespace HxCore.Migrate.Migrations
                 name: "BlogType",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(nullable: false),
                     CreateTime = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<string>(maxLength: 100, nullable: true),
                     UserName = table.Column<string>(maxLength: 50, nullable: true),
@@ -131,8 +127,7 @@ namespace HxCore.Migrate.Migrations
                 name: "Category",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(nullable: false),
                     CreateTime = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<string>(maxLength: 100, nullable: true),
                     UserName = table.Column<string>(maxLength: 50, nullable: true),
@@ -153,8 +148,7 @@ namespace HxCore.Migrate.Migrations
                 name: "JobInfo",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(nullable: false),
                     CreateTime = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<string>(maxLength: 100, nullable: true),
                     UserName = table.Column<string>(maxLength: 50, nullable: true),
@@ -208,9 +202,9 @@ namespace HxCore.Migrate.Migrations
                 columns: new[] { "Id", "CreateTime", "Delete", "DeleteTime", "DeletelUserId", "Description", "LastModifyTime", "Name", "Order", "UserId", "UserName" },
                 values: new object[,]
                 {
-                    { 850152162976595968L, new DateTime(2020, 3, 21, 23, 21, 11, 737, DateTimeKind.Local).AddTicks(8088), "N", null, null, null, null, "原创", null, "b7a14451-b51b-4b2c-87fe-34a948e0746b", "Admin" },
-                    { 850152162976595969L, new DateTime(2020, 3, 21, 23, 21, 11, 737, DateTimeKind.Local).AddTicks(8798), "N", null, null, null, null, "转载", null, "b7a14451-b51b-4b2c-87fe-34a948e0746b", "Admin" },
-                    { 850152162976595970L, new DateTime(2020, 3, 21, 23, 21, 11, 737, DateTimeKind.Local).AddTicks(8806), "N", null, null, null, null, "翻译", null, "b7a14451-b51b-4b2c-87fe-34a948e0746b", "Admin" }
+                    { 852514776905940992L, new DateTime(2020, 3, 28, 11, 49, 22, 794, DateTimeKind.Local).AddTicks(377), "N", null, null, null, null, "原创", null, "d0b4df42-ba26-4fae-9848-dc0d3520754e", "Admin" },
+                    { 852514776910135296L, new DateTime(2020, 3, 28, 11, 49, 22, 794, DateTimeKind.Local).AddTicks(1019), "N", null, null, null, null, "转载", null, "d0b4df42-ba26-4fae-9848-dc0d3520754e", "Admin" },
+                    { 852514776910135297L, new DateTime(2020, 3, 28, 11, 49, 22, 794, DateTimeKind.Local).AddTicks(1026), "N", null, null, null, null, "翻译", null, "d0b4df42-ba26-4fae-9848-dc0d3520754e", "Admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -218,15 +212,15 @@ namespace HxCore.Migrate.Migrations
                 columns: new[] { "Id", "CreateTime", "Delete", "DeleteTime", "DeletelUserId", "Description", "LastModifyTime", "Name", "Order", "UserId", "UserName" },
                 values: new object[,]
                 {
-                    { 850152162980790272L, new DateTime(2020, 3, 21, 23, 21, 11, 738, DateTimeKind.Local).AddTicks(708), "N", null, null, null, null, "前端", null, "b7a14451-b51b-4b2c-87fe-34a948e0746b", "Admin" },
-                    { 850152162980790273L, new DateTime(2020, 3, 21, 23, 21, 11, 738, DateTimeKind.Local).AddTicks(752), "N", null, null, null, null, "后端", null, "b7a14451-b51b-4b2c-87fe-34a948e0746b", "Admin" },
-                    { 850152162980790274L, new DateTime(2020, 3, 21, 23, 21, 11, 738, DateTimeKind.Local).AddTicks(760), "N", null, null, null, null, "编程语言", null, "b7a14451-b51b-4b2c-87fe-34a948e0746b", "Admin" }
+                    { 852514776910135298L, new DateTime(2020, 3, 28, 11, 49, 22, 794, DateTimeKind.Local).AddTicks(2359), "N", null, null, null, null, "前端", null, "d0b4df42-ba26-4fae-9848-dc0d3520754e", "Admin" },
+                    { 852514776910135299L, new DateTime(2020, 3, 28, 11, 49, 22, 794, DateTimeKind.Local).AddTicks(2388), "N", null, null, null, null, "后端", null, "d0b4df42-ba26-4fae-9848-dc0d3520754e", "Admin" },
+                    { 852514776910135300L, new DateTime(2020, 3, 28, 11, 49, 22, 794, DateTimeKind.Local).AddTicks(2392), "N", null, null, null, null, "编程语言", null, "d0b4df42-ba26-4fae-9848-dc0d3520754e", "Admin" }
                 });
 
             migrationBuilder.InsertData(
                 table: "UserInfo",
                 columns: new[] { "Id", "Activate", "Admin", "AvatarUrl", "BasicInfoId", "Delete", "DeleteTime", "Email", "JobInfoId", "LastLoginTime", "Lock", "LoginIp", "NickName", "OpenId", "PassWord", "RegisterTime", "UseMdEdit", "UserName" },
-                values: new object[] { "b7a14451-b51b-4b2c-87fe-34a948e0746b", "Y", "N", null, null, "N", null, "stjworkemail@163.com", null, new DateTime(2020, 3, 21, 23, 21, 11, 734, DateTimeKind.Local).AddTicks(7683), "N", null, "超级管理员", null, "F59BD65F7EDAFB087A81D4DCA06C4910", new DateTime(2020, 3, 21, 23, 21, 11, 731, DateTimeKind.Local).AddTicks(6753), "N", "Admin" });
+                values: new object[] { "d0b4df42-ba26-4fae-9848-dc0d3520754e", "Y", "N", null, null, "N", null, "stjworkemail@163.com", null, new DateTime(2020, 3, 28, 11, 49, 22, 790, DateTimeKind.Local).AddTicks(8535), "N", null, "超级管理员", null, "F59BD65F7EDAFB087A81D4DCA06C4910", new DateTime(2020, 3, 28, 11, 49, 22, 787, DateTimeKind.Local).AddTicks(9248), "N", "Admin" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -13,7 +13,8 @@ namespace HxCore.Model
         /// <summary>
         /// 博客id
         /// </summary>
-        public long Id { get; set; }
+        public string Id { get; set; }
+
         /// <summary>
         /// 博客标题
         /// </summary>

@@ -75,12 +75,12 @@ namespace HxCore.Entity.Context
         /// 执行事务
         /// </summary>
         /// <param name="handler"></param>
-        void Excute(EventHandler handler);
+        bool Excute(EventHandler handler);
         /// <summary>
         /// 执行事务
         /// </summary>
         /// <param name="handler"></param>
-        Task ExcuteAsync(EventHandler handler);
+        Task<bool> ExcuteAsync(EventHandler handler);
         /// <summary>
         /// 保存更改
         /// </summary>

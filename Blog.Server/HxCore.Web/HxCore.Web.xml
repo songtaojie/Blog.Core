@@ -412,7 +412,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HxCore.Web.Controllers.BlogController.FindById(System.String,System.String)">
+        <member name="M:HxCore.Web.Controllers.BlogController.FindById(System.String,System.Int64)">
             <summary>
             根据博客id获取博客信息
             </summary>

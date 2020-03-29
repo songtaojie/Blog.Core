@@ -16,6 +16,7 @@ namespace HxCore.Entity
         /// 主键
         /// </summary>
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long Id
         {
             get;

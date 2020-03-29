@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using HxCore.Common;
 using HxCore.Entity;
 using HxCore.Entity.Context;
+using HxCore.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,9 +31,13 @@ namespace HxCore.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost,HttpGet]
-        public List<BlogType> GetBlogTypeList()
+        public List<BlogTypeModel> GetBlogTypeList()
         {
-            var list = this.db.QueryEntities<BlogType>(b => b.Delete == ConstKey.No).ToList();
+            var list = this.db.QueryEntities<BlogType>(b => b.Delete == ConstKey.No).Select(b=>new BlogTypeModel
+            {
+                Id = b.Id.ToString(),
+                Name = b.Name
+            }).ToList();
             return list;
         }
 
@@ -41,9 +46,14 @@ namespace HxCore.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost, HttpGet]
-        public List<Category> GetCategoryList()
+        public List<CategoryModel> GetCategoryList()
         {
-            return this.db.QueryEntities<Category>(b => b.Delete == ConstKey.No).ToList();
+            return this.db.QueryEntities<Category>(b => b.Delete == ConstKey.No)
+                .Select(c => new CategoryModel
+                { 
+                    Id = c.Id.ToString(),
+                    Name = c.Name
+                }).ToList();
         }
     }
 }

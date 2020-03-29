@@ -89,52 +89,43 @@ namespace HxCore.Entity.Context
         /// 执行事务
         /// </summary>
         /// <param name="handler"></param>
-        public void Excute(EventHandler handler)
+        public bool Excute(EventHandler handler)
         {
-            Exception inner = null;
-            
             using (IDbContextTransaction transaction = Db.Database.BeginTransaction())
             {
                 try
                 {
                     handler?.Invoke(null, EventArgs.Empty);
                     transaction.Commit();
+                    return true;
                 }
                 catch (Exception e)
                 {
-                    inner = e;
                     transaction.Rollback();
+                    throw new System.Reflection.TargetInvocationException(e);
                 }
-            }
-            if (inner != null)
-            {
-                throw new System.Reflection.TargetInvocationException(inner);
             }
         }
         /// <summary>
         /// 异步执行
         /// </summary>
         /// <param name="handler"></param>
-        public async Task ExcuteAsync(EventHandler handler)
+        public async Task<bool> ExcuteAsync(EventHandler handler)
         {
-            Exception inner = null;
-
-            using (Task<IDbContextTransaction> transaction = Db.Database.BeginTransactionAsync())
+            using (IDbContextTransaction transaction = await Db.Database.BeginTransactionAsync())
             {
                 try
                 {
                     handler?.Invoke(null, EventArgs.Empty);
-                    await transaction.Result.CommitAsync();
+                    await transaction.CommitAsync();
+                    return true;
                 }
                 catch (Exception e)
                 {
-                    inner = e;
-                    await transaction.Result.RollbackAsync();
+
+                    await transaction.RollbackAsync();
+                    throw new System.Reflection.TargetInvocationException(e);
                 }
-            }
-            if (inner != null)
-            {
-                throw new System.Reflection.TargetInvocationException(inner);
             }
         }
 

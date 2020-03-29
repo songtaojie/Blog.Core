@@ -1,7 +1,7 @@
 <template>
 <div>
   <b-form-select :value="value" :required="required" :options="items" :placeholder="placeholder"
-  value-field="id" text-field="name" @change="onChange">
+  :value-field="valueField" :text-field="textField" @change="onChange">
   </b-form-select>
 </div>
 </template>
@@ -25,6 +25,14 @@ export default {
     api:{
       type:String,
       default:''
+    },
+    valueField:{
+      type:String,
+      default:'id'
+    },
+    textField:{
+      type:String,
+      default:'name'
     }
   },
   data() {

@@ -57,7 +57,7 @@ namespace HxCore.IServices
         /// </summary>
         /// <param name="entityList"></param>
         /// <returns></returns>
-        Task<bool> Insert(IEnumerable<T> entityList);
+        Task<bool> BatchInsert(IEnumerable<T> entityList);
         #endregion
 
         #region 更新

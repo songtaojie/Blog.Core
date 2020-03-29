@@ -15,7 +15,7 @@ import store from '../store'
 //   axios.defaults.baseURL = 'https://localhost:44354/'
 // }
 // 设置请求超时
-axios.defaults.timeout = 5000
+axios.defaults.timeout = 30000
 // 设置post请求头
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 

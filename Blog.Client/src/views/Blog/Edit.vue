@@ -126,7 +126,7 @@ export default {
         Content:'',
         Publish: 'N',
         PersonTags: [{
-          id: '111',
+          id: 'newData111',
           name: 'ssss',
           editable: false
         }]
