@@ -7,7 +7,7 @@ using System.Text;
 
 namespace HxCore.Services
 {
-    public class UserInfoServices:BaseService<UserInfo>, IUserInfoService
+    public class UserInfoServices:BaseService<T_UserInfo>, IUserInfoService
     {
         public UserInfoServices(IUserInfoRepository userDal):base(userDal)
         {

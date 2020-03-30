@@ -9,7 +9,7 @@ namespace HxCore.Model
     /// <summary>
     /// 博客类型的模型
     /// </summary>
-    public class BlogTypeModel: IAutoMapper<BlogType>
+    public class BlogTypeModel: IAutoMapper<T_BlogType>
     {
         /// <summary>
         /// 主键

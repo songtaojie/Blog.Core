@@ -10,7 +10,7 @@ namespace HxCore.Model.ViewModels
     /// <summary>
     /// 登录视图模型
     /// </summary>
-    public class LoginViewModel: IAutoMapper<UserInfo>
+    public class LoginViewModel: IAutoMapper<T_UserInfo>
     {
         /// <summary>
         /// 令牌

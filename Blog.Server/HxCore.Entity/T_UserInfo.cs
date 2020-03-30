@@ -10,9 +10,9 @@ namespace HxCore.Entity
     /// <summary>
     /// 用户信息类
     /// </summary>
-    [Table("UserInfo")]
+    [Table("T_UserInfo")]
     [Serializable]
-    public class UserInfo : BaseModel, IEntity<string>
+    public class T_UserInfo : BaseModel, IEntity<string>
     {
         /// <summary>
         /// 主键
@@ -139,13 +139,11 @@ namespace HxCore.Entity
         /// <summary>
         /// 基础信息
         /// </summary>
-        [StringLength(100)]
-        public string BasicInfoId { get; set; }
+        public long BasicInfoId { get; set; }
 
         /// <summary>
         /// 工作信息
         /// </summary>
-        [StringLength(100)]
-        public string JobInfoId { get; set; }
+        public long JobInfoId { get; set; }
     }
 }

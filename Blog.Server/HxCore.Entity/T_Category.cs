@@ -7,14 +7,14 @@ using System.Text;
 namespace HxCore.Entity
 {
     /// <summary>
-    /// 博客的类型
+    /// 博客分类
     /// </summary>
-    [Table("BlogType")]
     [Serializable]
-    public class BlogType : BaseEntity
+    [Table("T_Category")]
+    public class T_Category : BaseEntity
     {
         /// <summary>
-        /// 名字
+        /// 分类名字
         /// </summary>
         [StringLength(40)]
         public string Name { get; set; }

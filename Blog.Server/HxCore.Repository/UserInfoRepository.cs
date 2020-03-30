@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HxCore.Repository
 {
-    public class UserInfoRepository:BaseRepository<UserInfo>,IUserInfoRepository
+    public class UserInfoRepository:BaseRepository<T_UserInfo>,IUserInfoRepository
     {
         public UserInfoRepository(DbContext dbSession) : base(dbSession)
         { }

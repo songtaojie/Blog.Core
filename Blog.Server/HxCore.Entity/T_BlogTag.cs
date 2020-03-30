@@ -7,24 +7,24 @@ using System.Text;
 namespace HxCore.Entity
 {
     /// <summary>
-    /// 博客分类
+    /// 博客标签
     /// </summary>
+    [Table("T_BlogTag")]
     [Serializable]
-    //[Table("Category")]
-    public class Category : BaseEntity
+    public class T_BlogTag : BaseEntity
     {
         /// <summary>
-        /// 分类名字
+        /// 标签名字
         /// </summary>
         [StringLength(40)]
         public string Name { get; set; }
         /// <summary>
+        /// 描述
+        /// </summary>
+        public string Description { get; set; }
+        /// <summary>
         /// 排序
         /// </summary>
         public int? Order { get; set; }
-        /// <summary>
-        /// 备注
-        /// </summary>
-        public string Description { get; set; }
     }
 }

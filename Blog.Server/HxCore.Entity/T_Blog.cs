@@ -10,9 +10,9 @@ namespace HxCore.Entity
     /// <summary>
     /// 博客类
     /// </summary>
-    [Table("Blog")]
+    [Table("T_Blog")]
     [Serializable]
-    public class Blog : BaseEntity
+    public class T_Blog : BaseEntity
     {
         /// <summary>
         /// 博客标题
@@ -140,14 +140,12 @@ namespace HxCore.Entity
         /// <summary>
         /// 系统分类，前端、后端、编程语言等
         /// </summary> 
-        [StringLength(100)]
-        public string CategoryId { get; set; }
+        public long CategoryId { get; set; }
 
         /// <summary>
         /// 博客类型，是转发，原创，还是翻译等
         /// </summary> 
-        [StringLength(100)]
-        public string BlogTypeId { get; set; }
+        public long BlogTypeId { get; set; }
 
         /// <summary>
         /// 是否是轮播图

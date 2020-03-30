@@ -10,7 +10,7 @@ namespace HxCore.Model
     /// <summary>
     /// 博客视图模型
     /// </summary>
-    public class BlogViewModel:IAutoMapper<Blog>
+    public class BlogViewModel:IAutoMapper<T_Blog>
     {
         /// <summary>
         /// 博客id
@@ -57,7 +57,10 @@ namespace HxCore.Model
         /// 头像链接
         /// </summary>
         public string AvatarUrl { get; set; }
-
+        /// <summary>
+        /// 系统分类名称
+        /// </summary>
+        public string CategoryName { get; set; }
         /// <summary>
         /// 上一篇博客的id
         /// </summary>

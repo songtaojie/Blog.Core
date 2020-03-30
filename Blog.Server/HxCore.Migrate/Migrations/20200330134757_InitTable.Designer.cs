@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HxCore.Migrate.Migrations
 {
     [DbContext(typeof(HxContext))]
-    [Migration("20200328034923_InitTable")]
+    [Migration("20200330134757_InitTable")]
     partial class InitTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace HxCore.Migrate.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("HxCore.Entity.BasicInfo", b =>
+            modelBuilder.Entity("HxCore.Entity.T_BasicInfo", b =>
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
@@ -98,7 +98,7 @@ namespace HxCore.Migrate.Migrations
                     b.ToTable("BasicInfo");
                 });
 
-            modelBuilder.Entity("HxCore.Entity.Blog", b =>
+            modelBuilder.Entity("HxCore.Entity.T_Blog", b =>
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
@@ -107,9 +107,8 @@ namespace HxCore.Migrate.Migrations
                         .HasColumnType("nvarchar(40)")
                         .HasMaxLength(40);
 
-                    b.Property<string>("BlogTypeId")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<long>("BlogTypeId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("CanCmt")
                         .HasColumnType("char(1)");
@@ -117,9 +116,8 @@ namespace HxCore.Migrate.Migrations
                     b.Property<string>("Carousel")
                         .HasColumnType("char(1)");
 
-                    b.Property<string>("CategoryId")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<long>("CategoryId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(50)")
@@ -220,10 +218,10 @@ namespace HxCore.Migrate.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Blog");
+                    b.ToTable("T_Blog");
                 });
 
-            modelBuilder.Entity("HxCore.Entity.BlogTag", b =>
+            modelBuilder.Entity("HxCore.Entity.T_BlogTag", b =>
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
@@ -264,10 +262,10 @@ namespace HxCore.Migrate.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BlogTag");
+                    b.ToTable("T_BlogTag");
                 });
 
-            modelBuilder.Entity("HxCore.Entity.BlogType", b =>
+            modelBuilder.Entity("HxCore.Entity.T_BlogType", b =>
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
@@ -308,39 +306,39 @@ namespace HxCore.Migrate.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BlogType");
+                    b.ToTable("T_BlogType");
 
                     b.HasData(
                         new
                         {
-                            Id = 852514776905940992L,
-                            CreateTime = new DateTime(2020, 3, 28, 11, 49, 22, 794, DateTimeKind.Local).AddTicks(377),
+                            Id = 853390187210735616L,
+                            CreateTime = new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(351),
                             Delete = "N",
                             Name = "原创",
-                            UserId = "d0b4df42-ba26-4fae-9848-dc0d3520754e",
+                            UserId = "e3763d67-e30a-4370-af53-2d90bbc761b1",
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = 852514776910135296L,
-                            CreateTime = new DateTime(2020, 3, 28, 11, 49, 22, 794, DateTimeKind.Local).AddTicks(1019),
+                            Id = 853390187214929920L,
+                            CreateTime = new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(963),
                             Delete = "N",
                             Name = "转载",
-                            UserId = "d0b4df42-ba26-4fae-9848-dc0d3520754e",
+                            UserId = "e3763d67-e30a-4370-af53-2d90bbc761b1",
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = 852514776910135297L,
-                            CreateTime = new DateTime(2020, 3, 28, 11, 49, 22, 794, DateTimeKind.Local).AddTicks(1026),
+                            Id = 853390187214929921L,
+                            CreateTime = new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(970),
                             Delete = "N",
                             Name = "翻译",
-                            UserId = "d0b4df42-ba26-4fae-9848-dc0d3520754e",
+                            UserId = "e3763d67-e30a-4370-af53-2d90bbc761b1",
                             UserName = "Admin"
                         });
                 });
 
-            modelBuilder.Entity("HxCore.Entity.Category", b =>
+            modelBuilder.Entity("HxCore.Entity.T_Category", b =>
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
@@ -381,39 +379,39 @@ namespace HxCore.Migrate.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("T_Category");
 
                     b.HasData(
                         new
                         {
-                            Id = 852514776910135298L,
-                            CreateTime = new DateTime(2020, 3, 28, 11, 49, 22, 794, DateTimeKind.Local).AddTicks(2359),
+                            Id = 853390187214929922L,
+                            CreateTime = new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(2208),
                             Delete = "N",
                             Name = "前端",
-                            UserId = "d0b4df42-ba26-4fae-9848-dc0d3520754e",
+                            UserId = "e3763d67-e30a-4370-af53-2d90bbc761b1",
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = 852514776910135299L,
-                            CreateTime = new DateTime(2020, 3, 28, 11, 49, 22, 794, DateTimeKind.Local).AddTicks(2388),
+                            Id = 853390187214929923L,
+                            CreateTime = new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(2238),
                             Delete = "N",
                             Name = "后端",
-                            UserId = "d0b4df42-ba26-4fae-9848-dc0d3520754e",
+                            UserId = "e3763d67-e30a-4370-af53-2d90bbc761b1",
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = 852514776910135300L,
-                            CreateTime = new DateTime(2020, 3, 28, 11, 49, 22, 794, DateTimeKind.Local).AddTicks(2392),
+                            Id = 853390187214929924L,
+                            CreateTime = new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(2242),
                             Delete = "N",
                             Name = "编程语言",
-                            UserId = "d0b4df42-ba26-4fae-9848-dc0d3520754e",
+                            UserId = "e3763d67-e30a-4370-af53-2d90bbc761b1",
                             UserName = "Admin"
                         });
                 });
 
-            modelBuilder.Entity("HxCore.Entity.JobInfo", b =>
+            modelBuilder.Entity("HxCore.Entity.T_JobInfo", b =>
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint");
@@ -471,10 +469,10 @@ namespace HxCore.Migrate.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("JobInfo");
+                    b.ToTable("T_JobInfo");
                 });
 
-            modelBuilder.Entity("HxCore.Entity.UserInfo", b =>
+            modelBuilder.Entity("HxCore.Entity.T_UserInfo", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(100)")
@@ -490,9 +488,8 @@ namespace HxCore.Migrate.Migrations
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
-                    b.Property<string>("BasicInfoId")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<long>("BasicInfoId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Delete")
                         .HasColumnType("char(1)");
@@ -505,9 +502,8 @@ namespace HxCore.Migrate.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<string>("JobInfoId")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<long>("JobInfoId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("LastLoginTime")
                         .HasColumnType("datetime2");
@@ -545,21 +541,23 @@ namespace HxCore.Migrate.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserInfo");
+                    b.ToTable("T_UserInfo");
 
                     b.HasData(
                         new
                         {
-                            Id = "d0b4df42-ba26-4fae-9848-dc0d3520754e",
+                            Id = "e3763d67-e30a-4370-af53-2d90bbc761b1",
                             Activate = "Y",
                             Admin = "N",
+                            BasicInfoId = 0L,
                             Delete = "N",
                             Email = "stjworkemail@163.com",
-                            LastLoginTime = new DateTime(2020, 3, 28, 11, 49, 22, 790, DateTimeKind.Local).AddTicks(8535),
+                            JobInfoId = 0L,
+                            LastLoginTime = new DateTime(2020, 3, 30, 21, 47, 56, 871, DateTimeKind.Local).AddTicks(8406),
                             Lock = "N",
                             NickName = "超级管理员",
                             PassWord = "F59BD65F7EDAFB087A81D4DCA06C4910",
-                            RegisterTime = new DateTime(2020, 3, 28, 11, 49, 22, 787, DateTimeKind.Local).AddTicks(9248),
+                            RegisterTime = new DateTime(2020, 3, 30, 21, 47, 56, 868, DateTimeKind.Local).AddTicks(9017),
                             UseMdEdit = "N",
                             UserName = "Admin"
                         });

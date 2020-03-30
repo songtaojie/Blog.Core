@@ -7,7 +7,7 @@ using System.Text;
 namespace HxCore.IServices
 {
     [TransientDependency]
-    public interface IUserInfoService: IBaseService<UserInfo>
+    public interface IUserInfoService: IBaseService<T_UserInfo>
     {
     }
 }

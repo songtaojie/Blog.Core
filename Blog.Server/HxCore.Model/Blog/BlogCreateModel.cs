@@ -10,7 +10,7 @@ namespace HxCore.Model
     /// <summary>
     /// 博客创建所用模型
     /// </summary>
-    public class BlogCreateModel : IAutoMapper<Blog>
+    public class BlogCreateModel : IAutoMapper<T_Blog>
     {
         /// <summary>
         /// 博客id

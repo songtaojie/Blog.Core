@@ -110,266 +110,6 @@
             主键
             </summary>
         </member>
-        <member name="T:HxCore.Entity.BasicInfo">
-            <summary>
-            用户的基本信息
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.BasicInfo.RealName">
-            <summary>
-            真实的名字
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.BasicInfo.CardId">
-            <summary>
-            身份证号
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.BasicInfo.Birthday">
-            <summary>
-            生日
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.BasicInfo.Gender">
-            <summary>
-            性别
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.BasicInfo.QQ">
-            <summary>
-            用户的QQ
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.BasicInfo.WeChat">
-            <summary>
-            用户微信号
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.BasicInfo.Telephone">
-            <summary>
-            电话
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.BasicInfo.Mobile">
-            <summary>
-            手机号码
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.BasicInfo.Description">
-            <summary>
-            自我描述
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.BasicInfo.Address">
-            <summary>
-            用户地址
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.BasicInfo.School">
-            <summary>
-            用户毕业学校
-            </summary>
-        </member>
-        <member name="T:HxCore.Entity.Blog">
-            <summary>
-            博客类
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.Title">
-            <summary>
-            博客标题
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.Content">
-            <summary>
-            正文
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.ContentHtml">
-            <summary>
-            内容，html格式
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.MarkDown">
-            <summary>
-            是否使用MarkDown编辑的
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.Private">
-            <summary>
-            是否是私人的
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.Forward">
-            <summary>
-            是否是转发文章
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.Publish">
-            <summary>
-            是否发布，true代表发布，false代表不发布即是草稿
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.PublishDate">
-            <summary>
-            发布日期
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.Top">
-            <summary>
-            置顶 Y权值加10年
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.Essence">
-            <summary>
-            精华 Y权值加10天
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.ForwardUrl">
-            <summary>
-            原链接
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.OldPublishTime">
-            <summary>
-            原博客发表时间
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.BlogTags">
-            <summary>
-            博客的个人标签，对应的是BlogTag表中主键，以，号隔开
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.CanCmt">
-            <summary>
-            允许评论
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.ReadCount">
-            <summary>
-            阅读量
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.LikeCount">
-            <summary>
-            博客被推荐的次数
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.FavCount">
-            <summary>
-            被收藏次数
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.CmtCount">
-            <summary>
-            被评论次数
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.PersonTop">
-            <summary>
-            个人置顶 标识该文档是否置顶,置顶的文章在个人主页中排序靠前
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.ImgUrl">
-            <summary>
-            主题中的第一张图的地址
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.ImgName">
-            <summary>
-            主题中第一张图的名字
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.Location">
-            <summary>
-            发改主题时的坐标
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.City">
-            <summary>
-            城市
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.OrderFactor">
-            <summary>
-            热门程度
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Blog.CategoryId">
-            <summary>
-            系统分类，前端、后端、编程语言等
-            </summary> 
-        </member>
-        <member name="P:HxCore.Entity.Blog.BlogTypeId">
-            <summary>
-            博客类型，是转发，原创，还是翻译等
-            </summary> 
-        </member>
-        <member name="P:HxCore.Entity.Blog.Carousel">
-            <summary>
-            是否是轮播图
-            </summary>
-        </member>
-        <member name="T:HxCore.Entity.BlogTag">
-            <summary>
-            博客标签
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.BlogTag.Name">
-            <summary>
-            标签名字
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.BlogTag.Description">
-            <summary>
-            描述
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.BlogTag.Order">
-            <summary>
-            排序
-            </summary>
-        </member>
-        <member name="T:HxCore.Entity.BlogType">
-            <summary>
-            博客的类型
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.BlogType.Name">
-            <summary>
-            名字
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.BlogType.Order">
-            <summary>
-            排序
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.BlogType.Description">
-            <summary>
-            备注
-            </summary>
-        </member>
-        <member name="T:HxCore.Entity.Category">
-            <summary>
-            博客分类
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Category.Name">
-            <summary>
-            分类名字
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Category.Order">
-            <summary>
-            排序
-            </summary>
-        </member>
-        <member name="P:HxCore.Entity.Category.Description">
-            <summary>
-            备注
-            </summary>
-        </member>
         <member name="T:HxCore.Entity.Context.DbSession">
             <summary>
             如果没有提供对应模型的服务类，可以使用该方法进行CRUD操作
@@ -688,147 +428,407 @@
             保留位数（默认4）
             </summary>
         </member>
-        <member name="T:HxCore.Entity.JobInfo">
+        <member name="T:HxCore.Entity.T_BasicInfo">
+            <summary>
+            用户的基本信息
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_BasicInfo.RealName">
+            <summary>
+            真实的名字
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_BasicInfo.CardId">
+            <summary>
+            身份证号
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_BasicInfo.Birthday">
+            <summary>
+            生日
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_BasicInfo.Gender">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_BasicInfo.QQ">
+            <summary>
+            用户的QQ
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_BasicInfo.WeChat">
+            <summary>
+            用户微信号
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_BasicInfo.Telephone">
+            <summary>
+            电话
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_BasicInfo.Mobile">
+            <summary>
+            手机号码
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_BasicInfo.Description">
+            <summary>
+            自我描述
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_BasicInfo.Address">
+            <summary>
+            用户地址
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_BasicInfo.School">
+            <summary>
+            用户毕业学校
+            </summary>
+        </member>
+        <member name="T:HxCore.Entity.T_Blog">
+            <summary>
+            博客类
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.Title">
+            <summary>
+            博客标题
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.Content">
+            <summary>
+            正文
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.ContentHtml">
+            <summary>
+            内容，html格式
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.MarkDown">
+            <summary>
+            是否使用MarkDown编辑的
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.Private">
+            <summary>
+            是否是私人的
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.Forward">
+            <summary>
+            是否是转发文章
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.Publish">
+            <summary>
+            是否发布，true代表发布，false代表不发布即是草稿
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.PublishDate">
+            <summary>
+            发布日期
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.Top">
+            <summary>
+            置顶 Y权值加10年
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.Essence">
+            <summary>
+            精华 Y权值加10天
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.ForwardUrl">
+            <summary>
+            原链接
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.OldPublishTime">
+            <summary>
+            原博客发表时间
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.BlogTags">
+            <summary>
+            博客的个人标签，对应的是BlogTag表中主键，以，号隔开
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.CanCmt">
+            <summary>
+            允许评论
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.ReadCount">
+            <summary>
+            阅读量
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.LikeCount">
+            <summary>
+            博客被推荐的次数
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.FavCount">
+            <summary>
+            被收藏次数
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.CmtCount">
+            <summary>
+            被评论次数
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.PersonTop">
+            <summary>
+            个人置顶 标识该文档是否置顶,置顶的文章在个人主页中排序靠前
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.ImgUrl">
+            <summary>
+            主题中的第一张图的地址
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.ImgName">
+            <summary>
+            主题中第一张图的名字
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.Location">
+            <summary>
+            发改主题时的坐标
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.City">
+            <summary>
+            城市
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.OrderFactor">
+            <summary>
+            热门程度
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.CategoryId">
+            <summary>
+            系统分类，前端、后端、编程语言等
+            </summary> 
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.BlogTypeId">
+            <summary>
+            博客类型，是转发，原创，还是翻译等
+            </summary> 
+        </member>
+        <member name="P:HxCore.Entity.T_Blog.Carousel">
+            <summary>
+            是否是轮播图
+            </summary>
+        </member>
+        <member name="T:HxCore.Entity.T_BlogTag">
+            <summary>
+            博客标签
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_BlogTag.Name">
+            <summary>
+            标签名字
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_BlogTag.Description">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_BlogTag.Order">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="T:HxCore.Entity.T_BlogType">
+            <summary>
+            博客的类型
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_BlogType.Name">
+            <summary>
+            名字
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_BlogType.Order">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_BlogType.Description">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="T:HxCore.Entity.T_Category">
+            <summary>
+            博客分类
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Category.Name">
+            <summary>
+            分类名字
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Category.Order">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:HxCore.Entity.T_Category.Description">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="T:HxCore.Entity.T_JobInfo">
             <summary>
             工作信息
             </summary>
         </member>
-        <member name="P:HxCore.Entity.JobInfo.Position">
+        <member name="P:HxCore.Entity.T_JobInfo.Position">
             <summary>
             职位
             </summary>
         </member>
-        <member name="P:HxCore.Entity.JobInfo.Industry">
+        <member name="P:HxCore.Entity.T_JobInfo.Industry">
             <summary>
             行业
             </summary>
         </member>
-        <member name="P:HxCore.Entity.JobInfo.WorkUnit">
+        <member name="P:HxCore.Entity.T_JobInfo.WorkUnit">
             <summary>
             工作单位
             </summary>
         </member>
-        <member name="P:HxCore.Entity.JobInfo.WorkYear">
+        <member name="P:HxCore.Entity.T_JobInfo.WorkYear">
             <summary>
             工作年限
             </summary>
         </member>
-        <member name="P:HxCore.Entity.JobInfo.Status">
+        <member name="P:HxCore.Entity.T_JobInfo.Status">
             <summary>
             目前状态
             </summary>
         </member>
-        <member name="P:HxCore.Entity.JobInfo.Skills">
+        <member name="P:HxCore.Entity.T_JobInfo.Skills">
             <summary>
             熟悉的技术
             </summary>
         </member>
-        <member name="P:HxCore.Entity.JobInfo.GoodAreas">
+        <member name="P:HxCore.Entity.T_JobInfo.GoodAreas">
             <summary>
             擅长的领域
             </summary>
         </member>
-        <member name="T:HxCore.Entity.UserInfo">
+        <member name="T:HxCore.Entity.T_UserInfo">
             <summary>
             用户信息类
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.Id">
+        <member name="P:HxCore.Entity.T_UserInfo.Id">
             <summary>
             主键
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.UserName">
+        <member name="P:HxCore.Entity.T_UserInfo.UserName">
             <summary>
             用户名称
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.PassWord">
+        <member name="P:HxCore.Entity.T_UserInfo.PassWord">
             <summary>
             密码
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.NickName">
+        <member name="P:HxCore.Entity.T_UserInfo.NickName">
             <summary>
             昵称
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.Email">
+        <member name="P:HxCore.Entity.T_UserInfo.Email">
             <summary>
             邮箱
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.OpenId">
+        <member name="P:HxCore.Entity.T_UserInfo.OpenId">
             <summary>
             第三方登录唯一标识
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.Lock">
+        <member name="P:HxCore.Entity.T_UserInfo.Lock">
             <summary>
             是否锁定
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.AvatarUrl">
+        <member name="P:HxCore.Entity.T_UserInfo.AvatarUrl">
             <summary>
             头像存储文件路径
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.IsAdmin">
+        <member name="P:HxCore.Entity.T_UserInfo.IsAdmin">
             <summary>
             是否是管理员
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.Admin">
+        <member name="P:HxCore.Entity.T_UserInfo.Admin">
             <summary>
             是否是管理员
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.IsActivate">
+        <member name="P:HxCore.Entity.T_UserInfo.IsActivate">
             <summary>
             是否激活
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.Activate">
+        <member name="P:HxCore.Entity.T_UserInfo.Activate">
             <summary>
             是否激活
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.RegisterTime">
+        <member name="P:HxCore.Entity.T_UserInfo.RegisterTime">
             <summary>
             用户注册时间
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.Delete">
+        <member name="P:HxCore.Entity.T_UserInfo.Delete">
             <summary>
             是否被删除,假删除，数据库中还有记录
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.DeleteTime">
+        <member name="P:HxCore.Entity.T_UserInfo.DeleteTime">
             <summary>
             删除时间
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.UseMdEdit">
+        <member name="P:HxCore.Entity.T_UserInfo.UseMdEdit">
             <summary>
             使用MarkDown编辑器
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.LoginIp">
+        <member name="P:HxCore.Entity.T_UserInfo.LoginIp">
             <summary>
             登录的ip
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.LastLoginTime">
+        <member name="P:HxCore.Entity.T_UserInfo.LastLoginTime">
             <summary>
             最后更新时间
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.BasicInfoId">
+        <member name="P:HxCore.Entity.T_UserInfo.BasicInfoId">
             <summary>
             基础信息
             </summary>
         </member>
-        <member name="P:HxCore.Entity.UserInfo.JobInfoId">
+        <member name="P:HxCore.Entity.T_UserInfo.JobInfoId">
             <summary>
             工作信息
             </summary>

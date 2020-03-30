@@ -43,7 +43,7 @@ namespace HxCore.Web.Controllers
         public async Task<LoginViewModel> Login([FromForm] LoginParam param)
         {
             string md5pwd = SafeHelper.MD5TwoEncrypt(param.PassWord);
-            UserInfo userInfo = await _userService.FindEntity(u => u.UserName == param.UserName && u.PassWord == md5pwd);
+            T_UserInfo userInfo = await _userService.FindEntity(u => u.UserName == param.UserName && u.PassWord == md5pwd);
             if (userInfo == null) throw new UserFriendlyException("用户名或密码错误");
             
             JwtModel jwtModel = new JwtModel
@@ -73,7 +73,7 @@ namespace HxCore.Web.Controllers
         {
             if (string.IsNullOrEmpty(token)) throw new  NoAuthorizeException("token无效，请重新登录！");
             var tokenModel = JwtHelper.SerializeJwt(token);
-            UserInfo userInfo = await _userService.FindEntityById(tokenModel.UserId);
+            T_UserInfo userInfo = await _userService.FindEntityById(tokenModel.UserId);
             if (userInfo == null) throw new NoAuthorizeException("token无效，请重新登录！");
             JwtModel jwtModel = new JwtModel
             {

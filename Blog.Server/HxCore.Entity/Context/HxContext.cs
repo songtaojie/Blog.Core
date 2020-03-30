@@ -68,7 +68,7 @@ namespace HxCore.Entity.Context
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            UserInfo userInfo = new UserInfo()
+            T_UserInfo userInfo = new T_UserInfo()
             {
                 Id = Guid.NewGuid().ToString(),
                 UserName = "Admin",
@@ -78,9 +78,9 @@ namespace HxCore.Entity.Context
                 NickName = "超级管理员",
                 LastLoginTime = DateTime.Now
             };
-            modelBuilder.Entity<UserInfo>().HasData(userInfo);
-            modelBuilder.Entity<BlogType>().HasData(new BlogType[] {
-                new BlogType
+            modelBuilder.Entity<T_UserInfo>().HasData(userInfo);
+            modelBuilder.Entity<T_BlogType>().HasData(new T_BlogType[] {
+                new T_BlogType
                 {
                     Id = Helper.GetLongSnowId(),
                     Name="原创",
@@ -88,7 +88,7 @@ namespace HxCore.Entity.Context
                     UserName = userInfo.UserName,
                     CreateTime = DateTime.Now
                 },
-                new BlogType
+                new T_BlogType
                 {
                     Id = Helper.GetLongSnowId(),
                     Name="转载",
@@ -96,7 +96,7 @@ namespace HxCore.Entity.Context
                     UserName = userInfo.UserName,
                     CreateTime = DateTime.Now
                 },
-                new BlogType
+                new T_BlogType
                 {
                     Id = Helper.GetLongSnowId(),
                     Name="翻译",
@@ -105,22 +105,22 @@ namespace HxCore.Entity.Context
                     CreateTime = DateTime.Now
                 }
             });
-            modelBuilder.Entity<Category>().HasData(new Category[] {
-                new Category{
+            modelBuilder.Entity<T_Category>().HasData(new T_Category[] {
+                new T_Category{
                     Name="前端",
                     Id = Helper.GetLongSnowId(),
                     UserId = userInfo.Id,
                     UserName = userInfo.UserName,
                     CreateTime = DateTime.Now
                 },
-                new Category
+                new T_Category
                 {
                     Name="后端",
                     Id = Helper.GetLongSnowId(),
                     UserId = userInfo.Id,
                     UserName = userInfo.UserName,
                     CreateTime = DateTime.Now},
-                new Category
+                new T_Category
                 {
                     Name="编程语言",
                     Id = Helper.GetLongSnowId(),
@@ -134,31 +134,31 @@ namespace HxCore.Entity.Context
         /// <summary>
         /// 用户
         /// </summary>
-        public DbSet<UserInfo> UserInfo { get; set; }
+        public DbSet<T_UserInfo> UserInfo { get; set; }
         /// <summary>
         /// 用户工作情况
         /// </summary>
-        public DbSet<JobInfo> JobInfo { get; set; }
+        public DbSet<T_JobInfo> JobInfo { get; set; }
         /// <summary>
         /// 用户基础信息
         /// </summary>
-        public DbSet<BasicInfo> BasicInfo { get; set; }
+        public DbSet<T_BasicInfo> BasicInfo { get; set; }
         /// <summary>
         /// 博客
         /// </summary>
-        public DbSet<Blog> Blog { get; set; }
+        public DbSet<T_Blog> Blog { get; set; }
         /// <summary>
         /// 博客类型
         /// </summary>
-        public DbSet<BlogType> BlogType { get; set; }
+        public DbSet<T_BlogType> BlogType { get; set; }
         /// <summary>
         /// 博客分类
         /// </summary>
-        public DbSet<Category> Category { get; set; }
+        public DbSet<T_Category> Category { get; set; }
 
         /// <summary>
         /// 博客个人标签
         /// </summary>
-        public DbSet<BlogTag> BlogTag { get; set; }
+        public DbSet<T_BlogTag> BlogTag { get; set; }
     }
 }

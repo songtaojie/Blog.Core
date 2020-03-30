@@ -33,7 +33,7 @@ namespace HxCore.Web.Controllers
         [HttpPost,HttpGet]
         public List<BlogTypeModel> GetBlogTypeList()
         {
-            var list = this.db.QueryEntities<BlogType>(b => b.Delete == ConstKey.No).Select(b=>new BlogTypeModel
+            var list = this.db.QueryEntities<T_BlogType>(b => b.Delete == ConstKey.No).Select(b=>new BlogTypeModel
             {
                 Id = b.Id.ToString(),
                 Name = b.Name
@@ -48,7 +48,7 @@ namespace HxCore.Web.Controllers
         [HttpPost, HttpGet]
         public List<CategoryModel> GetCategoryList()
         {
-            return this.db.QueryEntities<Category>(b => b.Delete == ConstKey.No)
+            return this.db.QueryEntities<T_Category>(b => b.Delete == ConstKey.No)
                 .Select(c => new CategoryModel
                 { 
                     Id = c.Id.ToString(),

@@ -37,7 +37,7 @@ namespace HxCore.Migrate.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Blog",
+                name: "T_Blog",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false),
@@ -72,17 +72,17 @@ namespace HxCore.Migrate.Migrations
                     Location = table.Column<string>(maxLength: 255, nullable: true),
                     City = table.Column<string>(maxLength: 50, nullable: true),
                     OrderFactor = table.Column<decimal>(nullable: false),
-                    CategoryId = table.Column<string>(maxLength: 100, nullable: true),
-                    BlogTypeId = table.Column<string>(maxLength: 100, nullable: true),
+                    CategoryId = table.Column<long>(nullable: false),
+                    BlogTypeId = table.Column<long>(nullable: false),
                     Carousel = table.Column<string>(type: "char(1)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Blog", x => x.Id);
+                    table.PrimaryKey("PK_T_Blog", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "BlogTag",
+                name: "T_BlogTag",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false),
@@ -99,11 +99,11 @@ namespace HxCore.Migrate.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BlogTag", x => x.Id);
+                    table.PrimaryKey("PK_T_BlogTag", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "BlogType",
+                name: "T_BlogType",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false),
@@ -120,11 +120,11 @@ namespace HxCore.Migrate.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BlogType", x => x.Id);
+                    table.PrimaryKey("PK_T_BlogType", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "T_Category",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false),
@@ -141,11 +141,11 @@ namespace HxCore.Migrate.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.Id);
+                    table.PrimaryKey("PK_T_Category", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "JobInfo",
+                name: "T_JobInfo",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false),
@@ -166,11 +166,11 @@ namespace HxCore.Migrate.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_JobInfo", x => x.Id);
+                    table.PrimaryKey("PK_T_JobInfo", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserInfo",
+                name: "T_UserInfo",
                 columns: table => new
                 {
                     Id = table.Column<string>(maxLength: 100, nullable: false),
@@ -189,38 +189,38 @@ namespace HxCore.Migrate.Migrations
                     UseMdEdit = table.Column<string>(type: "char(1)", nullable: true),
                     LoginIp = table.Column<string>(maxLength: 100, nullable: true),
                     LastLoginTime = table.Column<DateTime>(nullable: true),
-                    BasicInfoId = table.Column<string>(maxLength: 100, nullable: true),
-                    JobInfoId = table.Column<string>(maxLength: 100, nullable: true)
+                    BasicInfoId = table.Column<long>(nullable: false),
+                    JobInfoId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserInfo", x => x.Id);
+                    table.PrimaryKey("PK_T_UserInfo", x => x.Id);
                 });
 
             migrationBuilder.InsertData(
-                table: "BlogType",
+                table: "T_BlogType",
                 columns: new[] { "Id", "CreateTime", "Delete", "DeleteTime", "DeletelUserId", "Description", "LastModifyTime", "Name", "Order", "UserId", "UserName" },
                 values: new object[,]
                 {
-                    { 852514776905940992L, new DateTime(2020, 3, 28, 11, 49, 22, 794, DateTimeKind.Local).AddTicks(377), "N", null, null, null, null, "原创", null, "d0b4df42-ba26-4fae-9848-dc0d3520754e", "Admin" },
-                    { 852514776910135296L, new DateTime(2020, 3, 28, 11, 49, 22, 794, DateTimeKind.Local).AddTicks(1019), "N", null, null, null, null, "转载", null, "d0b4df42-ba26-4fae-9848-dc0d3520754e", "Admin" },
-                    { 852514776910135297L, new DateTime(2020, 3, 28, 11, 49, 22, 794, DateTimeKind.Local).AddTicks(1026), "N", null, null, null, null, "翻译", null, "d0b4df42-ba26-4fae-9848-dc0d3520754e", "Admin" }
+                    { 853390187210735616L, new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(351), "N", null, null, null, null, "原创", null, "e3763d67-e30a-4370-af53-2d90bbc761b1", "Admin" },
+                    { 853390187214929920L, new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(963), "N", null, null, null, null, "转载", null, "e3763d67-e30a-4370-af53-2d90bbc761b1", "Admin" },
+                    { 853390187214929921L, new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(970), "N", null, null, null, null, "翻译", null, "e3763d67-e30a-4370-af53-2d90bbc761b1", "Admin" }
                 });
 
             migrationBuilder.InsertData(
-                table: "Category",
+                table: "T_Category",
                 columns: new[] { "Id", "CreateTime", "Delete", "DeleteTime", "DeletelUserId", "Description", "LastModifyTime", "Name", "Order", "UserId", "UserName" },
                 values: new object[,]
                 {
-                    { 852514776910135298L, new DateTime(2020, 3, 28, 11, 49, 22, 794, DateTimeKind.Local).AddTicks(2359), "N", null, null, null, null, "前端", null, "d0b4df42-ba26-4fae-9848-dc0d3520754e", "Admin" },
-                    { 852514776910135299L, new DateTime(2020, 3, 28, 11, 49, 22, 794, DateTimeKind.Local).AddTicks(2388), "N", null, null, null, null, "后端", null, "d0b4df42-ba26-4fae-9848-dc0d3520754e", "Admin" },
-                    { 852514776910135300L, new DateTime(2020, 3, 28, 11, 49, 22, 794, DateTimeKind.Local).AddTicks(2392), "N", null, null, null, null, "编程语言", null, "d0b4df42-ba26-4fae-9848-dc0d3520754e", "Admin" }
+                    { 853390187214929922L, new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(2208), "N", null, null, null, null, "前端", null, "e3763d67-e30a-4370-af53-2d90bbc761b1", "Admin" },
+                    { 853390187214929923L, new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(2238), "N", null, null, null, null, "后端", null, "e3763d67-e30a-4370-af53-2d90bbc761b1", "Admin" },
+                    { 853390187214929924L, new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(2242), "N", null, null, null, null, "编程语言", null, "e3763d67-e30a-4370-af53-2d90bbc761b1", "Admin" }
                 });
 
             migrationBuilder.InsertData(
-                table: "UserInfo",
+                table: "T_UserInfo",
                 columns: new[] { "Id", "Activate", "Admin", "AvatarUrl", "BasicInfoId", "Delete", "DeleteTime", "Email", "JobInfoId", "LastLoginTime", "Lock", "LoginIp", "NickName", "OpenId", "PassWord", "RegisterTime", "UseMdEdit", "UserName" },
-                values: new object[] { "d0b4df42-ba26-4fae-9848-dc0d3520754e", "Y", "N", null, null, "N", null, "stjworkemail@163.com", null, new DateTime(2020, 3, 28, 11, 49, 22, 790, DateTimeKind.Local).AddTicks(8535), "N", null, "超级管理员", null, "F59BD65F7EDAFB087A81D4DCA06C4910", new DateTime(2020, 3, 28, 11, 49, 22, 787, DateTimeKind.Local).AddTicks(9248), "N", "Admin" });
+                values: new object[] { "e3763d67-e30a-4370-af53-2d90bbc761b1", "Y", "N", null, 0L, "N", null, "stjworkemail@163.com", 0L, new DateTime(2020, 3, 30, 21, 47, 56, 871, DateTimeKind.Local).AddTicks(8406), "N", null, "超级管理员", null, "F59BD65F7EDAFB087A81D4DCA06C4910", new DateTime(2020, 3, 30, 21, 47, 56, 868, DateTimeKind.Local).AddTicks(9017), "N", "Admin" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -229,22 +229,22 @@ namespace HxCore.Migrate.Migrations
                 name: "BasicInfo");
 
             migrationBuilder.DropTable(
-                name: "Blog");
+                name: "T_Blog");
 
             migrationBuilder.DropTable(
-                name: "BlogTag");
+                name: "T_BlogTag");
 
             migrationBuilder.DropTable(
-                name: "BlogType");
+                name: "T_BlogType");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "T_Category");
 
             migrationBuilder.DropTable(
-                name: "JobInfo");
+                name: "T_JobInfo");
 
             migrationBuilder.DropTable(
-                name: "UserInfo");
+                name: "T_UserInfo");
         }
     }
 }

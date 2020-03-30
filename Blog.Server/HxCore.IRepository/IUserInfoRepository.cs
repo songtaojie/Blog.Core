@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace HxCore.IRepository
 {
     [TransientDependency]
-    public interface IUserInfoRepository:IBaseRepository<UserInfo>
+    public interface IUserInfoRepository:IBaseRepository<T_UserInfo>
     {
     }
 }

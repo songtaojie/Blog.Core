@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace HxCore.IServices
 {
     [ScropedDependency]
-    public interface IBlogService:IBaseService<Blog>
+    public interface IBlogService:IBaseService<T_Blog>
     {
         /// <summary>
         /// 插入一条数据

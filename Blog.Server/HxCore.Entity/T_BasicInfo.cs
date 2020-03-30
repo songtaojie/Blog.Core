@@ -11,7 +11,7 @@ namespace HxCore.Entity
     /// </summary>
     [Table("BasicInfo")]
     [Serializable]
-    public class BasicInfo : BaseEntity
+    public class T_BasicInfo : BaseEntity
     {
         /// <summary>
         /// 真实的名字

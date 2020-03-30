@@ -194,6 +194,11 @@
             头像链接
             </summary>
         </member>
+        <member name="P:HxCore.Model.BlogViewModel.CategoryName">
+            <summary>
+            系统分类名称
+            </summary>
+        </member>
         <member name="P:HxCore.Model.BlogViewModel.PreId">
             <summary>
             上一篇博客的id

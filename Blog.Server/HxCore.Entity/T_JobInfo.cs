@@ -9,9 +9,9 @@ namespace HxCore.Entity
     /// <summary>
     /// 工作信息
     /// </summary>
-    [Table("JobInfo")]
+    [Table("T_JobInfo")]
     [Serializable]
-    public class JobInfo : BaseEntity
+    public class T_JobInfo : BaseEntity
     {
         /// <summary>
         /// 职位
