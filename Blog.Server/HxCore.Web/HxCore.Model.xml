@@ -164,6 +164,11 @@
             博客内容
             </summary>
         </member>
+        <member name="P:HxCore.Model.BlogViewModel.UserId">
+            <summary>
+            这条记录属于哪个用户
+            </summary>
+        </member>
         <member name="P:HxCore.Model.BlogViewModel.UserName">
             <summary>
             用户名
@@ -182,6 +187,11 @@
         <member name="P:HxCore.Model.BlogViewModel.CmtCount">
             <summary>
             被评论次数
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogViewModel.Publish">
+            <summary>
+            是否发布
             </summary>
         </member>
         <member name="P:HxCore.Model.BlogViewModel.PublishDate">

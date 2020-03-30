@@ -18,6 +18,7 @@ namespace HxCore.Services
         protected IUserContext UserContext { get; }
         protected IMapper Mapper { get; }
         protected IDbSession DbSession { get; }
+        protected Microsoft.EntityFrameworkCore.DbContext Db { get; }
         public BaseService(IBaseRepository<T> repository)
         {
             this.Repository = repository;
@@ -29,6 +30,7 @@ namespace HxCore.Services
             this.DbSession = dbSession;
             this.UserContext = dbSession.GetRequiredService<IUserContext>();
             this.Mapper = dbSession.GetRequiredService<IMapper>();
+            this.Db = dbSession.GetRequiredService<Microsoft.EntityFrameworkCore.DbContext>();
         }
         #region 查询
         public async Task<T> FindEntity(Expression<Func<T, bool>> predicate, bool defaultFilter = true)

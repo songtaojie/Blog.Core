@@ -123,16 +123,27 @@ namespace HxCore.Services
 
         public async Task<BlogViewModel> FindById(long id)
         {
-            var blog = await this.FindEntityById(id);
-            if (blog == null || (blog.Publish == ConstKey.No && (UserContext == null || UserContext.UserId != blog.UserId || !UserContext.IsAdmin))) throw new NotFoundException("找不到您访问的页面");
-            var blogModel = this.Mapper.Map<BlogViewModel>(blog);
-            if (blog.CategoryId!=0)
-            {
-                var category = this.DbSession.FindById<T_Category>(blog.CategoryId);
-                blogModel.CategoryName = category?.Name;
-            }
-            var userInfo = await this.DbSession.FindEntity<T_UserInfo>(u => u.UserName == blog.UserName);
-            blogModel.NickName = userInfo.NickName;
+            var blogModel = await (from b in Db.Set<T_Blog>()
+                         join u in Db.Set<T_UserInfo>() on b.UserId equals u.Id
+                         join c in Db.Set<T_Category>() on b.CategoryId equals c.Id into c_temp
+                         from c in c_temp.DefaultIfEmpty()
+                         where b.Id == id
+                         select new BlogViewModel
+                         {
+                             Id = b.Id.ToString(),
+                             Title = b.Title,
+                             Publish = b.Publish,
+                             PublishDate = b.PublishDate,
+                             Content = b.Content,
+                             ReadCount = b.ReadCount,
+                             CmtCount = b.CmtCount,
+                             AvatarUrl = u.AvatarUrl,
+                             UserId = u.Id,
+                             UserName = u.UserName,
+                             NickName = u.NickName,
+                             CategoryName = c.Name,
+                         }).FirstOrDefaultAsync();
+            if (blogModel == null || (blogModel.Publish == ConstKey.No && (UserContext == null || UserContext.UserId != blogModel.UserId || !UserContext.IsAdmin))) throw new NotFoundException("找不到您访问的页面");
             return blogModel;
         }
         #endregion

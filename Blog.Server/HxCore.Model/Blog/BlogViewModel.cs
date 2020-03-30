@@ -31,6 +31,10 @@ namespace HxCore.Model
             get; set;
         }
         /// <summary>
+        /// 这条记录属于哪个用户
+        /// </summary>
+        public  string UserId { get; set; }
+        /// <summary>
         /// 用户名
         /// </summary>
         public string UserName { get; set; }
@@ -48,7 +52,10 @@ namespace HxCore.Model
         /// 被评论次数
         /// </summary>
         public long CmtCount { get; set; }
-
+        /// <summary>
+        /// 是否发布
+        /// </summary>
+        public string Publish { get; set; }
         /// <summary>
         /// 发布日期
         /// </summary>

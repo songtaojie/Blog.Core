@@ -82,8 +82,11 @@ namespace HxCore.Web
             {
                 c.AddFilters(typeof(ExceptionFilter), typeof(ApiResultAttribute));
                 c.AddGlobalRoutePrefix(new RouteAttribute(ConstInfo.RoutePrefix));
+            }).AddJsonOptions(json => {
+                json.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
+                json.JsonSerializerOptions.Converters.Add(new DateTimeNullConverter());
+                //json.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
             #endregion
 
 

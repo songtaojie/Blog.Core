@@ -17,7 +17,7 @@ namespace HxCore.Entity.Context
         /// 服务的实例
         /// </summary>
         IServiceProvider ServiceProvider { get;}
-        
+
         /// <summary>
         /// 获取服务
         /// </summary>
