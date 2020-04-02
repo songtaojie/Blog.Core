@@ -61,7 +61,7 @@ namespace HxCore.Web.Controllers
         /// <param name="id">博客id</param>
         /// <returns></returns>
         [HttpPost]
-        public Task<BlogViewModel> FindById(string userName,long id)
+        public Task<BlogDetailModel> FindById(string userName,long id)
         {
             return blogService.FindById(id);
         }

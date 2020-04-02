@@ -13,7 +13,7 @@
           <b-form-row class="mb-3">
             <b-input-group>
               <b-input-group-prepend is-text>
-                <i class="hx-icon-user-solid"></i>
+                <i class="hx-icon-user"></i>
               </b-input-group-prepend>
               <b-form-input
                 placeholder="请输入用户名"

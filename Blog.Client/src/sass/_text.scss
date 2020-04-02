@@ -4,6 +4,9 @@
       font-size: $font-size + 0.25em * $index;
   }
 }
+.text-mid{
+  vertical-align: middle;
+}
 
 //.hx-text-green
 .#{$prefix}-text-green {

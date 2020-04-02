@@ -107,35 +107,30 @@ export const guid = function() {
   return `${s4() + s4()}-${s4()}-${s4()}-${s4() + s4() + s4()}`
 }
 
-export function dateTimeFormat(time) {
-  var date = new Date(time)
-  var year = date.getFullYear()
-  /* 在日期格式中，月份是从0开始的，因此要加0
-    * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
-    * */
-  var month = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
-  var day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
-  var hours = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours()
-  var minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()
-  var seconds = date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds()
-  // 拼接
-
-  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
-}
-export function dateFormat(time) {
-  var date = new Date(time)
-  var year = date.getFullYear()
-  /* 在日期格式中，月份是从0开始的，因此要加0
-    * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
-    * */
-  var month = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
-  var day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
-  // var hours = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours()
-  // var minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()
-  // var seconds = date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds()
-  // 拼接
-
-  return `${year}-${month}-${day}`
+export function dateFormat(time, format) {
+      var date = new Date(time)
+      if(isEmpty(format)) {
+        format = 'yyyy-MM-dd'
+      }
+      var o = {
+        'M+' : date.getMonth() + 1, // 月份
+        'd+' : date.getDate(), // 日
+        'H+' : date.getHours(), // 小时
+        'h+' : date.getHours(), // 小时
+        'm+' : date.getMinutes(), // 分
+        's+' : date.getSeconds(), // 秒
+        'q+' : Math.floor((date.getMonth() + 3) / 3), // 季度
+        'S'  : date.getMilliseconds() // 毫秒
+    }
+    if(/(y+)/.test(format)) {
+      format = format.replace(RegExp.$1, `${date.getFullYear()}`.substr(4 - RegExp.$1.length))
+    }
+    for(var k in o) {
+        if(new RegExp(`(${k})`).test(format)) {
+          format = format.replace(RegExp.$1, RegExp.$1.length === 1 ? o[k] : `00${o[k]}`.substr(`${o[k]}`.length))
+        }
+    }
+    return format
 }
 // 默认导出所有方法
 export default {
@@ -149,6 +144,5 @@ export default {
   isSimpleObject,
   isEmptyObject,
   guid,
-  dateFormat,
-  dateTimeFormat
+  dateFormat
 }

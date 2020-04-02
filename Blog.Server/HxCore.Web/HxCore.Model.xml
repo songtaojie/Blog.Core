@@ -24,6 +24,11 @@
             博客内容
             </summary>
         </member>
+        <member name="P:HxCore.Model.BlogCreateModel.ContentHtml">
+            <summary>
+            内容，html格式
+            </summary>
+        </member>
         <member name="P:HxCore.Model.BlogCreateModel.BlogTypeId">
             <summary>
             文章类型
@@ -69,6 +74,101 @@
             是否是markdown
             </summary>
         </member>
+        <member name="T:HxCore.Model.BlogDetailModel">
+            <summary>
+            博客视图模型
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogDetailModel.Id">
+            <summary>
+            博客id
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogDetailModel.Title">
+            <summary>
+            博客标题
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogDetailModel.Content">
+            <summary>
+            博客内容
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogDetailModel.UserId">
+            <summary>
+            这条记录属于哪个用户
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogDetailModel.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogDetailModel.NickName">
+            <summary>
+            昵称
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogDetailModel.MarkDown">
+            <summary>
+            是否是MarkDown语法
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogDetailModel.IsMarkDown">
+            <summary>
+            是否是MarkDown语法
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogDetailModel.ReadCount">
+            <summary>
+            阅读量
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogDetailModel.CmtCount">
+            <summary>
+            被评论次数
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogDetailModel.Publish">
+            <summary>
+            是否发布
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogDetailModel.PublishDate">
+            <summary>
+            发布日期
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogDetailModel.AvatarUrl">
+            <summary>
+            头像链接
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogDetailModel.CategoryName">
+            <summary>
+            系统分类名称
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogDetailModel.PreId">
+            <summary>
+            上一篇博客的id
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogDetailModel.PreTitle">
+            <summary>
+            上一篇博客的名字
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogDetailModel.NextId">
+            <summary>
+            下一篇博客的id
+            </summary>
+        </member>
+        <member name="P:HxCore.Model.BlogDetailModel.NextTitle">
+            <summary>
+            下一篇博客的名字
+            </summary>
+        </member>
         <member name="T:HxCore.Model.BlogQueryModel">
             <summary>
             博客查询实体类
@@ -99,7 +199,7 @@
             昵称
             </summary>
         </member>
-        <member name="P:HxCore.Model.BlogQueryModel.HomeContent">
+        <member name="P:HxCore.Model.BlogQueryModel.PureContent">
             <summary>
             首页显示的内容
             </summary>
@@ -142,91 +242,6 @@
         <member name="P:HxCore.Model.PersonTag.Editable">
             <summary>
             是否可编辑
-            </summary>
-        </member>
-        <member name="T:HxCore.Model.BlogViewModel">
-            <summary>
-            博客视图模型
-            </summary>
-        </member>
-        <member name="P:HxCore.Model.BlogViewModel.Id">
-            <summary>
-            博客id
-            </summary>
-        </member>
-        <member name="P:HxCore.Model.BlogViewModel.Title">
-            <summary>
-            博客标题
-            </summary>
-        </member>
-        <member name="P:HxCore.Model.BlogViewModel.Content">
-            <summary>
-            博客内容
-            </summary>
-        </member>
-        <member name="P:HxCore.Model.BlogViewModel.UserId">
-            <summary>
-            这条记录属于哪个用户
-            </summary>
-        </member>
-        <member name="P:HxCore.Model.BlogViewModel.UserName">
-            <summary>
-            用户名
-            </summary>
-        </member>
-        <member name="P:HxCore.Model.BlogViewModel.NickName">
-            <summary>
-            昵称
-            </summary>
-        </member>
-        <member name="P:HxCore.Model.BlogViewModel.ReadCount">
-            <summary>
-            阅读量
-            </summary>
-        </member>
-        <member name="P:HxCore.Model.BlogViewModel.CmtCount">
-            <summary>
-            被评论次数
-            </summary>
-        </member>
-        <member name="P:HxCore.Model.BlogViewModel.Publish">
-            <summary>
-            是否发布
-            </summary>
-        </member>
-        <member name="P:HxCore.Model.BlogViewModel.PublishDate">
-            <summary>
-            发布日期
-            </summary>
-        </member>
-        <member name="P:HxCore.Model.BlogViewModel.AvatarUrl">
-            <summary>
-            头像链接
-            </summary>
-        </member>
-        <member name="P:HxCore.Model.BlogViewModel.CategoryName">
-            <summary>
-            系统分类名称
-            </summary>
-        </member>
-        <member name="P:HxCore.Model.BlogViewModel.PreId">
-            <summary>
-            上一篇博客的id
-            </summary>
-        </member>
-        <member name="P:HxCore.Model.BlogViewModel.PreName">
-            <summary>
-            上一篇博客的名字
-            </summary>
-        </member>
-        <member name="P:HxCore.Model.BlogViewModel.NextId">
-            <summary>
-            下一篇博客的id
-            </summary>
-        </member>
-        <member name="P:HxCore.Model.BlogViewModel.NextName">
-            <summary>
-            下一篇博客的名字
             </summary>
         </member>
         <member name="T:HxCore.Model.BlogTypeModel">

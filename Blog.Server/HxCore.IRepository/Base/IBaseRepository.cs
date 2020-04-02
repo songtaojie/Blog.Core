@@ -57,7 +57,7 @@ namespace HxCore.IRepository
         /// </summary>
         /// <param name="entityList"></param>
         /// <returns></returns>
-        Task BatchInsert(IEnumerable<T> entityList);
+        void BatchInsert(IEnumerable<T> entityList);
         #endregion
 
         #region 更新

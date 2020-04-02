@@ -70,8 +70,9 @@ export default {
     }
   },
   methods:{
-    onEditorInput(value) {
+    onEditorInput(value, render) {
       this.$emit('input', value)
+      this.$emit('getHtml', render)
     },
     onResize() {
       var that = this

@@ -10,7 +10,7 @@ namespace HxCore.Model
     /// <summary>
     /// 博客视图模型
     /// </summary>
-    public class BlogViewModel:IAutoMapper<T_Blog>
+    public class BlogDetailModel:IAutoMapper<T_Blog>
     {
         /// <summary>
         /// 博客id
@@ -33,7 +33,7 @@ namespace HxCore.Model
         /// <summary>
         /// 这条记录属于哪个用户
         /// </summary>
-        public  string UserId { get; set; }
+        public string UserId { get; set; }
         /// <summary>
         /// 用户名
         /// </summary>
@@ -43,6 +43,15 @@ namespace HxCore.Model
         /// </summary>
         public string NickName { get; set; }
 
+        /// <summary>
+        /// 是否是MarkDown语法
+        /// </summary>
+        public string MarkDown { get; set; }
+
+        /// <summary>
+        /// 是否是MarkDown语法
+        /// </summary>
+        public bool IsMarkDown => Helper.IsYes(MarkDown);
         /// <summary>
         /// 阅读量
         /// </summary>
@@ -76,7 +85,7 @@ namespace HxCore.Model
         /// <summary>
         /// 上一篇博客的名字
         /// </summary>
-        public string PreName { get; set; }
+        public string PreTitle { get; set; }
 
         /// <summary>
         /// 下一篇博客的id
@@ -86,7 +95,7 @@ namespace HxCore.Model
         /// <summary>
         /// 下一篇博客的名字
         /// </summary>
-        public string NextName { get; set; }
+        public string NextTitle { get; set; }
 
     }
     

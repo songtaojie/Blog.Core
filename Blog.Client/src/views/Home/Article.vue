@@ -7,7 +7,7 @@
         </h4>
       </div>
       <div class="blog-item-summary blog-content-nowrap">
-        <p>{{item.homeContent}}</p>
+        <p>{{item.pureContent}}</p>
       </div>
       <div class="blog-item-user d-flex justify-content-start align-items-center">
         <div class="hx-avatar _32x32 hx-circle mr-2">

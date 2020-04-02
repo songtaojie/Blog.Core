@@ -40,7 +40,7 @@ namespace HxCore.Model
         /// <summary>
         /// 首页显示的内容
         /// </summary>
-        public string HomeContent => WebHelper.FilterHtmlP(Content, 100);
+        public string PureContent => WebHelper.FilterHtml(Content, 100);
 
         /// <summary>
         /// 阅读量

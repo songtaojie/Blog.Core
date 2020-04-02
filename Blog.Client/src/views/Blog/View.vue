@@ -1,23 +1,31 @@
 <template>
   <div>
     <hx-header></hx-header>
-    <article class="container bg-white">
-      <div>
+    <article class="container bg-white mt-2">
+      <div class="article-header py-2 px-3">
         <h4 class="article-title">{{detail.title}}</h4>
         <div class="article-meta">
-          <span class="muted">
-            <i class="fa fa-list-alt"></i>
-            <a href="https://cuiqingcai.com/category/technique/python">Python</a>
+          <span>
+            <i class="hx-icon-user mr-1"></i>
+            {{detail.nickName}}
           </span>
-          <span class="muted">
-            <i class="fa fa-user"></i>
-            <a href="https://cuiqingcai.com/author/cqcre">{{detail.nickName}}</a>
+          <span>
+            <i class="hx-icon-clock hx-2x"></i>
+            {{dateFormat(detail.publishDate,'yyyy-MM-dd HH:mm')}}
           </span>
-          <time class="muted">
-            <i class="fa fa-clock-o"></i>
-            {{detail.publishDate}}
-          </time>
+          <span>
+            <i class="hx-icon-eye hx-2x"></i>
+            {{detail.readCount}}浏览
+          </span>
+          <span>
+            <i class="hx-icon-comments-o hx-2x"></i>
+            {{detail.readCount}}评论
+          </span>
         </div>
+      </div>
+      <!-- <div v-html="detail.content" class=""></div> -->
+      <div class="article-content p-2">
+        <md-view v-if="detail.isMarkDown" v-model="detail.content"></md-view>
       </div>
     </article>
   </div>
@@ -25,6 +33,8 @@
 
 <script>
 import HxHeader from '@/components/HxHeader.vue'
+import MdView from './MdView.vue'
+import { dateFormat } from '../../common/'
 export default {
   // name:'view',
   data() {
@@ -35,9 +45,11 @@ export default {
     }
   },
   components: {
-    HxHeader
+    HxHeader,
+    MdView
   },
   methods: {
+    dateFormat,
     findById() {
       var that = this
       that.$api.post(`/api/blog/FindById?userName=${that.userName}&id=${that.id}`)
@@ -56,10 +68,26 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.article-title {
-  font-size: 24px;
-  font-weight: normal;
-  padding: 20px 0;
-  color: #242525;
+.article-header {
+  margin-left: -15px;
+  margin-right: -15px;
+  border-bottom: 1px solid #eee;
+  .article-title {
+    font-size: 24px;
+    font-weight: normal;
+    padding: 20px 0;
+    color: #242525;
+  }
+  .article-meta {
+    color: #999;
+  }
+}
+
+.article-content {
+  font-size: 16px;
+  color: #4d4d4d;
+  font-weight: 400;
+  line-height: 26px;
+  margin: 0 0 16px;
 }
 </style>

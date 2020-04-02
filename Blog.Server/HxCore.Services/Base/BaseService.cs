@@ -116,7 +116,7 @@ namespace HxCore.Services
                     newList.Add(this.BeforeInsert(entity));
                 }
             }
-            await Repository.BatchInsert(newList);
+            Repository.BatchInsert(newList);
             var result = await this.Repository.SaveChangesAsync();
             return result;
         }

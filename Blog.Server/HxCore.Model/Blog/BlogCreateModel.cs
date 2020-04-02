@@ -31,6 +31,10 @@ namespace HxCore.Model
             get; set;
         }
         /// <summary>
+        /// 内容，html格式
+        /// </summary>
+        public string ContentHtml { get; set; }
+        /// <summary>
         /// 文章类型
         /// </summary>
         public string BlogTypeId

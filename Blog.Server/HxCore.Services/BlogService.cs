@@ -17,11 +17,11 @@ namespace HxCore.Services
     /// <summary>
     /// 博客的服务类
     /// </summary>
-    public class BlogService:BaseService<T_Blog>,IBlogService
+    public class BlogService : BaseService<T_Blog>, IBlogService
     {
         private IBlogTagRepository TagRepository { get; }
-        public BlogService(IBlogRepository dal, IBlogTagRepository tagRepository,IDbSession dbSession)
-            :base(dal, dbSession)
+        public BlogService(IBlogRepository dal, IBlogTagRepository tagRepository, IDbSession dbSession)
+            : base(dal, dbSession)
         {
             this.TagRepository = tagRepository;
         }
@@ -71,13 +71,16 @@ namespace HxCore.Services
                 });
                 entity.BlogTags = string.Join(",", blogTagList);
             }
-            bool result = await this.DbSession.ExcuteAsync(async delegate
-             {
-                 entity = this.BeforeInsert(entity);
-                 await this.Repository.Insert(entity);
-                 await this.TagRepository.BatchInsert(tagEntityList);
-                 await this.DbSession.SaveChangesAsync();
-             });
+            bool result = await this.DbSession.ExcuteAsync(delegate
+            {
+                entity = this.BeforeInsert(entity);
+                this.Repository.Insert(entity);
+                if (tagEntityList.Count > 0)
+                {
+                    this.TagRepository.BatchInsert(tagEntityList);
+                }
+                this.Repository.SaveChangesAsync();
+            });
             return result;
         }
         #endregion
@@ -121,29 +124,44 @@ namespace HxCore.Services
                 }).ToList();
         }
 
-        public async Task<BlogViewModel> FindById(long id)
+        public async Task<BlogDetailModel> FindById(long id)
         {
             var blogModel = await (from b in Db.Set<T_Blog>()
-                         join u in Db.Set<T_UserInfo>() on b.UserId equals u.Id
-                         join c in Db.Set<T_Category>() on b.CategoryId equals c.Id into c_temp
-                         from c in c_temp.DefaultIfEmpty()
-                         where b.Id == id
-                         select new BlogViewModel
-                         {
-                             Id = b.Id.ToString(),
-                             Title = b.Title,
-                             Publish = b.Publish,
-                             PublishDate = b.PublishDate,
-                             Content = b.Content,
-                             ReadCount = b.ReadCount,
-                             CmtCount = b.CmtCount,
-                             AvatarUrl = u.AvatarUrl,
-                             UserId = u.Id,
-                             UserName = u.UserName,
-                             NickName = u.NickName,
-                             CategoryName = c.Name,
-                         }).FirstOrDefaultAsync();
+                                   join u in Db.Set<T_UserInfo>() on b.UserId equals u.Id
+                                   join c in Db.Set<T_Category>() on b.CategoryId equals c.Id into c_temp
+                                   from c in c_temp.DefaultIfEmpty()
+                                   where b.Id == id
+                                   select new BlogDetailModel
+                                   {
+                                       Id = b.Id.ToString(),
+                                       Title = b.Title,
+                                       Publish = b.Publish,
+                                       PublishDate = b.PublishDate,
+                                       Content = b.Content,
+                                       ReadCount = b.ReadCount,
+                                       CmtCount = b.CmtCount,
+                                       AvatarUrl = u.AvatarUrl,
+                                       UserId = u.Id,
+                                       UserName = u.UserName,
+                                       NickName = u.NickName,
+                                       CategoryName = c.Name,
+                                       MarkDown = b.MarkDown
+                                   }).FirstOrDefaultAsync();
             if (blogModel == null || (blogModel.Publish == ConstKey.No && (UserContext == null || UserContext.UserId != blogModel.UserId || !UserContext.IsAdmin))) throw new NotFoundException("找不到您访问的页面");
+            //获取上一个和下一个博客
+            var blogId = Convert.ToInt64(blogModel.Id);
+            var preBlog = await this.Repository.QueryEntities(b => b.Id < blogId).OrderByDescending(b => b.Id).FirstOrDefaultAsync();
+            if (preBlog != null)
+            {
+                blogModel.PreId = preBlog.Id.ToString();
+                blogModel.PreTitle = preBlog.Title;
+            }
+            var nextBlog = await this.Repository.QueryEntities(b => b.Id > blogId).OrderBy(b => b.Id).FirstOrDefaultAsync();
+            if (nextBlog != null)
+            {
+                blogModel.NextId = nextBlog.Id.ToString();
+                blogModel.NextTitle = nextBlog.Title;
+            }
             return blogModel;
         }
         #endregion

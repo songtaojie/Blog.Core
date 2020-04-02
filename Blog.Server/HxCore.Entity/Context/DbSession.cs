@@ -91,19 +91,17 @@ namespace HxCore.Entity.Context
         /// <param name="handler"></param>
         public bool Excute(EventHandler handler)
         {
-            using (IDbContextTransaction transaction = Db.Database.BeginTransaction())
+            using IDbContextTransaction transaction = Db.Database.BeginTransaction();
+            try
             {
-                try
-                {
-                    handler?.Invoke(null, EventArgs.Empty);
-                    transaction.Commit();
-                    return true;
-                }
-                catch (Exception e)
-                {
-                    transaction.Rollback();
-                    throw new System.Reflection.TargetInvocationException(e);
-                }
+                handler?.Invoke(null, EventArgs.Empty);
+                transaction.Commit();
+                return true;
+            }
+            catch (Exception e)
+            {
+                transaction.Rollback();
+                throw new System.Reflection.TargetInvocationException(e);
             }
         }
         /// <summary>
@@ -112,20 +110,22 @@ namespace HxCore.Entity.Context
         /// <param name="handler"></param>
         public async Task<bool> ExcuteAsync(EventHandler handler)
         {
-            using (IDbContextTransaction transaction = await Db.Database.BeginTransactionAsync())
+            IDbContextTransaction transaction = null;
+            try
             {
-                try
-                {
-                    handler?.Invoke(null, EventArgs.Empty);
-                    await transaction.CommitAsync();
-                    return true;
-                }
-                catch (Exception e)
-                {
-
-                    await transaction.RollbackAsync();
-                    throw new System.Reflection.TargetInvocationException(e);
-                }
+                transaction = await Db.Database.BeginTransactionAsync();
+                handler?.Invoke(null, EventArgs.Empty);
+                await transaction.CommitAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                if (transaction != null) await transaction.RollbackAsync();
+                throw new System.Reflection.TargetInvocationException(e);
+            }
+            finally
+            {
+                if (transaction != null) await transaction.DisposeAsync();
             }
         }
 

@@ -474,7 +474,7 @@
         </member>
         <member name="T:HxCore.Web.Extensions.DateTimeConverter">
             <summary>
-            时间
+            时间格式化
             </summary>
         </member>
         <member name="P:HxCore.Web.Extensions.DateTimeConverter.DateTimeFormat">
@@ -502,7 +502,7 @@
         </member>
         <member name="T:HxCore.Web.Extensions.DateTimeNullConverter">
             <summary>
-            可空的时间
+            可空的时间格式化
             </summary>
         </member>
         <member name="P:HxCore.Web.Extensions.DateTimeNullConverter.DateTimeFormat">
