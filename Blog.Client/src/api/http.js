@@ -98,13 +98,14 @@ return new Promise((resolve, reject) => {
  * @param {String} url 请求的url地址
  * @param {Object} params 请求时传递的参数
  */
-export function post (url, params) {
-  if (!utils.isEmpty(params)) {
-    params = filterNull(params)
+export function post (url, data, cfg) {
+  if (!utils.isEmpty(data)) {
+    data = filterNull(data)
   }
-
+  cfg = cfg || {}
   return new Promise((resolve, reject) => {
-    axios.post(url, QS.stringify(params)).then(res => {
+    // const data = QS.stringify(params)
+    axios.post(url, data, cfg).then(res => {
       resolve(res)
     }).catch(err => {
       reject(err)

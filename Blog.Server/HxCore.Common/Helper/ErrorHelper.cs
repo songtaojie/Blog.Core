@@ -28,5 +28,15 @@ namespace HxCore.Common
         {
             if(value == true) throw new UserFriendlyException(message);
         }
+
+        /// <summary>
+        /// 如果对象为null时，抛出异常
+        /// </summary>
+        /// <param name="value">对象信息</param>
+        /// <param name="message">异常信息</param>
+        public static void ThrowIfFalse(bool? value, string message = "服务器端异常")
+        {
+            if (value == false) throw new UserFriendlyException(message);
+        }
     }
 }

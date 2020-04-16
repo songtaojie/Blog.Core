@@ -1,19 +1,19 @@
 <template>
-  <div class="md-view">
-     <mavon-editor
-        v-model="value"
-        :subfield="false"
-        :boxShadow="false"
-        defaultOpen="preview"
-        :toolbarsFlag="false"
-      />
+  <div class="hx-view">
+    <mavon-editor
+      v-model="value"
+      :subfield="false"
+      :boxShadow="false"
+      defaultOpen="preview"
+      :toolbarsFlag="false"
+    />
   </div>
 </template>
 
 <script>
 export default {
-   name:'MdView',
-  props:{
+  name: 'MdView',
+  props: {
     value: {
       type: String,
       default: ''
@@ -22,8 +22,9 @@ export default {
 }
 </script>
 
-<style  scoped>
+<style scoped>
 .md-view .markdown-body{
-   border: none;
+  border: none;
 }
+
 </style>

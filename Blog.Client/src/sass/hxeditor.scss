@@ -18,3 +18,12 @@
     }
   }
 }
+
+.hx-view{
+  .markdown-body{
+    border: none;
+  }
+  pre{
+    max-height: 400px;
+  }
+}

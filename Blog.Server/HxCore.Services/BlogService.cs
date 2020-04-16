@@ -61,11 +61,11 @@ namespace HxCore.Services
                         else
                         {
                             long.TryParse(p.Id, out long longId);
-                            var blogTag = this.DbSession.FindById<T_BlogTag>(longId);
-                            if (blogTag != null)
-                            {
-                                blogTagList.Add(blogTag.Id);
-                            }
+                            //var blogTag = this.DbSession.FindById<T_BlogTag>(longId);
+                            //if (blogTag != null)
+                            //{
+                            //}
+                            blogTagList.Add(longId);
                         }
                     }
                 });

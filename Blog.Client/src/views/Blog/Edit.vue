@@ -126,11 +126,7 @@ export default {
         content:'',
         contentHtml:'',
         publish: 'N',
-        personTags: [{
-          id: 'newData111',
-          name: 'ssss',
-          editable: false
-        }]
+        personTags: []
       }
     }
   },

@@ -1,17 +1,20 @@
 <template>
   <div class="hx-editor">
     <mavon-editor :toolbars="toolbars" placeholder="开始编写博客"
+    ref="mdedit"
     :value="value"
     :editable="editable"
     :boxShadow="false"
     :subfield="subfield"
     :defaultOpen="defaultOpen"
     @change="onEditorInput"
+    @imgAdd="onImgAdd"
      />
   </div>
 </template>
 <script>
 // import 'mavon-editor/dist/css/index.css'
+// import axios from 'axios'
 import '@/sass/hxeditor.scss'
 import {isEmpty} from '../../common/index'
 export default {
@@ -73,6 +76,29 @@ export default {
     onEditorInput(value, render) {
       this.$emit('input', value)
       this.$emit('getHtml', render)
+    },
+    /**
+     * 添加图片
+     */
+    onImgAdd(pos, imgfile) {
+      var that = this
+      var formdata = new FormData()
+      formdata.append('file', imgfile)
+      that.$api.post('/api/attach/upload', formdata, {
+        // 'Content-Type':'multipart/form-data'
+      })
+      .then(res => {
+        if(res && res.success) {
+          that.$refs.mdedit.$img2Url(pos, res.data)
+        }
+
+      })
+      // axios.post('/api/attach/upload', formdata, {
+      //   'Content-Type':'multipart/form-data'
+      // }).then(res => {
+      //   debugger
+      //   console.log(res)
+      // })
     },
     onResize() {
       var that = this

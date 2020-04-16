@@ -25,7 +25,7 @@ export default class MyUploadAdapter {
         'Content-Type':'multipart/form-data',
         cancelToken: new CancelToken(function executor(c) {
           that.cancel = c
-          console.log(c)
+          // console.log(c)
           // 这个参数 c 就是CancelToken构造函数里面自带的取消请求的函数，这里把该函数当参数用
         })
       })

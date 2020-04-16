@@ -38,7 +38,7 @@ namespace HxCore.Web.Controllers
         {
             Dictionary<string, object> result = new Dictionary<string, object>();
             result.Add("uploaded ", false);
-            if (file == null) return "请上传图片文件!";
+            ErrorHelper.ThrowIfNull(file, "请上传图片文件!");
             //{
             //    result.Add("error", new Dictionary<string, string>() { { "message", "请上传图片文件!" } });
             //    result.Add("message", "请上传图片文件!");
@@ -49,7 +49,7 @@ namespace HxCore.Web.Controllers
             string fileName = file.FileName;
             //判断是否是图片类型
             string fileExt = Path.GetExtension(fileName);
-            if (!ImageManager.IsImage(fileExt)) return "请上传图片文件!";
+            ErrorHelper.ThrowIfTrue(!ImageManager.IsImage(fileExt), "请上传图片文件!");
             //{
             //    result.Add("error", new Dictionary<string, string>() { { "message", "请上传图片文件!" } });
             //    result.Add("message", "请上传图片文件!");

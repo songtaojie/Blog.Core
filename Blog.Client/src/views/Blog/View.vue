@@ -6,7 +6,7 @@
         <h4 class="article-title">{{detail.title}}</h4>
         <div class="article-meta">
           <span>
-            <i class="hx-icon-user mr-1"></i>
+            <i class="hx-icon-user"></i>
             {{detail.nickName}}
           </span>
           <span>
@@ -80,6 +80,10 @@ export default {
   }
   .article-meta {
     color: #999;
+    i{
+      vertical-align: middle;
+      padding-bottom: 0.1rem;
+    }
   }
 }
 
