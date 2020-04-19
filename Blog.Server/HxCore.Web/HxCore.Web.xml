@@ -400,7 +400,7 @@
              </summary>
              <param name="_blogService"></param>
         </member>
-        <member name="M:HxCore.Web.Controllers.BlogController.QueryBlogList">
+        <member name="M:HxCore.Web.Controllers.BlogController.QueryBlogList(HxCore.Model.BlogQueryParam)">
             <summary>
             获取博客列表
             </summary>

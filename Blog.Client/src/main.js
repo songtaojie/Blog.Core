@@ -10,10 +10,12 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './assets/fonts/iconfont.css'
 import './sass/root.scss'
 import toast from './components/toast/index'
+import VueWechatTitle from 'vue-wechat-title'
 Vue.config.productionTip = false
 Vue.prototype.$api = api
 Vue.prototype.$toast = toast
 Vue.use(BootstrapVue)
+Vue.use(VueWechatTitle)
 // md编辑器
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'

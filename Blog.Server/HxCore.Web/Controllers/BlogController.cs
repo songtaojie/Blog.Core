@@ -36,9 +36,9 @@ namespace HxCore.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<List<BlogQueryModel>> QueryBlogList()
+        public async Task<PageModel<BlogQueryModel>> QueryBlogList(BlogQueryParam param)
         {
-            var result = await blogService.QueryBlogList();
+            var result = await blogService.QueryBlogList(param);
             return result;
         }
 

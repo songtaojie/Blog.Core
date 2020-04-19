@@ -244,6 +244,11 @@
             是否可编辑
             </summary>
         </member>
+        <member name="T:HxCore.Model.BlogQueryParam">
+            <summary>
+            博客查询参数
+            </summary>
+        </member>
         <member name="T:HxCore.Model.BlogTypeModel">
             <summary>
             博客类型的模型

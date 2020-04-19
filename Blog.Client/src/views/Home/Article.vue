@@ -40,7 +40,13 @@ export default {
   data() {
     return {
       avatarUrl: require('../../assets/images/avatar1_small.jpg'),
-      blogList: []
+      blogList: [],
+      queryParam: {
+        PageIndex:0,
+        PageSize:2,
+        SortKey:'',
+        SortType:0
+      }
     }
   },
   created() {
@@ -51,10 +57,10 @@ export default {
     dateFormat,
     getList: function () {
       var that = this
-      that.$api.post('api/blog/QueryBlogList')
+      that.$api.post('api/blog/QueryBlogList', that.queryParam)
         .then(res => {
           if (res && res.success) {
-            that.blogList = res.data
+            that.blogList = res.data.items
           }
         })
     }

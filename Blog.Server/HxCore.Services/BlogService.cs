@@ -11,6 +11,7 @@ using AutoMapper;
 using HxCore.Entity.Context;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using HxCore.Common.Extensions;
 
 namespace HxCore.Services
 {
@@ -90,24 +91,32 @@ namespace HxCore.Services
         /// 获取博客标签列表
         /// </summary>
         /// <returns></returns>
-        public Task<List<BlogQueryModel>> QueryBlogList()
+        public Task<PageModel<BlogQueryModel>> QueryBlogList(BlogQueryParam param)
         {
-            var blogList = this.Repository.QueryEntitiesNoTrack(b => b.Publish == ConstKey.Yes);
-            var userList = this.DbSession.QueryEntities<T_UserInfo>(u => u.Delete == ConstKey.No);
             WebManager webManager = this.DbSession.GetRequiredService<WebManager>();
-            var resultList = blogList.Join(userList, b => b.UserId, u => u.Id, (b, u) => new BlogQueryModel
+            var query = from b in Db.Set<T_Blog>().AsNoTracking()
+                        join u in Db.Set<T_UserInfo>().AsNoTracking() on b.UserId equals u.Id
+                        where b.Publish == ConstKey.Yes
+                        && b.Delete == ConstKey.No
+                        && u.Delete == ConstKey.No
+                        select new BlogQueryModel
+                        {
+                            Id = b.Id.ToString(),
+                            NickName = u.NickName,
+                            UserName = u.UserName,
+                            Title = b.Title,
+                            Content = b.Content,
+                            ReadCount = b.ReadCount,
+                            CmtCount = b.CmtCount,
+                            PublishDate = b.PublishDate,
+                            AvatarUrl = webManager.GetFullUrl(u.AvatarUrl)
+                        };
+            if (string.IsNullOrEmpty(param.SortKey))
             {
-                Id = b.Id.ToString(),
-                NickName = u.NickName,
-                UserName = u.UserName,
-                Title = b.Title,
-                Content = b.Content,
-                ReadCount = b.ReadCount,
-                CmtCount = b.CmtCount,
-                PublishDate = b.PublishDate,
-                AvatarUrl = webManager.GetFullUrl(u.AvatarUrl)
-            }).ToListAsync();
-            return resultList;
+                param.SortKey = nameof(BlogQueryModel.PublishDate);
+                param.SortType = SortTypeEnum.DESC;
+            }
+            return query.ToOrderAndPageListAsync(param);
         }
 
         /// <summary>
@@ -150,13 +159,13 @@ namespace HxCore.Services
             if (blogModel == null || (blogModel.Publish == ConstKey.No && (UserContext == null || UserContext.UserId != blogModel.UserId || !UserContext.IsAdmin))) throw new NotFoundException("找不到您访问的页面");
             //获取上一个和下一个博客
             var blogId = Convert.ToInt64(blogModel.Id);
-            var preBlog = await this.Repository.QueryEntities(b => b.Id < blogId).OrderByDescending(b => b.Id).FirstOrDefaultAsync();
+            var preBlog = await this.Repository.QueryEntities(b => b.Id < blogId && b.UserId == blogModel.UserId).OrderByDescending(b => b.Id).FirstOrDefaultAsync();
             if (preBlog != null)
             {
                 blogModel.PreId = preBlog.Id.ToString();
                 blogModel.PreTitle = preBlog.Title;
             }
-            var nextBlog = await this.Repository.QueryEntities(b => b.Id > blogId).OrderBy(b => b.Id).FirstOrDefaultAsync();
+            var nextBlog = await this.Repository.QueryEntities(b => b.Id > blogId && b.UserId == blogModel.UserId).OrderBy(b => b.Id).FirstOrDefaultAsync();
             if (nextBlog != null)
             {
                 blogModel.NextId = nextBlog.Id.ToString();

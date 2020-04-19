@@ -31,6 +31,9 @@ const router = new Router({
   routes
 })
 router.beforeEach((to, from, next) => {
+  if(to.meta.title) {
+    document.title = to.meta.title
+  }
   if (to.meta.auth) {
     debugger
     if (islogin) {

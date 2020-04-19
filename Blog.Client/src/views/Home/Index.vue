@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-wechat-title="this.title">
     <hx-header></hx-header>
     <div class="container-fluid hx-container d-flex mt-1">
       <div class="flex-fill">
@@ -39,6 +39,7 @@ import toast from '@/components/toast/'
 export default {
   data() {
     return {
+      title:'海·星の博客',
       list: 1,
       ImgItems: [
         {
