@@ -69,7 +69,7 @@
 export default {
   data() {
     return {
-      isLoading:false,
+      isLoading: false,
       form: {
         username: 'Admin',
         password: '123456',
@@ -86,8 +86,13 @@ export default {
         that.$api.login(that.form, () => {
           that.isLoading = false
           that.$router.replace(that.$route.query.redirect || '/')
-        }, () => {
-           that.isLoading = false
+        }, (error) => {
+          console.log(error)
+          debugger
+          that.$alert.show(error.data.message, {
+            variant: 'danger'
+          })
+          that.isLoading = false
         })
       }
     }
