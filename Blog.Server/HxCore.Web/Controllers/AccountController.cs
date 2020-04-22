@@ -40,7 +40,7 @@ namespace HxCore.Web.Controllers
         /// <param name="param">密码</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<LoginViewModel> Login([FromForm] LoginParam param)
+        public async Task<LoginViewModel> Login([FromBody] LoginParam param)
         {
             string md5pwd = SafeHelper.MD5TwoEncrypt(param.PassWord);
             T_UserInfo userInfo = await _userService.FindEntity(u => u.UserName == param.UserName && u.PassWord == md5pwd);

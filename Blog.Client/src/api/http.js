@@ -102,9 +102,10 @@ export function post (url, data, cfg) {
   if (!utils.isEmpty(data)) {
     data = filterNull(data)
   }
-  cfg = cfg || {}
+  // cfg = cfg || {}
   return new Promise((resolve, reject) => {
-    // const data = QS.stringify(params)
+    debugger
+    // var d = QS.stringify(data)
     axios.post(url, data, cfg).then(res => {
       resolve(res)
     }).catch(err => {

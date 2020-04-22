@@ -7,12 +7,13 @@
   </b-toast>-->
   <!-- class="position-fixed fixed-bottom m-0 rounded-0" -->
   <b-alert
-      class="position-fixed fixed-top m-0 rounded-0"
-      :show="dismissCountDown"
-      dismissible
-      :variant="variant"
-      @dismissed="dismissCountDown=0"
-      @dismiss-count-down="countDownChanged"
+    class="b-alert"
+    :class="alerter"
+    :show="dismissCountDown"
+    dismissible
+    :variant="variant"
+    @dismissed="dismissCountDown=0"
+    @dismiss-count-down="countDownChanged"
   >{{content}}</b-alert>
 </template>
 
@@ -25,7 +26,7 @@ export default {
       variant: 'info',
       title: '提示',
       content: '',
-      toaster: 'b-toaster-top-center',
+      alerter: 'b-alert-top-center',
       autoHideDelay: 5000,
       dismissCountDown: 0,
       noAutoHide: false
@@ -33,7 +34,6 @@ export default {
   },
   methods:{
     countDownChanged(dismissCountDown) {
-      debugger
       this.dismissCountDown = dismissCountDown
     }
   },
@@ -42,3 +42,35 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.b-alert{
+    position: absolute;
+    max-width: 350px;
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin: 0;
+}
+.b-alert.b-alert-top-center,
+.b-alert.b-alert-top-left,
+.b-alert.b-alert-top-right{
+  top: .5rem;
+}
+.b-alert.b-alert-bottom-center,
+.b-alert.b-alert-bottom-left,
+.b-alert.b-alert-bottom-right{
+  bottom: .5rem;
+}
+.b-alert.b-alert-top-center,
+.b-alert.b-alert-top-left,
+.b-alert.b-alert-bottom-left,
+.b-alert.b-alert-bottom-center{
+  margin-right: auto;
+}
+.b-alert.b-alert-top-center,
+.b-alert.b-alert-top-right,
+.b-alert.b-alert-bottom-right,
+.b-alert.b-alert-bottom-center{
+  margin-left: auto;
+}
+</style>

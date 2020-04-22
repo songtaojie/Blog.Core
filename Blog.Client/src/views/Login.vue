@@ -87,8 +87,6 @@ export default {
           that.isLoading = false
           that.$router.replace(that.$route.query.redirect || '/')
         }, (error) => {
-          console.log(error)
-          debugger
           that.$alert.show(error.data.message, {
             variant: 'danger'
           })
