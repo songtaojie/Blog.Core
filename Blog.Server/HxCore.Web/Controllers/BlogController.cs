@@ -77,7 +77,7 @@ namespace HxCore.Web.Controllers
         /// <returns></returns>
         [Authorize(Policy =ConstInfo.ClientPolicy)]
         [HttpPost]
-        public async Task<bool> Save([FromForm]BlogCreateModel editInfo)
+        public async Task<bool> Save([FromBody]BlogCreateModel editInfo)
         {
             return await blogService.InsertAsync(editInfo);
             //if (ModelState.IsValid)

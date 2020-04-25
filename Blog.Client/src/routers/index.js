@@ -4,7 +4,8 @@ import Index from '../views/Home/Index.vue'
 const islogin = true
 Vue.use(Router)
 const routes = [{
-  path: '',
+  path: '/',
+  name:'home',
   meta: {
     title: '这是第一个测试程序'
   },

@@ -104,7 +104,6 @@ export function post (url, data, cfg) {
   }
   // cfg = cfg || {}
   return new Promise((resolve, reject) => {
-    debugger
     // var d = QS.stringify(data)
     axios.post(url, data, cfg).then(res => {
       resolve(res)
@@ -172,9 +171,7 @@ export function ajaxError (err) {
       } else {
         msg = r.statusText
       }
-      toast.show(msg || '服务器忙，请稍后重试!', {
-        variant: 'danger'
-      })
+      toast.show(msg || '服务器忙，请稍后重试!')
     }
   }
 }
@@ -241,7 +238,6 @@ axios.interceptors.response.use((res) => {
         post(REFRESH_TOKEN_API, {token: token})
         .then(res => {
           if(res && res.success) {
-            debugger
             loginSuccess(res)
             e.config.__isRetryRequest = true
             e.config.headers.Authorization = TOKEN_TYPE + res.data.token
@@ -257,10 +253,7 @@ axios.interceptors.response.use((res) => {
 
       return null
     case 403:
-      toast.show('您没有该操作的权限!', {
-        variant: 'danger'
-      })
-
+      toast.show('您没有该操作的权限!')
       return null
     default:
       break

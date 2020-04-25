@@ -18,34 +18,19 @@ namespace HxCore.Repository
             this.Db = db;
         }
         #region 查询
-        public async Task<T> FindEntity(Expression<Func<T, bool>> predicate)
+        public async Task<T> FindAsync(Expression<Func<T, bool>> predicate)
         {
             return await Db.Set<T>().FirstOrDefaultAsync(predicate);
         }
 
-        public async Task<T> FindEntityById(object id)
+        public async Task<T> FindAsync(object id)
         {
             return await Db.Set<T>().FindAsync(id);
-        }
-
-        public async Task<T> QueryEntityNoTrack(Expression<Func<T, bool>> lambda)
-        {
-            var result = Db.Set<T>().AsNoTracking().Where(lambda);
-            
-            return await result.FirstOrDefaultAsync();
         }
 
         public IQueryable<T> QueryEntities(Expression<Func<T, bool>> lambda)
         {
             var result = Db.Set<T>().Where(lambda);
-            return result;
-        }
-
-        public virtual IQueryable<T> QueryEntitiesNoTrack(Expression<Func<T, bool>> lambda)
-        {
-            var result = Db.Set<T>()
-                .AsNoTracking()
-                .Where(lambda);
             return result;
         }
         #endregion
@@ -56,7 +41,7 @@ namespace HxCore.Repository
         /// </summary>
         /// <param name="entity">数据实体</param>
         /// <returns></returns>
-        public async Task<T> Insert(T entity)
+        public async Task<T> InsertAsync(T entity)
         {
             var result= await this.Db.Set<T>().AddAsync(entity);
             return result.Entity;
@@ -66,7 +51,7 @@ namespace HxCore.Repository
         /// </summary>
         /// <param name="entityList"></param>
         /// <returns></returns>
-        public async void BatchInsert(IEnumerable<T> entityList)
+        public async Task BatchInsertAsync(IEnumerable<T> entityList)
         {
             await this.Db.Set<T>().AddRangeAsync(entityList);
         }

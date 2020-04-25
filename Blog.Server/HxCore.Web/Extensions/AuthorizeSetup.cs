@@ -57,6 +57,13 @@ namespace HxCore.Web.Extensions
                 c.TokenValidationParameters = tokenParams;
                 c.Events = new JwtBearerEvents()
                 {
+                    OnMessageReceived = context => {
+                        return Task.CompletedTask;
+                    },
+                    OnTokenValidated = context => 
+                    {
+                        return Task.CompletedTask;
+                    },
                     OnAuthenticationFailed = context =>
                     {
                         if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))

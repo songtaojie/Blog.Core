@@ -34,7 +34,7 @@ namespace HxCore.Services
             {
                 entity.PublishDate = DateTime.Now;
             }
-            var imgList = WebHelper.GetHtmlImageUrlList(entity.Content).ToList();
+            var imgList = WebHelper.GetHtmlImageUrlList(entity.ContentHtml).ToList();
             if (imgList.Count > 0)
             {
                 entity.ImgUrl = imgList[0];
@@ -47,40 +47,34 @@ namespace HxCore.Services
                 {
                     if (!string.IsNullOrEmpty(p.Name))
                     {
-                        if (string.IsNullOrEmpty(p.Id) || p.Id.Contains("newData"))
+                        var tagTask = this.TagRepository.FindAsync(r => r.Name == p.Name.Trim() && r.UserId == UserContext.UserId);
+                        var tag = tagTask.Result;
+                        if (tag == null)
                         {
-                            var newBlogTag = new T_BlogTag
+                            tag = new T_BlogTag
                             {
                                 Id = Helper.GetLongSnowId(),
                                 Name = p.Name,
                                 UserId = UserContext.UserId,
                                 UserName = UserContext.UserName
                             };
-                            tagEntityList.Add(newBlogTag);
-                            blogTagList.Add(newBlogTag.Id);
+                            tagEntityList.Add(tag);
+                            
                         }
-                        else
-                        {
-                            long.TryParse(p.Id, out long longId);
-                            //var blogTag = this.DbSession.FindById<T_BlogTag>(longId);
-                            //if (blogTag != null)
-                            //{
-                            //}
-                            blogTagList.Add(longId);
-                        }
+                        blogTagList.Add(tag.Id);
                     }
                 });
                 entity.BlogTags = string.Join(",", blogTagList);
             }
-            bool result = await this.DbSession.ExcuteAsync(delegate
+            var result = await this.DbSession.ExcuteAsync(async delegate
             {
-                entity = this.BeforeInsert(entity);
-                this.Repository.Insert(entity);
+                this.BeforeInsert(entity);
+                await this.Repository.InsertAsync(entity);
                 if (tagEntityList.Count > 0)
                 {
-                    this.TagRepository.BatchInsert(tagEntityList);
+                    await this.TagRepository.BatchInsertAsync(tagEntityList);
                 }
-                this.Repository.SaveChangesAsync();
+                await this.DbSession.SaveChangesAsync();
             });
             return result;
         }
@@ -125,7 +119,8 @@ namespace HxCore.Services
         /// <returns></returns>
         public List<PersonTag> QueryTagList()
         {
-            return this.TagRepository.QueryEntitiesNoTrack(t => t.UserId == UserContext.UserId)
+            return this.TagRepository.QueryEntities(t => t.UserId == UserContext.UserId)
+                .AsNoTracking()
                 .Select(t => new PersonTag
                 {
                     Id = t.Id.ToString(),
@@ -158,6 +153,12 @@ namespace HxCore.Services
                                    }).FirstOrDefaultAsync();
             if (blogModel == null || (blogModel.Publish == ConstKey.No && (UserContext == null || UserContext.UserId != blogModel.UserId || !UserContext.IsAdmin))) throw new NotFoundException("找不到您访问的页面");
             //获取上一个和下一个博客
+            await GetPreBlogInfo(blogModel);
+            await GetNextBlogInfo(blogModel);
+            return blogModel;
+        }
+        private async Task GetPreBlogInfo(BlogDetailModel blogModel)
+        {
             var blogId = Convert.ToInt64(blogModel.Id);
             var preBlog = await this.Repository.QueryEntities(b => b.Id < blogId && b.UserId == blogModel.UserId).OrderByDescending(b => b.Id).FirstOrDefaultAsync();
             if (preBlog != null)
@@ -165,13 +166,17 @@ namespace HxCore.Services
                 blogModel.PreId = preBlog.Id.ToString();
                 blogModel.PreTitle = preBlog.Title;
             }
+        }
+
+        private async Task GetNextBlogInfo(BlogDetailModel blogModel)
+        {
+            var blogId = Convert.ToInt64(blogModel.Id);
             var nextBlog = await this.Repository.QueryEntities(b => b.Id > blogId && b.UserId == blogModel.UserId).OrderBy(b => b.Id).FirstOrDefaultAsync();
             if (nextBlog != null)
             {
                 blogModel.NextId = nextBlog.Id.ToString();
                 blogModel.NextTitle = nextBlog.Title;
             }
-            return blogModel;
         }
         #endregion
 

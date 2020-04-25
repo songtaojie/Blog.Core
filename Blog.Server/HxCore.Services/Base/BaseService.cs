@@ -33,31 +33,20 @@ namespace HxCore.Services
             this.Db = dbSession.GetRequiredService<Microsoft.EntityFrameworkCore.DbContext>();
         }
         #region 查询
-        public async Task<T> FindEntity(Expression<Func<T, bool>> predicate, bool defaultFilter = true)
+        public async Task<T> FindAsync(Expression<Func<T, bool>> predicate, bool defaultFilter = true)
         {
-            return await Repository.FindEntity(GetLambda(predicate,defaultFilter));
+            return await Repository.FindAsync(GetLambda(predicate,defaultFilter));
         }
 
-        public async Task<T> FindEntityById(object id)
+        public async Task<T> FindAsync(object id)
         {
-            return await Repository.FindEntityById(id);
-        }
-
-        public async Task<T> QueryEntityNoTrack(Expression<Func<T, bool>> predicate, bool defaultFilter = true)
-        {
-            return await Repository.QueryEntityNoTrack(GetLambda(predicate, defaultFilter));
+            return await Repository.FindAsync(id);
         }
 
         public IQueryable<T> QueryEntities(Expression<Func<T, bool>> predicate, bool defaultFilter = true)
         {
             return Repository.QueryEntities(GetLambda(predicate, defaultFilter));
         }
-
-        public virtual IQueryable<T> QueryEntitiesNoTrack(Expression<Func<T, bool>> lambda, bool defaultFilter = true)
-        {
-            return Repository.QueryEntitiesNoTrack(GetLambda(lambda, defaultFilter));
-        }
-
 
         #region 获取新的lambda
         protected virtual Expression<Func<T, bool>> GetLambda(Expression<Func<T, bool>> lambdaWhere, bool defaultFilter)
@@ -94,10 +83,10 @@ namespace HxCore.Services
         /// </summary>
         /// <param name="entity">数据实体</param>
         /// <returns></returns>
-        public async Task<bool> Insert(T entity)
+        public async Task<bool> InsertAsync(T entity)
         {
             entity = this.BeforeInsert(entity);
-            await Repository.Insert(entity);
+            await Repository.InsertAsync(entity);
             var result = await this.Repository.SaveChangesAsync();
             return result;
         }
@@ -106,7 +95,7 @@ namespace HxCore.Services
         /// </summary>
         /// <param name="entityList"></param>
         /// <returns></returns>
-        public async Task<bool> BatchInsert(IEnumerable<T> entityList)
+        public async Task<bool> BatchInsertAsync(IEnumerable<T> entityList)
         {
             List<T> newList = new List<T>();
             if (entityList != null && entityList.Count() > 0)
@@ -116,7 +105,7 @@ namespace HxCore.Services
                     newList.Add(this.BeforeInsert(entity));
                 }
             }
-            Repository.BatchInsert(newList);
+            Repository.BatchInsertAsync(newList);
             var result = await this.Repository.SaveChangesAsync();
             return result;
         }

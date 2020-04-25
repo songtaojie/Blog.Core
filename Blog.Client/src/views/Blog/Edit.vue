@@ -1,24 +1,24 @@
 <template>
-  <div>
+  <div v-wechat-title="this.title">
     <hx-header></hx-header>
-    <div class="hx-editor hx-container bg-white py-3 px-2">
-      <b-form ref="ckeditForm" @submit.stop.prevent="onSubmit" novalidate validated class="was-validated">
+    <div class="hx-editor hx-container hx-lg-container  bg-white py-3 px-2">
+      <b-form ref="ckeditForm" @submit.stop.prevent="onSubmit" novalidate :validated="validated"  >
         <b-form-row class="mb-2">
           <b-col class="flex-fill col-sm-8 mb-2 mb-sm-0">
             <b-form-input
-            class="was-validated"
               v-model="formData.title"
               type="text"
               required
               placeholder="文章标题,请控制在100字以内"
             ></b-form-input>
+            <!-- <b-form-invalid-feedback :state="validation">标题不能为空</b-form-invalid-feedback> -->
           </b-col>
           <b-col class="col-sm-4">
             <hx-select v-model="formData.categoryId" api="/api/enum/getcategorylist" placeholder="请选择系统分类"></hx-select>
           </b-col>
         </b-form-row>
-        <b-form-row class="mb-2">
-          <b-col v-if="isUseMdEdit">
+        <b-form-row class="mb-2 ">
+          <b-col v-if="isUseMdEdit" >
             <md-edit v-model="formData.content" @getHtml="getHtml"></md-edit>
           </b-col>
           <b-col v-else>
@@ -112,6 +112,8 @@ export default {
   data() {
     var useMdEdit = this.$route.params.useMdEdit
     return {
+      title: '写博客-海·星の博客',
+      validated: false,
       tagList:[],
       tagSelected:[],
       isUseMdEdit:true, // 是否是markdown编辑器
@@ -132,21 +134,23 @@ export default {
   },
   methods: {
     onSubmit() {
-      debugger
       var that = this
+      debugger
       if(this.$refs.ckeditForm.checkValidity()) {
+        this.validated = false
         if(isEmpty(that.formData.content)) {
-          that.$toast.show('请输入博客内容', {
-            variant: 'danger'
-          })
-
+          that.$toast.alert('请输入博客内容')
           return
         }
         that.$api.post('/api/blog/Save', this.formData)
         .then(res => {
-          debugger
           console.log(res)
+          that.$router.push({
+            name:'home'
+          })
         })
+      } else {
+        this.validated = true
       }
     },
     onClear(input) {
@@ -222,6 +226,11 @@ export default {
     },
     getHtml(data) {
       this.formData.contentHtml = data
+    }
+  },
+  computed:{
+    validation() {
+      return !isEmpty(this.formData.title)
     }
   },
   watch: {

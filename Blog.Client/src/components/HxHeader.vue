@@ -1,6 +1,6 @@
 
 <template>
-  <header class="hx-header">
+  <header class="hx-header fixed-top">
     <b-navbar toggleable="md" class="mx-auto justify-content-center" type="dark" variant="dark">
       <b-navbar-brand href="/" class="py-0 hx-3x">海·星の博客</b-navbar-brand>
       <b-navbar-toggle target="nav-collapse" v-on:click="doClick"></b-navbar-toggle>
@@ -118,6 +118,7 @@ export default {
 .hx-header {
   line-height: 2.5em;
   height: 3.5rem;
+  z-index: 9999;
   &::before {
     background: #000
       linear-gradient(
@@ -177,7 +178,7 @@ export default {
       height: auto;
       background: rgba(0, 0, 0, 0.5);
       position: fixed;
-      z-index: 999;
+      z-index: 9999;
       top: 3.25rem;
       li {
         background: rgba(18, 183, 222, 0.8);

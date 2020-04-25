@@ -50,7 +50,7 @@ namespace HxCore.Entity.Context
         /// <typeparam name="T"></typeparam>
         /// <param name="keyValues"></param>
         /// <returns></returns>
-        public T FindById<T>(params object[] keyValues) where T : class
+        public T Find<T>(params object[] keyValues) where T : class
         {
             return this.Db.Find<T>(keyValues);
         }
@@ -60,7 +60,7 @@ namespace HxCore.Entity.Context
         /// <typeparam name="T"></typeparam>
         /// <param name="keyValues"></param>
         /// <returns></returns>
-        public Task<T> FindByIdAsync<T>(params object[] keyValues) where T : class
+        public Task<T> FindAsync<T>(params object[] keyValues) where T : class
         {
             return this.Db.FindAsync<T>(keyValues).AsTask();
         }
@@ -70,7 +70,7 @@ namespace HxCore.Entity.Context
         /// <typeparam name="T"></typeparam>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public Task<T> FindEntity<T>(Expression<Func<T, bool>> predicate) where T : class
+        public Task<T> FindAsync<T>(Expression<Func<T, bool>> predicate) where T : class
         {
             return this.Db.Set<T>().FirstOrDefaultAsync(predicate);
         }
@@ -110,10 +110,9 @@ namespace HxCore.Entity.Context
         /// <param name="handler"></param>
         public async Task<bool> ExcuteAsync(EventHandler handler)
         {
-            IDbContextTransaction transaction = null;
+            using IDbContextTransaction transaction = await Db.Database.BeginTransactionAsync();
             try
             {
-                transaction = await Db.Database.BeginTransactionAsync();
                 handler?.Invoke(null, EventArgs.Empty);
                 await transaction.CommitAsync();
                 return true;
@@ -122,10 +121,6 @@ namespace HxCore.Entity.Context
             {
                 if (transaction != null) await transaction.RollbackAsync();
                 throw new System.Reflection.TargetInvocationException(e);
-            }
-            finally
-            {
-                if (transaction != null) await transaction.DisposeAsync();
             }
         }
 
@@ -185,9 +180,9 @@ namespace HxCore.Entity.Context
         /// </summary>
         /// <param name="entityList"></param>
         /// <returns></returns>
-        public Task InsertAsync<T>(IEnumerable<T> entityList) where T : class, new()
+        public async Task BatchInsertAsync<T>(IEnumerable<T> entityList) where T : class, new()
         {
-            return this.Db.Set<T>().AddRangeAsync(entityList);
+             await this.Db.Set<T>().AddRangeAsync(entityList);
         }
         #endregion
     }

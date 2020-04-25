@@ -14,7 +14,7 @@ export default {
   data() {
     return {
       visible:true,
-      variant:'info',
+      variant:'danger',
       title:'提示',
       content:'',
       toaster:'b-toaster-top-center',

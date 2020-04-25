@@ -14,21 +14,14 @@ namespace HxCore.IRepository
         /// </summary>
         /// <param name="id">id</param>
         /// <returns>模型数据</returns>
-        Task<T> FindEntityById(object id);
+        Task<T> FindAsync(object id);
 
         /// <summary>
         /// 获取满足指定条件的一条数据
         /// </summary>
         /// <param name="predicate">获取数据的条件lambda</param>
         /// <returns>满足当前条件的一个实体</returns>
-        Task<T> FindEntity(Expression<Func<T, bool>> predicate);
-
-        /// <summary>
-        /// 根据lambda表达式查询出单个实体（不进行跟踪）
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        Task<T> QueryEntityNoTrack(Expression<Func<T, bool>> predicate);
+        Task<T> FindAsync(Expression<Func<T, bool>> predicate);
 
         /// <summary>
         /// 查询符合条件的集合
@@ -37,12 +30,6 @@ namespace HxCore.IRepository
         /// <returns></returns>
         IQueryable<T> QueryEntities(Expression<Func<T, bool>> predicate);
 
-        /// <summary>
-        /// 查询符合条件的集合（不进行跟踪）
-        /// </summary>
-        /// <param name="predicate">lambda表达式</param>
-        /// <returns></returns>
-        IQueryable<T> QueryEntitiesNoTrack(Expression<Func<T, bool>> lambda);
         #endregion
 
         #region 新增
@@ -51,13 +38,13 @@ namespace HxCore.IRepository
         /// </summary>
         /// <param name="entity">数据实体</param>
         /// <returns></returns>
-        Task<T> Insert(T entity);
+        Task<T> InsertAsync(T entity);
         /// <summary>
         /// 插入集合
         /// </summary>
         /// <param name="entityList"></param>
         /// <returns></returns>
-        void BatchInsert(IEnumerable<T> entityList);
+        Task BatchInsertAsync(IEnumerable<T> entityList);
         #endregion
 
         #region 更新

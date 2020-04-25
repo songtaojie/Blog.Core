@@ -1,7 +1,7 @@
 <template>
   <div v-wechat-title="this.title">
     <hx-header></hx-header>
-    <div class="container mt-2 d-flex">
+    <div class="hx-container container-lg d-flex">
       <article class="article-wrap bg-white flex-fill">
         <div class="article-header px-1">
           <h4 class="article-title">{{detail.title}}</h4>
@@ -40,7 +40,7 @@
             </div>
           </div>
       </article>
-      <aside class="article-side ml-2" style="width:25%">
+      <aside class="article-side ml-2 d-none d-md-block" style="width:25%">
         <div class="bg-white about-me px-3 py-2">
           <h2>博主简介</h2>
             <ul>

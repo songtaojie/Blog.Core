@@ -23,7 +23,7 @@ export default {
   data() {
     return {
       visible: true,
-      variant: 'info',
+      variant: 'danger',
       title: '提示',
       content: '',
       alerter: 'b-alert-top-center',
