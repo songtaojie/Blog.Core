@@ -35,12 +35,51 @@ namespace Blog.IdentityServer
             services.AddMvc();
 
 
-            var connectionString = Configuration.GetConnectionString("SqlServerConnection");
-            if (connectionString == "")
-            {
-                throw new Exception("数据库配置异常");
-            }
-            var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+            //var connectionString = Configuration.GetConnectionString("SqlServerConnection");
+            //if (connectionString == "")
+            //{
+            //    throw new Exception("数据库配置异常");
+            //}
+            //var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+            //var builder = services.AddIdentityServer(options =>
+            //{
+            //    options.Events.RaiseErrorEvents = true;
+            //    options.Events.RaiseInformationEvents = true;
+            //    options.Events.RaiseFailureEvents = true;
+            //    options.Events.RaiseSuccessEvents = true;
+            //})
+            //.AddAspNetIdentity<ApplicationUser>()
+            //// 添加配置数据（客户端 和 资源）
+            //.AddConfigurationStore(options =>
+            //{
+            //    options.ConfigureDbContext = b =>
+            //        b.UseSqlServer(connectionString,
+            //            sql => sql.MigrationsAssembly(migrationsAssembly));
+            //})
+            //.AddOperationalStore(options =>
+            //{
+            //    options.ConfigureDbContext = b =>
+            //        b.UseSqlServer(connectionString,
+            //            sql => sql.MigrationsAssembly(migrationsAssembly));
+            //    // 自动清理 token ，可选
+            //    options.EnableTokenCleanup = true;
+            //});
+
+            //// 数据库配置系统应用用户数据上下文
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlServer(connectionString));
+            // 启用 Identity 服务 添加指定的用户和角色类型的默认标识系统配置
+            //services.AddIdentity<ApplicationUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>()
+            //    .AddDefaultTokenProviders();
+            ////.AddTestUsers(InMemoryConfig.Users().ToList())
+            ////.AddInMemoryApiResources(InMemoryConfig.GetApiResources())
+            ////.AddInMemoryClients(InMemoryConfig.GetClients());
+            //builder.AddDeveloperSigningCredential();
+            //services.AddAuthentication();
+
+            services.AddMvc();
+
             var builder = services.AddIdentityServer(options =>
             {
                 options.Events.RaiseErrorEvents = true;
@@ -48,35 +87,24 @@ namespace Blog.IdentityServer
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
             })
-            .AddAspNetIdentity<ApplicationUser>()
-            // 添加配置数据（客户端 和 资源）
-            .AddConfigurationStore(options =>
-            {
-                options.ConfigureDbContext = b =>
-                    b.UseSqlServer(connectionString,
-                        sql => sql.MigrationsAssembly(migrationsAssembly));
-            })
-            .AddOperationalStore(options =>
-            {
-                options.ConfigureDbContext = b =>
-                    b.UseSqlServer(connectionString,
-                        sql => sql.MigrationsAssembly(migrationsAssembly));
-                // 自动清理 token ，可选
-                options.EnableTokenCleanup = true;
-            });
+            // in-memory, code config
+            .AddTestUsers(InMemoryConfig.Users().ToList())
+            .AddInMemoryApiResources(InMemoryConfig.GetApiResources())
+            .AddInMemoryClients(InMemoryConfig.GetClients());
 
-            // 数据库配置系统应用用户数据上下文
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
-            // 启用 Identity 服务 添加指定的用户和角色类型的默认标识系统配置
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-            //.AddTestUsers(InMemoryConfig.Users().ToList())
-            //.AddInMemoryApiResources(InMemoryConfig.GetApiResources())
-            //.AddInMemoryClients(InMemoryConfig.GetClients());
+
             builder.AddDeveloperSigningCredential();
-            services.AddAuthentication();
+
+            if (Environment.IsDevelopment())
+            {
+                builder.AddDeveloperSigningCredential();
+            }
+            else
+            {
+                throw new Exception("need to configure key material");
+            }
+
+            services.AddAuthentication();//配置认证服务
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
