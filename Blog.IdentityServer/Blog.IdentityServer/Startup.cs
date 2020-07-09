@@ -36,6 +36,7 @@ namespace Blog.IdentityServer
         {
             services.AddMvc();
             var connectionString = Configuration.GetConnectionString("SqlServerConnection");
+
             if (string.IsNullOrEmpty(connectionString)) throw new Exception(" ˝æ›ø‚≈‰÷√“Ï≥£");
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
             var builder = services.AddIdentityServer()
