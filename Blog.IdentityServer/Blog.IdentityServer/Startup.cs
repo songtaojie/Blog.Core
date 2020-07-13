@@ -37,6 +37,7 @@ namespace Blog.IdentityServer
         {
             services.AddMvc();
             var connectionString = Configuration.GetConnectionString("SqlServerConnection");
+
             if (string.IsNullOrEmpty(connectionString)) throw new Exception("数据库配置异常");
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
             //// 数据库配置系统应用用户数据上下文
