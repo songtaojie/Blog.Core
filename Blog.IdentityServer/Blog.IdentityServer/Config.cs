@@ -22,7 +22,14 @@ namespace Blog.IdentityServer
                 new IdentityResource("rolename", "角色名", new List<string> { "rolename" }),
             };
         }
-
+        // v4更新
+        public static IEnumerable<ApiScope> GetApiScopes()
+        {
+            return new ApiScope[] {
+                 new ApiScope("blog.core.api"),
+                 new ApiScope("blog.core.api.BlogModule"),
+            };
+        }
         public static IEnumerable<ApiResource> GetApiResources()
         {
             // blog.core 项目
