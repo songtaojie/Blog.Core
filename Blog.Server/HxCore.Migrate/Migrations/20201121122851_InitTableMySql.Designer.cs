@@ -3,23 +3,21 @@ using System;
 using HxCore.Entity.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HxCore.Migrate.Migrations
 {
     [DbContext(typeof(HxContext))]
-    [Migration("20200330134757_InitTable")]
-    partial class InitTable
+    [Migration("20201121122851_InitTableMySql")]
+    partial class InitTableMySql
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.0")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "3.1.1")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("HxCore.Entity.T_BasicInfo", b =>
                 {
@@ -27,70 +25,70 @@ namespace HxCore.Migrate.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("Address")
-                        .HasColumnType("nvarchar(200)")
+                        .HasColumnType("varchar(200)")
                         .HasMaxLength(200);
 
                     b.Property<DateTime?>("Birthday")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("CardId")
-                        .HasColumnType("nvarchar(40)")
+                        .HasColumnType("varchar(40)")
                         .HasMaxLength(40);
 
                     b.Property<DateTime>("CreateTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Delete")
                         .HasColumnType("char(1)");
 
                     b.Property<DateTime?>("DeleteTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("DeletelUserId")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(2000)")
+                        .HasColumnType("varchar(2000)")
                         .HasMaxLength(2000);
 
                     b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(8)")
+                        .HasColumnType("varchar(8)")
                         .HasMaxLength(8);
 
                     b.Property<DateTime?>("LastModifyTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Mobile")
-                        .HasColumnType("nvarchar(40)")
+                        .HasColumnType("varchar(40)")
                         .HasMaxLength(40);
 
                     b.Property<string>("QQ")
-                        .HasColumnType("nvarchar(40)")
+                        .HasColumnType("varchar(40)")
                         .HasMaxLength(40);
 
                     b.Property<string>("RealName")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("School")
-                        .HasColumnType("nvarchar(200)")
+                        .HasColumnType("varchar(200)")
                         .HasMaxLength(200);
 
                     b.Property<string>("Telephone")
-                        .HasColumnType("nvarchar(40)")
+                        .HasColumnType("varchar(40)")
                         .HasMaxLength(40);
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
                     b.Property<string>("WeChat")
-                        .HasColumnType("nvarchar(40)")
+                        .HasColumnType("varchar(40)")
                         .HasMaxLength(40);
 
                     b.HasKey("Id");
@@ -104,7 +102,7 @@ namespace HxCore.Migrate.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("BlogTags")
-                        .HasColumnType("nvarchar(40)")
+                        .HasColumnType("varchar(40)")
                         .HasMaxLength(40);
 
                     b.Property<long>("BlogTypeId")
@@ -120,29 +118,29 @@ namespace HxCore.Migrate.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("City")
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
                     b.Property<long>("CmtCount")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ContentHtml")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreateTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Delete")
                         .HasColumnType("char(1)");
 
                     b.Property<DateTime?>("DeleteTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("DeletelUserId")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("Essence")
@@ -155,65 +153,65 @@ namespace HxCore.Migrate.Migrations
                         .HasColumnType("char(1)");
 
                     b.Property<string>("ForwardUrl")
-                        .HasColumnType("nvarchar(255)")
+                        .HasColumnType("varchar(255)")
                         .HasMaxLength(255);
 
                     b.Property<string>("ImgName")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("ImgUrl")
-                        .HasColumnType("nvarchar(255)")
+                        .HasColumnType("varchar(255)")
                         .HasMaxLength(255);
 
                     b.Property<DateTime?>("LastModifyTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<long>("LikeCount")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Location")
-                        .HasColumnType("nvarchar(255)")
+                        .HasColumnType("varchar(255)")
                         .HasMaxLength(255);
 
                     b.Property<string>("MarkDown")
                         .HasColumnType("char(1)");
 
                     b.Property<DateTime?>("OldPublishTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<decimal>("OrderFactor")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("PersonTop")
                         .HasColumnType("char(1)");
 
                     b.Property<string>("Private")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Publish")
                         .HasColumnType("char(1)");
 
                     b.Property<DateTime?>("PublishDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<long>("ReadCount")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(200)")
+                        .HasColumnType("varchar(200)")
                         .HasMaxLength(200);
 
                     b.Property<string>("Top")
                         .HasColumnType("char(1)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
@@ -227,37 +225,37 @@ namespace HxCore.Migrate.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreateTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Delete")
                         .HasColumnType("char(1)");
 
                     b.Property<DateTime?>("DeleteTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("DeletelUserId")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("LastModifyTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(40)")
+                        .HasColumnType("varchar(40)")
                         .HasMaxLength(40);
 
                     b.Property<int?>("Order")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
@@ -271,37 +269,37 @@ namespace HxCore.Migrate.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreateTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Delete")
                         .HasColumnType("char(1)");
 
                     b.Property<DateTime?>("DeleteTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("DeletelUserId")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("LastModifyTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(40)")
+                        .HasColumnType("varchar(40)")
                         .HasMaxLength(40);
 
                     b.Property<int?>("Order")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
@@ -311,29 +309,29 @@ namespace HxCore.Migrate.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 853390187210735616L,
-                            CreateTime = new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(351),
+                            Id = 938893818701283328L,
+                            CreateTime = new DateTime(2020, 11, 21, 20, 28, 51, 203, DateTimeKind.Local).AddTicks(2376),
                             Delete = "N",
                             Name = "原创",
-                            UserId = "e3763d67-e30a-4370-af53-2d90bbc761b1",
+                            UserId = "6a9e4884-dce8-4400-94c3-a29a2b56a735",
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = 853390187214929920L,
-                            CreateTime = new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(963),
+                            Id = 938893818705477632L,
+                            CreateTime = new DateTime(2020, 11, 21, 20, 28, 51, 203, DateTimeKind.Local).AddTicks(2923),
                             Delete = "N",
                             Name = "转载",
-                            UserId = "e3763d67-e30a-4370-af53-2d90bbc761b1",
+                            UserId = "6a9e4884-dce8-4400-94c3-a29a2b56a735",
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = 853390187214929921L,
-                            CreateTime = new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(970),
+                            Id = 938893818705477633L,
+                            CreateTime = new DateTime(2020, 11, 21, 20, 28, 51, 203, DateTimeKind.Local).AddTicks(2929),
                             Delete = "N",
                             Name = "翻译",
-                            UserId = "e3763d67-e30a-4370-af53-2d90bbc761b1",
+                            UserId = "6a9e4884-dce8-4400-94c3-a29a2b56a735",
                             UserName = "Admin"
                         });
                 });
@@ -344,37 +342,37 @@ namespace HxCore.Migrate.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreateTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Delete")
                         .HasColumnType("char(1)");
 
                     b.Property<DateTime?>("DeleteTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("DeletelUserId")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("LastModifyTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(40)")
+                        .HasColumnType("varchar(40)")
                         .HasMaxLength(40);
 
                     b.Property<int?>("Order")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
@@ -384,29 +382,29 @@ namespace HxCore.Migrate.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 853390187214929922L,
-                            CreateTime = new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(2208),
+                            Id = 938893818705477634L,
+                            CreateTime = new DateTime(2020, 11, 21, 20, 28, 51, 203, DateTimeKind.Local).AddTicks(4084),
                             Delete = "N",
                             Name = "前端",
-                            UserId = "e3763d67-e30a-4370-af53-2d90bbc761b1",
+                            UserId = "6a9e4884-dce8-4400-94c3-a29a2b56a735",
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = 853390187214929923L,
-                            CreateTime = new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(2238),
+                            Id = 938893818705477635L,
+                            CreateTime = new DateTime(2020, 11, 21, 20, 28, 51, 203, DateTimeKind.Local).AddTicks(4109),
                             Delete = "N",
                             Name = "后端",
-                            UserId = "e3763d67-e30a-4370-af53-2d90bbc761b1",
+                            UserId = "6a9e4884-dce8-4400-94c3-a29a2b56a735",
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = 853390187214929924L,
-                            CreateTime = new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(2242),
+                            Id = 938893818705477636L,
+                            CreateTime = new DateTime(2020, 11, 21, 20, 28, 51, 203, DateTimeKind.Local).AddTicks(4113),
                             Delete = "N",
                             Name = "编程语言",
-                            UserId = "e3763d67-e30a-4370-af53-2d90bbc761b1",
+                            UserId = "6a9e4884-dce8-4400-94c3-a29a2b56a735",
                             UserName = "Admin"
                         });
                 });
@@ -417,51 +415,51 @@ namespace HxCore.Migrate.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreateTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Delete")
                         .HasColumnType("char(1)");
 
                     b.Property<DateTime?>("DeleteTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("DeletelUserId")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("GoodAreas")
-                        .HasColumnType("nvarchar(1000)")
+                        .HasColumnType("varchar(1000)")
                         .HasMaxLength(1000);
 
                     b.Property<string>("Industry")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<DateTime?>("LastModifyTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Position")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("Skills")
-                        .HasColumnType("nvarchar(1000)")
+                        .HasColumnType("varchar(1000)")
                         .HasMaxLength(1000);
 
                     b.Property<string>("Status")
-                        .HasColumnType("nvarchar(20)")
+                        .HasColumnType("varchar(20)")
                         .HasMaxLength(20);
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
                     b.Property<string>("WorkUnit")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<int?>("WorkYear")
@@ -475,7 +473,7 @@ namespace HxCore.Migrate.Migrations
             modelBuilder.Entity("HxCore.Entity.T_UserInfo", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("Activate")
@@ -485,7 +483,7 @@ namespace HxCore.Migrate.Migrations
                         .HasColumnType("char(1)");
 
                     b.Property<string>("AvatarUrl")
-                        .HasColumnType("nvarchar(500)")
+                        .HasColumnType("varchar(500)")
                         .HasMaxLength(500);
 
                     b.Property<long>("BasicInfoId")
@@ -495,48 +493,48 @@ namespace HxCore.Migrate.Migrations
                         .HasColumnType("char(1)");
 
                     b.Property<DateTime?>("DeleteTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<long>("JobInfoId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("LastLoginTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Lock")
                         .HasColumnType("char(1)");
 
                     b.Property<string>("LoginIp")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("NickName")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("OpenId")
-                        .HasColumnType("nvarchar(80)")
+                        .HasColumnType("varchar(80)")
                         .HasMaxLength(80);
 
                     b.Property<string>("PassWord")
                         .IsRequired()
-                        .HasColumnType("nvarchar(40)")
+                        .HasColumnType("varchar(40)")
                         .HasMaxLength(40);
 
                     b.Property<DateTime>("RegisterTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("UseMdEdit")
                         .HasColumnType("char(1)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
@@ -546,18 +544,18 @@ namespace HxCore.Migrate.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e3763d67-e30a-4370-af53-2d90bbc761b1",
+                            Id = "6a9e4884-dce8-4400-94c3-a29a2b56a735",
                             Activate = "Y",
                             Admin = "N",
                             BasicInfoId = 0L,
                             Delete = "N",
                             Email = "stjworkemail@163.com",
                             JobInfoId = 0L,
-                            LastLoginTime = new DateTime(2020, 3, 30, 21, 47, 56, 871, DateTimeKind.Local).AddTicks(8406),
+                            LastLoginTime = new DateTime(2020, 11, 21, 20, 28, 51, 200, DateTimeKind.Local).AddTicks(5651),
                             Lock = "N",
                             NickName = "超级管理员",
                             PassWord = "F59BD65F7EDAFB087A81D4DCA06C4910",
-                            RegisterTime = new DateTime(2020, 3, 30, 21, 47, 56, 868, DateTimeKind.Local).AddTicks(9017),
+                            RegisterTime = new DateTime(2020, 11, 21, 20, 28, 51, 198, DateTimeKind.Local).AddTicks(126),
                             UseMdEdit = "N",
                             UserName = "Admin"
                         });

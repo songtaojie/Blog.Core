@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HxCore.Migrate.Migrations
 {
-    public partial class InitTable : Migration
+    public partial class InitTableMySql : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -202,9 +202,9 @@ namespace HxCore.Migrate.Migrations
                 columns: new[] { "Id", "CreateTime", "Delete", "DeleteTime", "DeletelUserId", "Description", "LastModifyTime", "Name", "Order", "UserId", "UserName" },
                 values: new object[,]
                 {
-                    { 853390187210735616L, new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(351), "N", null, null, null, null, "原创", null, "e3763d67-e30a-4370-af53-2d90bbc761b1", "Admin" },
-                    { 853390187214929920L, new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(963), "N", null, null, null, null, "转载", null, "e3763d67-e30a-4370-af53-2d90bbc761b1", "Admin" },
-                    { 853390187214929921L, new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(970), "N", null, null, null, null, "翻译", null, "e3763d67-e30a-4370-af53-2d90bbc761b1", "Admin" }
+                    { 938893818701283328L, new DateTime(2020, 11, 21, 20, 28, 51, 203, DateTimeKind.Local).AddTicks(2376), "N", null, null, null, null, "原创", null, "6a9e4884-dce8-4400-94c3-a29a2b56a735", "Admin" },
+                    { 938893818705477632L, new DateTime(2020, 11, 21, 20, 28, 51, 203, DateTimeKind.Local).AddTicks(2923), "N", null, null, null, null, "转载", null, "6a9e4884-dce8-4400-94c3-a29a2b56a735", "Admin" },
+                    { 938893818705477633L, new DateTime(2020, 11, 21, 20, 28, 51, 203, DateTimeKind.Local).AddTicks(2929), "N", null, null, null, null, "翻译", null, "6a9e4884-dce8-4400-94c3-a29a2b56a735", "Admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -212,15 +212,15 @@ namespace HxCore.Migrate.Migrations
                 columns: new[] { "Id", "CreateTime", "Delete", "DeleteTime", "DeletelUserId", "Description", "LastModifyTime", "Name", "Order", "UserId", "UserName" },
                 values: new object[,]
                 {
-                    { 853390187214929922L, new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(2208), "N", null, null, null, null, "前端", null, "e3763d67-e30a-4370-af53-2d90bbc761b1", "Admin" },
-                    { 853390187214929923L, new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(2238), "N", null, null, null, null, "后端", null, "e3763d67-e30a-4370-af53-2d90bbc761b1", "Admin" },
-                    { 853390187214929924L, new DateTime(2020, 3, 30, 21, 47, 56, 875, DateTimeKind.Local).AddTicks(2242), "N", null, null, null, null, "编程语言", null, "e3763d67-e30a-4370-af53-2d90bbc761b1", "Admin" }
+                    { 938893818705477634L, new DateTime(2020, 11, 21, 20, 28, 51, 203, DateTimeKind.Local).AddTicks(4084), "N", null, null, null, null, "前端", null, "6a9e4884-dce8-4400-94c3-a29a2b56a735", "Admin" },
+                    { 938893818705477635L, new DateTime(2020, 11, 21, 20, 28, 51, 203, DateTimeKind.Local).AddTicks(4109), "N", null, null, null, null, "后端", null, "6a9e4884-dce8-4400-94c3-a29a2b56a735", "Admin" },
+                    { 938893818705477636L, new DateTime(2020, 11, 21, 20, 28, 51, 203, DateTimeKind.Local).AddTicks(4113), "N", null, null, null, null, "编程语言", null, "6a9e4884-dce8-4400-94c3-a29a2b56a735", "Admin" }
                 });
 
             migrationBuilder.InsertData(
                 table: "T_UserInfo",
                 columns: new[] { "Id", "Activate", "Admin", "AvatarUrl", "BasicInfoId", "Delete", "DeleteTime", "Email", "JobInfoId", "LastLoginTime", "Lock", "LoginIp", "NickName", "OpenId", "PassWord", "RegisterTime", "UseMdEdit", "UserName" },
-                values: new object[] { "e3763d67-e30a-4370-af53-2d90bbc761b1", "Y", "N", null, 0L, "N", null, "stjworkemail@163.com", 0L, new DateTime(2020, 3, 30, 21, 47, 56, 871, DateTimeKind.Local).AddTicks(8406), "N", null, "超级管理员", null, "F59BD65F7EDAFB087A81D4DCA06C4910", new DateTime(2020, 3, 30, 21, 47, 56, 868, DateTimeKind.Local).AddTicks(9017), "N", "Admin" });
+                values: new object[] { "6a9e4884-dce8-4400-94c3-a29a2b56a735", "Y", "N", null, 0L, "N", null, "stjworkemail@163.com", 0L, new DateTime(2020, 11, 21, 20, 28, 51, 200, DateTimeKind.Local).AddTicks(5651), "N", null, "超级管理员", null, "F59BD65F7EDAFB087A81D4DCA06C4910", new DateTime(2020, 11, 21, 20, 28, 51, 198, DateTimeKind.Local).AddTicks(126), "N", "Admin" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

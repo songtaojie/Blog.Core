@@ -50,12 +50,17 @@ namespace HxCore.Entity.Context
             //          o.MigrationsAssembly("HxCore.Migrate");
             //      });
             //}
-            optionsBuilder.UseSqlServer(AppSettings.GetConnectionString("SqlServerConnection"),
-                 o =>
-                 {
-                     o.MigrationsAssembly("HxCore.Migrate");
-                 });
-            bool? enable = AppSettings.Get("Logging", "EnableSql").ToBool();
+            //optionsBuilder.UseSqlServer(AppSettings.GetConnectionString("SqlServerConnection"),
+            //     o =>
+            //     {
+            //         o.MigrationsAssembly("HxCore.Migrate");
+            //     });
+            optionsBuilder.UseMySQL(AppSettings.GetConnectionString("MySqlConnection"),
+                  o =>
+                  {
+                      o.MigrationsAssembly("HxCore.Migrate");
+                  });
+            bool ? enable = AppSettings.Get("Logging", "EnableSql").ToBool();
             if (enable.HasValue && enable.Value)
             {
                 optionsBuilder.EnableSensitiveDataLogging();
