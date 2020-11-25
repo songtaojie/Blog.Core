@@ -1,9 +1,22 @@
-
 <template>
   <header class="hx-header fixed-top">
-    <b-navbar toggleable="md" class="mx-auto justify-content-center" type="dark" variant="dark">
-      <b-navbar-brand href="/" class="py-0 hx-3x">海·星の博客</b-navbar-brand>
-      <b-navbar-toggle target="nav-collapse" v-on:click="doClick"></b-navbar-toggle>
+    <b-navbar
+      toggleable="md"
+      class="mx-auto justify-content-center"
+      type="dark"
+      variant="dark"
+    >
+      <b-navbar-brand
+        href="/"
+        class="py-0 hx-3x"
+      >海·星の博客</b-navbar-brand>
+      <b-navbar-toggle
+        target="nav-collapse"
+        class="hx-navbar-toggler thin-toggler"
+        v-on:click="doClick"
+      >
+        <span class="hx-navbar-toggler-icon"></span>
+      </b-navbar-toggle>
       <b-collapse
         id="nav-collapse"
         v-on:hidden="doHide"
@@ -14,23 +27,52 @@
         is-nav
       >
         <b-navbar-nav>
-          <b-nav-item href="#" link-classes="text-white px-3 py-0" active>网站首页</b-nav-item>
-          <b-nav-item href="#" link-classes="text-white px-3 py-0">关于我</b-nav-item>
-          <b-nav-item href="#" link-classes="text-white px-3 py-0">模板分享</b-nav-item>
-          <b-nav-item href="#" link-classes="text-white px-3 py-0">博客日记</b-nav-item>
+          <b-nav-item
+            href="#"
+            link-classes="text-white px-3 py-0"
+            active
+          >网站首页</b-nav-item>
+          <b-nav-item
+            href="#"
+            link-classes="text-white px-3 py-0"
+          >关于我</b-nav-item>
+          <b-nav-item
+            href="#"
+            link-classes="text-white px-3 py-0"
+          >模板分享</b-nav-item>
+          <b-nav-item
+            href="#"
+            link-classes="text-white px-3 py-0"
+          >博客日记</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
 
-      <span class="nav-item my-auto p-absolute login" v-if="!isLogin">
-        <router-link to="/login" class="text-white hx-1x">
+      <span
+        class="nav-item my-auto p-absolute login"
+        v-if="!isLogin"
+      >
+        <router-link
+          to="/login"
+          class="text-white hx-1x"
+        >
           <i class="hx-icon-login"></i> 登录
         </router-link>
       </span>
-      <b-navbar-nav v-else>
-        <b-nav-dropdown toggle-class="p-0" menu-class="hx-dropdown-menu">
+      <b-navbar-nav
+        v-else
+        class="p-absolute"
+      >
+        <b-nav-dropdown
+          toggle-class="p-0 hx-dropdown-toggle"
+          menu-class="hx-dropdown-menu"
+          class="hx-dropdown"
+        >
           <template slot="button-content">
             <!-- <em>{{user.username}}</em> -->
-            <b-img :src="imgUrl" rounded="circle"></b-img>
+            <b-img
+              :src="imgUrl"
+              rounded="circle"
+            ></b-img>
             <!-- <img src="../assets/images/avatar1_small.jpg" alt=""> -->
           </template>
           <b-dropdown-item :to="editRoute">
@@ -58,57 +100,57 @@
 import { mapState } from 'vuex'
 import imgUrl from '../assets/images/avatar1_small.jpg'
 export default {
-  data() {
+  data () {
     var that = this
 
     return {
-      editRoute:{
-        name:'edit',
-        params:{
-            useMdEdit:that.$store.getters.user.useMdEdit
-          }
+      editRoute: {
+        name: 'edit',
+        params: {
+          useMdEdit: that.$store.getters.user.useMdEdit
+        }
       },
       imgUrl,
       show: false
     }
   },
   methods: {
-    doClick() {
+    doClick () {
       if (!this.show) this.show = !this.show
     },
-    doHide() {
+    doHide () {
       this.show = !this.show
     },
-    doColClick() {
+    doColClick () {
       console.log('dddd')
     },
-    onClick() {
+    onClick () {
       this.$router.push({
-        path:'/blog/edit',
-        params:{
-          Id:'1123213',
-          isMd:false
+        path: '/blog/edit',
+        params: {
+          Id: '1123213',
+          isMd: false
         }
       })
     },
     // 退出
-    onSignOut() {
+    onSignOut () {
       this.$store.commit('CLEAR_AUTH')
     }
   },
   computed: mapState({
-    isLogin: function() {
+    isLogin: function () {
       return this.$store.getters.auth.isLogin
     },
-    colclass: function() {
+    colclass: function () {
       return {
         'hx-show': this.show
       }
     }
   }),
-  mounted() {
+  mounted () {
     const $col = this.$refs.collapse
-    window.onresize = function() {
+    window.onresize = function () {
       if ($col.show) $col.show = false
     }
   }
@@ -158,20 +200,16 @@ export default {
       // color:rgb(255, 208, 75)
     }
   }
-  .navbar-toggler {
-    position: absolute;
-    left: 0.75rem;
-    top: 0.5rem;
-  }
   .p-absolute {
     position: absolute;
     cursor: pointer;
     padding-right: 0.75rem;
-    right: 0.75rem;
+    right: 0.05rem;
     &.login {
       top: 0.5rem;
     }
   }
+
   .navbar-collapse {
     &.hx-show {
       width: 100%;
