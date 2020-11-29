@@ -30,6 +30,7 @@ a {
 .#{$prefix}-container {
   margin: 0 auto;
   margin-top: $header-height + 0.25rem !important;
+  max-width: $max-width;
 }
 
 @import 'function';

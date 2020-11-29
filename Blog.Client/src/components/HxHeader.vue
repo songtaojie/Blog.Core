@@ -19,11 +19,13 @@
       </b-navbar-toggle>
       <b-collapse
         id="nav-collapse"
-        v-on:hidden="doHide"
+        @show="colClassShow = true"
+        @hidden="colClassShow = false"
         v-on:click="doColClick"
         ref="collapse"
         class="flex-grow-0"
-        :class="colclass"
+        :class="{'hx-show':colClassShow}"
+        v-model="colVisible"
         is-nav
       >
         <b-navbar-nav>
@@ -65,7 +67,10 @@
         <b-nav-dropdown
           toggle-class="p-0 hx-dropdown-toggle"
           menu-class="hx-dropdown-menu"
-          class="hx-dropdown"
+          :class="{'hx-dropdown':true,'hx-show':dropClassShow}"
+          @show="onDropShow"
+          @hidden="dropClassShow = false"
+          ref="dropdown"
         >
           <template slot="button-content">
             <!-- <em>{{user.username}}</em> -->
@@ -111,18 +116,25 @@ export default {
         }
       },
       imgUrl,
-      show: false
+      colClassShow: false,
+      dropClassShow: false,
+      colVisible: false,
+      screenWidth: document.body.clientWidth // 屏幕宽度
     }
   },
   methods: {
     doClick () {
-      if (!this.show) this.show = !this.show
-    },
-    doHide () {
-      this.show = !this.show
+      console.log(111)
+      if (!this.colClassShow) this.colClassShow = !this.colClassShow
     },
     doColClick () {
       console.log('dddd')
+    },
+    onDropShow () {
+      const that = this
+      console.log('onDropShow')
+      if (that.colVisible) that.colVisible = false
+      if (that.screenWidth < 768) that.dropClassShow = true
     },
     onClick () {
       this.$router.push({
@@ -141,17 +153,30 @@ export default {
   computed: mapState({
     isLogin: function () {
       return this.$store.getters.auth.isLogin
-    },
-    colclass: function () {
-      return {
-        'hx-show': this.show
-      }
     }
+    // colClass: function () {
+    //   return {
+    //     'hx-show': this.colClassShow
+    //   }
+    // }
   }),
+  // watch: {
+  //   screenWidth () {
+  //     const $col = this.$refs.collapse
+  //     const $dropdown = this.$refs.dropdown
+  //     if ($col.show) $col.show = false
+  //     if ($dropdown.visible) $dropdown.visible = false
+  //   }
+  // },
   mounted () {
-    const $col = this.$refs.collapse
+    // const $col = this.$refs.collapse
+    const that = this
+    // const $col = this.$refs.collapse
+    const $dropdown = this.$refs.dropdown
     window.onresize = function () {
-      if ($col.show) $col.show = false
+      that.screenWidth = document.body.clientWidth
+      that.colVisible = false
+      if ($dropdown && $dropdown.visible) $dropdown.visible = false
     }
   }
 }

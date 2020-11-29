@@ -16,6 +16,7 @@ namespace HxCore.Web.Controllers
     /// 附件控制器
     /// </summary>
     [Route("[controller]/[action]")]
+    [ApiExplorerSettings(IgnoreApi =true)]
     public class AttachController : BaseApiController
     {
         private readonly WebManager webManager;

@@ -82,7 +82,7 @@ namespace HxCore.Web.Extensions
             });
         }
         /// <summary>
-        /// 使用Swagger
+        /// 使用Swagger进行api文档的展示
         /// </summary>
         /// <param name="app"></param>
         public static void UseSwaggerSetup(this IApplicationBuilder app)
@@ -95,6 +95,9 @@ namespace HxCore.Web.Extensions
                 typeof(ApiVersions).GetEnumNames().OrderByDescending(e => e).ToList().ForEach(version =>
                 {
                     c.SwaggerEndpoint($"/swagger/{version}/swagger.json", $"{ApiName} {version}");
+                    c.RoutePrefix = "";//路径配置，设置为空，表示直接访问该文件，
+                    //路径配置，设置为空，表示直接在根域名（http://localhost:52909）访问该文件,注意http://localhost:52909/swagger是访问不到的，
+                    //这个时候去launchSettings.json中把"launchUrl": "swagger/index.html"去掉， 然后直接访问http://localhost:52909/index.html即可
                 });
             });
         }
